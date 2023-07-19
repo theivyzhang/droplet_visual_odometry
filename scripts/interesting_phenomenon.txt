@@ -1,0 +1,11 @@
+between the two frames, we have frame one ground truth [ 2.96847216 -0.39480674  0.51404193] and frame two ground truth[ 2.96746232 -0.39427353  0.5130925 ]
+between the two adjacent frames, the ground truth translation is
+[-0.00100985
+0.0005332
+-0.00094943]
+
+THE LENGTHHHHHHH OF THE LIST 500, 500
+translation between the two frames is : [[ 0.96478687  0.20704499 -0.16223028 -0.1873372 ]
+ [-0.22602128  0.96803826 -0.10870285  0.04651887]
+ [ 0.13453873  0.14154258  0.98074718 -0.98119354]
+ [ 0.          0.          0.          1.        ]]

@@ -1,0 +1,303 @@
+
+
+
+
+
+{'0 th match previous key point ': (722.6083374023438, 382.2060546875), '0 th match distance': 2.0, '0 th match current key point ': (892.8094482421875, 412.06591796875)},
+ {'1 th match current key point ': (727.2000122070312, 452.1600036621094), '1 th match distance': 3.0, '1 th match previous key point ': (914.4000244140625, 660.9600219726562)}, {'2 th match distance': 3.0, '2 th match previous key point ': (731.5662841796875, 447.897705078125), '2 th match current key point ': (752.4681396484375, 653.9306640625)}, {'3 th match distance': 3.0, '3 th match current key point ': (695.7344360351562, 391.16400146484375), '3 th match previous key point ': (901.7673950195312, 641.9867553710938)}, {'4 th match current key point ': (698.4000244140625, 632.4000244140625), '4 th match previous key point ': (718.800048828125, 567.6000366210938), '4 th match distance': 4.0}, {'5 th match previous key point ': (758.9378051757812, 579.7786865234375), '5 th match distance': 4.0, '5 th match current key point ': (935.6085205078125, 472.7809143066406)}, {'6 th match current key point ': (722.6083374023438, 367.276123046875), '6 th match distance': 4.0, '6 th match previous key point ': (737.5382690429688, 621.0848388671875)}, {'7 th match previous key point ': (931.6272583007812, 465.8136291503906), '7 th match distance': 4.0, '7 th match current key point ': (695.1372680664062, 394.1499938964844)}, {'8 th match previous key point ': (728.4000244140625, 378.0), '8 th match distance': 5.0, '8 th match current key point ': (757.2000122070312, 655.2000122070312)}, {'9 th match current key point ': (694.241455078125, 629.5451049804688), '9 th match distance': 5.0, '9 th match previous key point ': (860.9589233398438, 427.99114990234375)}]
+
+========================================================================================================================
+# Standard output from running matches analysis on two consecutive frames
+# date: 07-06-2023
+# command: python frame_extraction.py
+
+after sorting again
+
+observations
+1) adding sorted matches will minimize the difference between trainIdx (train descriptor index) and queryIdx (query descriptor index)
+2)
+
+trial2
+
+Here are the top 10 matches:
+[
+{'distance': 0.0, 'trainIdx': 199, 'imgIdx': 0, 'queryIdx': 250},
+{'distance': 2.0, 'trainIdx': 266, 'imgIdx': 0, 'queryIdx': 257},
+{'distance': 3.0, 'trainIdx': 131, 'imgIdx': 0, 'queryIdx': 166},
+{'distance': 4.0, 'trainIdx': 151, 'imgIdx': 0, 'queryIdx': 132},
+{'distance': 4.0, 'trainIdx': 303, 'imgIdx': 0, 'queryIdx': 311},
+{'distance': 4.0, 'trainIdx': 371, 'imgIdx': 0, 'queryIdx': 340},
+{'distance': 4.0, 'trainIdx': 384, 'imgIdx': 0, 'queryIdx': 366},
+{'distance': 5.0, 'trainIdx': 124, 'imgIdx': 0, 'queryIdx': 142},
+{'distance': 5.0, 'trainIdx': 327, 'imgIdx': 0, 'queryIdx': 333},
+{'distance': 5.0, 'trainIdx': 412, 'imgIdx': 0, 'queryIdx': 415}
+]
+
+
+========================================================================================================================
+# Standard output from running matches analysis on two consecutive frames
+# date: 07-06-2023
+# command: python frame_extraction.py
+
+before sorting matches again in visualizing
+trial1
+
+Here are the top 10 matches:
+[
+{'distance': 5.0, 'trainIdx': 267, 'imgIdx': 0, 'queryIdx': 201},
+{'distance': 6.0, 'trainIdx': 298, 'imgIdx': 0, 'queryIdx': 291},
+{'distance': 6.0, 'trainIdx': 387, 'imgIdx': 0, 'queryIdx': 348},
+{'distance': 7.0, 'trainIdx': 1, 'imgIdx': 0, 'queryIdx': 102},
+{'distance': 8.0, 'trainIdx': 32, 'imgIdx': 0, 'queryIdx': 15},
+{'distance': 8.0, 'trainIdx': 27, 'imgIdx': 0, 'queryIdx': 49},
+{'distance': 8.0, 'trainIdx': 177, 'imgIdx': 0, 'queryIdx': 156},
+{'distance': 9.0, 'trainIdx': 259, 'imgIdx': 0, 'queryIdx': 203},
+{'distance': 9.0, 'trainIdx': 396, 'imgIdx': 0, 'queryIdx': 423},
+{'distance': 9.0, 'trainIdx': 494, 'imgIdx': 0, 'queryIdx': 496}
+]
+
+========================================================================================================================
+# Standard output from running matches analysis on two consecutive frames
+# date: 07-05-2023
+# command: python frame_extraction.py
+
+draw matches trial 4
+Here are the top 10 matches: [{'distance': 1.0, 'trainIdx': 399, 'imgIdx': 0, 'queryIdx': 400}, {'distance': 2.0, 'trainIdx': 147, 'imgIdx': 0, 'queryIdx': 143}, {'distance': 2.0, 'trainIdx': 338, 'imgIdx': 0, 'queryIdx': 339}, {'distance': 3.0, 'trainIdx': 284, 'imgIdx': 0, 'queryIdx': 282}, {'distance': 3.0, 'trainIdx': 291, 'imgIdx': 0, 'queryIdx': 323}, {'distance': 3.0, 'trainIdx': 340, 'imgIdx': 0, 'queryIdx': 352}, {'distance': 3.0, 'trainIdx': 365, 'imgIdx': 0, 'queryIdx': 381}, {'distance': 3.0, 'trainIdx': 471, 'imgIdx': 0, 'queryIdx': 488}, {'distance': 4.0, 'trainIdx': 63, 'imgIdx': 0, 'queryIdx': 12}, {'distance': 4.0, 'trainIdx': 204, 'imgIdx': 0, 'queryIdx': 226}]
++
+
+========================================================================================================================
+# Standard output from running matches analysis on two consecutive frames
+# date: 07-05-2023
+# command: python frame_extraction.py
+
+draw matches trial 3
+Here are the top 10 matches: [{'distance': 3.0, 'trainIdx': 35, 'imgIdx': 0, 'queryIdx': 81}, {'distance': 3.0, 'trainIdx': 323, 'imgIdx': 0, 'queryIdx': 308}, {'distance': 5.0, 'trainIdx': 23, 'imgIdx': 0, 'queryIdx': 20}, {'distance': 5.0, 'trainIdx': 76, 'imgIdx': 0, 'queryIdx': 106}, {'distance': 5.0, 'trainIdx': 420, 'imgIdx': 0, 'queryIdx': 412}, {'distance': 5.0, 'trainIdx': 482, 'imgIdx': 0, 'queryIdx': 475}, {'distance': 6.0, 'trainIdx': 50, 'imgIdx': 0, 'queryIdx': 7}, {'distance': 6.0, 'trainIdx': 144, 'imgIdx': 0, 'queryIdx': 176}, {'distance': 6.0, 'trainIdx': 487, 'imgIdx': 0, 'queryIdx': 489}, {'distance': 7.0, 'trainIdx': 99, 'imgIdx': 0, 'queryIdx': 70}]
+Here are the top 10 matches: [{'distance': 2.0, 'trainIdx': 73, 'imgIdx': 0, 'queryIdx': 76}, {'distance': 4.0, 'trainIdx': 76, 'imgIdx': 0, 'queryIdx': 77}, {'distance': 6.0, 'trainIdx': 183, 'imgIdx': 0, 'queryIdx': 173}, {'distance': 6.0, 'trainIdx': 481, 'imgIdx': 0, 'queryIdx': 484}, {'distance': 6.0, 'trainIdx': 475, 'imgIdx': 0, 'queryIdx': 487}, {'distance': 7.0, 'trainIdx': 25, 'imgIdx': 0, 'queryIdx': 28}, {'distance': 7.0, 'trainIdx': 67, 'imgIdx': 0, 'queryIdx': 42}, {'distance': 7.0, 'trainIdx': 98, 'imgIdx': 0, 'queryIdx': 49}, {'distance': 7.0, 'trainIdx': 106, 'imgIdx': 0, 'queryIdx': 70}, {'distance': 7.0, 'trainIdx': 191, 'imgIdx': 0, 'queryIdx': 192}]
+
+
+========================================================================================================================
+# Standard output from running matches analysis on two consecutive frames
+# date: 07-05-2023
+# command: python frame_extraction.py
+draw matches trial 2
+
+Here are the top 10 matches: [{'distance': 0.0, 'trainIdx': 283, 'imgIdx': 0, 'queryIdx': 276}, {'distance': 1.0, 'trainIdx': 175, 'imgIdx': 0, 'queryIdx': 138}, {'distance': 1.0, 'trainIdx': 478, 'imgIdx': 0, 'queryIdx': 474}, {'distance': 2.0, 'trainIdx': 2, 'imgIdx': 0, 'queryIdx': 4}, {'distance': 2.0, 'trainIdx': 201, 'imgIdx': 0, 'queryIdx': 202}, {'distance': 2.0, 'trainIdx': 338, 'imgIdx': 0, 'queryIdx': 338}, {'distance': 2.0, 'trainIdx': 419, 'imgIdx': 0, 'queryIdx': 422}, {'distance': 2.0, 'trainIdx': 442, 'imgIdx': 0, 'queryIdx': 457}, {'distance': 3.0, 'trainIdx': 191, 'imgIdx': 0, 'queryIdx': 189}, {'distance': 3.0, 'trainIdx': 204, 'imgIdx': 0, 'queryIdx': 203}]
+Here are the top 10 matches: [{'distance': 1.0, 'trainIdx': 24, 'imgIdx': 0, 'queryIdx': 22}, {'distance': 1.0, 'trainIdx': 228, 'imgIdx': 0, 'queryIdx': 231}, {'distance': 1.0, 'trainIdx': 375, 'imgIdx': 0, 'queryIdx': 354}, {'distance': 2.0, 'trainIdx': 203, 'imgIdx': 0, 'queryIdx': 210}, {'distance': 2.0, 'trainIdx': 295, 'imgIdx': 0, 'queryIdx': 318}, {'distance': 2.0, 'trainIdx': 338, 'imgIdx': 0, 'queryIdx': 338}, {'distance': 2.0, 'trainIdx': 339, 'imgIdx': 0, 'queryIdx': 340}, {'distance': 2.0, 'trainIdx': 358, 'imgIdx': 0, 'queryIdx': 363}, {'distance': 2.0, 'trainIdx': 415, 'imgIdx': 0, 'queryIdx': 402}, {'distance': 2.0, 'trainIdx': 416, 'imgIdx': 0, 'queryIdx': 410}]
+
+
+========================================================================================================================
+# Standard output from running matches analysis on two consecutive frames
+# date: 07-05-2023
+# command: python frame_extraction.py
+
+AFTER ADDING THE SORT MATCHES BY LAMBDA DISTANCE
+
+Here are the top 10 matches:
+[
+{'distance': 0.0, 'trainIdx': 390, 'imgIdx': 0, 'queryIdx': 430},
+{'distance': 1.0, 'trainIdx': 414, 'imgIdx': 0, 'queryIdx': 403},
+{'distance': 1.0, 'trainIdx': 404, 'imgIdx': 0, 'queryIdx': 409},
+{'distance': 1.0, 'trainIdx': 433, 'imgIdx': 0, 'queryIdx': 439},
+{'distance': 1.0, 'trainIdx': 449, 'imgIdx': 0, 'queryIdx': 455},
+{'distance': 1.0, 'trainIdx': 489, 'imgIdx': 0, 'queryIdx': 471},
+ {'distance': 1.0, 'trainIdx': 486, 'imgIdx': 0, 'queryIdx': 484},
+ {'distance': 2.0, 'trainIdx': 382, 'imgIdx': 0, 'queryIdx': 375},
+ {'distance': 2.0, 'trainIdx': 415, 'imgIdx': 0, 'queryIdx': 406},
+ {'distance': 2.0, 'trainIdx': 440, 'imgIdx': 0, 'queryIdx': 454}
+ ]
+
+
+
+
+
+========================================================================================================================
+# Standard output from running matches analysis on two consecutive frames
+# date: 07-05-2023
+# command: python frame_extraction.py
+
+BEFORE ADDING THE SORT MATCHES BY LAMBDA DISTANCE
+
+Here are the top 10 matches:
+[
+{'distance': 39.0, 'trainIdx': 194, 'imgIdx': 0, 'queryIdx': 0},
+{'distance': 21.0, 'trainIdx': 7, 'imgIdx': 0, 'queryIdx': 1},
+{'distance': 32.0, 'trainIdx': 17, 'imgIdx': 0, 'queryIdx': 3},
+{'distance': 52.0, 'trainIdx': 59, 'imgIdx': 0, 'queryIdx': 5},
+{'distance': 25.0, 'trainIdx': 6, 'imgIdx': 0, 'queryIdx': 7},
+{'distance': 23.0, 'trainIdx': 61, 'imgIdx': 0, 'queryIdx': 8},
+{'distance': 25.0, 'trainIdx': 239, 'imgIdx': 0, 'queryIdx': 13},
+{'distance': 29.0, 'trainIdx': 26, 'imgIdx': 0, 'queryIdx': 14},
+{'distance': 50.0, 'trainIdx': 18, 'imgIdx': 0, 'queryIdx': 16},
+{'distance': 62.0, 'trainIdx': 19, 'imgIdx': 0, 'queryIdx': 17}
+]
+
+
+
+Here are the top 10 matches:
+[
+{'distance': 20.0, 'trainIdx': 57, 'imgIdx': 0, 'queryIdx': 0},
+{'distance': 9.0, 'trainIdx': 68, 'imgIdx': 0, 'queryIdx': 1},
+{'distance': 24.0, 'trainIdx': 52, 'imgIdx': 0, 'queryIdx': 2},
+{'distance': 15.0, 'trainIdx': 69, 'imgIdx': 0, 'queryIdx': 3},
+{'distance': 35.0, 'trainIdx': 29, 'imgIdx': 0, 'queryIdx': 4},
+{'distance': 43.0, 'trainIdx': 156, 'imgIdx': 0, 'queryIdx': 5},
+{'distance': 18.0, 'trainIdx': 5, 'imgIdx': 0, 'queryIdx': 6},
+{'distance': 20.0, 'trainIdx': 24, 'imgIdx': 0, 'queryIdx': 7},
+{'distance': 26.0, 'trainIdx': 48, 'imgIdx': 0, 'queryIdx': 8},
+{'distance': 10.0, 'trainIdx': 60, 'imgIdx': 0, 'queryIdx': 9}
+]
+
+
+
+
+========================================================================================================================
+# standard output from fixing the subscriber
+
+
+CORRECTED AFTER PASSING IN CORRECT MESSAGE ARGUMENT
+
+
+========================================================================================================================
+# standard output from running ground truth analysis on TWO CONSECUTIVE FRAMES
+# date: 06-30-2023
+# command: python frame_extraction.py
+[array([1.12256562, 0.26166868, 0.63911798]),
+array([1.12563269, 0.26060867, 0.63566179]),
+array([1.12830348, 0.25978104, 0.63145396]),
+array([1.1324218 , 0.25881574, 0.62695684]),
+array([1.1354748 , 0.25744667, 0.62197397]),
+array([1.13710037, 0.25630429, 0.61654635]),
+array([1.14212617, 0.25506947, 0.6112573 ]),
+array([1.14544916, 0.25417277, 0.60529791]),
+array([1.14632536, 0.25291659, 0.59941564]),
+array([1.15174733, 0.25167748, 0.59335456]),
+array([1.15365857, 0.25087742, 0.58643336]),
+array([1.15526326, 0.24954214, 0.57991983]),
+array([1.15789881, 0.24834436, 0.57281993]),
+array([1.16174349, 0.24732685, 0.56548511]),
+array([1.16504958, 0.24595611, 0.55802391]),
+array([1.1675433 , 0.2446928 , 0.55065606]),
+array([1.17946238, 0.24314728, 0.54361532]),
+array([1.16963216, 0.24231044, 0.53513754]),
+array([1.17236047, 0.24107751, 0.52720229])]
+
+
+# standard output from running ground truth analysis on ONE FRAME ONLY
+# date: 06-30-2023
+# command: python frame_extraction.py
+('Length of ground truth list: ', 19)
+List of ground truth: [[array([2.70504232, 1.10868613, 0.33466829]), array([2.70433017, 1.1093463 , 0.33483774]), array([2.70374023, 1.10948854, 0.3350735 ]), array([2.70544571, 1.11046634, 0.33521513]), array([2.705016  , 1.11042047, 0.33554332]), array([2.70485567, 1.10977784, 0.33579045]), array([2.70447701, 1.10919694, 0.33631296]), array([2.70481098, 1.10848297, 0.33674942]), array([2.70624705, 1.10823298, 0.33687992]), array([2.70464614, 1.10729703, 0.33733491]), array([2.70491892, 1.10727373, 0.33771446]), array([2.70544268, 1.10741406, 0.33807136]), array([2.70510602, 1.1076109 , 0.33845897]), array([2.70390959, 1.10753035, 0.33901963]), array([2.70469727, 1.10774869, 0.33922093]), array([2.70509532, 1.10847042, 0.33955332]), array([2.70573934, 1.10934953, 0.34002066]), array([2.70365899, 1.10950399, 0.34045852]), array([2.70356705, 1.10998067, 0.34110454])]]
+pure virtual method called
+
+# standard output from running ground truth analysis on TWO FRAME ONLY
+# date: 06-30-2023
+# command: python frame_extraction.py
+List of ground truth: [
+[
+array([1.137937  , 0.26053681, 0.04626193]),
+array([1.1384683 , 0.26076131, 0.04645629]),
+array([1.13846005, 0.26100368, 0.04669885]),
+array([1.13849255, 0.2612045 , 0.04686108]),
+array([1.13864967, 0.26155849, 0.04711469]),
+array([1.1386552 , 0.26195237, 0.04729133]),
+array([1.13842622, 0.26226264, 0.04754479]),
+array([1.13885034, 0.26262712, 0.0479154 ]),
+array([1.1388134 , 0.26308717, 0.04813212]),
+array([1.1389712 , 0.26359188, 0.04844531]),
+array([1.13862396, 0.26400995, 0.04884585]),
+array([1.1385634 , 0.26456779, 0.04918207]),
+array([1.13894565, 0.26502955, 0.04949875]),
+array([1.13893113, 0.26526423, 0.04984822]),
+array([1.13899685, 0.26541254, 0.05022369]),
+array([1.13899326, 0.2653596 , 0.05061698]),
+array([1.13919323, 0.26529618, 0.0509669 ]),
+array([1.13926859, 0.26517576, 0.05134613]),
+array([1.13999301, 0.26499901, 0.05168794]),
+array([1.13993525, 0.26470845, 0.05201827])
+],
+
+[
+array([1.137937  , 0.26053681, 0.04626193]),
+array([1.1384683 , 0.26076131, 0.04645629]),
+array([1.13846005, 0.26100368, 0.04669885]),
+array([1.13849255, 0.2612045 , 0.04686108]),
+array([1.13864967, 0.26155849, 0.04711469]),
+array([1.1386552 , 0.26195237, 0.04729133]),
+array([1.13842622, 0.26226264, 0.04754479]),
+array([1.13885034, 0.26262712, 0.0479154 ]),
+array([1.1388134 , 0.26308717, 0.04813212]),
+array([1.1389712 , 0.26359188, 0.04844531]),
+array([1.13862396, 0.26400995, 0.04884585]),
+array([1.1385634 , 0.26456779, 0.04918207]),
+array([1.13894565, 0.26502955, 0.04949875]),
+array([1.13893113, 0.26526423, 0.04984822]),
+array([1.13899685, 0.26541254, 0.05022369]),
+array([1.13899326, 0.2653596 , 0.05061698]),
+array([1.13919323, 0.26529618, 0.0509669 ]),
+array([1.13926859, 0.26517576, 0.05134613]),
+array([1.13999301, 0.26499901, 0.05168794]),
+array([1.13993525, 0.26470845, 0.05201827])
+]]
+
+
+### questions:
+am I saving two distinct frames or just saving one for two times?
+
+### 06-30-2023 7:13pm
+### testing: frame_extraction.py
+results:
+Ground truth full list:
+[
+
+[
+array([ 2.94401589, -0.24362661,  0.70956411]),
+array([ 2.94953719, -0.24524498,  0.71121886]),
+array([ 2.94624743, -0.24549446,  0.71077984]),
+array([ 2.94560726, -0.24636045,  0.71125923]),
+array([ 2.94757666, -0.24719196,  0.71182803]),
+array([ 2.9453567 , -0.24784289,  0.7116931 ]),
+array([ 2.94431257, -0.2485799 ,  0.71180824]),
+array([ 2.94566995, -0.24948222,  0.71234757]),
+array([ 2.94492877, -0.25036353,  0.71265082]),
+array([ 2.94408114, -0.25107252,  0.71292086]),
+array([ 2.9480751 , -0.25240618,  0.71362313]),
+array([ 2.94774079, -0.25334436,  0.71351647]),
+array([ 2.94572122, -0.25379137,  0.71331718]),
+array([ 2.9439893 , -0.25427429,  0.71329958]),
+array([ 2.94452192, -0.25485495,  0.71347515]),
+array([ 2.94760621, -0.25611648,  0.7141614 ]),
+array([ 2.94712668, -0.25674387,  0.71428771]),
+array([ 2.94356162, -0.25721041,  0.71409848]),
+array([ 2.94520633, -0.25815822,  0.71442904])
+],
+
+[
+array([ 2.94401589, -0.24362661,  0.70956411]),
+array([ 2.94953719, -0.24524498,  0.71121886]),
+array([ 2.94624743, -0.24549446,  0.71077984]),
+array([ 2.94560726, -0.24636045,  0.71125923]),
+array([ 2.94757666, -0.24719196,  0.71182803]),
+array([ 2.9453567 , -0.24784289,  0.7116931 ]),
+array([ 2.94431257, -0.2485799 ,  0.71180824]),
+array([ 2.94566995, -0.24948222,  0.71234757]),
+array([ 2.94492877, -0.25036353,  0.71265082]),
+array([ 2.94408114, -0.25107252,  0.71292086]),
+array([ 2.9480751 , -0.25240618,  0.71362313]),
+array([ 2.94774079, -0.25334436,  0.71351647]),
+array([ 2.94572122, -0.25379137,  0.71331718]),
+array([ 2.9439893 , -0.25427429,  0.71329958]),
+array([ 2.94452192, -0.25485495,  0.71347515]),
+array([ 2.94760621, -0.25611648,  0.7141614 ]),
+array([ 2.94712668, -0.25674387,  0.71428771]),
+array([ 2.94356162, -0.25721041,  0.71409848]),
+array([ 2.94520633, -0.25815822,  0.71442904])
+]
+]
+
+
+
+
+
+
+
+

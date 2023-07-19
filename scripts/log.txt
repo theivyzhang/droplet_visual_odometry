@@ -1,0 +1,9080 @@
+transforms: 
+  - 
+    header: 
+      seq: 0
+      stamp: 
+        secs: 1627505023
+        nsecs: 238113028
+      frame_id: "cam_0_optical_frame"
+    child_frame_id: "/ar_marker_0"
+    transform: 
+      translation: 
+        x: -0.606623054758
+        y: -0.369753928693
+        z: 1.9458886688
+      rotation: 
+        x: 0.999599045316
+        y: 0.00683216425766
+        z: 0.0267331490796
+        w: -0.00635679758349
+---
+transforms: 
+  - 
+    header: 
+      seq: 0
+      stamp: 
+        secs: 1627505023
+        nsecs: 238113028
+      frame_id: "cam_0_optical_frame"
+    child_frame_id: "/ar_marker_4"
+    transform: 
+      translation: 
+        x: -0.356431727272
+        y: 0.320231341232
+        z: 1.21303649505
+      rotation: 
+        x: 0.999958296161
+        y: 0.00867990188109
+        z: 0.00280146651894
+        w: 0.000465862723893
+---
+transforms: 
+  - 
+    header: 
+      seq: 153831
+      stamp: 
+        secs: 1627505023
+        nsecs: 378795260
+      frame_id: "world"
+    child_frame_id: "MiniAHRS"
+    transform: 
+      translation: 
+        x: 0.0
+        y: 0.0
+        z: 0.0
+      rotation: 
+        x: -0.0112141688755
+        y: 0.00176086605695
+        z: 0.409233938028
+        w: 0.912358879901
+---
+transforms: 
+  - 
+    header: 
+      seq: 153832
+      stamp: 
+        secs: 1627505023
+        nsecs: 379218721
+      frame_id: "world"
+    child_frame_id: "MiniAHRS"
+    transform: 
+      translation: 
+        x: 0.0
+        y: 0.0
+        z: 0.0
+      rotation: 
+        x: -0.0112141688755
+        y: 0.00176086605695
+        z: 0.409233938028
+        w: 0.912358879901
+---
+transforms: 
+  - 
+    header: 
+      seq: 153833
+      stamp: 
+        secs: 1627505023
+        nsecs: 379441503
+      frame_id: "world"
+    child_frame_id: "MiniAHRS"
+    transform: 
+      translation: 
+        x: 0.0
+        y: 0.0
+        z: 0.0
+      rotation: 
+        x: -0.0112141688755
+        y: 0.00176086605695
+        z: 0.409233938028
+        w: 0.912358879901
+---
+transforms: 
+  - 
+    header: 
+      seq: 153834
+      stamp: 
+        secs: 1627505023
+        nsecs: 379627970
+      frame_id: "world"
+    child_frame_id: "MiniAHRS"
+    transform: 
+      translation: 
+        x: 0.0
+        y: 0.0
+        z: 0.0
+      rotation: 
+        x: -0.0112143224974
+        y: 0.00175988742939
+        z: 0.409313554801
+        w: 0.912323164029
+---
+transforms: 
+  - 
+    header: 
+      seq: 153835
+      stamp: 
+        secs: 1627505023
+        nsecs: 379813519
+      frame_id: "world"
+    child_frame_id: "MiniAHRS"
+    transform: 
+      translation: 
+        x: 0.0
+        y: 0.0
+        z: 0.0
+      rotation: 
+        x: -0.0112143224974
+        y: 0.00175988742939
+        z: 0.409313554801
+        w: 0.912323164029
+---
+transforms: 
+  - 
+    header: 
+      seq: 153836
+      stamp: 
+        secs: 1627505023
+        nsecs: 380056586
+      frame_id: "world"
+    child_frame_id: "MiniAHRS"
+    transform: 
+      translation: 
+        x: 0.0
+        y: 0.0
+        z: 0.0
+      rotation: 
+        x: -0.0112143224974
+        y: 0.00175988742939
+        z: 0.409313554801
+        w: 0.912323164029
+---
+transforms: 
+  - 
+    header: 
+      seq: 153837
+      stamp: 
+        secs: 1627505023
+        nsecs: 380239514
+      frame_id: "world"
+    child_frame_id: "MiniAHRS"
+    transform: 
+      translation: 
+        x: 0.0
+        y: 0.0
+        z: 0.0
+      rotation: 
+        x: -0.0112500324156
+        y: 0.00183950684779
+        z: 0.409314089301
+        w: 0.912322327516
+---
+transforms: 
+  - 
+    header: 
+      seq: 153838
+      stamp: 
+        secs: 1627505023
+        nsecs: 380504401
+      frame_id: "world"
+    child_frame_id: "MiniAHRS"
+    transform: 
+      translation: 
+        x: 0.0
+        y: 0.0
+        z: 0.0
+      rotation: 
+        x: -0.0112501929001
+        y: 0.00183852509026
+        z: 0.409393702885
+        w: 0.91228660465
+---
+transforms: 
+  - 
+    header: 
+      seq: 153839
+      stamp: 
+        secs: 1627505023
+        nsecs: 380784205
+      frame_id: "world"
+    child_frame_id: "MiniAHRS"
+    transform: 
+      translation: 
+        x: 0.0
+        y: 0.0
+        z: 0.0
+      rotation: 
+        x: -0.0112501929001
+        y: 0.00183852509026
+        z: 0.409393702885
+        w: 0.91228660465
+---
+transforms: 
+  - 
+    header: 
+      seq: 153840
+      stamp: 
+        secs: 1627505023
+        nsecs: 380979985
+      frame_id: "world"
+    child_frame_id: "MiniAHRS"
+    transform: 
+      translation: 
+        x: 0.0
+        y: 0.0
+        z: 0.0
+      rotation: 
+        x: -0.0112501929001
+        y: 0.00183852509026
+        z: 0.409393702885
+        w: 0.91228660465
+---
+transforms: 
+  - 
+    header: 
+      seq: 153841
+      stamp: 
+        secs: 1627505023
+        nsecs: 381159775
+      frame_id: "world"
+    child_frame_id: "MiniAHRS"
+    transform: 
+      translation: 
+        x: 0.0
+        y: 0.0
+        z: 0.0
+      rotation: 
+        x: -0.0112501929001
+        y: 0.00183852509026
+        z: 0.409393702885
+        w: 0.91228660465
+---
+transforms: 
+  - 
+    header: 
+      seq: 0
+      stamp: 
+        secs: 1627505023
+        nsecs: 238113028
+      frame_id: "marker_0"
+    child_frame_id: "/base_link"
+    transform: 
+      translation: 
+        x: 2.07845991987
+        y: 0.608172190574
+        z: 0.371303374579
+      rotation: 
+        x: 0.520147935577
+        y: -0.486189859187
+        z: -0.48626198351
+        w: 0.506571642842
+---
+transforms: 
+  - 
+    header: 
+      seq: 0
+      stamp: 
+        secs: 1627505023
+        nsecs: 238113028
+      frame_id: "marker_4"
+    child_frame_id: "/base_link"
+    transform: 
+      translation: 
+        x: 1.34635689841
+        y: 0.357397790385
+        z: -0.319265266335
+      rotation: 
+        x: 0.505883930925
+        y: -0.494002103906
+        z: -0.502752033482
+        w: 0.497276344298
+---
+transforms: 
+  - 
+    header: 
+      seq: 0
+      stamp: 
+        secs: 1627505023
+        nsecs: 287982470
+      frame_id: "cam_0_optical_frame"
+    child_frame_id: "/ar_marker_0"
+    transform: 
+      translation: 
+        x: -0.607072192572
+        y: -0.370031916143
+        z: 1.94558411199
+      rotation: 
+        x: 0.999616643601
+        y: 0.00687741431572
+        z: 0.0264594366333
+        w: -0.00437781018433
+---
+transforms: 
+  - 
+    header: 
+      seq: 0
+      stamp: 
+        secs: 1627505023
+        nsecs: 287982470
+      frame_id: "cam_0_optical_frame"
+    child_frame_id: "/ar_marker_4"
+    transform: 
+      translation: 
+        x: -0.35647973085
+        y: 0.319459314167
+        z: 1.21131140617
+      rotation: 
+        x: 0.999955700802
+        y: 0.00877414266326
+        z: 0.00244702998819
+        w: -0.00237126521755
+---
+transforms: 
+  - 
+    header: 
+      seq: 153842
+      stamp: 
+        secs: 1627505023
+        nsecs: 425984976
+      frame_id: "world"
+    child_frame_id: "MiniAHRS"
+    transform: 
+      translation: 
+        x: 0.0
+        y: 0.0
+        z: 0.0
+      rotation: 
+        x: -0.0112501929001
+        y: 0.00183852509026
+        z: 0.409393702885
+        w: 0.91228660465
+---
+transforms: 
+  - 
+    header: 
+      seq: 153843
+      stamp: 
+        secs: 1627505023
+        nsecs: 426368502
+      frame_id: "world"
+    child_frame_id: "MiniAHRS"
+    transform: 
+      translation: 
+        x: 0.0
+        y: 0.0
+        z: 0.0
+      rotation: 
+        x: -0.0112501929001
+        y: 0.00183852509026
+        z: 0.409393702885
+        w: 0.91228660465
+---
+transforms: 
+  - 
+    header: 
+      seq: 153844
+      stamp: 
+        secs: 1627505023
+        nsecs: 426535171
+      frame_id: "world"
+    child_frame_id: "MiniAHRS"
+    transform: 
+      translation: 
+        x: 0.0
+        y: 0.0
+        z: 0.0
+      rotation: 
+        x: -0.0112503532988
+        y: 0.00183754331872
+        z: 0.409473313351
+        w: 0.912250874836
+---
+transforms: 
+  - 
+    header: 
+      seq: 153845
+      stamp: 
+        secs: 1627505023
+        nsecs: 426559725
+      frame_id: "world"
+    child_frame_id: "MiniAHRS"
+    transform: 
+      translation: 
+        x: 0.0
+        y: 0.0
+        z: 0.0
+      rotation: 
+        x: -0.0112503532988
+        y: 0.00183754331872
+        z: 0.409473313351
+        w: 0.912250874836
+---
+transforms: 
+  - 
+    header: 
+      seq: 153846
+      stamp: 
+        secs: 1627505023
+        nsecs: 426570088
+      frame_id: "world"
+    child_frame_id: "MiniAHRS"
+    transform: 
+      translation: 
+        x: 0.0
+        y: 0.0
+        z: 0.0
+      rotation: 
+        x: -0.0112503532988
+        y: 0.00183754331872
+        z: 0.409473313351
+        w: 0.912250874836
+---
+transforms: 
+  - 
+    header: 
+      seq: 153847
+      stamp: 
+        secs: 1627505023
+        nsecs: 426579524
+      frame_id: "world"
+    child_frame_id: "MiniAHRS"
+    transform: 
+      translation: 
+        x: 0.0
+        y: 0.0
+        z: 0.0
+      rotation: 
+        x: -0.0112503532988
+        y: 0.00183754331872
+        z: 0.409473313351
+        w: 0.912250874836
+---
+transforms: 
+  - 
+    header: 
+      seq: 153848
+      stamp: 
+        secs: 1627505023
+        nsecs: 426590374
+      frame_id: "world"
+    child_frame_id: "MiniAHRS"
+    transform: 
+      translation: 
+        x: 0.0
+        y: 0.0
+        z: 0.0
+      rotation: 
+        x: -0.0112503532988
+        y: 0.00183754331872
+        z: 0.409473313351
+        w: 0.912250874836
+---
+transforms: 
+  - 
+    header: 
+      seq: 153849
+      stamp: 
+        secs: 1627505023
+        nsecs: 426609371
+      frame_id: "world"
+    child_frame_id: "MiniAHRS"
+    transform: 
+      translation: 
+        x: 0.0
+        y: 0.0
+        z: 0.0
+      rotation: 
+        x: -0.0112503532988
+        y: 0.00183754331872
+        z: 0.409473313351
+        w: 0.912250874836
+---
+transforms: 
+  - 
+    header: 
+      seq: 153850
+      stamp: 
+        secs: 1627505023
+        nsecs: 426988457
+      frame_id: "world"
+    child_frame_id: "MiniAHRS"
+    transform: 
+      translation: 
+        x: 0.0
+        y: 0.0
+        z: 0.0
+      rotation: 
+        x: -0.0112505136119
+        y: 0.00183656153319
+        z: 0.409552920698
+        w: 0.912215138075
+---
+transforms: 
+  - 
+    header: 
+      seq: 153851
+      stamp: 
+        secs: 1627505023
+        nsecs: 427082667
+      frame_id: "world"
+    child_frame_id: "MiniAHRS"
+    transform: 
+      translation: 
+        x: 0.0
+        y: 0.0
+        z: 0.0
+      rotation: 
+        x: -0.0112505136119
+        y: 0.00183656153319
+        z: 0.409552920698
+        w: 0.912215138075
+---
+transforms: 
+  - 
+    header: 
+      seq: 153852
+      stamp: 
+        secs: 1627505023
+        nsecs: 427098672
+      frame_id: "world"
+    child_frame_id: "MiniAHRS"
+    transform: 
+      translation: 
+        x: 0.0
+        y: 0.0
+        z: 0.0
+      rotation: 
+        x: -0.0112505136119
+        y: 0.00183656153319
+        z: 0.409552920698
+        w: 0.912215138075
+---
+transforms: 
+  - 
+    header: 
+      seq: 153853
+      stamp: 
+        secs: 1627505023
+        nsecs: 427108852
+      frame_id: "world"
+    child_frame_id: "MiniAHRS"
+    transform: 
+      translation: 
+        x: 0.0
+        y: 0.0
+        z: 0.0
+      rotation: 
+        x: -0.0112505136119
+        y: 0.00183656153319
+        z: 0.409552920698
+        w: 0.912215138075
+---
+transforms: 
+  - 
+    header: 
+      seq: 0
+      stamp: 
+        secs: 1627505023
+        nsecs: 287982470
+      frame_id: "marker_0"
+    child_frame_id: "/base_link"
+    transform: 
+      translation: 
+        x: 2.07815478422
+        y: 0.608621085543
+        z: 0.371581119414
+      rotation: 
+        x: 0.519053126121
+        y: -0.485324165721
+        z: -0.487419859258
+        w: 0.50741126045
+---
+transforms: 
+  - 
+    header: 
+      seq: 0
+      stamp: 
+        secs: 1627505023
+        nsecs: 287982470
+      frame_id: "marker_4"
+    child_frame_id: "/base_link"
+    transform: 
+      translation: 
+        x: 1.34463115761
+        y: 0.357444419724
+        z: -0.318494613249
+      rotation: 
+        x: 0.507171238968
+        y: -0.495548300852
+        z: -0.50155665308
+        w: 0.495631051931
+---
+transforms: 
+  - 
+    header: 
+      seq: 153854
+      stamp: 
+        secs: 1627505023
+        nsecs: 472177773
+      frame_id: "world"
+    child_frame_id: "MiniAHRS"
+    transform: 
+      translation: 
+        x: 0.0
+        y: 0.0
+        z: 0.0
+      rotation: 
+        x: -0.0112864114621
+        y: 0.00191518666813
+        z: 0.409633056015
+        w: 0.912178550721
+---
+transforms: 
+  - 
+    header: 
+      seq: 153855
+      stamp: 
+        secs: 1627505023
+        nsecs: 472535837
+      frame_id: "world"
+    child_frame_id: "MiniAHRS"
+    transform: 
+      translation: 
+        x: 0.0
+        y: 0.0
+        z: 0.0
+      rotation: 
+        x: -0.0112864114621
+        y: 0.00191518666813
+        z: 0.409633056015
+        w: 0.912178550721
+---
+transforms: 
+  - 
+    header: 
+      seq: 153856
+      stamp: 
+        secs: 1627505023
+        nsecs: 472706223
+      frame_id: "world"
+    child_frame_id: "MiniAHRS"
+    transform: 
+      translation: 
+        x: 0.0
+        y: 0.0
+        z: 0.0
+      rotation: 
+        x: -0.0112864114621
+        y: 0.00191518666813
+        z: 0.409633056015
+        w: 0.912178550721
+---
+transforms: 
+  - 
+    header: 
+      seq: 153857
+      stamp: 
+        secs: 1627505023
+        nsecs: 472826081
+      frame_id: "world"
+    child_frame_id: "MiniAHRS"
+    transform: 
+      translation: 
+        x: 0.0
+        y: 0.0
+        z: 0.0
+      rotation: 
+        x: -0.0112864114621
+        y: 0.00191518666813
+        z: 0.409633056015
+        w: 0.912178550721
+---
+transforms: 
+  - 
+    header: 
+      seq: 153858
+      stamp: 
+        secs: 1627505023
+        nsecs: 472941457
+      frame_id: "world"
+    child_frame_id: "MiniAHRS"
+    transform: 
+      translation: 
+        x: 0.0
+        y: 0.0
+        z: 0.0
+      rotation: 
+        x: -0.0112865785507
+        y: 0.00191420173563
+        z: 0.409712657051
+        w: 0.91214280002
+---
+transforms: 
+  - 
+    header: 
+      seq: 153859
+      stamp: 
+        secs: 1627505023
+        nsecs: 473076270
+      frame_id: "world"
+    child_frame_id: "MiniAHRS"
+    transform: 
+      translation: 
+        x: 0.0
+        y: 0.0
+        z: 0.0
+      rotation: 
+        x: -0.0112865785507
+        y: 0.00191420173563
+        z: 0.409712657051
+        w: 0.91214280002
+---
+transforms: 
+  - 
+    header: 
+      seq: 153860
+      stamp: 
+        secs: 1627505023
+        nsecs: 473202326
+      frame_id: "world"
+    child_frame_id: "MiniAHRS"
+    transform: 
+      translation: 
+        x: 0.0
+        y: 0.0
+        z: 0.0
+      rotation: 
+        x: -0.0112865785507
+        y: 0.00191420173563
+        z: 0.409712657051
+        w: 0.91214280002
+---
+transforms: 
+  - 
+    header: 
+      seq: 153861
+      stamp: 
+        secs: 1627505023
+        nsecs: 473328443
+      frame_id: "world"
+    child_frame_id: "MiniAHRS"
+    transform: 
+      translation: 
+        x: 0.0
+        y: 0.0
+        z: 0.0
+      rotation: 
+        x: -0.0112867455533
+        y: 0.00191321678856
+        z: 0.409792254966
+        w: 0.912107042373
+---
+transforms: 
+  - 
+    header: 
+      seq: 153862
+      stamp: 
+        secs: 1627505023
+        nsecs: 473460469
+      frame_id: "world"
+    child_frame_id: "MiniAHRS"
+    transform: 
+      translation: 
+        x: 0.0
+        y: 0.0
+        z: 0.0
+      rotation: 
+        x: -0.0112867455533
+        y: 0.00191321678856
+        z: 0.409792254966
+        w: 0.912107042373
+---
+transforms: 
+  - 
+    header: 
+      seq: 153863
+      stamp: 
+        secs: 1627505023
+        nsecs: 473624219
+      frame_id: "world"
+    child_frame_id: "MiniAHRS"
+    transform: 
+      translation: 
+        x: 0.0
+        y: 0.0
+        z: 0.0
+      rotation: 
+        x: -0.0112867455533
+        y: 0.00191321678856
+        z: 0.409792254966
+        w: 0.912107042373
+---
+transforms: 
+  - 
+    header: 
+      seq: 153864
+      stamp: 
+        secs: 1627505023
+        nsecs: 473794792
+      frame_id: "world"
+    child_frame_id: "MiniAHRS"
+    transform: 
+      translation: 
+        x: 0.0
+        y: 0.0
+        z: 0.0
+      rotation: 
+        x: -0.0112867455533
+        y: 0.00191321678856
+        z: 0.409792254966
+        w: 0.912107042373
+---
+transforms: 
+  - 
+    header: 
+      seq: 153865
+      stamp: 
+        secs: 1627505023
+        nsecs: 473948825
+      frame_id: "world"
+    child_frame_id: "MiniAHRS"
+    transform: 
+      translation: 
+        x: 0.0
+        y: 0.0
+        z: 0.0
+      rotation: 
+        x: -0.01128691247
+        y: 0.00191223182692
+        z: 0.409871849761
+        w: 0.912071277779
+---
+transforms: 
+  - 
+    header: 
+      seq: 0
+      stamp: 
+        secs: 1627505023
+        nsecs: 337611454
+      frame_id: "cam_0_optical_frame"
+    child_frame_id: "/ar_marker_0"
+    transform: 
+      translation: 
+        x: -0.607786334353
+        y: -0.370188194642
+        z: 1.94462293866
+      rotation: 
+        x: 0.999592544755
+        y: 0.00689037599279
+        z: 0.0269068700223
+        w: -0.00657932624991
+---
+transforms: 
+  - 
+    header: 
+      seq: 0
+      stamp: 
+        secs: 1627505023
+        nsecs: 337611454
+      frame_id: "cam_0_optical_frame"
+    child_frame_id: "/ar_marker_4"
+    transform: 
+      translation: 
+        x: -0.356845400348
+        y: 0.319099660434
+        z: 1.21072878102
+      rotation: 
+        x: 0.99995940929
+        y: 0.00838073303274
+        z: 0.00285698802922
+        w: -0.00166754461698
+---
+transforms: 
+  - 
+    header: 
+      seq: 0
+      stamp: 
+        secs: 1627505023
+        nsecs: 387570218
+      frame_id: "cam_0_optical_frame"
+    child_frame_id: "/ar_marker_0"
+    transform: 
+      translation: 
+        x: -0.608524591168
+        y: -0.370437595235
+        z: 1.94508802105
+      rotation: 
+        x: 0.999605007899
+        y: 0.00679419313948
+        z: 0.026799068381
+        w: -0.00504748017151
+---
+transforms: 
+  - 
+    header: 
+      seq: 0
+      stamp: 
+        secs: 1627505023
+        nsecs: 387570218
+      frame_id: "cam_0_optical_frame"
+    child_frame_id: "/ar_marker_4"
+    transform: 
+      translation: 
+        x: -0.357574267711
+        y: 0.319305488787
+        z: 1.21240717104
+      rotation: 
+        x: 0.999961896329
+        y: 0.00839065299976
+        z: 0.00237425186745
+        w: 0.000407138051712
+---
+transforms: 
+  - 
+    header: 
+      seq: 0
+      stamp: 
+        secs: 1627505023
+        nsecs: 337611454
+      frame_id: "marker_0"
+    child_frame_id: "/base_link"
+    transform: 
+      translation: 
+        x: 2.07719291836
+        y: 0.60933446159
+        z: 0.371736632456
+      rotation: 
+        x: 0.520371844167
+        y: -0.486181795149
+        z: -0.486089647737
+        w: 0.506514817381
+---
+transforms: 
+  - 
+    header: 
+      seq: 0
+      stamp: 
+        secs: 1627505023
+        nsecs: 337611454
+      frame_id: "marker_4"
+    child_frame_id: "/base_link"
+    transform: 
+      translation: 
+        x: 1.34404795523
+        y: 0.357809624918
+        z: -0.31813542359
+      rotation: 
+        x: 0.506829345537
+        y: -0.495190457492
+        z: -0.501508519033
+        w: 0.4963865738
+---
+transforms: 
+  - 
+    header: 
+      seq: 153866
+      stamp: 
+        secs: 1627505023
+        nsecs: 519519387
+      frame_id: "world"
+    child_frame_id: "MiniAHRS"
+    transform: 
+      translation: 
+        x: 0.0
+        y: 0.0
+        z: 0.0
+      rotation: 
+        x: -0.01128691247
+        y: 0.00191223182692
+        z: 0.409871849761
+        w: 0.912071277779
+---
+transforms: 
+  - 
+    header: 
+      seq: 153867
+      stamp: 
+        secs: 1627505023
+        nsecs: 519826881
+      frame_id: "world"
+    child_frame_id: "MiniAHRS"
+    transform: 
+      translation: 
+        x: 0.0
+        y: 0.0
+        z: 0.0
+      rotation: 
+        x: -0.01128691247
+        y: 0.00191223182692
+        z: 0.409871849761
+        w: 0.912071277779
+---
+transforms: 
+  - 
+    header: 
+      seq: 153868
+      stamp: 
+        secs: 1627505023
+        nsecs: 519962666
+      frame_id: "world"
+    child_frame_id: "MiniAHRS"
+    transform: 
+      translation: 
+        x: 0.0
+        y: 0.0
+        z: 0.0
+      rotation: 
+        x: -0.0112870793007
+        y: 0.00191124685071
+        z: 0.409951441434
+        w: 0.91203550624
+---
+transforms: 
+  - 
+    header: 
+      seq: 153869
+      stamp: 
+        secs: 1627505023
+        nsecs: 520076727
+      frame_id: "world"
+    child_frame_id: "MiniAHRS"
+    transform: 
+      translation: 
+        x: 0.0
+        y: 0.0
+        z: 0.0
+      rotation: 
+        x: -0.0112870793007
+        y: 0.00191124685071
+        z: 0.409951441434
+        w: 0.91203550624
+---
+transforms: 
+  - 
+    header: 
+      seq: 153870
+      stamp: 
+        secs: 1627505023
+        nsecs: 520188993
+      frame_id: "world"
+    child_frame_id: "MiniAHRS"
+    transform: 
+      translation: 
+        x: 0.0
+        y: 0.0
+        z: 0.0
+      rotation: 
+        x: -0.0113228446234
+        y: 0.00199084129098
+        z: 0.409951969106
+        w: 0.912034655464
+---
+transforms: 
+  - 
+    header: 
+      seq: 153871
+      stamp: 
+        secs: 1627505023
+        nsecs: 520316550
+      frame_id: "world"
+    child_frame_id: "MiniAHRS"
+    transform: 
+      translation: 
+        x: 0.0
+        y: 0.0
+        z: 0.0
+      rotation: 
+        x: -0.0113228446234
+        y: 0.00199084129098
+        z: 0.409951969106
+        w: 0.912034655464
+---
+transforms: 
+  - 
+    header: 
+      seq: 153872
+      stamp: 
+        secs: 1627505023
+        nsecs: 520440266
+      frame_id: "world"
+    child_frame_id: "MiniAHRS"
+    transform: 
+      translation: 
+        x: 0.0
+        y: 0.0
+        z: 0.0
+      rotation: 
+        x: -0.0113228446234
+        y: 0.00199084129098
+        z: 0.409951969106
+        w: 0.912034655464
+---
+transforms: 
+  - 
+    header: 
+      seq: 153873
+      stamp: 
+        secs: 1627505023
+        nsecs: 520557822
+      frame_id: "world"
+    child_frame_id: "MiniAHRS"
+    transform: 
+      translation: 
+        x: 0.0
+        y: 0.0
+        z: 0.0
+      rotation: 
+        x: -0.0114026051867
+        y: 0.00195407116769
+        z: 0.410031729669
+        w: 0.91199788534
+---
+transforms: 
+  - 
+    header: 
+      seq: 153874
+      stamp: 
+        secs: 1627505023
+        nsecs: 520671870
+      frame_id: "world"
+    child_frame_id: "MiniAHRS"
+    transform: 
+      translation: 
+        x: 0.0
+        y: 0.0
+        z: 0.0
+      rotation: 
+        x: -0.0114026051867
+        y: 0.00195407116769
+        z: 0.410031729669
+        w: 0.91199788534
+---
+transforms: 
+  - 
+    header: 
+      seq: 153875
+      stamp: 
+        secs: 1627505023
+        nsecs: 520785938
+      frame_id: "world"
+    child_frame_id: "MiniAHRS"
+    transform: 
+      translation: 
+        x: 0.0
+        y: 0.0
+        z: 0.0
+      rotation: 
+        x: -0.0114026051867
+        y: 0.00195407116769
+        z: 0.410031729669
+        w: 0.91199788534
+---
+transforms: 
+  - 
+    header: 
+      seq: 153876
+      stamp: 
+        secs: 1627505023
+        nsecs: 520918623
+      frame_id: "world"
+    child_frame_id: "MiniAHRS"
+    transform: 
+      translation: 
+        x: 0.0
+        y: 0.0
+        z: 0.0
+      rotation: 
+        x: -0.0114026051867
+        y: 0.00195407116769
+        z: 0.410031729669
+        w: 0.91199788534
+---
+transforms: 
+  - 
+    header: 
+      seq: 153877
+      stamp: 
+        secs: 1627505023
+        nsecs: 521060918
+      frame_id: "world"
+    child_frame_id: "MiniAHRS"
+    transform: 
+      translation: 
+        x: 0.0
+        y: 0.0
+        z: 0.0
+      rotation: 
+        x: -0.0114026051867
+        y: 0.00195407116769
+        z: 0.410031729669
+        w: 0.91199788534
+---
+transforms: 
+  - 
+    header: 
+      seq: 0
+      stamp: 
+        secs: 1627505023
+        nsecs: 387570218
+      frame_id: "marker_0"
+    child_frame_id: "/base_link"
+    transform: 
+      translation: 
+        x: 2.07765721395
+        y: 0.610073088371
+        z: 0.371986403327
+      rotation: 
+        x: 0.519510208595
+        y: -0.485524744132
+        z: -0.486867649475
+        w: 0.507281734242
+---
+transforms: 
+  - 
+    header: 
+      seq: 0
+      stamp: 
+        secs: 1627505023
+        nsecs: 387570218
+      frame_id: "marker_4"
+    child_frame_id: "/base_link"
+    transform: 
+      translation: 
+        x: 1.34572592768
+        y: 0.358539828727
+        z: -0.318339915331
+      rotation: 
+        x: 0.50555703315
+        y: -0.49439158981
+        z: -0.502793622838
+        w: 0.497179660678
+---
+transforms: 
+  - 
+    header: 
+      seq: 0
+      stamp: 
+        secs: 1627505023
+        nsecs: 438708882
+      frame_id: "cam_0_optical_frame"
+    child_frame_id: "/ar_marker_0"
+    transform: 
+      translation: 
+        x: -0.609119792517
+        y: -0.370661033949
+        z: 1.94463474306
+      rotation: 
+        x: 0.999602598066
+        y: 0.00703067232029
+        z: 0.0265690072285
+        w: -0.00626924575299
+---
+transforms: 
+  - 
+    header: 
+      seq: 0
+      stamp: 
+        secs: 1627505023
+        nsecs: 438708882
+      frame_id: "cam_0_optical_frame"
+    child_frame_id: "/ar_marker_4"
+    transform: 
+      translation: 
+        x: -0.357751255894
+        y: 0.318816652287
+        z: 1.21129392218
+      rotation: 
+        x: 0.999955022725
+        y: 0.00852935725627
+        z: 0.00413301269168
+        w: -0.000347560240722
+---
+transforms: 
+  - 
+    header: 
+      seq: 153878
+      stamp: 
+        secs: 1627505023
+        nsecs: 566882309
+      frame_id: "world"
+    child_frame_id: "MiniAHRS"
+    transform: 
+      translation: 
+        x: 0.0
+        y: 0.0
+        z: 0.0
+      rotation: 
+        x: -0.0114026051867
+        y: 0.00195407116769
+        z: 0.410031729669
+        w: 0.91199788534
+---
+transforms: 
+  - 
+    header: 
+      seq: 153879
+      stamp: 
+        secs: 1627505023
+        nsecs: 567177163
+      frame_id: "world"
+    child_frame_id: "MiniAHRS"
+    transform: 
+      translation: 
+        x: 0.0
+        y: 0.0
+        z: 0.0
+      rotation: 
+        x: -0.0114027756681
+        y: 0.00195307609523
+        z: 0.410111314937
+        w: 0.911962099849
+---
+transforms: 
+  - 
+    header: 
+      seq: 153880
+      stamp: 
+        secs: 1627505023
+        nsecs: 567308810
+      frame_id: "world"
+    child_frame_id: "MiniAHRS"
+    transform: 
+      translation: 
+        x: 0.0
+        y: 0.0
+        z: 0.0
+      rotation: 
+        x: -0.0114027756681
+        y: 0.00195307609523
+        z: 0.410111314937
+        w: 0.911962099849
+---
+transforms: 
+  - 
+    header: 
+      seq: 153881
+      stamp: 
+        secs: 1627505023
+        nsecs: 567422653
+      frame_id: "world"
+    child_frame_id: "MiniAHRS"
+    transform: 
+      translation: 
+        x: 0.0
+        y: 0.0
+        z: 0.0
+      rotation: 
+        x: -0.0114027756681
+        y: 0.00195307609523
+        z: 0.410111314937
+        w: 0.911962099849
+---
+transforms: 
+  - 
+    header: 
+      seq: 153882
+      stamp: 
+        secs: 1627505023
+        nsecs: 567534875
+      frame_id: "world"
+    child_frame_id: "MiniAHRS"
+    transform: 
+      translation: 
+        x: 0.0
+        y: 0.0
+        z: 0.0
+      rotation: 
+        x: -0.0114027756681
+        y: 0.00195307609523
+        z: 0.410111314937
+        w: 0.911962099849
+---
+transforms: 
+  - 
+    header: 
+      seq: 153883
+      stamp: 
+        secs: 1627505023
+        nsecs: 567665942
+      frame_id: "world"
+    child_frame_id: "MiniAHRS"
+    transform: 
+      translation: 
+        x: 0.0
+        y: 0.0
+        z: 0.0
+      rotation: 
+        x: -0.0114027756681
+        y: 0.00195307609523
+        z: 0.410111314937
+        w: 0.911962099849
+---
+transforms: 
+  - 
+    header: 
+      seq: 153884
+      stamp: 
+        secs: 1627505023
+        nsecs: 567776095
+      frame_id: "world"
+    child_frame_id: "MiniAHRS"
+    transform: 
+      translation: 
+        x: 0.0
+        y: 0.0
+        z: 0.0
+      rotation: 
+        x: -0.0114027756681
+        y: 0.00195307609523
+        z: 0.410111314937
+        w: 0.911962099849
+---
+transforms: 
+  - 
+    header: 
+      seq: 153885
+      stamp: 
+        secs: 1627505023
+        nsecs: 567910200
+      frame_id: "world"
+    child_frame_id: "MiniAHRS"
+    transform: 
+      translation: 
+        x: 0.0
+        y: 0.0
+        z: 0.0
+      rotation: 
+        x: -0.0114029460628
+        y: 0.0019520810079
+        z: 0.410190897082
+        w: 0.911926307413
+---
+transforms: 
+  - 
+    header: 
+      seq: 153886
+      stamp: 
+        secs: 1627505023
+        nsecs: 568031067
+      frame_id: "world"
+    child_frame_id: "MiniAHRS"
+    transform: 
+      translation: 
+        x: 0.0
+        y: 0.0
+        z: 0.0
+      rotation: 
+        x: -0.0114029460628
+        y: 0.0019520810079
+        z: 0.410190897082
+        w: 0.911926307413
+---
+transforms: 
+  - 
+    header: 
+      seq: 153887
+      stamp: 
+        secs: 1627505023
+        nsecs: 568142663
+      frame_id: "world"
+    child_frame_id: "MiniAHRS"
+    transform: 
+      translation: 
+        x: 0.0
+        y: 0.0
+        z: 0.0
+      rotation: 
+        x: -0.0114029460628
+        y: 0.0019520810079
+        z: 0.410190897082
+        w: 0.911926307413
+---
+transforms: 
+  - 
+    header: 
+      seq: 153888
+      stamp: 
+        secs: 1627505023
+        nsecs: 568253171
+      frame_id: "world"
+    child_frame_id: "MiniAHRS"
+    transform: 
+      translation: 
+        x: 0.0
+        y: 0.0
+        z: 0.0
+      rotation: 
+        x: -0.0114029460628
+        y: 0.0019520810079
+        z: 0.410190897082
+        w: 0.911926307413
+---
+transforms: 
+  - 
+    header: 
+      seq: 153889
+      stamp: 
+        secs: 1627505023
+        nsecs: 568363559
+      frame_id: "world"
+    child_frame_id: "MiniAHRS"
+    transform: 
+      translation: 
+        x: 0.0
+        y: 0.0
+        z: 0.0
+      rotation: 
+        x: -0.0114029460628
+        y: 0.0019520810079
+        z: 0.410190897082
+        w: 0.911926307413
+---
+transforms: 
+  - 
+    header: 
+      seq: 0
+      stamp: 
+        secs: 1627505023
+        nsecs: 438708882
+      frame_id: "marker_0"
+    child_frame_id: "/base_link"
+    transform: 
+      translation: 
+        x: 2.07720328435
+        y: 0.610667928432
+        z: 0.372209481012
+      rotation: 
+        x: 0.520123185895
+        y: -0.486130632336
+        z: -0.486488924652
+        w: 0.506435984099
+---
+transforms: 
+  - 
+    header: 
+      seq: 0
+      stamp: 
+        secs: 1627505023
+        nsecs: 438708882
+      frame_id: "marker_4"
+    child_frame_id: "/base_link"
+    transform: 
+      translation: 
+        x: 1.34461214931
+        y: 0.358715930034
+        z: -0.317851965495
+      rotation: 
+        x: 0.506878974882
+        y: -0.493816414174
+        z: -0.501602111166
+        w: 0.497608657469
+---
+transforms: 
+  - 
+    header: 
+      seq: 0
+      stamp: 
+        secs: 1627505023
+        nsecs: 487645342
+      frame_id: "cam_0_optical_frame"
+    child_frame_id: "/ar_marker_0"
+    transform: 
+      translation: 
+        x: -0.609692346872
+        y: -0.370944319985
+        z: 1.94433575674
+      rotation: 
+        x: 0.999592874147
+        y: 0.0070914931315
+        z: 0.0267171159582
+        w: -0.00707052995516
+---
+transforms: 
+  - 
+    header: 
+      seq: 0
+      stamp: 
+        secs: 1627505023
+        nsecs: 487645342
+      frame_id: "cam_0_optical_frame"
+    child_frame_id: "/ar_marker_4"
+    transform: 
+      translation: 
+        x: -0.357958771446
+        y: 0.318420132142
+        z: 1.21130376989
+      rotation: 
+        x: 0.999947785145
+        y: 0.00917780234041
+        z: 0.00447690298603
+        w: 0.000390213995707
+---
+transforms: 
+  - 
+    header: 
+      seq: 153890
+      stamp: 
+        secs: 1627505023
+        nsecs: 620669022
+      frame_id: "world"
+    child_frame_id: "MiniAHRS"
+    transform: 
+      translation: 
+        x: 0.0
+        y: 0.0
+        z: 0.0
+      rotation: 
+        x: -0.0114031163705
+        y: 0.0019510859057
+        z: 0.410270476103
+        w: 0.911890508032
+---
+transforms: 
+  - 
+    header: 
+      seq: 153891
+      stamp: 
+        secs: 1627505023
+        nsecs: 621819752
+      frame_id: "world"
+    child_frame_id: "MiniAHRS"
+    transform: 
+      translation: 
+        x: 0.0
+        y: 0.0
+        z: 0.0
+      rotation: 
+        x: -0.0114031163705
+        y: 0.0019510859057
+        z: 0.410270476103
+        w: 0.911890508032
+---
+transforms: 
+  - 
+    header: 
+      seq: 153892
+      stamp: 
+        secs: 1627505023
+        nsecs: 621838149
+      frame_id: "world"
+    child_frame_id: "MiniAHRS"
+    transform: 
+      translation: 
+        x: 0.0
+        y: 0.0
+        z: 0.0
+      rotation: 
+        x: -0.0114031163705
+        y: 0.0019510859057
+        z: 0.410270476103
+        w: 0.911890508032
+---
+transforms: 
+  - 
+    header: 
+      seq: 153893
+      stamp: 
+        secs: 1627505023
+        nsecs: 621847930
+      frame_id: "world"
+    child_frame_id: "MiniAHRS"
+    transform: 
+      translation: 
+        x: 0.0
+        y: 0.0
+        z: 0.0
+      rotation: 
+        x: -0.0114031163705
+        y: 0.0019510859057
+        z: 0.410270476103
+        w: 0.911890508032
+---
+transforms: 
+  - 
+    header: 
+      seq: 153894
+      stamp: 
+        secs: 1627505023
+        nsecs: 621857555
+      frame_id: "world"
+    child_frame_id: "MiniAHRS"
+    transform: 
+      translation: 
+        x: 0.0
+        y: 0.0
+        z: 0.0
+      rotation: 
+        x: -0.0114031163705
+        y: 0.0019510859057
+        z: 0.410270476103
+        w: 0.911890508032
+---
+transforms: 
+  - 
+    header: 
+      seq: 153895
+      stamp: 
+        secs: 1627505023
+        nsecs: 621867697
+      frame_id: "world"
+    child_frame_id: "MiniAHRS"
+    transform: 
+      translation: 
+        x: 0.0
+        y: 0.0
+        z: 0.0
+      rotation: 
+        x: -0.0114031163705
+        y: 0.0019510859057
+        z: 0.410270476103
+        w: 0.911890508032
+---
+transforms: 
+  - 
+    header: 
+      seq: 153896
+      stamp: 
+        secs: 1627505023
+        nsecs: 621879358
+      frame_id: "world"
+    child_frame_id: "MiniAHRS"
+    transform: 
+      translation: 
+        x: 0.0
+        y: 0.0
+        z: 0.0
+      rotation: 
+        x: -0.0114032865915
+        y: 0.00195009078864
+        z: 0.410350051999
+        w: 0.911854701707
+---
+transforms: 
+  - 
+    header: 
+      seq: 153897
+      stamp: 
+        secs: 1627505023
+        nsecs: 621889237
+      frame_id: "world"
+    child_frame_id: "MiniAHRS"
+    transform: 
+      translation: 
+        x: 0.0
+        y: 0.0
+        z: 0.0
+      rotation: 
+        x: -0.0114032865915
+        y: 0.00195009078864
+        z: 0.410350051999
+        w: 0.911854701707
+---
+transforms: 
+  - 
+    header: 
+      seq: 0
+      stamp: 
+        secs: 1627505023
+        nsecs: 487645342
+      frame_id: "marker_0"
+    child_frame_id: "/base_link"
+    transform: 
+      translation: 
+        x: 2.07690361669
+        y: 0.611240244335
+        z: 0.372492528868
+      rotation: 
+        x: 0.520623367827
+        y: -0.486421604474
+        z: -0.48603972165
+        w: 0.506073829151
+---
+transforms: 
+  - 
+    header: 
+      seq: 0
+      stamp: 
+        secs: 1627505023
+        nsecs: 487645342
+      frame_id: "marker_4"
+    child_frame_id: "/base_link"
+    transform: 
+      translation: 
+        x: 1.34462151601
+        y: 0.358923453111
+        z: -0.317455437635
+      rotation: 
+        x: 0.507002496871
+        y: -0.4929477762
+        z: -0.502119522627
+        w: 0.497822200291
+---
+transforms: 
+  - 
+    header: 
+      seq: 153898
+      stamp: 
+        secs: 1627505023
+        nsecs: 621899291
+      frame_id: "world"
+    child_frame_id: "MiniAHRS"
+    transform: 
+      translation: 
+        x: 0.0
+        y: 0.0
+        z: 0.0
+      rotation: 
+        x: -0.0114390864792
+        y: 0.0020296695546
+        z: 0.41035058312
+        w: 0.911853840632
+---
+transforms: 
+  - 
+    header: 
+      seq: 153899
+      stamp: 
+        secs: 1627505023
+        nsecs: 621908746
+      frame_id: "world"
+    child_frame_id: "MiniAHRS"
+    transform: 
+      translation: 
+        x: 0.0
+        y: 0.0
+        z: 0.0
+      rotation: 
+        x: -0.0114390864792
+        y: 0.0020296695546
+        z: 0.41035058312
+        w: 0.911853840632
+---
+transforms: 
+  - 
+    header: 
+      seq: 153900
+      stamp: 
+        secs: 1627505023
+        nsecs: 621918524
+      frame_id: "world"
+    child_frame_id: "MiniAHRS"
+    transform: 
+      translation: 
+        x: 0.0
+        y: 0.0
+        z: 0.0
+      rotation: 
+        x: -0.0114390864792
+        y: 0.0020296695546
+        z: 0.41035058312
+        w: 0.911853840632
+---
+transforms: 
+  - 
+    header: 
+      seq: 0
+      stamp: 
+        secs: 1627505023
+        nsecs: 537648173
+      frame_id: "cam_0_optical_frame"
+    child_frame_id: "/ar_marker_0"
+    transform: 
+      translation: 
+        x: -0.610208662657
+        y: -0.371192206893
+        z: 1.94446628325
+      rotation: 
+        x: 0.999587175613
+        y: 0.00704061101159
+        z: 0.0273430065687
+        w: -0.00531677897012
+---
+transforms: 
+  - 
+    header: 
+      seq: 0
+      stamp: 
+        secs: 1627505023
+        nsecs: 537648173
+      frame_id: "cam_0_optical_frame"
+    child_frame_id: "/ar_marker_4"
+    transform: 
+      translation: 
+        x: -0.358237961786
+        y: 0.318129513811
+        z: 1.21082014718
+      rotation: 
+        x: 0.999947957079
+        y: 0.00906959289317
+        z: 0.00443855844658
+        w: -0.00145767497292
+---
+transforms: 
+  - 
+    header: 
+      seq: 153901
+      stamp: 
+        secs: 1627505023
+        nsecs: 661517993
+      frame_id: "world"
+    child_frame_id: "MiniAHRS"
+    transform: 
+      translation: 
+        x: 0.0
+        y: 0.0
+        z: 0.0
+      rotation: 
+        x: -0.0114390864792
+        y: 0.0020296695546
+        z: 0.41035058312
+        w: 0.911853840632
+---
+transforms: 
+  - 
+    header: 
+      seq: 153902
+      stamp: 
+        secs: 1627505023
+        nsecs: 661585684
+      frame_id: "world"
+    child_frame_id: "MiniAHRS"
+    transform: 
+      translation: 
+        x: 0.0
+        y: 0.0
+        z: 0.0
+      rotation: 
+        x: -0.0114392635577
+        y: 0.00202867129826
+        z: 0.410430155816
+        w: 0.911818027316
+---
+transforms: 
+  - 
+    header: 
+      seq: 153903
+      stamp: 
+        secs: 1627505023
+        nsecs: 661599330
+      frame_id: "world"
+    child_frame_id: "MiniAHRS"
+    transform: 
+      translation: 
+        x: 0.0
+        y: 0.0
+        z: 0.0
+      rotation: 
+        x: -0.0114392635577
+        y: 0.00202867129826
+        z: 0.410430155816
+        w: 0.911818027316
+---
+transforms: 
+  - 
+    header: 
+      seq: 153904
+      stamp: 
+        secs: 1627505023
+        nsecs: 661609335
+      frame_id: "world"
+    child_frame_id: "MiniAHRS"
+    transform: 
+      translation: 
+        x: 0.0
+        y: 0.0
+        z: 0.0
+      rotation: 
+        x: -0.0114392635577
+        y: 0.00202867129826
+        z: 0.410430155816
+        w: 0.911818027316
+---
+transforms: 
+  - 
+    header: 
+      seq: 153905
+      stamp: 
+        secs: 1627505023
+        nsecs: 661621842
+      frame_id: "world"
+    child_frame_id: "MiniAHRS"
+    transform: 
+      translation: 
+        x: 0.0
+        y: 0.0
+        z: 0.0
+      rotation: 
+        x: -0.0114392635577
+        y: 0.00202867129826
+        z: 0.410430155816
+        w: 0.911818027316
+---
+transforms: 
+  - 
+    header: 
+      seq: 153906
+      stamp: 
+        secs: 1627505023
+        nsecs: 661632351
+      frame_id: "world"
+    child_frame_id: "MiniAHRS"
+    transform: 
+      translation: 
+        x: 0.0
+        y: 0.0
+        z: 0.0
+      rotation: 
+        x: -0.0114392635577
+        y: 0.00202867129826
+        z: 0.410430155816
+        w: 0.911818027316
+---
+transforms: 
+  - 
+    header: 
+      seq: 153907
+      stamp: 
+        secs: 1627505023
+        nsecs: 661716505
+      frame_id: "world"
+    child_frame_id: "MiniAHRS"
+    transform: 
+      translation: 
+        x: 0.0
+        y: 0.0
+        z: 0.0
+      rotation: 
+        x: -0.0114392635577
+        y: 0.00202867129826
+        z: 0.410430155816
+        w: 0.911818027316
+---
+transforms: 
+  - 
+    header: 
+      seq: 153908
+      stamp: 
+        secs: 1627505023
+        nsecs: 661728038
+      frame_id: "world"
+    child_frame_id: "MiniAHRS"
+    transform: 
+      translation: 
+        x: 0.0
+        y: 0.0
+        z: 0.0
+      rotation: 
+        x: -0.0114394405491
+        y: 0.00202767302647
+        z: 0.410509725387
+        w: 0.911782207056
+---
+transforms: 
+  - 
+    header: 
+      seq: 153909
+      stamp: 
+        secs: 1627505023
+        nsecs: 661739421
+      frame_id: "world"
+    child_frame_id: "MiniAHRS"
+    transform: 
+      translation: 
+        x: 0.0
+        y: 0.0
+        z: 0.0
+      rotation: 
+        x: -0.0114394405491
+        y: 0.00202767302647
+        z: 0.410509725387
+        w: 0.911782207056
+---
+transforms: 
+  - 
+    header: 
+      seq: 153910
+      stamp: 
+        secs: 1627505023
+        nsecs: 661749662
+      frame_id: "world"
+    child_frame_id: "MiniAHRS"
+    transform: 
+      translation: 
+        x: 0.0
+        y: 0.0
+        z: 0.0
+      rotation: 
+        x: -0.0114394405491
+        y: 0.00202767302647
+        z: 0.410509725387
+        w: 0.911782207056
+---
+transforms: 
+  - 
+    header: 
+      seq: 153911
+      stamp: 
+        secs: 1627505023
+        nsecs: 661761086
+      frame_id: "world"
+    child_frame_id: "MiniAHRS"
+    transform: 
+      translation: 
+        x: 0.0
+        y: 0.0
+        z: 0.0
+      rotation: 
+        x: -0.0114394405491
+        y: 0.00202767302647
+        z: 0.410509725387
+        w: 0.911782207056
+---
+transforms: 
+  - 
+    header: 
+      seq: 153912
+      stamp: 
+        secs: 1627505023
+        nsecs: 661771217
+      frame_id: "world"
+    child_frame_id: "MiniAHRS"
+    transform: 
+      translation: 
+        x: 0.0
+        y: 0.0
+        z: 0.0
+      rotation: 
+        x: -0.0114394405491
+        y: 0.00202767302647
+        z: 0.410509725387
+        w: 0.911782207056
+---
+transforms: 
+  - 
+    header: 
+      seq: 0
+      stamp: 
+        secs: 1627505023
+        nsecs: 537648173
+      frame_id: "marker_0"
+    child_frame_id: "/base_link"
+    transform: 
+      translation: 
+        x: 2.07703353456
+        y: 0.611756663741
+        z: 0.372740519639
+      rotation: 
+        x: 0.520030896123
+        y: -0.485255094108
+        z: -0.486575114302
+        w: 0.507286919663
+---
+transforms: 
+  - 
+    header: 
+      seq: 0
+      stamp: 
+        secs: 1627505023
+        nsecs: 537648173
+      frame_id: "marker_4"
+    child_frame_id: "/base_link"
+    transform: 
+      translation: 
+        x: 1.34413743985
+        y: 0.359202258057
+        z: -0.317165204517
+      rotation: 
+        x: 0.50785326539
+        y: -0.493944390962
+        z: -0.501160747165
+        w: 0.496932495387
+---
+transforms: 
+  - 
+    header: 
+      seq: 153913
+      stamp: 
+        secs: 1627505023
+        nsecs: 708757132
+      frame_id: "world"
+    child_frame_id: "MiniAHRS"
+    transform: 
+      translation: 
+        x: 0.0
+        y: 0.0
+        z: 0.0
+      rotation: 
+        x: -0.0114394405491
+        y: 0.00202767302647
+        z: 0.410509725387
+        w: 0.911782207056
+---
+transforms: 
+  - 
+    header: 
+      seq: 153914
+      stamp: 
+        secs: 1627505023
+        nsecs: 708821799
+      frame_id: "world"
+    child_frame_id: "MiniAHRS"
+    transform: 
+      translation: 
+        x: 0.0
+        y: 0.0
+        z: 0.0
+      rotation: 
+        x: -0.0114396174534
+        y: 0.00202667473924
+        z: 0.410589291832
+        w: 0.911746379853
+---
+transforms: 
+  - 
+    header: 
+      seq: 153915
+      stamp: 
+        secs: 1627505023
+        nsecs: 708832954
+      frame_id: "world"
+    child_frame_id: "MiniAHRS"
+    transform: 
+      translation: 
+        x: 0.0
+        y: 0.0
+        z: 0.0
+      rotation: 
+        x: -0.0114396174534
+        y: 0.00202667473924
+        z: 0.410589291832
+        w: 0.911746379853
+---
+transforms: 
+  - 
+    header: 
+      seq: 153916
+      stamp: 
+        secs: 1627505023
+        nsecs: 708844774
+      frame_id: "world"
+    child_frame_id: "MiniAHRS"
+    transform: 
+      translation: 
+        x: 0.0
+        y: 0.0
+        z: 0.0
+      rotation: 
+        x: -0.0114396174534
+        y: 0.00202667473924
+        z: 0.410589291832
+        w: 0.911746379853
+---
+transforms: 
+  - 
+    header: 
+      seq: 153917
+      stamp: 
+        secs: 1627505023
+        nsecs: 708855061
+      frame_id: "world"
+    child_frame_id: "MiniAHRS"
+    transform: 
+      translation: 
+        x: 0.0
+        y: 0.0
+        z: 0.0
+      rotation: 
+        x: -0.0114396174534
+        y: 0.00202667473924
+        z: 0.410589291832
+        w: 0.911746379853
+---
+transforms: 
+  - 
+    header: 
+      seq: 153918
+      stamp: 
+        secs: 1627505023
+        nsecs: 708949479
+      frame_id: "world"
+    child_frame_id: "MiniAHRS"
+    transform: 
+      translation: 
+        x: 0.0
+        y: 0.0
+        z: 0.0
+      rotation: 
+        x: -0.0114396174534
+        y: 0.00202667473924
+        z: 0.410589291832
+        w: 0.911746379853
+---
+transforms: 
+  - 
+    header: 
+      seq: 153919
+      stamp: 
+        secs: 1627505023
+        nsecs: 708961710
+      frame_id: "world"
+    child_frame_id: "MiniAHRS"
+    transform: 
+      translation: 
+        x: 0.0
+        y: 0.0
+        z: 0.0
+      rotation: 
+        x: -0.0114396174534
+        y: 0.00202667473924
+        z: 0.410589291832
+        w: 0.911746379853
+---
+transforms: 
+  - 
+    header: 
+      seq: 153920
+      stamp: 
+        secs: 1627505023
+        nsecs: 708971638
+      frame_id: "world"
+    child_frame_id: "MiniAHRS"
+    transform: 
+      translation: 
+        x: 0.0
+        y: 0.0
+        z: 0.0
+      rotation: 
+        x: -0.0114396174534
+        y: 0.00202667473924
+        z: 0.410589291832
+        w: 0.911746379853
+---
+transforms: 
+  - 
+    header: 
+      seq: 153921
+      stamp: 
+        secs: 1627505023
+        nsecs: 708981261
+      frame_id: "world"
+    child_frame_id: "MiniAHRS"
+    transform: 
+      translation: 
+        x: 0.0
+        y: 0.0
+        z: 0.0
+      rotation: 
+        x: -0.0114396174534
+        y: 0.00202667473924
+        z: 0.410589291832
+        w: 0.911746379853
+---
+transforms: 
+  - 
+    header: 
+      seq: 153922
+      stamp: 
+        secs: 1627505023
+        nsecs: 708991812
+      frame_id: "world"
+    child_frame_id: "MiniAHRS"
+    transform: 
+      translation: 
+        x: 0.0
+        y: 0.0
+        z: 0.0
+      rotation: 
+        x: -0.0114396174534
+        y: 0.00202667473924
+        z: 0.410589291832
+        w: 0.911746379853
+---
+transforms: 
+  - 
+    header: 
+      seq: 153923
+      stamp: 
+        secs: 1627505023
+        nsecs: 709002128
+      frame_id: "world"
+    child_frame_id: "MiniAHRS"
+    transform: 
+      translation: 
+        x: 0.0
+        y: 0.0
+        z: 0.0
+      rotation: 
+        x: -0.0114397942706
+        y: 0.00202567643658
+        z: 0.410668855149
+        w: 0.911710545706
+---
+transforms: 
+  - 
+    header: 
+      seq: 153924
+      stamp: 
+        secs: 1627505023
+        nsecs: 709011857
+      frame_id: "world"
+    child_frame_id: "MiniAHRS"
+    transform: 
+      translation: 
+        x: 0.0
+        y: 0.0
+        z: 0.0
+      rotation: 
+        x: -0.0114397942706
+        y: 0.00202567643658
+        z: 0.410668855149
+        w: 0.911710545706
+---
+transforms: 
+  - 
+    header: 
+      seq: 0
+      stamp: 
+        secs: 1627505023
+        nsecs: 590806435
+      frame_id: "cam_0_optical_frame"
+    child_frame_id: "/ar_marker_0"
+    transform: 
+      translation: 
+        x: -0.610591856485
+        y: -0.371401592132
+        z: 1.9437899057
+      rotation: 
+        x: 0.999568827621
+        y: 0.00727087677674
+        z: 0.0277198977499
+        w: -0.00639534731038
+---
+transforms: 
+  - 
+    header: 
+      seq: 0
+      stamp: 
+        secs: 1627505023
+        nsecs: 590806435
+      frame_id: "cam_0_optical_frame"
+    child_frame_id: "/ar_marker_4"
+    transform: 
+      translation: 
+        x: -0.358473067223
+        y: 0.31794721958
+        z: 1.21104855273
+      rotation: 
+        x: 0.999952508771
+        y: 0.00881586345555
+        z: 0.00410625809082
+        w: -0.000631979211153
+---
+transforms: 
+  - 
+    header: 
+      seq: 0
+      stamp: 
+        secs: 1627505023
+        nsecs: 590806435
+      frame_id: "marker_0"
+    child_frame_id: "/base_link"
+    transform: 
+      translation: 
+        x: 2.07635668555
+        y: 0.612139318698
+        z: 0.372949366194
+      rotation: 
+        x: 0.520864427193
+        y: -0.485481104742
+        z: -0.485953200804
+        w: 0.506811436386
+---
+transforms: 
+  - 
+    header: 
+      seq: 0
+      stamp: 
+        secs: 1627505023
+        nsecs: 590806435
+      frame_id: "marker_4"
+    child_frame_id: "/base_link"
+    transform: 
+      translation: 
+        x: 1.34436551286
+        y: 0.35943754519
+        z: -0.316982728458
+      rotation: 
+        x: 0.507149812751
+        y: -0.493827263558
+        z: -0.501615286757
+        w: 0.497308561443
+---
+transforms: 
+  - 
+    header: 
+      seq: 153925
+      stamp: 
+        secs: 1627505023
+        nsecs: 755688531
+      frame_id: "world"
+    child_frame_id: "MiniAHRS"
+    transform: 
+      translation: 
+        x: 0.0
+        y: 0.0
+        z: 0.0
+      rotation: 
+        x: -0.0114397942706
+        y: 0.00202567643658
+        z: 0.410668855149
+        w: 0.911710545706
+---
+transforms: 
+  - 
+    header: 
+      seq: 153926
+      stamp: 
+        secs: 1627505023
+        nsecs: 755752087
+      frame_id: "world"
+    child_frame_id: "MiniAHRS"
+    transform: 
+      translation: 
+        x: 0.0
+        y: 0.0
+        z: 0.0
+      rotation: 
+        x: -0.0114397942706
+        y: 0.00202567643658
+        z: 0.410668855149
+        w: 0.911710545706
+---
+transforms: 
+  - 
+    header: 
+      seq: 153927
+      stamp: 
+        secs: 1627505023
+        nsecs: 755762616
+      frame_id: "world"
+    child_frame_id: "MiniAHRS"
+    transform: 
+      translation: 
+        x: 0.0
+        y: 0.0
+        z: 0.0
+      rotation: 
+        x: -0.0114397942706
+        y: 0.00202567643658
+        z: 0.410668855149
+        w: 0.911710545706
+---
+transforms: 
+  - 
+    header: 
+      seq: 153928
+      stamp: 
+        secs: 1627505023
+        nsecs: 755772924
+      frame_id: "world"
+    child_frame_id: "MiniAHRS"
+    transform: 
+      translation: 
+        x: 0.0
+        y: 0.0
+        z: 0.0
+      rotation: 
+        x: -0.0114399710007
+        y: 0.00202467811849
+        z: 0.41074841534
+        w: 0.911674704617
+---
+transforms: 
+  - 
+    header: 
+      seq: 153929
+      stamp: 
+        secs: 1627505023
+        nsecs: 755786139
+      frame_id: "world"
+    child_frame_id: "MiniAHRS"
+    transform: 
+      translation: 
+        x: 0.0
+        y: 0.0
+        z: 0.0
+      rotation: 
+        x: -0.0114399710007
+        y: 0.00202467811849
+        z: 0.41074841534
+        w: 0.911674704617
+---
+transforms: 
+  - 
+    header: 
+      seq: 153930
+      stamp: 
+        secs: 1627505023
+        nsecs: 755890929
+      frame_id: "world"
+    child_frame_id: "MiniAHRS"
+    transform: 
+      translation: 
+        x: 0.0
+        y: 0.0
+        z: 0.0
+      rotation: 
+        x: -0.0114399710007
+        y: 0.00202467811849
+        z: 0.41074841534
+        w: 0.911674704617
+---
+transforms: 
+  - 
+    header: 
+      seq: 153931
+      stamp: 
+        secs: 1627505023
+        nsecs: 755902265
+      frame_id: "world"
+    child_frame_id: "MiniAHRS"
+    transform: 
+      translation: 
+        x: 0.0
+        y: 0.0
+        z: 0.0
+      rotation: 
+        x: -0.0114399710007
+        y: 0.00202467811849
+        z: 0.41074841534
+        w: 0.911674704617
+---
+transforms: 
+  - 
+    header: 
+      seq: 153932
+      stamp: 
+        secs: 1627505023
+        nsecs: 755911825
+      frame_id: "world"
+    child_frame_id: "MiniAHRS"
+    transform: 
+      translation: 
+        x: 0.0
+        y: 0.0
+        z: 0.0
+      rotation: 
+        x: -0.0114399710007
+        y: 0.00202467811849
+        z: 0.41074841534
+        w: 0.911674704617
+---
+transforms: 
+  - 
+    header: 
+      seq: 153933
+      stamp: 
+        secs: 1627505023
+        nsecs: 755921941
+      frame_id: "world"
+    child_frame_id: "MiniAHRS"
+    transform: 
+      translation: 
+        x: 0.0
+        y: 0.0
+        z: 0.0
+      rotation: 
+        x: -0.0114401476436
+        y: 0.00202367978498
+        z: 0.410827972402
+        w: 0.911638856584
+---
+transforms: 
+  - 
+    header: 
+      seq: 153934
+      stamp: 
+        secs: 1627505023
+        nsecs: 755933492
+      frame_id: "world"
+    child_frame_id: "MiniAHRS"
+    transform: 
+      translation: 
+        x: 0.0
+        y: 0.0
+        z: 0.0
+      rotation: 
+        x: -0.0114401476436
+        y: 0.00202367978498
+        z: 0.410827972402
+        w: 0.911638856584
+---
+transforms: 
+  - 
+    header: 
+      seq: 153935
+      stamp: 
+        secs: 1627505023
+        nsecs: 755944271
+      frame_id: "world"
+    child_frame_id: "MiniAHRS"
+    transform: 
+      translation: 
+        x: 0.0
+        y: 0.0
+        z: 0.0
+      rotation: 
+        x: -0.0114401476436
+        y: 0.00202367978498
+        z: 0.410827972402
+        w: 0.911638856584
+---
+transforms: 
+  - 
+    header: 
+      seq: 153936
+      stamp: 
+        secs: 1627505023
+        nsecs: 755953976
+      frame_id: "world"
+    child_frame_id: "MiniAHRS"
+    transform: 
+      translation: 
+        x: 0.0
+        y: 0.0
+        z: 0.0
+      rotation: 
+        x: -0.0114401476436
+        y: 0.00202367978498
+        z: 0.410827972402
+        w: 0.911638856584
+---
+transforms: 
+  - 
+    header: 
+      seq: 0
+      stamp: 
+        secs: 1627505023
+        nsecs: 637757164
+      frame_id: "cam_0_optical_frame"
+    child_frame_id: "/ar_marker_0"
+    transform: 
+      translation: 
+        x: -0.611096820507
+        y: -0.371476892595
+        z: 1.94336307809
+      rotation: 
+        x: 0.999528331829
+        y: 0.00700840864405
+        z: 0.0291510033274
+        w: -0.00664944245313
+---
+transforms: 
+  - 
+    header: 
+      seq: 0
+      stamp: 
+        secs: 1627505023
+        nsecs: 637757164
+      frame_id: "cam_0_optical_frame"
+    child_frame_id: "/ar_marker_4"
+    transform: 
+      translation: 
+        x: -0.358604685
+        y: 0.317570356095
+        z: 1.21012376728
+      rotation: 
+        x: 0.999945781273
+        y: 0.00897287357821
+        z: 0.00478034687043
+        w: -0.00225174091926
+---
+transforms: 
+  - 
+    header: 
+      seq: 0
+      stamp: 
+        secs: 1627505023
+        nsecs: 637757164
+      frame_id: "marker_0"
+    child_frame_id: "/base_link"
+    transform: 
+      translation: 
+        x: 2.07592939613
+        y: 0.612643942618
+        z: 0.373024326739
+      rotation: 
+        x: 0.521554959654
+        y: -0.485003589262
+        z: -0.484958564874
+        w: 0.507510721876
+---
+transforms: 
+  - 
+    header: 
+      seq: 0
+      stamp: 
+        secs: 1627505023
+        nsecs: 637757164
+      frame_id: "marker_4"
+    child_frame_id: "/base_link"
+    transform: 
+      translation: 
+        x: 1.34344032308
+        y: 0.359568426254
+        z: -0.316606601524
+      rotation: 
+        x: 0.50837160795
+        y: -0.494217523874
+        z: -0.500543237339
+        w: 0.496753273649
+---
+transforms: 
+  - 
+    header: 
+      seq: 153937
+      stamp: 
+        secs: 1627505023
+        nsecs: 802963511
+      frame_id: "world"
+    child_frame_id: "MiniAHRS"
+    transform: 
+      translation: 
+        x: 0.0
+        y: 0.0
+        z: 0.0
+      rotation: 
+        x: -0.0114401476436
+        y: 0.00202367978498
+        z: 0.410827972402
+        w: 0.911638856584
+---
+transforms: 
+  - 
+    header: 
+      seq: 153938
+      stamp: 
+        secs: 1627505023
+        nsecs: 803059320
+      frame_id: "world"
+    child_frame_id: "MiniAHRS"
+    transform: 
+      translation: 
+        x: 0.0
+        y: 0.0
+        z: 0.0
+      rotation: 
+        x: -0.0114401476436
+        y: 0.00202367978498
+        z: 0.410827972402
+        w: 0.911638856584
+---
+transforms: 
+  - 
+    header: 
+      seq: 153939
+      stamp: 
+        secs: 1627505023
+        nsecs: 803124190
+      frame_id: "world"
+    child_frame_id: "MiniAHRS"
+    transform: 
+      translation: 
+        x: 0.0
+        y: 0.0
+        z: 0.0
+      rotation: 
+        x: -0.0114401476436
+        y: 0.00202367978498
+        z: 0.410827972402
+        w: 0.911638856584
+---
+transforms: 
+  - 
+    header: 
+      seq: 153940
+      stamp: 
+        secs: 1627505023
+        nsecs: 803138574
+      frame_id: "world"
+    child_frame_id: "MiniAHRS"
+    transform: 
+      translation: 
+        x: 0.0
+        y: 0.0
+        z: 0.0
+      rotation: 
+        x: -0.0114403241994
+        y: 0.00202268143606
+        z: 0.410907526336
+        w: 0.911603001609
+---
+transforms: 
+  - 
+    header: 
+      seq: 153941
+      stamp: 
+        secs: 1627505023
+        nsecs: 803150373
+      frame_id: "world"
+    child_frame_id: "MiniAHRS"
+    transform: 
+      translation: 
+        x: 0.0
+        y: 0.0
+        z: 0.0
+      rotation: 
+        x: -0.0114403241994
+        y: 0.00202268143606
+        z: 0.410907526336
+        w: 0.911603001609
+---
+transforms: 
+  - 
+    header: 
+      seq: 153942
+      stamp: 
+        secs: 1627505023
+        nsecs: 803162782
+      frame_id: "world"
+    child_frame_id: "MiniAHRS"
+    transform: 
+      translation: 
+        x: 0.0
+        y: 0.0
+        z: 0.0
+      rotation: 
+        x: -0.0114403241994
+        y: 0.00202268143606
+        z: 0.410907526336
+        w: 0.911603001609
+---
+transforms: 
+  - 
+    header: 
+      seq: 153943
+      stamp: 
+        secs: 1627505023
+        nsecs: 803174702
+      frame_id: "world"
+    child_frame_id: "MiniAHRS"
+    transform: 
+      translation: 
+        x: 0.0
+        y: 0.0
+        z: 0.0
+      rotation: 
+        x: -0.0114403241994
+        y: 0.00202268143606
+        z: 0.410907526336
+        w: 0.911603001609
+---
+transforms: 
+  - 
+    header: 
+      seq: 153944
+      stamp: 
+        secs: 1627505023
+        nsecs: 803186162
+      frame_id: "world"
+    child_frame_id: "MiniAHRS"
+    transform: 
+      translation: 
+        x: 0.0
+        y: 0.0
+        z: 0.0
+      rotation: 
+        x: -0.0114403241994
+        y: 0.00202268143606
+        z: 0.410907526336
+        w: 0.911603001609
+---
+transforms: 
+  - 
+    header: 
+      seq: 153945
+      stamp: 
+        secs: 1627505023
+        nsecs: 803197292
+      frame_id: "world"
+    child_frame_id: "MiniAHRS"
+    transform: 
+      translation: 
+        x: 0.0
+        y: 0.0
+        z: 0.0
+      rotation: 
+        x: -0.0114403241994
+        y: 0.00202268143606
+        z: 0.410907526336
+        w: 0.911603001609
+---
+transforms: 
+  - 
+    header: 
+      seq: 153946
+      stamp: 
+        secs: 1627505023
+        nsecs: 803210386
+      frame_id: "world"
+    child_frame_id: "MiniAHRS"
+    transform: 
+      translation: 
+        x: 0.0
+        y: 0.0
+        z: 0.0
+      rotation: 
+        x: -0.0114403241994
+        y: 0.00202268143606
+        z: 0.410907526336
+        w: 0.911603001609
+---
+transforms: 
+  - 
+    header: 
+      seq: 153947
+      stamp: 
+        secs: 1627505023
+        nsecs: 803231908
+      frame_id: "world"
+    child_frame_id: "MiniAHRS"
+    transform: 
+      translation: 
+        x: 0.0
+        y: 0.0
+        z: 0.0
+      rotation: 
+        x: -0.0114403241994
+        y: 0.00202268143606
+        z: 0.410907526336
+        w: 0.911603001609
+---
+transforms: 
+  - 
+    header: 
+      seq: 153948
+      stamp: 
+        secs: 1627505023
+        nsecs: 803245868
+      frame_id: "world"
+    child_frame_id: "MiniAHRS"
+    transform: 
+      translation: 
+        x: 0.0
+        y: 0.0
+        z: 0.0
+      rotation: 
+        x: -0.0114403241994
+        y: 0.00202268143606
+        z: 0.410907526336
+        w: 0.911603001609
+---
+transforms: 
+  - 
+    header: 
+      seq: 0
+      stamp: 
+        secs: 1627505023
+        nsecs: 687604943
+      frame_id: "cam_0_optical_frame"
+    child_frame_id: "/ar_marker_0"
+    transform: 
+      translation: 
+        x: -0.611538959847
+        y: -0.371863727246
+        z: 1.943831481
+      rotation: 
+        x: 0.99953310853
+        y: 0.00699656951599
+        z: 0.0292699786968
+        w: -0.00528027597945
+---
+transforms: 
+  - 
+    header: 
+      seq: 0
+      stamp: 
+        secs: 1627505023
+        nsecs: 687604943
+      frame_id: "cam_0_optical_frame"
+    child_frame_id: "/ar_marker_4"
+    transform: 
+      translation: 
+        x: -0.358618171075
+        y: 0.317113727311
+        z: 1.20902475934
+      rotation: 
+        x: 0.999943251142
+        y: 0.00902304484728
+        z: 0.00492458592816
+        w: -0.00279778681289
+---
+transforms: 
+  - 
+    header: 
+      seq: 0
+      stamp: 
+        secs: 1627505023
+        nsecs: 687604943
+      frame_id: "marker_0"
+    child_frame_id: "/base_link"
+    transform: 
+      translation: 
+        x: 2.07639713861
+        y: 0.613086454574
+        z: 0.37341153427
+      rotation: 
+        x: 0.520926287638
+        y: -0.484268376139
+        z: -0.485580079724
+        w: 0.508263641131
+---
+transforms: 
+  - 
+    header: 
+      seq: 0
+      stamp: 
+        secs: 1627505023
+        nsecs: 687604943
+      frame_id: "marker_4"
+    child_frame_id: "/base_link"
+    transform: 
+      translation: 
+        x: 1.34234094147
+        y: 0.359581036866
+        z: -0.316150848054
+      rotation: 
+        x: 0.508740512461
+        y: -0.494391839223
+        z: -0.500221859087
+        w: 0.496525822069
+---
+transforms: 
+  - 
+    header: 
+      seq: 153949
+      stamp: 
+        secs: 1627505023
+        nsecs: 849944455
+      frame_id: "world"
+    child_frame_id: "MiniAHRS"
+    transform: 
+      translation: 
+        x: 0.0
+        y: 0.0
+        z: 0.0
+      rotation: 
+        x: -0.0114403241994
+        y: 0.00202268143606
+        z: 0.410907526336
+        w: 0.911603001609
+---
+transforms: 
+  - 
+    header: 
+      seq: 153950
+      stamp: 
+        secs: 1627505023
+        nsecs: 850012003
+      frame_id: "world"
+    child_frame_id: "MiniAHRS"
+    transform: 
+      translation: 
+        x: 0.0
+        y: 0.0
+        z: 0.0
+      rotation: 
+        x: -0.0114405006681
+        y: 0.00202168307173
+        z: 0.410987077141
+        w: 0.911567139692
+---
+transforms: 
+  - 
+    header: 
+      seq: 153951
+      stamp: 
+        secs: 1627505023
+        nsecs: 850022760
+      frame_id: "world"
+    child_frame_id: "MiniAHRS"
+    transform: 
+      translation: 
+        x: 0.0
+        y: 0.0
+        z: 0.0
+      rotation: 
+        x: -0.0114405006681
+        y: 0.00202168307173
+        z: 0.410987077141
+        w: 0.911567139692
+---
+transforms: 
+  - 
+    header: 
+      seq: 153952
+      stamp: 
+        secs: 1627505023
+        nsecs: 850032436
+      frame_id: "world"
+    child_frame_id: "MiniAHRS"
+    transform: 
+      translation: 
+        x: 0.0
+        y: 0.0
+        z: 0.0
+      rotation: 
+        x: -0.0114405006681
+        y: 0.00202168307173
+        z: 0.410987077141
+        w: 0.911567139692
+---
+transforms: 
+  - 
+    header: 
+      seq: 153953
+      stamp: 
+        secs: 1627505023
+        nsecs: 850042993
+      frame_id: "world"
+    child_frame_id: "MiniAHRS"
+    transform: 
+      translation: 
+        x: 0.0
+        y: 0.0
+        z: 0.0
+      rotation: 
+        x: -0.0114405006681
+        y: 0.00202168307173
+        z: 0.410987077141
+        w: 0.911567139692
+---
+transforms: 
+  - 
+    header: 
+      seq: 153954
+      stamp: 
+        secs: 1627505023
+        nsecs: 850052515
+      frame_id: "world"
+    child_frame_id: "MiniAHRS"
+    transform: 
+      translation: 
+        x: 0.0
+        y: 0.0
+        z: 0.0
+      rotation: 
+        x: -0.0114405006681
+        y: 0.00202168307173
+        z: 0.410987077141
+        w: 0.911567139692
+---
+transforms: 
+  - 
+    header: 
+      seq: 153955
+      stamp: 
+        secs: 1627505023
+        nsecs: 850061830
+      frame_id: "world"
+    child_frame_id: "MiniAHRS"
+    transform: 
+      translation: 
+        x: 0.0
+        y: 0.0
+        z: 0.0
+      rotation: 
+        x: -0.0114405006681
+        y: 0.00202168307173
+        z: 0.410987077141
+        w: 0.911567139692
+---
+transforms: 
+  - 
+    header: 
+      seq: 153956
+      stamp: 
+        secs: 1627505023
+        nsecs: 850071463
+      frame_id: "world"
+    child_frame_id: "MiniAHRS"
+    transform: 
+      translation: 
+        x: 0.0
+        y: 0.0
+        z: 0.0
+      rotation: 
+        x: -0.0114405006681
+        y: 0.00202168307173
+        z: 0.410987077141
+        w: 0.911567139692
+---
+transforms: 
+  - 
+    header: 
+      seq: 153957
+      stamp: 
+        secs: 1627505023
+        nsecs: 850081242
+      frame_id: "world"
+    child_frame_id: "MiniAHRS"
+    transform: 
+      translation: 
+        x: 0.0
+        y: 0.0
+        z: 0.0
+      rotation: 
+        x: -0.0114405006681
+        y: 0.00202168307173
+        z: 0.410987077141
+        w: 0.911567139692
+---
+transforms: 
+  - 
+    header: 
+      seq: 153958
+      stamp: 
+        secs: 1627505023
+        nsecs: 850091977
+      frame_id: "world"
+    child_frame_id: "MiniAHRS"
+    transform: 
+      translation: 
+        x: 0.0
+        y: 0.0
+        z: 0.0
+      rotation: 
+        x: -0.0114405006681
+        y: 0.00202168307173
+        z: 0.410987077141
+        w: 0.911567139692
+---
+transforms: 
+  - 
+    header: 
+      seq: 153959
+      stamp: 
+        secs: 1627505023
+        nsecs: 850101473
+      frame_id: "world"
+    child_frame_id: "MiniAHRS"
+    transform: 
+      translation: 
+        x: 0.0
+        y: 0.0
+        z: 0.0
+      rotation: 
+        x: -0.0114405006681
+        y: 0.00202168307173
+        z: 0.410987077141
+        w: 0.911567139692
+---
+transforms: 
+  - 
+    header: 
+      seq: 153960
+      stamp: 
+        secs: 1627505023
+        nsecs: 897275569
+      frame_id: "world"
+    child_frame_id: "MiniAHRS"
+    transform: 
+      translation: 
+        x: 0.0
+        y: 0.0
+        z: 0.0
+      rotation: 
+        x: -0.0114403241994
+        y: 0.00202268143606
+        z: 0.410907526336
+        w: 0.911603001609
+---
+transforms: 
+  - 
+    header: 
+      seq: 153961
+      stamp: 
+        secs: 1627505023
+        nsecs: 897679284
+      frame_id: "world"
+    child_frame_id: "MiniAHRS"
+    transform: 
+      translation: 
+        x: 0.0
+        y: 0.0
+        z: 0.0
+      rotation: 
+        x: -0.0114405006681
+        y: 0.00202168307173
+        z: 0.410987077141
+        w: 0.911567139692
+---
+transforms: 
+  - 
+    header: 
+      seq: 153962
+      stamp: 
+        secs: 1627505023
+        nsecs: 897873361
+      frame_id: "world"
+    child_frame_id: "MiniAHRS"
+    transform: 
+      translation: 
+        x: 0.0
+        y: 0.0
+        z: 0.0
+      rotation: 
+        x: -0.0114405006681
+        y: 0.00202168307173
+        z: 0.410987077141
+        w: 0.911567139692
+---
+transforms: 
+  - 
+    header: 
+      seq: 153963
+      stamp: 
+        secs: 1627505023
+        nsecs: 898048529
+      frame_id: "world"
+    child_frame_id: "MiniAHRS"
+    transform: 
+      translation: 
+        x: 0.0
+        y: 0.0
+        z: 0.0
+      rotation: 
+        x: -0.0114403241994
+        y: 0.00202268143606
+        z: 0.410907526336
+        w: 0.911603001609
+---
+transforms: 
+  - 
+    header: 
+      seq: 153964
+      stamp: 
+        secs: 1627505023
+        nsecs: 898205087
+      frame_id: "world"
+    child_frame_id: "MiniAHRS"
+    transform: 
+      translation: 
+        x: 0.0
+        y: 0.0
+        z: 0.0
+      rotation: 
+        x: -0.0114403241994
+        y: 0.00202268143606
+        z: 0.410907526336
+        w: 0.911603001609
+---
+transforms: 
+  - 
+    header: 
+      seq: 153965
+      stamp: 
+        secs: 1627505023
+        nsecs: 898348785
+      frame_id: "world"
+    child_frame_id: "MiniAHRS"
+    transform: 
+      translation: 
+        x: 0.0
+        y: 0.0
+        z: 0.0
+      rotation: 
+        x: -0.0114403241994
+        y: 0.00202268143606
+        z: 0.410907526336
+        w: 0.911603001609
+---
+transforms: 
+  - 
+    header: 
+      seq: 153966
+      stamp: 
+        secs: 1627505023
+        nsecs: 898485522
+      frame_id: "world"
+    child_frame_id: "MiniAHRS"
+    transform: 
+      translation: 
+        x: 0.0
+        y: 0.0
+        z: 0.0
+      rotation: 
+        x: -0.0114403241994
+        y: 0.00202268143606
+        z: 0.410907526336
+        w: 0.911603001609
+---
+transforms: 
+  - 
+    header: 
+      seq: 153967
+      stamp: 
+        secs: 1627505023
+        nsecs: 898621138
+      frame_id: "world"
+    child_frame_id: "MiniAHRS"
+    transform: 
+      translation: 
+        x: 0.0
+        y: 0.0
+        z: 0.0
+      rotation: 
+        x: -0.0114403241994
+        y: 0.00202268143606
+        z: 0.410907526336
+        w: 0.911603001609
+---
+transforms: 
+  - 
+    header: 
+      seq: 153968
+      stamp: 
+        secs: 1627505023
+        nsecs: 898752693
+      frame_id: "world"
+    child_frame_id: "MiniAHRS"
+    transform: 
+      translation: 
+        x: 0.0
+        y: 0.0
+        z: 0.0
+      rotation: 
+        x: -0.0114403241994
+        y: 0.00202268143606
+        z: 0.410907526336
+        w: 0.911603001609
+---
+transforms: 
+  - 
+    header: 
+      seq: 153969
+      stamp: 
+        secs: 1627505023
+        nsecs: 898888532
+      frame_id: "world"
+    child_frame_id: "MiniAHRS"
+    transform: 
+      translation: 
+        x: 0.0
+        y: 0.0
+        z: 0.0
+      rotation: 
+        x: -0.0114403241994
+        y: 0.00202268143606
+        z: 0.410907526336
+        w: 0.911603001609
+---
+transforms: 
+  - 
+    header: 
+      seq: 153970
+      stamp: 
+        secs: 1627505023
+        nsecs: 899048157
+      frame_id: "world"
+    child_frame_id: "MiniAHRS"
+    transform: 
+      translation: 
+        x: 0.0
+        y: 0.0
+        z: 0.0
+      rotation: 
+        x: -0.0114403241994
+        y: 0.00202268143606
+        z: 0.410907526336
+        w: 0.911603001609
+---
+transforms: 
+  - 
+    header: 
+      seq: 153971
+      stamp: 
+        secs: 1627505023
+        nsecs: 899185097
+      frame_id: "world"
+    child_frame_id: "MiniAHRS"
+    transform: 
+      translation: 
+        x: 0.0
+        y: 0.0
+        z: 0.0
+      rotation: 
+        x: -0.0114403241994
+        y: 0.00202268143606
+        z: 0.410907526336
+        w: 0.911603001609
+---
+transforms: 
+  - 
+    header: 
+      seq: 0
+      stamp: 
+        secs: 1627505023
+        nsecs: 787655193
+      frame_id: "cam_0_optical_frame"
+    child_frame_id: "/ar_marker_0"
+    transform: 
+      translation: 
+        x: -0.612056844983
+        y: -0.37232200297
+        z: 1.94390044963
+      rotation: 
+        x: 0.999578235648
+        y: 0.00699602783167
+        z: 0.0278410684425
+        w: -0.00439105020168
+---
+transforms: 
+  - 
+    header: 
+      seq: 0
+      stamp: 
+        secs: 1627505023
+        nsecs: 787655193
+      frame_id: "cam_0_optical_frame"
+    child_frame_id: "/ar_marker_4"
+    transform: 
+      translation: 
+        x: -0.358874708787
+        y: 0.316722911548
+        z: 1.20958250541
+      rotation: 
+        x: 0.999951469351
+        y: 0.00847723669046
+        z: 0.00479121488633
+        w: -0.00149654983238
+---
+transforms: 
+  - 
+    header: 
+      seq: 0
+      stamp: 
+        secs: 1627505023
+        nsecs: 787655193
+      frame_id: "marker_0"
+    child_frame_id: "/base_link"
+    transform: 
+      translation: 
+        x: 2.07646532986
+        y: 0.613604394177
+        z: 0.37386986477
+      rotation: 
+        x: 0.519790099388
+        y: -0.484561406817
+        z: -0.486761991287
+        w: 0.508016987354
+---
+transforms: 
+  - 
+    header: 
+      seq: 0
+      stamp: 
+        secs: 1627505023
+        nsecs: 787655193
+      frame_id: "marker_4"
+    child_frame_id: "/base_link"
+    transform: 
+      translation: 
+        x: 1.34289817168
+        y: 0.359838018397
+        z: -0.315759588267
+      rotation: 
+        x: 0.507754470145
+        y: -0.49408565484
+        z: -0.500670417836
+        w: 0.497387069025
+---
+transforms: 
+  - 
+    header: 
+      seq: 0
+      stamp: 
+        secs: 1627505023
+        nsecs: 739283785
+      frame_id: "cam_0_optical_frame"
+    child_frame_id: "/ar_marker_0"
+    transform: 
+      translation: 
+        x: -0.611888733843
+        y: -0.372080683327
+        z: 1.94421071709
+      rotation: 
+        x: 0.999579998754
+        y: 0.0070107915489
+        z: 0.0276489563286
+        w: -0.00511958077676
+---
+transforms: 
+  - 
+    header: 
+      seq: 0
+      stamp: 
+        secs: 1627505023
+        nsecs: 739283785
+      frame_id: "cam_0_optical_frame"
+    child_frame_id: "/ar_marker_4"
+    transform: 
+      translation: 
+        x: -0.358671139142
+        y: 0.316678857972
+        z: 1.20907118926
+      rotation: 
+        x: 0.999944425277
+        y: 0.00911066677754
+        z: 0.00484456718572
+        w: -0.00216154512219
+---
+transforms: 
+  - 
+    header: 
+      seq: 153972
+      stamp: 
+        secs: 1627505023
+        nsecs: 947290326
+      frame_id: "world"
+    child_frame_id: "MiniAHRS"
+    transform: 
+      translation: 
+        x: 0.0
+        y: 0.0
+        z: 0.0
+      rotation: 
+        x: -0.0114403241994
+        y: 0.00202268143606
+        z: 0.410907526336
+        w: 0.911603001609
+---
+transforms: 
+  - 
+    header: 
+      seq: 153973
+      stamp: 
+        secs: 1627505023
+        nsecs: 947623852
+      frame_id: "world"
+    child_frame_id: "MiniAHRS"
+    transform: 
+      translation: 
+        x: 0.0
+        y: 0.0
+        z: 0.0
+      rotation: 
+        x: -0.0114403241994
+        y: 0.00202268143606
+        z: 0.410907526336
+        w: 0.911603001609
+---
+transforms: 
+  - 
+    header: 
+      seq: 153974
+      stamp: 
+        secs: 1627505023
+        nsecs: 947780418
+      frame_id: "world"
+    child_frame_id: "MiniAHRS"
+    transform: 
+      translation: 
+        x: 0.0
+        y: 0.0
+        z: 0.0
+      rotation: 
+        x: -0.0114403241994
+        y: 0.00202268143606
+        z: 0.410907526336
+        w: 0.911603001609
+---
+transforms: 
+  - 
+    header: 
+      seq: 153975
+      stamp: 
+        secs: 1627505023
+        nsecs: 947924868
+      frame_id: "world"
+    child_frame_id: "MiniAHRS"
+    transform: 
+      translation: 
+        x: 0.0
+        y: 0.0
+        z: 0.0
+      rotation: 
+        x: -0.0115197030981
+        y: 0.00198782827343
+        z: 0.410828147437
+        w: 0.911637854772
+---
+transforms: 
+  - 
+    header: 
+      seq: 153976
+      stamp: 
+        secs: 1627505023
+        nsecs: 948075216
+      frame_id: "world"
+    child_frame_id: "MiniAHRS"
+    transform: 
+      translation: 
+        x: 0.0
+        y: 0.0
+        z: 0.0
+      rotation: 
+        x: -0.0115197030981
+        y: 0.00198782827343
+        z: 0.410828147437
+        w: 0.911637854772
+---
+transforms: 
+  - 
+    header: 
+      seq: 0
+      stamp: 
+        secs: 1627505023
+        nsecs: 739283785
+      frame_id: "marker_0"
+    child_frame_id: "/base_link"
+    transform: 
+      translation: 
+        x: 2.07677592316
+        y: 0.613436530318
+        z: 0.373628792277
+      rotation: 
+        x: 0.520066649106
+        y: -0.485014931873
+        z: -0.486502121371
+        w: 0.507549881538
+---
+transforms: 
+  - 
+    header: 
+      seq: 153977
+      stamp: 
+        secs: 1627505023
+        nsecs: 948224612
+      frame_id: "world"
+    child_frame_id: "MiniAHRS"
+    transform: 
+      translation: 
+        x: 0.0
+        y: 0.0
+        z: 0.0
+      rotation: 
+        x: -0.0115197030981
+        y: 0.00198782827343
+        z: 0.410828147437
+        w: 0.911637854772
+---
+transforms: 
+  - 
+    header: 
+      seq: 153978
+      stamp: 
+        secs: 1627505023
+        nsecs: 948377309
+      frame_id: "world"
+    child_frame_id: "MiniAHRS"
+    transform: 
+      translation: 
+        x: 0.0
+        y: 0.0
+        z: 0.0
+      rotation: 
+        x: -0.0115197030981
+        y: 0.00198782827343
+        z: 0.410828147437
+        w: 0.911637854772
+---
+transforms: 
+  - 
+    header: 
+      seq: 0
+      stamp: 
+        secs: 1627505023
+        nsecs: 739283785
+      frame_id: "marker_4"
+    child_frame_id: "/base_link"
+    transform: 
+      translation: 
+        x: 1.34238698289
+        y: 0.359634041614
+        z: -0.31571594188
+      rotation: 
+        x: 0.508426812693
+        y: -0.494070722279
+        z: -0.500624418615
+        w: 0.496760997874
+---
+transforms: 
+  - 
+    header: 
+      seq: 153979
+      stamp: 
+        secs: 1627505023
+        nsecs: 948455039
+      frame_id: "world"
+    child_frame_id: "MiniAHRS"
+    transform: 
+      translation: 
+        x: 0.0
+        y: 0.0
+        z: 0.0
+      rotation: 
+        x: -0.0115197030981
+        y: 0.00198782827343
+        z: 0.410828147437
+        w: 0.911637854772
+---
+transforms: 
+  - 
+    header: 
+      seq: 153980
+      stamp: 
+        secs: 1627505023
+        nsecs: 948477338
+      frame_id: "world"
+    child_frame_id: "MiniAHRS"
+    transform: 
+      translation: 
+        x: 0.0
+        y: 0.0
+        z: 0.0
+      rotation: 
+        x: -0.0115197030981
+        y: 0.00198782827343
+        z: 0.410828147437
+        w: 0.911637854772
+---
+transforms: 
+  - 
+    header: 
+      seq: 153981
+      stamp: 
+        secs: 1627505023
+        nsecs: 949088849
+      frame_id: "world"
+    child_frame_id: "MiniAHRS"
+    transform: 
+      translation: 
+        x: 0.0
+        y: 0.0
+        z: 0.0
+      rotation: 
+        x: -0.0115197030981
+        y: 0.00198782827343
+        z: 0.410828147437
+        w: 0.911637854772
+---
+transforms: 
+  - 
+    header: 
+      seq: 153982
+      stamp: 
+        secs: 1627505023
+        nsecs: 949104624
+      frame_id: "world"
+    child_frame_id: "MiniAHRS"
+    transform: 
+      translation: 
+        x: 0.0
+        y: 0.0
+        z: 0.0
+      rotation: 
+        x: -0.0115197030981
+        y: 0.00198782827343
+        z: 0.410828147437
+        w: 0.911637854772
+---
+transforms: 
+  - 
+    header: 
+      seq: 153983
+      stamp: 
+        secs: 1627505023
+        nsecs: 949114809
+      frame_id: "world"
+    child_frame_id: "MiniAHRS"
+    transform: 
+      translation: 
+        x: 0.0
+        y: 0.0
+        z: 0.0
+      rotation: 
+        x: -0.0115197030981
+        y: 0.00198782827343
+        z: 0.410828147437
+        w: 0.911637854772
+---
+transforms: 
+  - 
+    header: 
+      seq: 0
+      stamp: 
+        secs: 1627505023
+        nsecs: 837571348
+      frame_id: "cam_0_optical_frame"
+    child_frame_id: "/ar_marker_0"
+    transform: 
+      translation: 
+        x: -0.612175937651
+        y: -0.372452961342
+        z: 1.94357578879
+      rotation: 
+        x: 0.999569588289
+        y: 0.00709045807281
+        z: 0.0278051046862
+        w: -0.00610243598004
+---
+transforms: 
+  - 
+    header: 
+      seq: 0
+      stamp: 
+        secs: 1627505023
+        nsecs: 837571348
+      frame_id: "cam_0_optical_frame"
+    child_frame_id: "/ar_marker_4"
+    transform: 
+      translation: 
+        x: -0.35868155394
+        y: 0.316281359162
+        z: 1.20868474856
+      rotation: 
+        x: 0.999937777201
+        y: 0.00905851760742
+        z: 0.00579206468711
+        w: -0.00297270432959
+---
+transforms: 
+  - 
+    header: 
+      seq: 153984
+      stamp: 
+        secs: 1627505023
+        nsecs: 992352906
+      frame_id: "world"
+    child_frame_id: "MiniAHRS"
+    transform: 
+      translation: 
+        x: 0.0
+        y: 0.0
+        z: 0.0
+      rotation: 
+        x: -0.0115197030981
+        y: 0.00198782827343
+        z: 0.410828147437
+        w: 0.911637854772
+---
+transforms: 
+  - 
+    header: 
+      seq: 153985
+      stamp: 
+        secs: 1627505023
+        nsecs: 992413046
+      frame_id: "world"
+    child_frame_id: "MiniAHRS"
+    transform: 
+      translation: 
+        x: 0.0
+        y: 0.0
+        z: 0.0
+      rotation: 
+        x: -0.0115197030981
+        y: 0.00198782827343
+        z: 0.410828147437
+        w: 0.911637854772
+---
+transforms: 
+  - 
+    header: 
+      seq: 153986
+      stamp: 
+        secs: 1627505023
+        nsecs: 992424184
+      frame_id: "world"
+    child_frame_id: "MiniAHRS"
+    transform: 
+      translation: 
+        x: 0.0
+        y: 0.0
+        z: 0.0
+      rotation: 
+        x: -0.0115197030981
+        y: 0.00198782827343
+        z: 0.410828147437
+        w: 0.911637854772
+---
+transforms: 
+  - 
+    header: 
+      seq: 153987
+      stamp: 
+        secs: 1627505023
+        nsecs: 992435447
+      frame_id: "world"
+    child_frame_id: "MiniAHRS"
+    transform: 
+      translation: 
+        x: 0.0
+        y: 0.0
+        z: 0.0
+      rotation: 
+        x: -0.0115197030981
+        y: 0.00198782827343
+        z: 0.410828147437
+        w: 0.911637854772
+---
+transforms: 
+  - 
+    header: 
+      seq: 0
+      stamp: 
+        secs: 1627505023
+        nsecs: 837571348
+      frame_id: "marker_0"
+    child_frame_id: "/base_link"
+    transform: 
+      translation: 
+        x: 2.0761404701
+        y: 0.613723228187
+        z: 0.374000564564
+      rotation: 
+        x: 0.52067071243
+        y: -0.48538282377
+        z: -0.485967189736
+        w: 0.507091129982
+---
+transforms: 
+  - 
+    header: 
+      seq: 0
+      stamp: 
+        secs: 1627505023
+        nsecs: 837571348
+      frame_id: "marker_4"
+    child_frame_id: "/base_link"
+    transform: 
+      translation: 
+        x: 1.3420002176
+        y: 0.359644148424
+        z: -0.315318750929
+      rotation: 
+        x: 0.509276362398
+        y: -0.494025001621
+        z: -0.499715317163
+        w: 0.496851573681
+---
+transforms: 
+  - 
+    header: 
+      seq: 153988
+      stamp: 
+        secs: 1627505023
+        nsecs: 992446753
+      frame_id: "world"
+    child_frame_id: "MiniAHRS"
+    transform: 
+      translation: 
+        x: 0.0
+        y: 0.0
+        z: 0.0
+      rotation: 
+        x: -0.0115195295835
+        y: 0.0019888335496
+        z: 0.410748590462
+        w: 0.911673702819
+---
+transforms: 
+  - 
+    header: 
+      seq: 153989
+      stamp: 
+        secs: 1627505023
+        nsecs: 992458186
+      frame_id: "world"
+    child_frame_id: "MiniAHRS"
+    transform: 
+      translation: 
+        x: 0.0
+        y: 0.0
+        z: 0.0
+      rotation: 
+        x: -0.0115195295835
+        y: 0.0019888335496
+        z: 0.410748590462
+        w: 0.911673702819
+---
+transforms: 
+  - 
+    header: 
+      seq: 153990
+      stamp: 
+        secs: 1627505023
+        nsecs: 992467674
+      frame_id: "world"
+    child_frame_id: "MiniAHRS"
+    transform: 
+      translation: 
+        x: 0.0
+        y: 0.0
+        z: 0.0
+      rotation: 
+        x: -0.0115195295835
+        y: 0.0019888335496
+        z: 0.410748590462
+        w: 0.911673702819
+---
+transforms: 
+  - 
+    header: 
+      seq: 153991
+      stamp: 
+        secs: 1627505023
+        nsecs: 992477507
+      frame_id: "world"
+    child_frame_id: "MiniAHRS"
+    transform: 
+      translation: 
+        x: 0.0
+        y: 0.0
+        z: 0.0
+      rotation: 
+        x: -0.0115195295835
+        y: 0.0019888335496
+        z: 0.410748590462
+        w: 0.911673702819
+---
+transforms: 
+  - 
+    header: 
+      seq: 153992
+      stamp: 
+        secs: 1627505023
+        nsecs: 992486694
+      frame_id: "world"
+    child_frame_id: "MiniAHRS"
+    transform: 
+      translation: 
+        x: 0.0
+        y: 0.0
+        z: 0.0
+      rotation: 
+        x: -0.0115195295835
+        y: 0.0019888335496
+        z: 0.410748590462
+        w: 0.911673702819
+---
+transforms: 
+  - 
+    header: 
+      seq: 153993
+      stamp: 
+        secs: 1627505023
+        nsecs: 992496104
+      frame_id: "world"
+    child_frame_id: "MiniAHRS"
+    transform: 
+      translation: 
+        x: 0.0
+        y: 0.0
+        z: 0.0
+      rotation: 
+        x: -0.0115990880786
+        y: 0.00195298896556
+        z: 0.410748762457
+        w: 0.911672694079
+---
+transforms: 
+  - 
+    header: 
+      seq: 153994
+      stamp: 
+        secs: 1627505023
+        nsecs: 992505620
+      frame_id: "world"
+    child_frame_id: "MiniAHRS"
+    transform: 
+      translation: 
+        x: 0.0
+        y: 0.0
+        z: 0.0
+      rotation: 
+        x: -0.0115990880786
+        y: 0.00195298896556
+        z: 0.410748762457
+        w: 0.911672694079
+---
+transforms: 
+  - 
+    header: 
+      seq: 153995
+      stamp: 
+        secs: 1627505023
+        nsecs: 992515084
+      frame_id: "world"
+    child_frame_id: "MiniAHRS"
+    transform: 
+      translation: 
+        x: 0.0
+        y: 0.0
+        z: 0.0
+      rotation: 
+        x: -0.0115990880786
+        y: 0.00195298896556
+        z: 0.410748762457
+        w: 0.911672694079
+---
+transforms: 
+  - 
+    header: 
+      seq: 153996
+      stamp: 
+        secs: 1627505024
+        nsecs:  39137797
+      frame_id: "world"
+    child_frame_id: "MiniAHRS"
+    transform: 
+      translation: 
+        x: 0.0
+        y: 0.0
+        z: 0.0
+      rotation: 
+        x: -0.0115990880786
+        y: 0.00195298896556
+        z: 0.410748762457
+        w: 0.911672694079
+---
+transforms: 
+  - 
+    header: 
+      seq: 153997
+      stamp: 
+        secs: 1627505024
+        nsecs:  39203316
+      frame_id: "world"
+    child_frame_id: "MiniAHRS"
+    transform: 
+      translation: 
+        x: 0.0
+        y: 0.0
+        z: 0.0
+      rotation: 
+        x: -0.0115990880786
+        y: 0.00195298896556
+        z: 0.410748762457
+        w: 0.911672694079
+---
+transforms: 
+  - 
+    header: 
+      seq: 153998
+      stamp: 
+        secs: 1627505024
+        nsecs:  39216132
+      frame_id: "world"
+    child_frame_id: "MiniAHRS"
+    transform: 
+      translation: 
+        x: 0.0
+        y: 0.0
+        z: 0.0
+      rotation: 
+        x: -0.0115990880786
+        y: 0.00195298896556
+        z: 0.410748762457
+        w: 0.911672694079
+---
+transforms: 
+  - 
+    header: 
+      seq: 153999
+      stamp: 
+        secs: 1627505024
+        nsecs:  39274763
+      frame_id: "world"
+    child_frame_id: "MiniAHRS"
+    transform: 
+      translation: 
+        x: 0.0
+        y: 0.0
+        z: 0.0
+      rotation: 
+        x: -0.0115990880786
+        y: 0.00195298896556
+        z: 0.410748762457
+        w: 0.911672694079
+---
+transforms: 
+  - 
+    header: 
+      seq: 154000
+      stamp: 
+        secs: 1627505024
+        nsecs:  39286288
+      frame_id: "world"
+    child_frame_id: "MiniAHRS"
+    transform: 
+      translation: 
+        x: 0.0
+        y: 0.0
+        z: 0.0
+      rotation: 
+        x: -0.011598917604
+        y: 0.00195400116951
+        z: 0.410669202442
+        w: 0.9117085352
+---
+transforms: 
+  - 
+    header: 
+      seq: 154001
+      stamp: 
+        secs: 1627505024
+        nsecs:  39295988
+      frame_id: "world"
+    child_frame_id: "MiniAHRS"
+    transform: 
+      translation: 
+        x: 0.0
+        y: 0.0
+        z: 0.0
+      rotation: 
+        x: -0.011598917604
+        y: 0.00195400116951
+        z: 0.410669202442
+        w: 0.9117085352
+---
+transforms: 
+  - 
+    header: 
+      seq: 154002
+      stamp: 
+        secs: 1627505024
+        nsecs:  39305492
+      frame_id: "world"
+    child_frame_id: "MiniAHRS"
+    transform: 
+      translation: 
+        x: 0.0
+        y: 0.0
+        z: 0.0
+      rotation: 
+        x: -0.011598917604
+        y: 0.00195400116951
+        z: 0.410669202442
+        w: 0.9117085352
+---
+transforms: 
+  - 
+    header: 
+      seq: 154003
+      stamp: 
+        secs: 1627505024
+        nsecs:  39314722
+      frame_id: "world"
+    child_frame_id: "MiniAHRS"
+    transform: 
+      translation: 
+        x: 0.0
+        y: 0.0
+        z: 0.0
+      rotation: 
+        x: -0.011598917604
+        y: 0.00195400116951
+        z: 0.410669202442
+        w: 0.9117085352
+---
+transforms: 
+  - 
+    header: 
+      seq: 154004
+      stamp: 
+        secs: 1627505024
+        nsecs:  39333902
+      frame_id: "world"
+    child_frame_id: "MiniAHRS"
+    transform: 
+      translation: 
+        x: 0.0
+        y: 0.0
+        z: 0.0
+      rotation: 
+        x: -0.011598917604
+        y: 0.00195400116951
+        z: 0.410669202442
+        w: 0.9117085352
+---
+transforms: 
+  - 
+    header: 
+      seq: 154005
+      stamp: 
+        secs: 1627505024
+        nsecs:  39347657
+      frame_id: "world"
+    child_frame_id: "MiniAHRS"
+    transform: 
+      translation: 
+        x: 0.0
+        y: 0.0
+        z: 0.0
+      rotation: 
+        x: -0.011598917604
+        y: 0.00195400116951
+        z: 0.410669202442
+        w: 0.9117085352
+---
+transforms: 
+  - 
+    header: 
+      seq: 154006
+      stamp: 
+        secs: 1627505024
+        nsecs:  39358416
+      frame_id: "world"
+    child_frame_id: "MiniAHRS"
+    transform: 
+      translation: 
+        x: 0.0
+        y: 0.0
+        z: 0.0
+      rotation: 
+        x: -0.011598917604
+        y: 0.00195400116951
+        z: 0.410669202442
+        w: 0.9117085352
+---
+transforms: 
+  - 
+    header: 
+      seq: 154007
+      stamp: 
+        secs: 1627505024
+        nsecs:  39368494
+      frame_id: "world"
+    child_frame_id: "MiniAHRS"
+    transform: 
+      translation: 
+        x: 0.0
+        y: 0.0
+        z: 0.0
+      rotation: 
+        x: -0.011598917604
+        y: 0.00195400116951
+        z: 0.410669202442
+        w: 0.9117085352
+---
+transforms: 
+  - 
+    header: 
+      seq: 0
+      stamp: 
+        secs: 1627505023
+        nsecs: 937607558
+      frame_id: "cam_0_optical_frame"
+    child_frame_id: "/ar_marker_0"
+    transform: 
+      translation: 
+        x: -0.611924942917
+        y: -0.372985633548
+        z: 1.94355036733
+      rotation: 
+        x: 0.999562283938
+        y: 0.00730955924968
+        z: 0.0280747127091
+        w: -0.00579839444642
+---
+transforms: 
+  - 
+    header: 
+      seq: 0
+      stamp: 
+        secs: 1627505023
+        nsecs: 887982738
+      frame_id: "cam_0_optical_frame"
+    child_frame_id: "/ar_marker_0"
+    transform: 
+      translation: 
+        x: -0.612198715838
+        y: -0.372750219766
+        z: 1.94401599532
+      rotation: 
+        x: 0.999587328929
+        y: 0.00714442422723
+        z: 0.0271717864252
+        w: -0.00598523764551
+---
+transforms: 
+  - 
+    header: 
+      seq: 0
+      stamp: 
+        secs: 1627505023
+        nsecs: 937607558
+      frame_id: "cam_0_optical_frame"
+    child_frame_id: "/ar_marker_4"
+    transform: 
+      translation: 
+        x: -0.358607080582
+        y: 0.316076735997
+        z: 1.20901595711
+      rotation: 
+        x: 0.999945155873
+        y: 0.00872072943267
+        z: 0.00511679785648
+        w: -0.00272992731659
+---
+transforms: 
+  - 
+    header: 
+      seq: 0
+      stamp: 
+        secs: 1627505023
+        nsecs: 937607558
+      frame_id: "marker_0"
+    child_frame_id: "/base_link"
+    transform: 
+      translation: 
+        x: 2.07611482434
+        y: 0.613472212952
+        z: 0.374533216357
+      rotation: 
+        x: 0.520759283845
+        y: -0.484982830092
+        z: -0.486090200382
+        w: 0.507264960251
+---
+transforms: 
+  - 
+    header: 
+      seq: 0
+      stamp: 
+        secs: 1627505023
+        nsecs: 937607558
+      frame_id: "marker_4"
+    child_frame_id: "/base_link"
+    transform: 
+      translation: 
+        x: 1.3423313223
+        y: 0.359569938709
+        z: -0.315113864079
+      rotation: 
+        x: 0.508652407621
+        y: -0.494414061004
+        z: -0.500009400277
+        w: 0.496807874472
+---
+transforms: 
+  - 
+    header: 
+      seq: 0
+      stamp: 
+        secs: 1627505023
+        nsecs: 887982738
+      frame_id: "cam_0_optical_frame"
+    child_frame_id: "/ar_marker_4"
+    transform: 
+      translation: 
+        x: -0.358605387038
+        y: 0.316062078037
+        z: 1.20859877961
+      rotation: 
+        x: 0.999940196404
+        y: 0.00894200313978
+        z: 0.00532597489394
+        w: -0.0033583013055
+---
+transforms: 
+  - 
+    header: 
+      seq: 154008
+      stamp: 
+        secs: 1627505024
+        nsecs:  86297898
+      frame_id: "world"
+    child_frame_id: "MiniAHRS"
+    transform: 
+      translation: 
+        x: 0.0
+        y: 0.0
+        z: 0.0
+      rotation: 
+        x: -0.0117143064867
+        y: 0.00199772962181
+        z: 0.410669919919
+        w: 0.911706641949
+---
+transforms: 
+  - 
+    header: 
+      seq: 154009
+      stamp: 
+        secs: 1627505024
+        nsecs:  86372285
+      frame_id: "world"
+    child_frame_id: "MiniAHRS"
+    transform: 
+      translation: 
+        x: 0.0
+        y: 0.0
+        z: 0.0
+      rotation: 
+        x: -0.0117143064867
+        y: 0.00199772962181
+        z: 0.410669919919
+        w: 0.911706641949
+---
+transforms: 
+  - 
+    header: 
+      seq: 154010
+      stamp: 
+        secs: 1627505024
+        nsecs:  86383923
+      frame_id: "world"
+    child_frame_id: "MiniAHRS"
+    transform: 
+      translation: 
+        x: 0.0
+        y: 0.0
+        z: 0.0
+      rotation: 
+        x: -0.0117141321073
+        y: 0.00199875188029
+        z: 0.410590356942
+        w: 0.911742476188
+---
+transforms: 
+  - 
+    header: 
+      seq: 154011
+      stamp: 
+        secs: 1627505024
+        nsecs:  87499568
+      frame_id: "world"
+    child_frame_id: "MiniAHRS"
+    transform: 
+      translation: 
+        x: 0.0
+        y: 0.0
+        z: 0.0
+      rotation: 
+        x: -0.0117141321073
+        y: 0.00199875188029
+        z: 0.410590356942
+        w: 0.911742476188
+---
+transforms: 
+  - 
+    header: 
+      seq: 154012
+      stamp: 
+        secs: 1627505024
+        nsecs:  87547018
+      frame_id: "world"
+    child_frame_id: "MiniAHRS"
+    transform: 
+      translation: 
+        x: 0.0
+        y: 0.0
+        z: 0.0
+      rotation: 
+        x: -0.0117141321073
+        y: 0.00199875188029
+        z: 0.410590356942
+        w: 0.911742476188
+---
+transforms: 
+  - 
+    header: 
+      seq: 154013
+      stamp: 
+        secs: 1627505024
+        nsecs:  87559187
+      frame_id: "world"
+    child_frame_id: "MiniAHRS"
+    transform: 
+      translation: 
+        x: 0.0
+        y: 0.0
+        z: 0.0
+      rotation: 
+        x: -0.0117141321073
+        y: 0.00199875188029
+        z: 0.410590356942
+        w: 0.911742476188
+---
+transforms: 
+  - 
+    header: 
+      seq: 154014
+      stamp: 
+        secs: 1627505024
+        nsecs:  87569031
+      frame_id: "world"
+    child_frame_id: "MiniAHRS"
+    transform: 
+      translation: 
+        x: 0.0
+        y: 0.0
+        z: 0.0
+      rotation: 
+        x: -0.0117141321073
+        y: 0.00199875188029
+        z: 0.410590356942
+        w: 0.911742476188
+---
+transforms: 
+  - 
+    header: 
+      seq: 154015
+      stamp: 
+        secs: 1627505024
+        nsecs:  87578582
+      frame_id: "world"
+    child_frame_id: "MiniAHRS"
+    transform: 
+      translation: 
+        x: 0.0
+        y: 0.0
+        z: 0.0
+      rotation: 
+        x: -0.0117139576387
+        y: 0.00199977412355
+        z: 0.410510790838
+        w: 0.911778303485
+---
+transforms: 
+  - 
+    header: 
+      seq: 154016
+      stamp: 
+        secs: 1627505024
+        nsecs:  87588958
+      frame_id: "world"
+    child_frame_id: "MiniAHRS"
+    transform: 
+      translation: 
+        x: 0.0
+        y: 0.0
+        z: 0.0
+      rotation: 
+        x: -0.0117139576387
+        y: 0.00199977412355
+        z: 0.410510790838
+        w: 0.911778303485
+---
+transforms: 
+  - 
+    header: 
+      seq: 154017
+      stamp: 
+        secs: 1627505024
+        nsecs:  87600926
+      frame_id: "world"
+    child_frame_id: "MiniAHRS"
+    transform: 
+      translation: 
+        x: 0.0
+        y: 0.0
+        z: 0.0
+      rotation: 
+        x: -0.0117139576387
+        y: 0.00199977412355
+        z: 0.410510790838
+        w: 0.911778303485
+---
+transforms: 
+  - 
+    header: 
+      seq: 154018
+      stamp: 
+        secs: 1627505024
+        nsecs:  87611049
+      frame_id: "world"
+    child_frame_id: "MiniAHRS"
+    transform: 
+      translation: 
+        x: 0.0
+        y: 0.0
+        z: 0.0
+      rotation: 
+        x: -0.0117935252612
+        y: 0.0019639502914
+        z: 0.410510963788
+        w: 0.911777277777
+---
+transforms: 
+  - 
+    header: 
+      seq: 154019
+      stamp: 
+        secs: 1627505024
+        nsecs:  87621151
+      frame_id: "world"
+    child_frame_id: "MiniAHRS"
+    transform: 
+      translation: 
+        x: 0.0
+        y: 0.0
+        z: 0.0
+      rotation: 
+        x: -0.0117935252612
+        y: 0.0019639502914
+        z: 0.410510963788
+        w: 0.911777277777
+---
+transforms: 
+  - 
+    header: 
+      seq: 0
+      stamp: 
+        secs: 1627505023
+        nsecs: 887982738
+      frame_id: "marker_0"
+    child_frame_id: "/base_link"
+    transform: 
+      translation: 
+        x: 2.07658042149
+        y: 0.613746356727
+        z: 0.374298173442
+      rotation: 
+        x: 0.520331566767
+        y: -0.48562279605
+        z: -0.486378546504
+        w: 0.50681502551
+---
+transforms: 
+  - 
+    header: 
+      seq: 0
+      stamp: 
+        secs: 1627505023
+        nsecs: 887982738
+      frame_id: "marker_4"
+    child_frame_id: "/base_link"
+    transform: 
+      translation: 
+        x: 1.34191413474
+        y: 0.359567912947
+        z: -0.315099538333
+      rotation: 
+        x: 0.509179254857
+        y: -0.494510204627
+        z: -0.499698700635
+        w: 0.496484997283
+---
+transforms: 
+  - 
+    header: 
+      seq: 0
+      stamp: 
+        secs: 1627505023
+        nsecs: 989284988
+      frame_id: "cam_0_optical_frame"
+    child_frame_id: "/ar_marker_0"
+    transform: 
+      translation: 
+        x: -0.61169937836
+        y: -0.373120508312
+        z: 1.94316722822
+      rotation: 
+        x: 0.999541546412
+        y: 0.00727565981472
+        z: 0.028722397841
+        w: -0.00622781128555
+---
+transforms: 
+  - 
+    header: 
+      seq: 0
+      stamp: 
+        secs: 1627505023
+        nsecs: 989284988
+      frame_id: "cam_0_optical_frame"
+    child_frame_id: "/ar_marker_4"
+    transform: 
+      translation: 
+        x: -0.358530904909
+        y: 0.316044187225
+        z: 1.20972272577
+      rotation: 
+        x: 0.999945177688
+        y: 0.00897108558334
+        z: 0.00526876659879
+        w: -0.00118378203165
+---
+transforms: 
+  - 
+    header: 
+      seq: 154020
+      stamp: 
+        secs: 1627505024
+        nsecs: 133414744
+      frame_id: "world"
+    child_frame_id: "MiniAHRS"
+    transform: 
+      translation: 
+        x: 0.0
+        y: 0.0
+        z: 0.0
+      rotation: 
+        x: -0.0117933538293
+        y: 0.00196497946316
+        z: 0.410431394647
+        w: 0.911813098145
+---
+transforms: 
+  - 
+    header: 
+      seq: 154021
+      stamp: 
+        secs: 1627505024
+        nsecs: 133499963
+      frame_id: "world"
+    child_frame_id: "MiniAHRS"
+    transform: 
+      translation: 
+        x: 0.0
+        y: 0.0
+        z: 0.0
+      rotation: 
+        x: -0.0117933538293
+        y: 0.00196497946316
+        z: 0.410431394647
+        w: 0.911813098145
+---
+transforms: 
+  - 
+    header: 
+      seq: 154022
+      stamp: 
+        secs: 1627505024
+        nsecs: 133515076
+      frame_id: "world"
+    child_frame_id: "MiniAHRS"
+    transform: 
+      translation: 
+        x: 0.0
+        y: 0.0
+        z: 0.0
+      rotation: 
+        x: -0.0117933538293
+        y: 0.00196497946316
+        z: 0.410431394647
+        w: 0.911813098145
+---
+transforms: 
+  - 
+    header: 
+      seq: 154023
+      stamp: 
+        secs: 1627505024
+        nsecs: 133613432
+      frame_id: "world"
+    child_frame_id: "MiniAHRS"
+    transform: 
+      translation: 
+        x: 0.0
+        y: 0.0
+        z: 0.0
+      rotation: 
+        x: -0.0117933538293
+        y: 0.00196497946316
+        z: 0.410431394647
+        w: 0.911813098145
+---
+transforms: 
+  - 
+    header: 
+      seq: 154024
+      stamp: 
+        secs: 1627505024
+        nsecs: 133627091
+      frame_id: "world"
+    child_frame_id: "MiniAHRS"
+    transform: 
+      translation: 
+        x: 0.0
+        y: 0.0
+        z: 0.0
+      rotation: 
+        x: -0.0117933538293
+        y: 0.00196497946316
+        z: 0.410431394647
+        w: 0.911813098145
+---
+transforms: 
+  - 
+    header: 
+      seq: 154025
+      stamp: 
+        secs: 1627505024
+        nsecs: 133636931
+      frame_id: "world"
+    child_frame_id: "MiniAHRS"
+    transform: 
+      translation: 
+        x: 0.0
+        y: 0.0
+        z: 0.0
+      rotation: 
+        x: -0.0117933538293
+        y: 0.00196497946316
+        z: 0.410431394647
+        w: 0.911813098145
+---
+transforms: 
+  - 
+    header: 
+      seq: 154026
+      stamp: 
+        secs: 1627505024
+        nsecs: 133646542
+      frame_id: "world"
+    child_frame_id: "MiniAHRS"
+    transform: 
+      translation: 
+        x: 0.0
+        y: 0.0
+        z: 0.0
+      rotation: 
+        x: -0.0117933538293
+        y: 0.00196497946316
+        z: 0.410431394647
+        w: 0.911813098145
+---
+transforms: 
+  - 
+    header: 
+      seq: 154027
+      stamp: 
+        secs: 1627505024
+        nsecs: 133657076
+      frame_id: "world"
+    child_frame_id: "MiniAHRS"
+    transform: 
+      translation: 
+        x: 0.0
+        y: 0.0
+        z: 0.0
+      rotation: 
+        x: -0.0117933538293
+        y: 0.00196497946316
+        z: 0.410431394647
+        w: 0.911813098145
+---
+transforms: 
+  - 
+    header: 
+      seq: 154028
+      stamp: 
+        secs: 1627505024
+        nsecs: 133666845
+      frame_id: "world"
+    child_frame_id: "MiniAHRS"
+    transform: 
+      translation: 
+        x: 0.0
+        y: 0.0
+        z: 0.0
+      rotation: 
+        x: -0.0117931823076
+        y: 0.00196600861994
+        z: 0.410351822381
+        w: 0.911848911569
+---
+transforms: 
+  - 
+    header: 
+      seq: 154029
+      stamp: 
+        secs: 1627505024
+        nsecs: 133676661
+      frame_id: "world"
+    child_frame_id: "MiniAHRS"
+    transform: 
+      translation: 
+        x: 0.0
+        y: 0.0
+        z: 0.0
+      rotation: 
+        x: -0.0118727560915
+        y: 0.00193019866054
+        z: 0.410351992385
+        w: 0.911847878948
+---
+transforms: 
+  - 
+    header: 
+      seq: 154030
+      stamp: 
+        secs: 1627505024
+        nsecs: 133686440
+      frame_id: "world"
+    child_frame_id: "MiniAHRS"
+    transform: 
+      translation: 
+        x: 0.0
+        y: 0.0
+        z: 0.0
+      rotation: 
+        x: -0.0118727560915
+        y: 0.00193019866054
+        z: 0.410351992385
+        w: 0.911847878948
+---
+transforms: 
+  - 
+    header: 
+      seq: 0
+      stamp: 
+        secs: 1627505023
+        nsecs: 989284988
+      frame_id: "marker_0"
+    child_frame_id: "/base_link"
+    transform: 
+      translation: 
+        x: 2.0757317577
+        y: 0.613246343277
+        z: 0.374667785974
+      rotation: 
+        x: 0.521270250145
+        y: -0.484880119525
+        z: -0.485524081362
+        w: 0.507380490776
+---
+transforms: 
+  - 
+    header: 
+      seq: 0
+      stamp: 
+        secs: 1627505023
+        nsecs: 989284988
+      frame_id: "marker_4"
+    child_frame_id: "/base_link"
+    transform: 
+      translation: 
+        x: 1.34303812525
+        y: 0.359494325859
+        z: -0.315080752498
+      rotation: 
+        x: 0.508080448038
+        y: -0.493440352783
+        z: -0.500831616729
+        w: 0.497532479594
+---
+transforms: 
+  - 
+    header: 
+      seq: 0
+      stamp: 
+        secs: 1627505024
+        nsecs:  39151473
+      frame_id: "cam_0_optical_frame"
+    child_frame_id: "/ar_marker_0"
+    transform: 
+      translation: 
+        x: -0.611446268378
+        y: -0.373299282511
+        z: 1.94347149194
+      rotation: 
+        x: 0.999539264191
+        y: 0.00738527749597
+        z: 0.0288323214797
+        w: -0.00595098769859
+---
+transforms: 
+  - 
+    header: 
+      seq: 0
+      stamp: 
+        secs: 1627505024
+        nsecs:  39151473
+      frame_id: "cam_0_optical_frame"
+    child_frame_id: "/ar_marker_4"
+    transform: 
+      translation: 
+        x: -0.35865914619
+        y: 0.31626805187
+        z: 1.2111285265
+      rotation: 
+        x: 0.999955221838
+        y: 0.00848572826778
+        z: 0.00399032921143
+        w: 0.00127436572352
+---
+transforms: 
+  - 
+    header: 
+      seq: 154031
+      stamp: 
+        secs: 1627505024
+        nsecs: 180719954
+      frame_id: "world"
+    child_frame_id: "MiniAHRS"
+    transform: 
+      translation: 
+        x: 0.0
+        y: 0.0
+        z: 0.0
+      rotation: 
+        x: -0.0118727560915
+        y: 0.00193019866054
+        z: 0.410351992385
+        w: 0.911847878948
+---
+transforms: 
+  - 
+    header: 
+      seq: 154032
+      stamp: 
+        secs: 1627505024
+        nsecs: 180788594
+      frame_id: "world"
+    child_frame_id: "MiniAHRS"
+    transform: 
+      translation: 
+        x: 0.0
+        y: 0.0
+        z: 0.0
+      rotation: 
+        x: -0.0118727560915
+        y: 0.00193019866054
+        z: 0.410351992385
+        w: 0.911847878948
+---
+transforms: 
+  - 
+    header: 
+      seq: 154033
+      stamp: 
+        secs: 1627505024
+        nsecs: 180802298
+      frame_id: "world"
+    child_frame_id: "MiniAHRS"
+    transform: 
+      translation: 
+        x: 0.0
+        y: 0.0
+        z: 0.0
+      rotation: 
+        x: -0.0118725876047
+        y: 0.00193123474662
+        z: 0.410272417084
+        w: 0.911883685442
+---
+transforms: 
+  - 
+    header: 
+      seq: 154034
+      stamp: 
+        secs: 1627505024
+        nsecs: 180861574
+      frame_id: "world"
+    child_frame_id: "MiniAHRS"
+    transform: 
+      translation: 
+        x: 0.0
+        y: 0.0
+        z: 0.0
+      rotation: 
+        x: -0.0118725876047
+        y: 0.00193123474662
+        z: 0.410272417084
+        w: 0.911883685442
+---
+transforms: 
+  - 
+    header: 
+      seq: 154035
+      stamp: 
+        secs: 1627505024
+        nsecs: 180872778
+      frame_id: "world"
+    child_frame_id: "MiniAHRS"
+    transform: 
+      translation: 
+        x: 0.0
+        y: 0.0
+        z: 0.0
+      rotation: 
+        x: -0.0118725876047
+        y: 0.00193123474662
+        z: 0.410272417084
+        w: 0.911883685442
+---
+transforms: 
+  - 
+    header: 
+      seq: 154036
+      stamp: 
+        secs: 1627505024
+        nsecs: 180882350
+      frame_id: "world"
+    child_frame_id: "MiniAHRS"
+    transform: 
+      translation: 
+        x: 0.0
+        y: 0.0
+        z: 0.0
+      rotation: 
+        x: -0.0118725876047
+        y: 0.00193123474662
+        z: 0.410272417084
+        w: 0.911883685442
+---
+transforms: 
+  - 
+    header: 
+      seq: 154037
+      stamp: 
+        secs: 1627505024
+        nsecs: 180893137
+      frame_id: "world"
+    child_frame_id: "MiniAHRS"
+    transform: 
+      translation: 
+        x: 0.0
+        y: 0.0
+        z: 0.0
+      rotation: 
+        x: -0.0118725876047
+        y: 0.00193123474662
+        z: 0.410272417084
+        w: 0.911883685442
+---
+transforms: 
+  - 
+    header: 
+      seq: 154038
+      stamp: 
+        secs: 1627505024
+        nsecs: 180902631
+      frame_id: "world"
+    child_frame_id: "MiniAHRS"
+    transform: 
+      translation: 
+        x: 0.0
+        y: 0.0
+        z: 0.0
+      rotation: 
+        x: -0.0118725876047
+        y: 0.00193123474662
+        z: 0.410272417084
+        w: 0.911883685442
+---
+transforms: 
+  - 
+    header: 
+      seq: 154039
+      stamp: 
+        secs: 1627505024
+        nsecs: 180911909
+      frame_id: "world"
+    child_frame_id: "MiniAHRS"
+    transform: 
+      translation: 
+        x: 0.0
+        y: 0.0
+        z: 0.0
+      rotation: 
+        x: -0.0118725876047
+        y: 0.00193123474662
+        z: 0.410272417084
+        w: 0.911883685442
+---
+transforms: 
+  - 
+    header: 
+      seq: 154040
+      stamp: 
+        secs: 1627505024
+        nsecs: 180923024
+      frame_id: "world"
+    child_frame_id: "MiniAHRS"
+    transform: 
+      translation: 
+        x: 0.0
+        y: 0.0
+        z: 0.0
+      rotation: 
+        x: -0.0118725876047
+        y: 0.00193123474662
+        z: 0.410272417084
+        w: 0.911883685442
+---
+transforms: 
+  - 
+    header: 
+      seq: 154041
+      stamp: 
+        secs: 1627505024
+        nsecs: 180932895
+      frame_id: "world"
+    child_frame_id: "MiniAHRS"
+    transform: 
+      translation: 
+        x: 0.0
+        y: 0.0
+        z: 0.0
+      rotation: 
+        x: -0.0119879567284
+        y: 0.00197501328924
+        z: 0.410273150669
+        w: 0.911881752233
+---
+transforms: 
+  - 
+    header: 
+      seq: 154042
+      stamp: 
+        secs: 1627505024
+        nsecs: 180942871
+      frame_id: "world"
+    child_frame_id: "MiniAHRS"
+    transform: 
+      translation: 
+        x: 0.0
+        y: 0.0
+        z: 0.0
+      rotation: 
+        x: -0.0119879567284
+        y: 0.00197501328924
+        z: 0.410273150669
+        w: 0.911881752233
+---
+transforms: 
+  - 
+    header: 
+      seq: 0
+      stamp: 
+        secs: 1627505024
+        nsecs:  39151473
+      frame_id: "marker_0"
+    child_frame_id: "/base_link"
+    transform: 
+      translation: 
+        x: 2.07603608042
+        y: 0.612993475555
+        z: 0.37484680241
+      rotation: 
+        x: 0.521240423252
+        y: -0.484630862555
+        z: -0.485661156146
+        w: 0.507518068288
+---
+transforms: 
+  - 
+    header: 
+      seq: 0
+      stamp: 
+        secs: 1627505024
+        nsecs:  39151473
+      frame_id: "marker_4"
+    child_frame_id: "/base_link"
+    transform: 
+      translation: 
+        x: 1.34444400124
+        y: 0.359623686717
+        z: -0.315303497596
+      rotation: 
+        x: 0.505975012377
+        y: -0.493099370123
+        z: -0.502462757432
+        w: 0.498370821205
+---
+transforms: 
+  - 
+    header: 
+      seq: 0
+      stamp: 
+        secs: 1627505024
+        nsecs:  91806612
+      frame_id: "cam_0_optical_frame"
+    child_frame_id: "/ar_marker_0"
+    transform: 
+      translation: 
+        x: -0.611118427
+        y: -0.373294540329
+        z: 1.94256471331
+      rotation: 
+        x: 0.999514150516
+        y: 0.00738609882553
+        z: 0.0293755406087
+        w: -0.00734752174886
+---
+transforms: 
+  - 
+    header: 
+      seq: 0
+      stamp: 
+        secs: 1627505024
+        nsecs:  91806612
+      frame_id: "cam_0_optical_frame"
+    child_frame_id: "/ar_marker_4"
+    transform: 
+      translation: 
+        x: -0.358448799301
+        y: 0.316148148986
+        z: 1.21050133681
+      rotation: 
+        x: 0.999957157973
+        y: 0.00852962130374
+        z: 0.00282113436657
+        w: -0.00222912082169
+---
+transforms: 
+  - 
+    header: 
+      seq: 154043
+      stamp: 
+        secs: 1627505024
+        nsecs: 228034173
+      frame_id: "world"
+    child_frame_id: "MiniAHRS"
+    transform: 
+      translation: 
+        x: 0.0
+        y: 0.0
+        z: 0.0
+      rotation: 
+        x: -0.0119879567284
+        y: 0.00197501328924
+        z: 0.410273150669
+        w: 0.911881752233
+---
+transforms: 
+  - 
+    header: 
+      seq: 154044
+      stamp: 
+        secs: 1627505024
+        nsecs: 228098461
+      frame_id: "world"
+    child_frame_id: "MiniAHRS"
+    transform: 
+      translation: 
+        x: 0.0
+        y: 0.0
+        z: 0.0
+      rotation: 
+        x: -0.0119877843304
+        y: 0.0019760594283
+        z: 0.410193572412
+        w: 0.911917551848
+---
+transforms: 
+  - 
+    header: 
+      seq: 154045
+      stamp: 
+        secs: 1627505024
+        nsecs: 228112765
+      frame_id: "world"
+    child_frame_id: "MiniAHRS"
+    transform: 
+      translation: 
+        x: 0.0
+        y: 0.0
+        z: 0.0
+      rotation: 
+        x: -0.0119877843304
+        y: 0.0019760594283
+        z: 0.410193572412
+        w: 0.911917551848
+---
+transforms: 
+  - 
+    header: 
+      seq: 154046
+      stamp: 
+        secs: 1627505024
+        nsecs: 228172947
+      frame_id: "world"
+    child_frame_id: "MiniAHRS"
+    transform: 
+      translation: 
+        x: 0.0
+        y: 0.0
+        z: 0.0
+      rotation: 
+        x: -0.0119877843304
+        y: 0.0019760594283
+        z: 0.410193572412
+        w: 0.911917551848
+---
+transforms: 
+  - 
+    header: 
+      seq: 154047
+      stamp: 
+        secs: 1627505024
+        nsecs: 228184606
+      frame_id: "world"
+    child_frame_id: "MiniAHRS"
+    transform: 
+      translation: 
+        x: 0.0
+        y: 0.0
+        z: 0.0
+      rotation: 
+        x: -0.0119877843304
+        y: 0.0019760594283
+        z: 0.410193572412
+        w: 0.911917551848
+---
+transforms: 
+  - 
+    header: 
+      seq: 154048
+      stamp: 
+        secs: 1627505024
+        nsecs: 228194240
+      frame_id: "world"
+    child_frame_id: "MiniAHRS"
+    transform: 
+      translation: 
+        x: 0.0
+        y: 0.0
+        z: 0.0
+      rotation: 
+        x: -0.0119877843304
+        y: 0.0019760594283
+        z: 0.410193572412
+        w: 0.911917551848
+---
+transforms: 
+  - 
+    header: 
+      seq: 154049
+      stamp: 
+        secs: 1627505024
+        nsecs: 228203576
+      frame_id: "world"
+    child_frame_id: "MiniAHRS"
+    transform: 
+      translation: 
+        x: 0.0
+        y: 0.0
+        z: 0.0
+      rotation: 
+        x: -0.0119877843304
+        y: 0.0019760594283
+        z: 0.410193572412
+        w: 0.911917551848
+---
+transforms: 
+  - 
+    header: 
+      seq: 154050
+      stamp: 
+        secs: 1627505024
+        nsecs: 228212884
+      frame_id: "world"
+    child_frame_id: "MiniAHRS"
+    transform: 
+      translation: 
+        x: 0.0
+        y: 0.0
+        z: 0.0
+      rotation: 
+        x: -0.0119877843304
+        y: 0.0019760594283
+        z: 0.410193572412
+        w: 0.911917551848
+---
+transforms: 
+  - 
+    header: 
+      seq: 154051
+      stamp: 
+        secs: 1627505024
+        nsecs: 228222763
+      frame_id: "world"
+    child_frame_id: "MiniAHRS"
+    transform: 
+      translation: 
+        x: 0.0
+        y: 0.0
+        z: 0.0
+      rotation: 
+        x: -0.0119877843304
+        y: 0.0019760594283
+        z: 0.410193572412
+        w: 0.911917551848
+---
+transforms: 
+  - 
+    header: 
+      seq: 154052
+      stamp: 
+        secs: 1627505024
+        nsecs: 228233747
+      frame_id: "world"
+    child_frame_id: "MiniAHRS"
+    transform: 
+      translation: 
+        x: 0.0
+        y: 0.0
+        z: 0.0
+      rotation: 
+        x: -0.0119877843304
+        y: 0.0019760594283
+        z: 0.410193572412
+        w: 0.911917551848
+---
+transforms: 
+  - 
+    header: 
+      seq: 154053
+      stamp: 
+        secs: 1627505024
+        nsecs: 228243481
+      frame_id: "world"
+    child_frame_id: "MiniAHRS"
+    transform: 
+      translation: 
+        x: 0.0
+        y: 0.0
+        z: 0.0
+      rotation: 
+        x: -0.0120673641035
+        y: 0.00194026327878
+        z: 0.410193743294
+        w: 0.911916502244
+---
+transforms: 
+  - 
+    header: 
+      seq: 154054
+      stamp: 
+        secs: 1627505024
+        nsecs: 228253976
+      frame_id: "world"
+    child_frame_id: "MiniAHRS"
+    transform: 
+      translation: 
+        x: 0.0
+        y: 0.0
+        z: 0.0
+      rotation: 
+        x: -0.0120673641035
+        y: 0.00194026327878
+        z: 0.410193743294
+        w: 0.911916502244
+---
+transforms: 
+  - 
+    header: 
+      seq: 0
+      stamp: 
+        secs: 1627505024
+        nsecs:  91806612
+      frame_id: "marker_0"
+    child_frame_id: "/base_link"
+    transform: 
+      translation: 
+        x: 2.07512956722
+        y: 0.612664912192
+        z: 0.374841338138
+      rotation: 
+        x: 0.522197927158
+        y: -0.485043996228
+        z: -0.484678927314
+        w: 0.507077887521
+---
+transforms: 
+  - 
+    header: 
+      seq: 0
+      stamp: 
+        secs: 1627505024
+        nsecs:  91806612
+      frame_id: "marker_4"
+    child_frame_id: "/base_link"
+    transform: 
+      translation: 
+        x: 1.34381688397
+        y: 0.359412840372
+        z: -0.315184094198
+      rotation: 
+        x: 0.507165538552
+        y: -0.495413319745
+        z: -0.501318991476
+        w: 0.496012124761
+---
+transforms: 
+  - 
+    header: 
+      seq: 0
+      stamp: 
+        secs: 1627505024
+        nsecs: 137607097
+      frame_id: "cam_0_optical_frame"
+    child_frame_id: "/ar_marker_0"
+    transform: 
+      translation: 
+        x: -0.61074192452
+        y: -0.373379006913
+        z: 1.94302890135
+      rotation: 
+        x: 0.999534989736
+        y: 0.00764020676836
+        z: 0.0285546196947
+        w: -0.00748767174742
+---
+transforms: 
+  - 
+    header: 
+      seq: 0
+      stamp: 
+        secs: 1627505024
+        nsecs: 137607097
+      frame_id: "cam_0_optical_frame"
+    child_frame_id: "/ar_marker_4"
+    transform: 
+      translation: 
+        x: -0.358209595436
+        y: 0.315965376065
+        z: 1.21049323637
+      rotation: 
+        x: 0.999942963356
+        y: 0.00930507661399
+        z: 0.00522687851095
+        w: -0.000406600696166
+---
+transforms: 
+  - 
+    header: 
+      seq: 154055
+      stamp: 
+        secs: 1627505024
+        nsecs: 275738350
+      frame_id: "world"
+    child_frame_id: "MiniAHRS"
+    transform: 
+      translation: 
+        x: 0.0
+        y: 0.0
+        z: 0.0
+      rotation: 
+        x: -0.0120671947377
+        y: 0.00194131634757
+        z: 0.410114162005
+        w: 0.911952294928
+---
+transforms: 
+  - 
+    header: 
+      seq: 154056
+      stamp: 
+        secs: 1627505024
+        nsecs: 275809982
+      frame_id: "world"
+    child_frame_id: "MiniAHRS"
+    transform: 
+      translation: 
+        x: 0.0
+        y: 0.0
+        z: 0.0
+      rotation: 
+        x: -0.0120671947377
+        y: 0.00194131634757
+        z: 0.410114162005
+        w: 0.911952294928
+---
+transforms: 
+  - 
+    header: 
+      seq: 154057
+      stamp: 
+        secs: 1627505024
+        nsecs: 275820943
+      frame_id: "world"
+    child_frame_id: "MiniAHRS"
+    transform: 
+      translation: 
+        x: 0.0
+        y: 0.0
+        z: 0.0
+      rotation: 
+        x: -0.0120671947377
+        y: 0.00194131634757
+        z: 0.410114162005
+        w: 0.911952294928
+---
+transforms: 
+  - 
+    header: 
+      seq: 154058
+      stamp: 
+        secs: 1627505024
+        nsecs: 275830785
+      frame_id: "world"
+    child_frame_id: "MiniAHRS"
+    transform: 
+      translation: 
+        x: 0.0
+        y: 0.0
+        z: 0.0
+      rotation: 
+        x: -0.0120671947377
+        y: 0.00194131634757
+        z: 0.410114162005
+        w: 0.911952294928
+---
+transforms: 
+  - 
+    header: 
+      seq: 154059
+      stamp: 
+        secs: 1627505024
+        nsecs: 275840533
+      frame_id: "world"
+    child_frame_id: "MiniAHRS"
+    transform: 
+      translation: 
+        x: 0.0
+        y: 0.0
+        z: 0.0
+      rotation: 
+        x: -0.0120671947377
+        y: 0.00194131634757
+        z: 0.410114162005
+        w: 0.911952294928
+---
+transforms: 
+  - 
+    header: 
+      seq: 154060
+      stamp: 
+        secs: 1627505024
+        nsecs: 275910262
+      frame_id: "world"
+    child_frame_id: "MiniAHRS"
+    transform: 
+      translation: 
+        x: 0.0
+        y: 0.0
+        z: 0.0
+      rotation: 
+        x: -0.0120671947377
+        y: 0.00194131634757
+        z: 0.410114162005
+        w: 0.911952294928
+---
+transforms: 
+  - 
+    header: 
+      seq: 154061
+      stamp: 
+        secs: 1627505024
+        nsecs: 275920781
+      frame_id: "world"
+    child_frame_id: "MiniAHRS"
+    transform: 
+      translation: 
+        x: 0.0
+        y: 0.0
+        z: 0.0
+      rotation: 
+        x: -0.0120670252799
+        y: 0.00194236940157
+        z: 0.410034577593
+        w: 0.911988080668
+---
+transforms: 
+  - 
+    header: 
+      seq: 154062
+      stamp: 
+        secs: 1627505024
+        nsecs: 275930366
+      frame_id: "world"
+    child_frame_id: "MiniAHRS"
+    transform: 
+      translation: 
+        x: 0.0
+        y: 0.0
+        z: 0.0
+      rotation: 
+        x: -0.0120670252799
+        y: 0.00194236940157
+        z: 0.410034577593
+        w: 0.911988080668
+---
+transforms: 
+  - 
+    header: 
+      seq: 154063
+      stamp: 
+        secs: 1627505024
+        nsecs: 275940316
+      frame_id: "world"
+    child_frame_id: "MiniAHRS"
+    transform: 
+      translation: 
+        x: 0.0
+        y: 0.0
+        z: 0.0
+      rotation: 
+        x: -0.0120670252799
+        y: 0.00194236940157
+        z: 0.410034577593
+        w: 0.911988080668
+---
+transforms: 
+  - 
+    header: 
+      seq: 154064
+      stamp: 
+        secs: 1627505024
+        nsecs: 275951356
+      frame_id: "world"
+    child_frame_id: "MiniAHRS"
+    transform: 
+      translation: 
+        x: 0.0
+        y: 0.0
+        z: 0.0
+      rotation: 
+        x: -0.0120670252799
+        y: 0.00194236940157
+        z: 0.410034577593
+        w: 0.911988080668
+---
+transforms: 
+  - 
+    header: 
+      seq: 154065
+      stamp: 
+        secs: 1627505024
+        nsecs: 275960985
+      frame_id: "world"
+    child_frame_id: "MiniAHRS"
+    transform: 
+      translation: 
+        x: 0.0
+        y: 0.0
+        z: 0.0
+      rotation: 
+        x: -0.0121466112076
+        y: 0.00190658712709
+        z: 0.410034745535
+        w: 0.911987024149
+---
+transforms: 
+  - 
+    header: 
+      seq: 154066
+      stamp: 
+        secs: 1627505024
+        nsecs: 275970479
+      frame_id: "world"
+    child_frame_id: "MiniAHRS"
+    transform: 
+      translation: 
+        x: 0.0
+        y: 0.0
+        z: 0.0
+      rotation: 
+        x: -0.0121466112076
+        y: 0.00190658712709
+        z: 0.410034745535
+        w: 0.911987024149
+---
+transforms: 
+  - 
+    header: 
+      seq: 0
+      stamp: 
+        secs: 1627505024
+        nsecs: 137607097
+      frame_id: "marker_0"
+    child_frame_id: "/base_link"
+    transform: 
+      translation: 
+        x: 2.07559398751
+        y: 0.612288779423
+        z: 0.37492617434
+      rotation: 
+        x: 0.521995350377
+        y: -0.48540774021
+        z: -0.485157104898
+        w: 0.506480763204
+---
+transforms: 
+  - 
+    header: 
+      seq: 0
+      stamp: 
+        secs: 1627505024
+        nsecs: 137607097
+      frame_id: "marker_4"
+    child_frame_id: "/base_link"
+    transform: 
+      translation: 
+        x: 1.34380882847
+        y: 0.359173630016
+        z: -0.315001327785
+      rotation: 
+        x: 0.507836817543
+        y: -0.492904779933
+        z: -0.501407057174
+        w: 0.497732465972
+---
+transforms: 
+  - 
+    header: 
+      seq: 0
+      stamp: 
+        secs: 1627505024
+        nsecs: 187636317
+      frame_id: "cam_0_optical_frame"
+    child_frame_id: "/ar_marker_0"
+    transform: 
+      translation: 
+        x: -0.610225186211
+        y: -0.373297524524
+        z: 1.94309916686
+      rotation: 
+        x: 0.99956163641
+        y: 0.00763276954012
+        z: 0.0278650295624
+        w: -0.00646652717328
+---
+transforms: 
+  - 
+    header: 
+      seq: 0
+      stamp: 
+        secs: 1627505024
+        nsecs: 187636317
+      frame_id: "cam_0_optical_frame"
+    child_frame_id: "/ar_marker_4"
+    transform: 
+      translation: 
+        x: -0.357752505521
+        y: 0.315672991558
+        z: 1.20914476914
+      rotation: 
+        x: 0.999938822314
+        y: 0.00953839532053
+        z: 0.00508726854329
+        w: -0.00234314786629
+---
+transforms: 
+  - 
+    header: 
+      seq: 154067
+      stamp: 
+        secs: 1627505024
+        nsecs: 323141899
+      frame_id: "world"
+    child_frame_id: "MiniAHRS"
+    transform: 
+      translation: 
+        x: 0.0
+        y: 0.0
+        z: 0.0
+      rotation: 
+        x: -0.0121466112076
+        y: 0.00190658712709
+        z: 0.410034745535
+        w: 0.911987024149
+---
+transforms: 
+  - 
+    header: 
+      seq: 154068
+      stamp: 
+        secs: 1627505024
+        nsecs: 323205074
+      frame_id: "world"
+    child_frame_id: "MiniAHRS"
+    transform: 
+      translation: 
+        x: 0.0
+        y: 0.0
+        z: 0.0
+      rotation: 
+        x: -0.0121466112076
+        y: 0.00190658712709
+        z: 0.410034745535
+        w: 0.911987024149
+---
+transforms: 
+  - 
+    header: 
+      seq: 154069
+      stamp: 
+        secs: 1627505024
+        nsecs: 323217719
+      frame_id: "world"
+    child_frame_id: "MiniAHRS"
+    transform: 
+      translation: 
+        x: 0.0
+        y: 0.0
+        z: 0.0
+      rotation: 
+        x: -0.0121466112076
+        y: 0.00190658712709
+        z: 0.410034745535
+        w: 0.911987024149
+---
+transforms: 
+  - 
+    header: 
+      seq: 154070
+      stamp: 
+        secs: 1627505024
+        nsecs: 323229419
+      frame_id: "world"
+    child_frame_id: "MiniAHRS"
+    transform: 
+      translation: 
+        x: 0.0
+        y: 0.0
+        z: 0.0
+      rotation: 
+        x: -0.0121464447802
+        y: 0.00190764711162
+        z: 0.409955158092
+        w: 0.912022802958
+---
+transforms: 
+  - 
+    header: 
+      seq: 154071
+      stamp: 
+        secs: 1627505024
+        nsecs: 323252368
+      frame_id: "world"
+    child_frame_id: "MiniAHRS"
+    transform: 
+      translation: 
+        x: 0.0
+        y: 0.0
+        z: 0.0
+      rotation: 
+        x: -0.0121464447802
+        y: 0.00190764711162
+        z: 0.409955158092
+        w: 0.912022802958
+---
+transforms: 
+  - 
+    header: 
+      seq: 154072
+      stamp: 
+        secs: 1627505024
+        nsecs: 323262664
+      frame_id: "world"
+    child_frame_id: "MiniAHRS"
+    transform: 
+      translation: 
+        x: 0.0
+        y: 0.0
+        z: 0.0
+      rotation: 
+        x: -0.0121464447802
+        y: 0.00190764711162
+        z: 0.409955158092
+        w: 0.912022802958
+---
+transforms: 
+  - 
+    header: 
+      seq: 154073
+      stamp: 
+        secs: 1627505024
+        nsecs: 323275080
+      frame_id: "world"
+    child_frame_id: "MiniAHRS"
+    transform: 
+      translation: 
+        x: 0.0
+        y: 0.0
+        z: 0.0
+      rotation: 
+        x: -0.0121464447802
+        y: 0.00190764711162
+        z: 0.409955158092
+        w: 0.912022802958
+---
+transforms: 
+  - 
+    header: 
+      seq: 154074
+      stamp: 
+        secs: 1627505024
+        nsecs: 323291511
+      frame_id: "world"
+    child_frame_id: "MiniAHRS"
+    transform: 
+      translation: 
+        x: 0.0
+        y: 0.0
+        z: 0.0
+      rotation: 
+        x: -0.0121822090554
+        y: 0.00198724105843
+        z: 0.409955735789
+        w: 0.91202189631
+---
+transforms: 
+  - 
+    header: 
+      seq: 154075
+      stamp: 
+        secs: 1627505024
+        nsecs: 323305850
+      frame_id: "world"
+    child_frame_id: "MiniAHRS"
+    transform: 
+      translation: 
+        x: 0.0
+        y: 0.0
+        z: 0.0
+      rotation: 
+        x: -0.0121822090554
+        y: 0.00198724105843
+        z: 0.409955735789
+        w: 0.91202189631
+---
+transforms: 
+  - 
+    header: 
+      seq: 154076
+      stamp: 
+        secs: 1627505024
+        nsecs: 323404317
+      frame_id: "world"
+    child_frame_id: "MiniAHRS"
+    transform: 
+      translation: 
+        x: 0.0
+        y: 0.0
+        z: 0.0
+      rotation: 
+        x: -0.0121820355895
+        y: 0.00198830414916
+        z: 0.409876145304
+        w: 0.912057668224
+---
+transforms: 
+  - 
+    header: 
+      seq: 154077
+      stamp: 
+        secs: 1627505024
+        nsecs: 323418089
+      frame_id: "world"
+    child_frame_id: "MiniAHRS"
+    transform: 
+      translation: 
+        x: 0.0
+        y: 0.0
+        z: 0.0
+      rotation: 
+        x: -0.0121820355895
+        y: 0.00198830414916
+        z: 0.409876145304
+        w: 0.912057668224
+---
+transforms: 
+  - 
+    header: 
+      seq: 154078
+      stamp: 
+        secs: 1627505024
+        nsecs: 323431087
+      frame_id: "world"
+    child_frame_id: "MiniAHRS"
+    transform: 
+      translation: 
+        x: 0.0
+        y: 0.0
+        z: 0.0
+      rotation: 
+        x: -0.0121820355895
+        y: 0.00198830414916
+        z: 0.409876145304
+        w: 0.912057668224
+---
+transforms: 
+  - 
+    header: 
+      seq: 0
+      stamp: 
+        secs: 1627505024
+        nsecs: 187636317
+      frame_id: "marker_0"
+    child_frame_id: "/base_link"
+    transform: 
+      translation: 
+        x: 2.07566472936
+        y: 0.611772097285
+        z: 0.374844747932
+      rotation: 
+        x: 0.521149873089
+        y: -0.48525941437
+        z: -0.486022340774
+        w: 0.506663986102
+---
+transforms: 
+  - 
+    header: 
+      seq: 0
+      stamp: 
+        secs: 1627505024
+        nsecs: 187636317
+      frame_id: "marker_4"
+    child_frame_id: "/base_link"
+    transform: 
+      translation: 
+        x: 1.34246049326
+        y: 0.35871546624
+        z: -0.314710017191
+      rotation: 
+        x: 0.508849928571
+        y: -0.493823264645
+        z: -0.500623234911
+        w: 0.496574979388
+---
+transforms: 
+  - 
+    header: 
+      seq: 0
+      stamp: 
+        secs: 1627505024
+        nsecs: 237784324
+      frame_id: "cam_0_optical_frame"
+    child_frame_id: "/ar_marker_0"
+    transform: 
+      translation: 
+        x: -0.609605655577
+        y: -0.373275577647
+        z: 1.94329878285
+      rotation: 
+        x: 0.999554492852
+        y: 0.00765202190145
+        z: 0.0282674811143
+        w: -0.00576297599961
+---
+transforms: 
+  - 
+    header: 
+      seq: 154079
+      stamp: 
+        secs: 1627505024
+        nsecs: 369560432
+      frame_id: "world"
+    child_frame_id: "MiniAHRS"
+    transform: 
+      translation: 
+        x: 0.0
+        y: 0.0
+        z: 0.0
+      rotation: 
+        x: -0.0121820355895
+        y: 0.00198830414916
+        z: 0.409876145304
+        w: 0.912057668224
+---
+transforms: 
+  - 
+    header: 
+      seq: 154080
+      stamp: 
+        secs: 1627505024
+        nsecs: 369611092
+      frame_id: "world"
+    child_frame_id: "MiniAHRS"
+    transform: 
+      translation: 
+        x: 0.0
+        y: 0.0
+        z: 0.0
+      rotation: 
+        x: -0.0122616275894
+        y: 0.00195253570033
+        z: 0.409876317255
+        w: 0.912056601668
+---
+transforms: 
+  - 
+    header: 
+      seq: 154081
+      stamp: 
+        secs: 1627505024
+        nsecs: 369621970
+      frame_id: "world"
+    child_frame_id: "MiniAHRS"
+    transform: 
+      translation: 
+        x: 0.0
+        y: 0.0
+        z: 0.0
+      rotation: 
+        x: -0.0122616275894
+        y: 0.00195253570033
+        z: 0.409876317255
+        w: 0.912056601668
+---
+transforms: 
+  - 
+    header: 
+      seq: 154082
+      stamp: 
+        secs: 1627505024
+        nsecs: 369631786
+      frame_id: "world"
+    child_frame_id: "MiniAHRS"
+    transform: 
+      translation: 
+        x: 0.0
+        y: 0.0
+        z: 0.0
+      rotation: 
+        x: -0.0122614571518
+        y: 0.00195360572176
+        z: 0.409796723741
+        w: 0.912092366652
+---
+transforms: 
+  - 
+    header: 
+      seq: 154083
+      stamp: 
+        secs: 1627505024
+        nsecs: 369641784
+      frame_id: "world"
+    child_frame_id: "MiniAHRS"
+    transform: 
+      translation: 
+        x: 0.0
+        y: 0.0
+        z: 0.0
+      rotation: 
+        x: -0.0122614571518
+        y: 0.00195360572176
+        z: 0.409796723741
+        w: 0.912092366652
+---
+transforms: 
+  - 
+    header: 
+      seq: 154084
+      stamp: 
+        secs: 1627505024
+        nsecs: 369651542
+      frame_id: "world"
+    child_frame_id: "MiniAHRS"
+    transform: 
+      translation: 
+        x: 0.0
+        y: 0.0
+        z: 0.0
+      rotation: 
+        x: -0.0122614571518
+        y: 0.00195360572176
+        z: 0.409796723741
+        w: 0.912092366652
+---
+transforms: 
+  - 
+    header: 
+      seq: 154085
+      stamp: 
+        secs: 1627505024
+        nsecs: 369661081
+      frame_id: "world"
+    child_frame_id: "MiniAHRS"
+    transform: 
+      translation: 
+        x: 0.0
+        y: 0.0
+        z: 0.0
+      rotation: 
+        x: -0.0122614571518
+        y: 0.00195360572176
+        z: 0.409796723741
+        w: 0.912092366652
+---
+transforms: 
+  - 
+    header: 
+      seq: 154086
+      stamp: 
+        secs: 1627505024
+        nsecs: 369671869
+      frame_id: "world"
+    child_frame_id: "MiniAHRS"
+    transform: 
+      translation: 
+        x: 0.0
+        y: 0.0
+        z: 0.0
+      rotation: 
+        x: -0.0122612866209
+        y: 0.00195467572831
+        z: 0.409717127107
+        w: 0.912128124689
+---
+transforms: 
+  - 
+    header: 
+      seq: 154087
+      stamp: 
+        secs: 1627505024
+        nsecs: 369681907
+      frame_id: "world"
+    child_frame_id: "MiniAHRS"
+    transform: 
+      translation: 
+        x: 0.0
+        y: 0.0
+        z: 0.0
+      rotation: 
+        x: -0.0122612866209
+        y: 0.00195467572831
+        z: 0.409717127107
+        w: 0.912128124689
+---
+transforms: 
+  - 
+    header: 
+      seq: 154088
+      stamp: 
+        secs: 1627505024
+        nsecs: 369691626
+      frame_id: "world"
+    child_frame_id: "MiniAHRS"
+    transform: 
+      translation: 
+        x: 0.0
+        y: 0.0
+        z: 0.0
+      rotation: 
+        x: -0.0122612866209
+        y: 0.00195467572831
+        z: 0.409717127107
+        w: 0.912128124689
+---
+transforms: 
+  - 
+    header: 
+      seq: 154089
+      stamp: 
+        secs: 1627505024
+        nsecs: 369701152
+      frame_id: "world"
+    child_frame_id: "MiniAHRS"
+    transform: 
+      translation: 
+        x: 0.0
+        y: 0.0
+        z: 0.0
+      rotation: 
+        x: -0.0122612866209
+        y: 0.00195467572831
+        z: 0.409717127107
+        w: 0.912128124689
+---
+transforms: 
+  - 
+    header: 
+      seq: 0
+      stamp: 
+        secs: 1627505024
+        nsecs: 237784324
+      frame_id: "cam_0_optical_frame"
+    child_frame_id: "/ar_marker_4"
+    transform: 
+      translation: 
+        x: -0.357479242874
+        y: 0.315889901751
+        z: 1.20961159432
+      rotation: 
+        x: 0.999954393474
+        y: 0.00895964831713
+        z: 0.00330565081848
+        w: -9.1362660216e-05
+---
+transforms: 
+  - 
+    header: 
+      seq: 0
+      stamp: 
+        secs: 1627505024
+        nsecs: 237784324
+      frame_id: "marker_0"
+    child_frame_id: "/base_link"
+    transform: 
+      translation: 
+        x: 2.07586485605
+        y: 0.61115272582
+        z: 0.374822960021
+      rotation: 
+        x: 0.521005214702
+        y: -0.484693487575
+        z: -0.486178787474
+        w: 0.507204077236
+---
+transforms: 
+  - 
+    header: 
+      seq: 0
+      stamp: 
+        secs: 1627505024
+        nsecs: 237784324
+      frame_id: "marker_4"
+    child_frame_id: "/base_link"
+    transform: 
+      translation: 
+        x: 1.34292770848
+        y: 0.358442575563
+        z: -0.31492655557
+      rotation: 
+        x: 0.506552355207
+        y: -0.493886466716
+        z: -0.502359051365
+        w: 0.497107888633
+---
+transforms: 
+  - 
+    header: 
+      seq: 154090
+      stamp: 
+        secs: 1627505024
+        nsecs: 416900402
+      frame_id: "world"
+    child_frame_id: "MiniAHRS"
+    transform: 
+      translation: 
+        x: 0.0
+        y: 0.0
+        z: 0.0
+      rotation: 
+        x: -0.0122611159966
+        y: 0.00195574571997
+        z: 0.409637527352
+        w: 0.91216387578
+---
+transforms: 
+  - 
+    header: 
+      seq: 154091
+      stamp: 
+        secs: 1627505024
+        nsecs: 416957860
+      frame_id: "world"
+    child_frame_id: "MiniAHRS"
+    transform: 
+      translation: 
+        x: 0.0
+        y: 0.0
+        z: 0.0
+      rotation: 
+        x: -0.0122611159966
+        y: 0.00195574571997
+        z: 0.409637527352
+        w: 0.91216387578
+---
+transforms: 
+  - 
+    header: 
+      seq: 154092
+      stamp: 
+        secs: 1627505024
+        nsecs: 416970707
+      frame_id: "world"
+    child_frame_id: "MiniAHRS"
+    transform: 
+      translation: 
+        x: 0.0
+        y: 0.0
+        z: 0.0
+      rotation: 
+        x: -0.0122611159966
+        y: 0.00195574571997
+        z: 0.409637527352
+        w: 0.91216387578
+---
+transforms: 
+  - 
+    header: 
+      seq: 154093
+      stamp: 
+        secs: 1627505024
+        nsecs: 416981050
+      frame_id: "world"
+    child_frame_id: "MiniAHRS"
+    transform: 
+      translation: 
+        x: 0.0
+        y: 0.0
+        z: 0.0
+      rotation: 
+        x: -0.0122609452789
+        y: 0.00195681569675
+        z: 0.409557924477
+        w: 0.912199619925
+---
+transforms: 
+  - 
+    header: 
+      seq: 154094
+      stamp: 
+        secs: 1627505024
+        nsecs: 416991784
+      frame_id: "world"
+    child_frame_id: "MiniAHRS"
+    transform: 
+      translation: 
+        x: 0.0
+        y: 0.0
+        z: 0.0
+      rotation: 
+        x: -0.0122609452789
+        y: 0.00195681569675
+        z: 0.409557924477
+        w: 0.912199619925
+---
+transforms: 
+  - 
+    header: 
+      seq: 154095
+      stamp: 
+        secs: 1627505024
+        nsecs: 417065201
+      frame_id: "world"
+    child_frame_id: "MiniAHRS"
+    transform: 
+      translation: 
+        x: 0.0
+        y: 0.0
+        z: 0.0
+      rotation: 
+        x: -0.0122607744678
+        y: 0.00195788565862
+        z: 0.409478318484
+        w: 0.912235357123
+---
+transforms: 
+  - 
+    header: 
+      seq: 154096
+      stamp: 
+        secs: 1627505024
+        nsecs: 417076499
+      frame_id: "world"
+    child_frame_id: "MiniAHRS"
+    transform: 
+      translation: 
+        x: 0.0
+        y: 0.0
+        z: 0.0
+      rotation: 
+        x: -0.0122607744678
+        y: 0.00195788565862
+        z: 0.409478318484
+        w: 0.912235357123
+---
+transforms: 
+  - 
+    header: 
+      seq: 154097
+      stamp: 
+        secs: 1627505024
+        nsecs: 417087244
+      frame_id: "world"
+    child_frame_id: "MiniAHRS"
+    transform: 
+      translation: 
+        x: 0.0
+        y: 0.0
+        z: 0.0
+      rotation: 
+        x: -0.0122607744678
+        y: 0.00195788565862
+        z: 0.409478318484
+        w: 0.912235357123
+---
+transforms: 
+  - 
+    header: 
+      seq: 154098
+      stamp: 
+        secs: 1627505024
+        nsecs: 417097145
+      frame_id: "world"
+    child_frame_id: "MiniAHRS"
+    transform: 
+      translation: 
+        x: 0.0
+        y: 0.0
+        z: 0.0
+      rotation: 
+        x: -0.0123403819737
+        y: 0.00192215192684
+        z: 0.409478487783
+        w: 0.912234283695
+---
+transforms: 
+  - 
+    header: 
+      seq: 154099
+      stamp: 
+        secs: 1627505024
+        nsecs: 417107201
+      frame_id: "world"
+    child_frame_id: "MiniAHRS"
+    transform: 
+      translation: 
+        x: 0.0
+        y: 0.0
+        z: 0.0
+      rotation: 
+        x: -0.0123402141873
+        y: 0.001923228821
+        z: 0.409398878765
+        w: 0.91227001396
+---
+transforms: 
+  - 
+    header: 
+      seq: 154100
+      stamp: 
+        secs: 1627505024
+        nsecs: 417117921
+      frame_id: "world"
+    child_frame_id: "MiniAHRS"
+    transform: 
+      translation: 
+        x: 0.0
+        y: 0.0
+        z: 0.0
+      rotation: 
+        x: -0.0123402141873
+        y: 0.001923228821
+        z: 0.409398878765
+        w: 0.91227001396
+---
+transforms: 
+  - 
+    header: 
+      seq: 154101
+      stamp: 
+        secs: 1627505024
+        nsecs: 417128205
+      frame_id: "world"
+    child_frame_id: "MiniAHRS"
+    transform: 
+      translation: 
+        x: 0.0
+        y: 0.0
+        z: 0.0
+      rotation: 
+        x: -0.0123402141873
+        y: 0.001923228821
+        z: 0.409398878765
+        w: 0.91227001396
+---
+transforms: 
+  - 
+    header: 
+      seq: 0
+      stamp: 
+        secs: 1627505024
+        nsecs: 287561009
+      frame_id: "marker_0"
+    child_frame_id: "/base_link"
+    transform: 
+      translation: 
+        x: 2.07611697884
+        y: 0.610423440315
+        z: 0.374674583627
+      rotation: 
+        x: 0.520963885033
+        y: -0.485599575559
+        z: -0.486376985766
+        w: 0.506188809068
+---
+transforms: 
+  - 
+    header: 
+      seq: 0
+      stamp: 
+        secs: 1627505024
+        nsecs: 287561009
+      frame_id: "marker_4"
+    child_frame_id: "/base_link"
+    transform: 
+      translation: 
+        x: 1.34293860583
+        y: 0.358087003797
+        z: -0.315069195585
+      rotation: 
+        x: 0.507583418484
+        y: -0.493605530832
+        z: -0.501588853465
+        w: 0.497112940178
+---
+transforms: 
+  - 
+    header: 
+      seq: 0
+      stamp: 
+        secs: 1627505024
+        nsecs: 287561009
+      frame_id: "cam_0_optical_frame"
+    child_frame_id: "/ar_marker_0"
+    transform: 
+      translation: 
+        x: -0.608876169532
+        y: -0.37312700099
+        z: 1.94355020658
+      rotation: 
+        x: 0.999578241716
+        y: 0.00778428126643
+        z: 0.0271869769028
+        w: -0.00660393360472
+---
+transforms: 
+  - 
+    header: 
+      seq: 0
+      stamp: 
+        secs: 1627505024
+        nsecs: 287561009
+      frame_id: "cam_0_optical_frame"
+    child_frame_id: "/ar_marker_4"
+    transform: 
+      translation: 
+        x: -0.357123662543
+        y: 0.316032550173
+        z: 1.20962209493
+      rotation: 
+        x: 0.999947601233
+        y: 0.00922813700287
+        z: 0.0043491712084
+        w: -0.00084910909528
+---
+transforms: 
+  - 
+    header: 
+      seq: 154102
+      stamp: 
+        secs: 1627505024
+        nsecs: 464253410
+      frame_id: "world"
+    child_frame_id: "MiniAHRS"
+    transform: 
+      translation: 
+        x: 0.0
+        y: 0.0
+        z: 0.0
+      rotation: 
+        x: -0.0123402141873
+        y: 0.001923228821
+        z: 0.409398878765
+        w: 0.91227001396
+---
+transforms: 
+  - 
+    header: 
+      seq: 154103
+      stamp: 
+        secs: 1627505024
+        nsecs: 464313175
+      frame_id: "world"
+    child_frame_id: "MiniAHRS"
+    transform: 
+      translation: 
+        x: 0.0
+        y: 0.0
+        z: 0.0
+      rotation: 
+        x: -0.0123400463069
+        y: 0.00192430570052
+        z: 0.409319266629
+        w: 0.912305737278
+---
+transforms: 
+  - 
+    header: 
+      seq: 154104
+      stamp: 
+        secs: 1627505024
+        nsecs: 464325135
+      frame_id: "world"
+    child_frame_id: "MiniAHRS"
+    transform: 
+      translation: 
+        x: 0.0
+        y: 0.0
+        z: 0.0
+      rotation: 
+        x: -0.0123757547536
+        y: 0.0020039244793
+        z: 0.409319855738
+        w: 0.912304817854
+---
+transforms: 
+  - 
+    header: 
+      seq: 154105
+      stamp: 
+        secs: 1627505024
+        nsecs: 464338697
+      frame_id: "world"
+    child_frame_id: "MiniAHRS"
+    transform: 
+      translation: 
+        x: 0.0
+        y: 0.0
+        z: 0.0
+      rotation: 
+        x: -0.0123755798311
+        y: 0.00200500446001
+        z: 0.409240240565
+        w: 0.912340534276
+---
+transforms: 
+  - 
+    header: 
+      seq: 154106
+      stamp: 
+        secs: 1627505024
+        nsecs: 464428576
+      frame_id: "world"
+    child_frame_id: "MiniAHRS"
+    transform: 
+      translation: 
+        x: 0.0
+        y: 0.0
+        z: 0.0
+      rotation: 
+        x: -0.0123755798311
+        y: 0.00200500446001
+        z: 0.409240240565
+        w: 0.912340534276
+---
+transforms: 
+  - 
+    header: 
+      seq: 154107
+      stamp: 
+        secs: 1627505024
+        nsecs: 464438507
+      frame_id: "world"
+    child_frame_id: "MiniAHRS"
+    transform: 
+      translation: 
+        x: 0.0
+        y: 0.0
+        z: 0.0
+      rotation: 
+        x: -0.0123755798311
+        y: 0.00200500446001
+        z: 0.409240240565
+        w: 0.912340534276
+---
+transforms: 
+  - 
+    header: 
+      seq: 154108
+      stamp: 
+        secs: 1627505024
+        nsecs: 464450190
+      frame_id: "world"
+    child_frame_id: "MiniAHRS"
+    transform: 
+      translation: 
+        x: 0.0
+        y: 0.0
+        z: 0.0
+      rotation: 
+        x: -0.0123755798311
+        y: 0.00200500446001
+        z: 0.409240240565
+        w: 0.912340534276
+---
+transforms: 
+  - 
+    header: 
+      seq: 154109
+      stamp: 
+        secs: 1627505024
+        nsecs: 464460161
+      frame_id: "world"
+    child_frame_id: "MiniAHRS"
+    transform: 
+      translation: 
+        x: 0.0
+        y: 0.0
+        z: 0.0
+      rotation: 
+        x: -0.0123754048143
+        y: 0.00200608442545
+        z: 0.409160622276
+        w: 0.91237624375
+---
+transforms: 
+  - 
+    header: 
+      seq: 154110
+      stamp: 
+        secs: 1627505024
+        nsecs: 464469786
+      frame_id: "world"
+    child_frame_id: "MiniAHRS"
+    transform: 
+      translation: 
+        x: 0.0
+        y: 0.0
+        z: 0.0
+      rotation: 
+        x: -0.0123754048143
+        y: 0.00200608442545
+        z: 0.409160622276
+        w: 0.91237624375
+---
+transforms: 
+  - 
+    header: 
+      seq: 154111
+      stamp: 
+        secs: 1627505024
+        nsecs: 464480409
+      frame_id: "world"
+    child_frame_id: "MiniAHRS"
+    transform: 
+      translation: 
+        x: 0.0
+        y: 0.0
+        z: 0.0
+      rotation: 
+        x: -0.0123754048143
+        y: 0.00200608442545
+        z: 0.409160622276
+        w: 0.91237624375
+---
+transforms: 
+  - 
+    header: 
+      seq: 154112
+      stamp: 
+        secs: 1627505024
+        nsecs: 464489629
+      frame_id: "world"
+    child_frame_id: "MiniAHRS"
+    transform: 
+      translation: 
+        x: 0.0
+        y: 0.0
+        z: 0.0
+      rotation: 
+        x: -0.0123754048143
+        y: 0.00200608442545
+        z: 0.409160622276
+        w: 0.91237624375
+---
+transforms: 
+  - 
+    header: 
+      seq: 154113
+      stamp: 
+        secs: 1627505024
+        nsecs: 464500775
+      frame_id: "world"
+    child_frame_id: "MiniAHRS"
+    transform: 
+      translation: 
+        x: 0.0
+        y: 0.0
+        z: 0.0
+      rotation: 
+        x: -0.0123752297033
+        y: 0.00200716437561
+        z: 0.40908100087
+        w: 0.912411946276
+---
+transforms: 
+  - 
+    header: 
+      seq: 0
+      stamp: 
+        secs: 1627505024
+        nsecs: 338195336
+      frame_id: "cam_0_optical_frame"
+    child_frame_id: "/ar_marker_0"
+    transform: 
+      translation: 
+        x: -0.608136114725
+        y: -0.372903199943
+        z: 1.94415462183
+      rotation: 
+        x: 0.999594466429
+        y: 0.00752112201978
+        z: 0.0270312048316
+        w: -0.00486306220954
+---
+transforms: 
+  - 
+    header: 
+      seq: 0
+      stamp: 
+        secs: 1627505024
+        nsecs: 338195336
+      frame_id: "cam_0_optical_frame"
+    child_frame_id: "/ar_marker_4"
+    transform: 
+      translation: 
+        x: -0.356464645954
+        y: 0.315940049202
+        z: 1.20879246704
+      rotation: 
+        x: 0.999944474831
+        y: 0.00933282780294
+        z: 0.00445919065163
+        w: -0.002015241714
+---
+transforms: 
+  - 
+    header: 
+      seq: 0
+      stamp: 
+        secs: 1627505024
+        nsecs: 338195336
+      frame_id: "marker_0"
+    child_frame_id: "/base_link"
+    transform: 
+      translation: 
+        x: 2.07672216125
+        y: 0.609683867197
+        z: 0.374451263962
+      rotation: 
+        x: 0.519892164833
+        y: -0.484947515781
+        z: -0.48720189556
+        w: 0.507121639102
+---
+transforms: 
+  - 
+    header: 
+      seq: 0
+      stamp: 
+        secs: 1627505024
+        nsecs: 338195336
+      frame_id: "marker_4"
+    child_frame_id: "/base_link"
+    transform: 
+      translation: 
+        x: 1.3421094296
+        y: 0.357427326703
+        z: -0.314977355299
+      rotation: 
+        x: 0.508272231462
+        y: -0.494079172841
+        z: -0.50100151724
+        w: 0.496530552345
+---
+transforms: 
+  - 
+    header: 
+      seq: 0
+      stamp: 
+        secs: 1627505024
+        nsecs: 387622861
+      frame_id: "cam_0_optical_frame"
+    child_frame_id: "/ar_marker_0"
+    transform: 
+      translation: 
+        x: -0.607175629601
+        y: -0.37283689333
+        z: 1.94454915652
+      rotation: 
+        x: 0.999606329815
+        y: 0.00771783407906
+        z: 0.0266536196304
+        w: -0.00414788993874
+---
+transforms: 
+  - 
+    header: 
+      seq: 0
+      stamp: 
+        secs: 1627505024
+        nsecs: 387622861
+      frame_id: "cam_0_optical_frame"
+    child_frame_id: "/ar_marker_4"
+    transform: 
+      translation: 
+        x: -0.356227749523
+        y: 0.316538568258
+        z: 1.21056357568
+      rotation: 
+        x: 0.999950271055
+        y: 0.00934047345186
+        z: 0.00348850390644
+        w: -0.000203254362982
+---
+transforms: 
+  - 
+    header: 
+      seq: 154114
+      stamp: 
+        secs: 1627505024
+        nsecs: 511672406
+      frame_id: "world"
+    child_frame_id: "MiniAHRS"
+    transform: 
+      translation: 
+        x: 0.0
+        y: 0.0
+        z: 0.0
+      rotation: 
+        x: -0.0123752297033
+        y: 0.00200716437561
+        z: 0.40908100087
+        w: 0.912411946276
+---
+transforms: 
+  - 
+    header: 
+      seq: 154115
+      stamp: 
+        secs: 1627505024
+        nsecs: 511735979
+      frame_id: "world"
+    child_frame_id: "MiniAHRS"
+    transform: 
+      translation: 
+        x: 0.0
+        y: 0.0
+        z: 0.0
+      rotation: 
+        x: -0.012375054498
+        y: 0.00200824431049
+        z: 0.40900137635
+        w: 0.912447641854
+---
+transforms: 
+  - 
+    header: 
+      seq: 154116
+      stamp: 
+        secs: 1627505024
+        nsecs: 511748549
+      frame_id: "world"
+    child_frame_id: "MiniAHRS"
+    transform: 
+      translation: 
+        x: 0.0
+        y: 0.0
+        z: 0.0
+      rotation: 
+        x: -0.012375054498
+        y: 0.00200824431049
+        z: 0.40900137635
+        w: 0.912447641854
+---
+transforms: 
+  - 
+    header: 
+      seq: 154117
+      stamp: 
+        secs: 1627505024
+        nsecs: 511760993
+      frame_id: "world"
+    child_frame_id: "MiniAHRS"
+    transform: 
+      translation: 
+        x: 0.0
+        y: 0.0
+        z: 0.0
+      rotation: 
+        x: -0.012375054498
+        y: 0.00200824431049
+        z: 0.40900137635
+        w: 0.912447641854
+---
+transforms: 
+  - 
+    header: 
+      seq: 154118
+      stamp: 
+        secs: 1627505024
+        nsecs: 511772561
+      frame_id: "world"
+    child_frame_id: "MiniAHRS"
+    transform: 
+      translation: 
+        x: 0.0
+        y: 0.0
+        z: 0.0
+      rotation: 
+        x: -0.0123748791985
+        y: 0.00200932423007
+        z: 0.408921748714
+        w: 0.912483330483
+---
+transforms: 
+  - 
+    header: 
+      seq: 154119
+      stamp: 
+        secs: 1627505024
+        nsecs: 511855652
+      frame_id: "world"
+    child_frame_id: "MiniAHRS"
+    transform: 
+      translation: 
+        x: 0.0
+        y: 0.0
+        z: 0.0
+      rotation: 
+        x: -0.0123748791985
+        y: 0.00200932423007
+        z: 0.408921748714
+        w: 0.912483330483
+---
+transforms: 
+  - 
+    header: 
+      seq: 154120
+      stamp: 
+        secs: 1627505024
+        nsecs: 511867490
+      frame_id: "world"
+    child_frame_id: "MiniAHRS"
+    transform: 
+      translation: 
+        x: 0.0
+        y: 0.0
+        z: 0.0
+      rotation: 
+        x: -0.0123748791985
+        y: 0.00200932423007
+        z: 0.408921748714
+        w: 0.912483330483
+---
+transforms: 
+  - 
+    header: 
+      seq: 154121
+      stamp: 
+        secs: 1627505024
+        nsecs: 511877691
+      frame_id: "world"
+    child_frame_id: "MiniAHRS"
+    transform: 
+      translation: 
+        x: 0.0
+        y: 0.0
+        z: 0.0
+      rotation: 
+        x: -0.0123747038048
+        y: 0.00201040413435
+        z: 0.408842117965
+        w: 0.912519012163
+---
+transforms: 
+  - 
+    header: 
+      seq: 154122
+      stamp: 
+        secs: 1627505024
+        nsecs: 511888242
+      frame_id: "world"
+    child_frame_id: "MiniAHRS"
+    transform: 
+      translation: 
+        x: 0.0
+        y: 0.0
+        z: 0.0
+      rotation: 
+        x: -0.0123747038048
+        y: 0.00201040413435
+        z: 0.408842117965
+        w: 0.912519012163
+---
+transforms: 
+  - 
+    header: 
+      seq: 154123
+      stamp: 
+        secs: 1627505024
+        nsecs: 511898930
+      frame_id: "world"
+    child_frame_id: "MiniAHRS"
+    transform: 
+      translation: 
+        x: 0.0
+        y: 0.0
+        z: 0.0
+      rotation: 
+        x: -0.0123747038048
+        y: 0.00201040413435
+        z: 0.408842117965
+        w: 0.912519012163
+---
+transforms: 
+  - 
+    header: 
+      seq: 154124
+      stamp: 
+        secs: 1627505024
+        nsecs: 511909375
+      frame_id: "world"
+    child_frame_id: "MiniAHRS"
+    transform: 
+      translation: 
+        x: 0.0
+        y: 0.0
+        z: 0.0
+      rotation: 
+        x: -0.0123745283168
+        y: 0.00201148402332
+        z: 0.408762484102
+        w: 0.912554686894
+---
+transforms: 
+  - 
+    header: 
+      seq: 154125
+      stamp: 
+        secs: 1627505024
+        nsecs: 511920144
+      frame_id: "world"
+    child_frame_id: "MiniAHRS"
+    transform: 
+      translation: 
+        x: 0.0
+        y: 0.0
+        z: 0.0
+      rotation: 
+        x: -0.0123745283168
+        y: 0.00201148402332
+        z: 0.408762484102
+        w: 0.912554686894
+---
+transforms: 
+  - 
+    header: 
+      seq: 0
+      stamp: 
+        secs: 1627505024
+        nsecs: 387622861
+      frame_id: "marker_0"
+    child_frame_id: "/base_link"
+    transform: 
+      translation: 
+        x: 2.07711751336
+        y: 0.608723696598
+        z: 0.374385271548
+      rotation: 
+        x: 0.519450228966
+        y: -0.48468650428
+        z: -0.487852707492
+        w: 0.507198371438
+---
+transforms: 
+  - 
+    header: 
+      seq: 0
+      stamp: 
+        secs: 1627505024
+        nsecs: 387622861
+      frame_id: "marker_4"
+    child_frame_id: "/base_link"
+    transform: 
+      translation: 
+        x: 1.34388120239
+        y: 0.357191841108
+        z: -0.315574463783
+      rotation: 
+        x: 0.506888004436
+        y: -0.493658316094
+        z: -0.502399959121
+        w: 0.4969510026
+---
+transforms: 
+  - 
+    header: 
+      seq: 0
+      stamp: 
+        secs: 1627505024
+        nsecs: 437626773
+      frame_id: "cam_0_optical_frame"
+    child_frame_id: "/ar_marker_0"
+    transform: 
+      translation: 
+        x: -0.6062648929
+        y: -0.3725346432
+        z: 1.94465677634
+      rotation: 
+        x: 0.999604691649
+        y: 0.00767116498925
+        z: 0.0265271813207
+        w: -0.00528415678156
+---
+transforms: 
+  - 
+    header: 
+      seq: 0
+      stamp: 
+        secs: 1627505024
+        nsecs: 437626773
+      frame_id: "cam_0_optical_frame"
+    child_frame_id: "/ar_marker_4"
+    transform: 
+      translation: 
+        x: -0.355291756454
+        y: 0.316226361602
+        z: 1.20881036274
+      rotation: 
+        x: 0.999937898353
+        y: 0.00977245408874
+        z: 0.00404126990144
+        w: -0.00351663414122
+---
+transforms: 
+  - 
+    header: 
+      seq: 154126
+      stamp: 
+        secs: 1627505024
+        nsecs: 558920370
+      frame_id: "world"
+    child_frame_id: "MiniAHRS"
+    transform: 
+      translation: 
+        x: 0.0
+        y: 0.0
+        z: 0.0
+      rotation: 
+        x: -0.0123745283168
+        y: 0.00201148402332
+        z: 0.408762484102
+        w: 0.912554686894
+---
+transforms: 
+  - 
+    header: 
+      seq: 154127
+      stamp: 
+        secs: 1627505024
+        nsecs: 558975340
+      frame_id: "world"
+    child_frame_id: "MiniAHRS"
+    transform: 
+      translation: 
+        x: 0.0
+        y: 0.0
+        z: 0.0
+      rotation: 
+        x: -0.0123743527346
+        y: 0.00201256389697
+        z: 0.408682847126
+        w: 0.912590354675
+---
+transforms: 
+  - 
+    header: 
+      seq: 154128
+      stamp: 
+        secs: 1627505024
+        nsecs: 558985938
+      frame_id: "world"
+    child_frame_id: "MiniAHRS"
+    transform: 
+      translation: 
+        x: 0.0
+        y: 0.0
+        z: 0.0
+      rotation: 
+        x: -0.0123743527346
+        y: 0.00201256389697
+        z: 0.408682847126
+        w: 0.912590354675
+---
+transforms: 
+  - 
+    header: 
+      seq: 154129
+      stamp: 
+        secs: 1627505024
+        nsecs: 559030076
+      frame_id: "world"
+    child_frame_id: "MiniAHRS"
+    transform: 
+      translation: 
+        x: 0.0
+        y: 0.0
+        z: 0.0
+      rotation: 
+        x: -0.0123741770582
+        y: 0.0020136437553
+        z: 0.408603207038
+        w: 0.912626015506
+---
+transforms: 
+  - 
+    header: 
+      seq: 154130
+      stamp: 
+        secs: 1627505024
+        nsecs: 559120374
+      frame_id: "world"
+    child_frame_id: "MiniAHRS"
+    transform: 
+      translation: 
+        x: 0.0
+        y: 0.0
+        z: 0.0
+      rotation: 
+        x: -0.0123741770582
+        y: 0.0020136437553
+        z: 0.408603207038
+        w: 0.912626015506
+---
+transforms: 
+  - 
+    header: 
+      seq: 154131
+      stamp: 
+        secs: 1627505024
+        nsecs: 559133253
+      frame_id: "world"
+    child_frame_id: "MiniAHRS"
+    transform: 
+      translation: 
+        x: 0.0
+        y: 0.0
+        z: 0.0
+      rotation: 
+        x: -0.0123741770582
+        y: 0.0020136437553
+        z: 0.408603207038
+        w: 0.912626015506
+---
+transforms: 
+  - 
+    header: 
+      seq: 0
+      stamp: 
+        secs: 1627505024
+        nsecs: 437626773
+      frame_id: "marker_0"
+    child_frame_id: "/base_link"
+    transform: 
+      translation: 
+        x: 2.07722609904
+        y: 0.607813046078
+        z: 0.374083107215
+      rotation: 
+        x: 0.519931039123
+        y: -0.48533993846
+        z: -0.48732369078
+        w: 0.506589063342
+---
+transforms: 
+  - 
+    header: 
+      seq: 0
+      stamp: 
+        secs: 1627505024
+        nsecs: 437626773
+      frame_id: "marker_4"
+    child_frame_id: "/base_link"
+    transform: 
+      translation: 
+        x: 1.34212848729
+        y: 0.356254452008
+        z: -0.315263653357
+      rotation: 
+        x: 0.509030655679
+        y: -0.494814955141
+        z: -0.500676475494
+        w: 0.495347371686
+---
+transforms: 
+  - 
+    header: 
+      seq: 154132
+      stamp: 
+        secs: 1627505024
+        nsecs: 559143872
+      frame_id: "world"
+    child_frame_id: "MiniAHRS"
+    transform: 
+      translation: 
+        x: 0.0
+        y: 0.0
+        z: 0.0
+      rotation: 
+        x: -0.0123740012875
+        y: 0.00201472359829
+        z: 0.408523563838
+        w: 0.912661669388
+---
+transforms: 
+  - 
+    header: 
+      seq: 154133
+      stamp: 
+        secs: 1627505024
+        nsecs: 559153538
+      frame_id: "world"
+    child_frame_id: "MiniAHRS"
+    transform: 
+      translation: 
+        x: 0.0
+        y: 0.0
+        z: 0.0
+      rotation: 
+        x: -0.0123740012875
+        y: 0.00201472359829
+        z: 0.408523563838
+        w: 0.912661669388
+---
+transforms: 
+  - 
+    header: 
+      seq: 154134
+      stamp: 
+        secs: 1627505024
+        nsecs: 559162809
+      frame_id: "world"
+    child_frame_id: "MiniAHRS"
+    transform: 
+      translation: 
+        x: 0.0
+        y: 0.0
+        z: 0.0
+      rotation: 
+        x: -0.0123740012875
+        y: 0.00201472359829
+        z: 0.408523563838
+        w: 0.912661669388
+---
+transforms: 
+  - 
+    header: 
+      seq: 154135
+      stamp: 
+        secs: 1627505024
+        nsecs: 559172913
+      frame_id: "world"
+    child_frame_id: "MiniAHRS"
+    transform: 
+      translation: 
+        x: 0.0
+        y: 0.0
+        z: 0.0
+      rotation: 
+        x: -0.0123738254226
+        y: 0.00201580342594
+        z: 0.408443917528
+        w: 0.912697316319
+---
+transforms: 
+  - 
+    header: 
+      seq: 154136
+      stamp: 
+        secs: 1627505024
+        nsecs: 559182816
+      frame_id: "world"
+    child_frame_id: "MiniAHRS"
+    transform: 
+      translation: 
+        x: 0.0
+        y: 0.0
+        z: 0.0
+      rotation: 
+        x: -0.0123738254226
+        y: 0.00201580342594
+        z: 0.408443917528
+        w: 0.912697316319
+---
+transforms: 
+  - 
+    header: 
+      seq: 154137
+      stamp: 
+        secs: 1627505024
+        nsecs: 559192410
+      frame_id: "world"
+    child_frame_id: "MiniAHRS"
+    transform: 
+      translation: 
+        x: 0.0
+        y: 0.0
+        z: 0.0
+      rotation: 
+        x: -0.01240945733
+        y: 0.00209545643033
+        z: 0.408444504408
+        w: 0.91269639051
+---
+transforms: 
+  - 
+    header: 
+      seq: 154138
+      stamp: 
+        secs: 1627505024
+        nsecs: 605863973
+      frame_id: "world"
+    child_frame_id: "MiniAHRS"
+    transform: 
+      translation: 
+        x: 0.0
+        y: 0.0
+        z: 0.0
+      rotation: 
+        x: -0.0124092744197
+        y: 0.00209653935179
+        z: 0.408364855068
+        w: 0.912732030542
+---
+transforms: 
+  - 
+    header: 
+      seq: 154139
+      stamp: 
+        secs: 1627505024
+        nsecs: 605937163
+      frame_id: "world"
+    child_frame_id: "MiniAHRS"
+    transform: 
+      translation: 
+        x: 0.0
+        y: 0.0
+        z: 0.0
+      rotation: 
+        x: -0.0124092744197
+        y: 0.00209653935179
+        z: 0.408364855068
+        w: 0.912732030542
+---
+transforms: 
+  - 
+    header: 
+      seq: 154140
+      stamp: 
+        secs: 1627505024
+        nsecs: 606952535
+      frame_id: "world"
+    child_frame_id: "MiniAHRS"
+    transform: 
+      translation: 
+        x: 0.0
+        y: 0.0
+        z: 0.0
+      rotation: 
+        x: -0.0124090914149
+        y: 0.00209762225729
+        z: 0.408285202617
+        w: 0.912767663623
+---
+transforms: 
+  - 
+    header: 
+      seq: 154141
+      stamp: 
+        secs: 1627505024
+        nsecs: 606974808
+      frame_id: "world"
+    child_frame_id: "MiniAHRS"
+    transform: 
+      translation: 
+        x: 0.0
+        y: 0.0
+        z: 0.0
+      rotation: 
+        x: -0.0124090914149
+        y: 0.00209762225729
+        z: 0.408285202617
+        w: 0.912767663623
+---
+transforms: 
+  - 
+    header: 
+      seq: 154142
+      stamp: 
+        secs: 1627505024
+        nsecs: 607125938
+      frame_id: "world"
+    child_frame_id: "MiniAHRS"
+    transform: 
+      translation: 
+        x: 0.0
+        y: 0.0
+        z: 0.0
+      rotation: 
+        x: -0.0124090914149
+        y: 0.00209762225729
+        z: 0.408285202617
+        w: 0.912767663623
+---
+transforms: 
+  - 
+    header: 
+      seq: 154143
+      stamp: 
+        secs: 1627505024
+        nsecs: 607140394
+      frame_id: "world"
+    child_frame_id: "MiniAHRS"
+    transform: 
+      translation: 
+        x: 0.0
+        y: 0.0
+        z: 0.0
+      rotation: 
+        x: -0.0124089083156
+        y: 0.00209870514681
+        z: 0.408205547058
+        w: 0.912803289752
+---
+transforms: 
+  - 
+    header: 
+      seq: 154144
+      stamp: 
+        secs: 1627505024
+        nsecs: 607150493
+      frame_id: "world"
+    child_frame_id: "MiniAHRS"
+    transform: 
+      translation: 
+        x: 0.0
+        y: 0.0
+        z: 0.0
+      rotation: 
+        x: -0.0124089083156
+        y: 0.00209870514681
+        z: 0.408205547058
+        w: 0.912803289752
+---
+transforms: 
+  - 
+    header: 
+      seq: 154145
+      stamp: 
+        secs: 1627505024
+        nsecs: 607161098
+      frame_id: "world"
+    child_frame_id: "MiniAHRS"
+    transform: 
+      translation: 
+        x: 0.0
+        y: 0.0
+        z: 0.0
+      rotation: 
+        x: -0.0124089083156
+        y: 0.00209870514681
+        z: 0.408205547058
+        w: 0.912803289752
+---
+transforms: 
+  - 
+    header: 
+      seq: 154146
+      stamp: 
+        secs: 1627505024
+        nsecs: 607172385
+      frame_id: "world"
+    child_frame_id: "MiniAHRS"
+    transform: 
+      translation: 
+        x: 0.0
+        y: 0.0
+        z: 0.0
+      rotation: 
+        x: -0.0124089083156
+        y: 0.00209870514681
+        z: 0.408205547058
+        w: 0.912803289752
+---
+transforms: 
+  - 
+    header: 
+      seq: 154147
+      stamp: 
+        secs: 1627505024
+        nsecs: 607184040
+      frame_id: "world"
+    child_frame_id: "MiniAHRS"
+    transform: 
+      translation: 
+        x: 0.0
+        y: 0.0
+        z: 0.0
+      rotation: 
+        x: -0.0124087251217
+        y: 0.00209978802035
+        z: 0.408125888389
+        w: 0.912838908931
+---
+transforms: 
+  - 
+    header: 
+      seq: 154148
+      stamp: 
+        secs: 1627505024
+        nsecs: 607193770
+      frame_id: "world"
+    child_frame_id: "MiniAHRS"
+    transform: 
+      translation: 
+        x: 0.0
+        y: 0.0
+        z: 0.0
+      rotation: 
+        x: -0.0123290648521
+        y: 0.00213540371489
+        z: 0.408125703594
+        w: 0.91283998832
+---
+transforms: 
+  - 
+    header: 
+      seq: 0
+      stamp: 
+        secs: 1627505024
+        nsecs: 487613731
+      frame_id: "cam_0_optical_frame"
+    child_frame_id: "/ar_marker_0"
+    transform: 
+      translation: 
+        x: -0.605162282973
+        y: -0.372385993915
+        z: 1.94476827342
+      rotation: 
+        x: 0.999588752145
+        y: 0.00784696833815
+        z: 0.0271664505788
+        w: -0.00476819001012
+---
+transforms: 
+  - 
+    header: 
+      seq: 0
+      stamp: 
+        secs: 1627505024
+        nsecs: 487613731
+      frame_id: "cam_0_optical_frame"
+    child_frame_id: "/ar_marker_4"
+    transform: 
+      translation: 
+        x: -0.354742609704
+        y: 0.316689283082
+        z: 1.20951821336
+      rotation: 
+        x: 0.99995153212
+        y: 0.00923029259713
+        z: 0.00296177784975
+        w: -0.00172133107742
+---
+transforms: 
+  - 
+    header: 
+      seq: 0
+      stamp: 
+        secs: 1627505024
+        nsecs: 487613731
+      frame_id: "marker_0"
+    child_frame_id: "/base_link"
+    transform: 
+      translation: 
+        x: 2.07733859246
+        y: 0.606710525383
+        z: 0.373934546766
+      rotation: 
+        x: 0.520072361463
+        y: -0.484666584563
+        z: -0.487341723162
+        w: 0.507071085269
+---
+transforms: 
+  - 
+    header: 
+      seq: 0
+      stamp: 
+        secs: 1627505024
+        nsecs: 487613731
+      frame_id: "marker_4"
+    child_frame_id: "/base_link"
+    transform: 
+      translation: 
+        x: 1.3428371434
+        y: 0.355705869405
+        z: -0.31572601101
+      rotation: 
+        x: 0.507329429872
+        y: -0.494735877783
+        z: -0.501850033376
+        w: 0.495983673945
+---
+transforms: 
+  - 
+    header: 
+      seq: 154149
+      stamp: 
+        secs: 1627505024
+        nsecs: 653107842
+      frame_id: "world"
+    child_frame_id: "MiniAHRS"
+    transform: 
+      translation: 
+        x: 0.0
+        y: 0.0
+        z: 0.0
+      rotation: 
+        x: -0.012328878456
+        y: 0.00213647962063
+        z: 0.408046041723
+        w: 0.912875600531
+---
+transforms: 
+  - 
+    header: 
+      seq: 154150
+      stamp: 
+        secs: 1627505024
+        nsecs: 653165211
+      frame_id: "world"
+    child_frame_id: "MiniAHRS"
+    transform: 
+      translation: 
+        x: 0.0
+        y: 0.0
+        z: 0.0
+      rotation: 
+        x: -0.012328878456
+        y: 0.00213647962063
+        z: 0.408046041723
+        w: 0.912875600531
+---
+transforms: 
+  - 
+    header: 
+      seq: 154151
+      stamp: 
+        secs: 1627505024
+        nsecs: 653176427
+      frame_id: "world"
+    child_frame_id: "MiniAHRS"
+    transform: 
+      translation: 
+        x: 0.0
+        y: 0.0
+        z: 0.0
+      rotation: 
+        x: -0.012328878456
+        y: 0.00213647962063
+        z: 0.408046041723
+        w: 0.912875600531
+---
+transforms: 
+  - 
+    header: 
+      seq: 154152
+      stamp: 
+        secs: 1627505024
+        nsecs: 653186754
+      frame_id: "world"
+    child_frame_id: "MiniAHRS"
+    transform: 
+      translation: 
+        x: 0.0
+        y: 0.0
+        z: 0.0
+      rotation: 
+        x: -0.0123286919661
+        y: 0.00213755551011
+        z: 0.407966376745
+        w: 0.91291120579
+---
+transforms: 
+  - 
+    header: 
+      seq: 154153
+      stamp: 
+        secs: 1627505024
+        nsecs: 653199415
+      frame_id: "world"
+    child_frame_id: "MiniAHRS"
+    transform: 
+      translation: 
+        x: 0.0
+        y: 0.0
+        z: 0.0
+      rotation: 
+        x: -0.0123286919661
+        y: 0.00213755551011
+        z: 0.407966376745
+        w: 0.91291120579
+---
+transforms: 
+  - 
+    header: 
+      seq: 154154
+      stamp: 
+        secs: 1627505024
+        nsecs: 653325899
+      frame_id: "world"
+    child_frame_id: "MiniAHRS"
+    transform: 
+      translation: 
+        x: 0.0
+        y: 0.0
+        z: 0.0
+      rotation: 
+        x: -0.0123286919661
+        y: 0.00213755551011
+        z: 0.407966376745
+        w: 0.91291120579
+---
+transforms: 
+  - 
+    header: 
+      seq: 154155
+      stamp: 
+        secs: 1627505024
+        nsecs: 653339859
+      frame_id: "world"
+    child_frame_id: "MiniAHRS"
+    transform: 
+      translation: 
+        x: 0.0
+        y: 0.0
+        z: 0.0
+      rotation: 
+        x: -0.0123285053822
+        y: 0.0021386313833
+        z: 0.40788670866
+        w: 0.912946804096
+---
+transforms: 
+  - 
+    header: 
+      seq: 154156
+      stamp: 
+        secs: 1627505024
+        nsecs: 653349802
+      frame_id: "world"
+    child_frame_id: "MiniAHRS"
+    transform: 
+      translation: 
+        x: 0.0
+        y: 0.0
+        z: 0.0
+      rotation: 
+        x: -0.0123285053822
+        y: 0.0021386313833
+        z: 0.40788670866
+        w: 0.912946804096
+---
+transforms: 
+  - 
+    header: 
+      seq: 154157
+      stamp: 
+        secs: 1627505024
+        nsecs: 653360279
+      frame_id: "world"
+    child_frame_id: "MiniAHRS"
+    transform: 
+      translation: 
+        x: 0.0
+        y: 0.0
+        z: 0.0
+      rotation: 
+        x: -0.0123285053822
+        y: 0.0021386313833
+        z: 0.40788670866
+        w: 0.912946804096
+---
+transforms: 
+  - 
+    header: 
+      seq: 154158
+      stamp: 
+        secs: 1627505024
+        nsecs: 653370244
+      frame_id: "world"
+    child_frame_id: "MiniAHRS"
+    transform: 
+      translation: 
+        x: 0.0
+        y: 0.0
+        z: 0.0
+      rotation: 
+        x: -0.0123283187045
+        y: 0.00213970724021
+        z: 0.407807037469
+        w: 0.91298239545
+---
+transforms: 
+  - 
+    header: 
+      seq: 154159
+      stamp: 
+        secs: 1627505024
+        nsecs: 653380116
+      frame_id: "world"
+    child_frame_id: "MiniAHRS"
+    transform: 
+      translation: 
+        x: 0.0
+        y: 0.0
+        z: 0.0
+      rotation: 
+        x: -0.0123283187045
+        y: 0.00213970724021
+        z: 0.407807037469
+        w: 0.91298239545
+---
+transforms: 
+  - 
+    header: 
+      seq: 154160
+      stamp: 
+        secs: 1627505024
+        nsecs: 653391009
+      frame_id: "world"
+    child_frame_id: "MiniAHRS"
+    transform: 
+      translation: 
+        x: 0.0
+        y: 0.0
+        z: 0.0
+      rotation: 
+        x: -0.0122486459136
+        y: 0.0021752951096
+        z: 0.407806849192
+        w: 0.912983467822
+---
+transforms: 
+  - 
+    header: 
+      seq: 0
+      stamp: 
+        secs: 1627505024
+        nsecs: 542769546
+      frame_id: "cam_0_optical_frame"
+    child_frame_id: "/ar_marker_0"
+    transform: 
+      translation: 
+        x: -0.603828842959
+        y: -0.37201968317
+        z: 1.9446455432
+      rotation: 
+        x: 0.999592069407
+        y: 0.00800243063242
+        z: 0.0267868300115
+        w: -0.00584137149386
+---
+transforms: 
+  - 
+    header: 
+      seq: 0
+      stamp: 
+        secs: 1627505024
+        nsecs: 542769546
+      frame_id: "cam_0_optical_frame"
+    child_frame_id: "/ar_marker_4"
+    transform: 
+      translation: 
+        x: -0.354141698094
+        y: 0.317231710848
+        z: 1.21018982576
+      rotation: 
+        x: 0.99995422205
+        y: 0.00911213991551
+        z: 0.00260270919747
+        w: -0.00132235205567
+---
+transforms: 
+  - 
+    header: 
+      seq: 0
+      stamp: 
+        secs: 1627505024
+        nsecs: 542769546
+      frame_id: "marker_0"
+    child_frame_id: "/base_link"
+    transform: 
+      translation: 
+        x: 2.07721721588
+        y: 0.605376988291
+        z: 0.373568138403
+      rotation: 
+        x: 0.520498683976
+        y: -0.485316423811
+        z: -0.487074482458
+        w: 0.506268246385
+---
+transforms: 
+  - 
+    header: 
+      seq: 0
+      stamp: 
+        secs: 1627505024
+        nsecs: 542769546
+      frame_id: "marker_4"
+    child_frame_id: "/base_link"
+    transform: 
+      translation: 
+        x: 1.34350966585
+        y: 0.355105493153
+        z: -0.31626790378
+      rotation: 
+        x: 0.50689281878
+        y: -0.49477654975
+        z: -0.50217146769
+        w: 0.496064162307
+---
+transforms: 
+  - 
+    header: 
+      seq: 154161
+      stamp: 
+        secs: 1627505024
+        nsecs: 701361682
+      frame_id: "world"
+    child_frame_id: "MiniAHRS"
+    transform: 
+      translation: 
+        x: 0.0
+        y: 0.0
+        z: 0.0
+      rotation: 
+        x: -0.0122486459136
+        y: 0.0021752951096
+        z: 0.407806849192
+        w: 0.912983467822
+---
+transforms: 
+  - 
+    header: 
+      seq: 154162
+      stamp: 
+        secs: 1627505024
+        nsecs: 701422966
+      frame_id: "world"
+    child_frame_id: "MiniAHRS"
+    transform: 
+      translation: 
+        x: 0.0
+        y: 0.0
+        z: 0.0
+      rotation: 
+        x: -0.0122484560366
+        y: 0.00217636399732
+        z: 0.407727174801
+        w: 0.913019052207
+---
+transforms: 
+  - 
+    header: 
+      seq: 154163
+      stamp: 
+        secs: 1627505024
+        nsecs: 701433662
+      frame_id: "world"
+    child_frame_id: "MiniAHRS"
+    transform: 
+      translation: 
+        x: 0.0
+        y: 0.0
+        z: 0.0
+      rotation: 
+        x: -0.0122484560366
+        y: 0.00217636399732
+        z: 0.407727174801
+        w: 0.913019052207
+---
+transforms: 
+  - 
+    header: 
+      seq: 154164
+      stamp: 
+        secs: 1627505024
+        nsecs: 701445998
+      frame_id: "world"
+    child_frame_id: "MiniAHRS"
+    transform: 
+      translation: 
+        x: 0.0
+        y: 0.0
+        z: 0.0
+      rotation: 
+        x: -0.0122484560366
+        y: 0.00217636399732
+        z: 0.407727174801
+        w: 0.913019052207
+---
+transforms: 
+  - 
+    header: 
+      seq: 154165
+      stamp: 
+        secs: 1627505024
+        nsecs: 701457488
+      frame_id: "world"
+    child_frame_id: "MiniAHRS"
+    transform: 
+      translation: 
+        x: 0.0
+        y: 0.0
+        z: 0.0
+      rotation: 
+        x: -0.0122484560366
+        y: 0.00217636399732
+        z: 0.407727174801
+        w: 0.913019052207
+---
+transforms: 
+  - 
+    header: 
+      seq: 154166
+      stamp: 
+        secs: 1627505024
+        nsecs: 701578268
+      frame_id: "world"
+    child_frame_id: "MiniAHRS"
+    transform: 
+      translation: 
+        x: 0.0
+        y: 0.0
+        z: 0.0
+      rotation: 
+        x: -0.0122482660664
+        y: 0.00217743286846
+        z: 0.407647497306
+        w: 0.913054629639
+---
+transforms: 
+  - 
+    header: 
+      seq: 154167
+      stamp: 
+        secs: 1627505024
+        nsecs: 701590172
+      frame_id: "world"
+    child_frame_id: "MiniAHRS"
+    transform: 
+      translation: 
+        x: 0.0
+        y: 0.0
+        z: 0.0
+      rotation: 
+        x: -0.0121685869722
+        y: 0.0022130068152
+        z: 0.407647305737
+        w: 0.913055695025
+---
+transforms: 
+  - 
+    header: 
+      seq: 154168
+      stamp: 
+        secs: 1627505024
+        nsecs: 701600242
+      frame_id: "world"
+    child_frame_id: "MiniAHRS"
+    transform: 
+      translation: 
+        x: 0.0
+        y: 0.0
+        z: 0.0
+      rotation: 
+        x: -0.0121685869722
+        y: 0.0022130068152
+        z: 0.407647305737
+        w: 0.913055695025
+---
+transforms: 
+  - 
+    header: 
+      seq: 154169
+      stamp: 
+        secs: 1627505024
+        nsecs: 701609608
+      frame_id: "world"
+    child_frame_id: "MiniAHRS"
+    transform: 
+      translation: 
+        x: 0.0
+        y: 0.0
+        z: 0.0
+      rotation: 
+        x: -0.0121685869722
+        y: 0.0022130068152
+        z: 0.407647305737
+        w: 0.913055695025
+---
+transforms: 
+  - 
+    header: 
+      seq: 154170
+      stamp: 
+        secs: 1627505024
+        nsecs: 701619669
+      frame_id: "world"
+    child_frame_id: "MiniAHRS"
+    transform: 
+      translation: 
+        x: 0.0
+        y: 0.0
+        z: 0.0
+      rotation: 
+        x: -0.0121685869722
+        y: 0.0022130068152
+        z: 0.407647305737
+        w: 0.913055695025
+---
+transforms: 
+  - 
+    header: 
+      seq: 154171
+      stamp: 
+        secs: 1627505024
+        nsecs: 701631156
+      frame_id: "world"
+    child_frame_id: "MiniAHRS"
+    transform: 
+      translation: 
+        x: 0.0
+        y: 0.0
+        z: 0.0
+      rotation: 
+        x: -0.0121683938045
+        y: 0.00221406871631
+        z: 0.407567625044
+        w: 0.913091265487
+---
+transforms: 
+  - 
+    header: 
+      seq: 154172
+      stamp: 
+        secs: 1627505024
+        nsecs: 701640716
+      frame_id: "world"
+    child_frame_id: "MiniAHRS"
+    transform: 
+      translation: 
+        x: 0.0
+        y: 0.0
+        z: 0.0
+      rotation: 
+        x: -0.0121683938045
+        y: 0.00221406871631
+        z: 0.407567625044
+        w: 0.913091265487
+---
+transforms: 
+  - 
+    header: 
+      seq: 0
+      stamp: 
+        secs: 1627505024
+        nsecs: 606363845
+      frame_id: "cam_0_optical_frame"
+    child_frame_id: "/ar_marker_0"
+    transform: 
+      translation: 
+        x: -0.60258689368
+        y: -0.371479395616
+        z: 1.94517204664
+      rotation: 
+        x: 0.999634514197
+        y: 0.0077849259897
+        z: 0.0253462265965
+        w: -0.00527273651884
+---
+transforms: 
+  - 
+    header: 
+      seq: 0
+      stamp: 
+        secs: 1627505024
+        nsecs: 606363845
+      frame_id: "cam_0_optical_frame"
+    child_frame_id: "/ar_marker_4"
+    transform: 
+      translation: 
+        x: -0.353194922828
+        y: 0.3176107251
+        z: 1.21013420687
+      rotation: 
+        x: 0.999954630723
+        y: 0.00912632451865
+        z: 0.00229414549789
+        w: -0.00147769846903
+---
+transforms: 
+  - 
+    header: 
+      seq: 0
+      stamp: 
+        secs: 1627505024
+        nsecs: 606363845
+      frame_id: "marker_0"
+    child_frame_id: "/base_link"
+    transform: 
+      translation: 
+        x: 2.07774513822
+        y: 0.604135459017
+        z: 0.373028270289
+      rotation: 
+        x: 0.519407125475
+        y: -0.485882695524
+        z: -0.487992128367
+        w: 0.50596237691
+---
+transforms: 
+  - 
+    header: 
+      seq: 0
+      stamp: 
+        secs: 1627505024
+        nsecs: 606363845
+      frame_id: "marker_4"
+    child_frame_id: "/base_link"
+    transform: 
+      translation: 
+        x: 1.34345510275
+        y: 0.354158674137
+        z: -0.316646962204
+      rotation: 
+        x: 0.50682362977
+        y: -0.495001549291
+        z: -0.502255495689
+        w: 0.495825263129
+---
