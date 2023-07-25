@@ -80,8 +80,8 @@ class VisualOdometry:
         # subscribers
         self.image_subscriber = rospy.Subscriber("/camera_array/cam0/image_raw/compressed", CompressedImage,
                                                  self.image_callback, queue_size=1)
-        self.ground_truth_subscriber = rospy.Subscriber("/bluerov_controller/ar_tag_detector", StagMarkers,
-                                                        self.marker_callback, queue_size=1)
+        # self.ground_truth_subscriber = rospy.Subscriber("/bluerov_controller/ar_tag_detector", StagMarkers,
+        #                                                 self.marker_callback, queue_size=1)
 
     """
     THIS IS THE SECTION CONTAINING ALL THE UTILITY FUNCTIONS
@@ -190,7 +190,7 @@ class VisualOdometry:
             img3 = cv.drawMatches(self.previous_image, current_key_points, current_image_with_keypoints_drawn,
                                   current_key_points, matches[:10], None,
                                   flags=cv.DrawMatchesFlags_NOT_DRAW_SINGLE_POINTS)
-            image_path = "/home/ivyz/Documents/ivy_workspace/src/vis_odom/scripts/images/frame1frame2_matches.jpg"
+            image_path = "/home/ivyz/Documents/ivy_workspace/src/vis_odom/scripts/images/unit_testing_07242023/set5_ut_072423_matches.jpg"
             cv.imwrite(image_path, img3)
 
             cv.imshow('pattern', img3), cv.waitKey(5)
@@ -243,20 +243,26 @@ class VisualOdometry:
         points, relative_rotation, translation, mask = cv.recoverPose(E=self.essential_matrix,
                                                                       points1=array_current_key_points,
                                                                       points2=array_previous_key_points)
+        print("relative rotation and translation at the start: {}, {}".format(relative_rotation, translation))
         translation = translation.transpose()[0]
+        print("translation after transposing: {}".format(translation))
+        print("translation size {}".format(translation.size))
         relative_rotation = np.array(relative_rotation)
+        print("np array version of relative rotation {}".format(relative_rotation))
         # decompose rotation matrix + find euler
         t = np.array([0, 0, 0])
         new_rotation_mat = np.vstack((np.hstack((relative_rotation, t[:, None])), [0, 0, 0, 1]))  # TODO: check 0, 0, 0, 1
+        print("here's the new rotation matrix: {}".format(new_rotation_mat))
 
         # get euler angles
         euler = transf.euler_from_matrix(new_rotation_mat, 'rxyz')
+        print("here's the euler angles: {}".format(euler))
 
         # compute the current transformation matrix
         euler = np.array(euler)
 
         prev2curr_translation = self.make_transform_mat(translation=translation, euler=euler)
-        # print("Here is the previous-current translatio: {}".format(prev2curr_translation))
+        print("Here is the previous-current translation: {}".format(prev2curr_translation))
         # store previous to current translation in the corresponding list
         self.frame_translations.append(prev2curr_translation)
         return prev2curr_translation

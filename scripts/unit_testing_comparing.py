@@ -37,8 +37,8 @@ class UnitTestingComparing:
         # self.parse_camera_intrinsics()
         self.matches_dictionary = []
         self.robot_position_list = []
-        self.previous_image = cv.imread("/home/ivyz/Documents/ivy_workspace/src/vis_odom/scripts/images/Unit_testing_images/unit_test_set4_frame1.jpg")
-        self.current_image = cv.imread("/home/ivyz/Documents/ivy_workspace/src/vis_odom/scripts/images/Unit_testing_images/unit_test_set4_frame2.jpg")
+        self.previous_image = cv.imread("/home/ivyz/Documents/ivy_workspace/src/vis_odom/scripts/images/unit_testing_07242023/set4_ut_072423_frame1.jpg")
+        self.current_image = cv.imread("/home/ivyz/Documents/ivy_workspace/src/vis_odom/scripts/images/unit_testing_07242023/set4_ut_072423_frame2.jpg")
         self.vo = VisualOdometry()
         self.bf = cv.BFMatcher(cv.NORM_HAMMING, crossCheck=True)
         self.orb_feature_detector = cv.ORB_create()
@@ -50,7 +50,7 @@ class UnitTestingComparing:
     def get_features_transformation(self):
         self.vo.visual_odometry_calculations(self.previous_image, None)
         self.vo.visual_odometry_calculations(self.current_image, self.previous_image)
-        print(self.vo.robot_current_translation)
+        print("robot translated in visual odometry",self.vo.robot_current_translation)
 
 
 

@@ -11,7 +11,7 @@ class StagVisualizer:
         rospy.Subscriber("bluerov_controller/ar_tag_detector", StagMarkers, self.stag_markers_callback)
 
     def stag_markers_callback(self, msg):
-        rospy.loginfo("publishing " + str(len(msg.markers)))
+        rospy.loginfo("publishing " + len(msg.markers))
         for marker in msg.markers:
 
             self.br.sendTransform((marker.pose.pose.position.x, marker.pose.pose.position.y, marker.pose.pose.position.z),

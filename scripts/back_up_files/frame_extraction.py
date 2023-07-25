@@ -31,6 +31,8 @@ class FrameExtraction:
         uncomment the draw matches section that save the matched image
         """
 
+        self.robot_frame_2_stamp = None
+        self.robot_frame_1_stamp = None
         self.image_subscriber = rospy.Subscriber("/camera_array/cam0/image_raw/compressed", CompressedImage,
                                                  self.frame_extraction_callback, queue_size=1)
         self.ground_truth_subscriber = rospy.Subscriber("/bluerov_controller/ar_tag_detector", StagMarkers,
@@ -102,6 +104,8 @@ class FrameExtraction:
 
                 if self.frame_one is None:
                     self.frame_one = robot_frame
+                    print("Here's the header for robot frame 1: {}".format(robot_frame.header.stamp))
+                    self.robot_frame_1_stamp = robot_frame.header.stamp
                     self.image_one = self.rosframe_to_current_image(frame=robot_frame,
                                                                        frame_dimensions=self.frame_dimensions)
                     image_path = "/home/ivyz/Documents/ivy_workspace/src/vis_odom/scripts/images/robot_frame_one.jpg"
@@ -110,6 +114,8 @@ class FrameExtraction:
 
                 else:
                     self.frame_two = robot_frame
+                    print("Here's the header for robot frame 2: {}".format(robot_frame.header.stamp))
+                    self.robot_frame_2_stamp = robot_frame.header.stamp
                     self.image_two = self.rosframe_to_current_image(frame=robot_frame,
                                                                        frame_dimensions=self.frame_dimensions)
                     image_path = "/home/ivyz/Documents/ivy_workspace/src/vis_odom/scripts/images/robot_frame_two.jpg"
@@ -121,11 +127,17 @@ class FrameExtraction:
                     self.done_extracting = True
 
 
-
-
         except CvBridgeError as e:
             print("finished extracting")
             print(e)
+
+
+
+    def compute_and_save_reading(self, markers):
+        pose_position = markers[0].pose.pose.position  # access the pose position
+        x, y, z = pose_position.x, pose_position.y, pose_position.z
+        ground_truth_point = [x, y, z]  # create an (x,y,z) point object
+        self.ground_truth_full_list.append(np.array(ground_truth_point))  # add the ground truth point into the list of ground truths
 
     def marker_callback(self, msg):
         # callback function to access the ground truth data
@@ -134,25 +146,24 @@ class FrameExtraction:
             self.detected_marker = True
             # self.start_feature_matching = True
             markers = msg.markers  # get the marker information
+            print("Here's the header for ground truth: {}".format(markers[0].header.stamp))
 
             if len(markers) > 0 and self.detected_marker:
-                pose_position = markers[0].pose.pose.position  # access the pose position
-                x, y, z = pose_position.x, pose_position.y, pose_position.z
-                ground_truth_point = [x, y, z]  # create an (x,y,z) point object
-                self.ground_truth_full_list.append(
-                    np.array(ground_truth_point))  # add the ground truth point into the list of ground truths
+                
+                if markers[0].header.stamp == self.robot_frame_1_stamp:
+                    self.compute_and_save_reading(markers)
+
+                if markers[0].header.stamp == self.robot_frame_2_stamp:
+                    self.compute_and_save_reading(markers)
 
                 if len(self.ground_truth_full_list) == 2:
-                    ground_truth_data = open("ground_truth_data.txt","w")
                     marker_translation = np.subtract(np.array(self.ground_truth_full_list[-1]),
                                                      np.array(self.ground_truth_full_list[-2]))
                     print("between the two frames, we have frame one ground truth {} and frame two ground truth{}"
                           .format(self.ground_truth_full_list[-2], self.ground_truth_full_list[-1]))
                     print("between the two adjacent frames, the ground truth translation is {}".format(
                         marker_translation))
-
-                    ground_truth_data.write(str(marker_translation[0])+" "+str(marker_translation[1])+" "+str(marker_translation[2]))
-                    ground_truth_data.close()
+                    self.ground_truth_subscriber.unregister()
 
 
             else:
@@ -164,14 +175,6 @@ class FrameExtraction:
             print("Could not process marker data!")
             print(e)
             pass
-
-
-    # def unit_testing_visual_odometry(self):
-    #     try:
-    #         if self.done_extracting:
-    #             self.vo.previous_image =
-    #     except:
-    #         print("Unable to execute visual odometry")
 
     def are_they_the_same(self):  # note: only two frames to compare
         if self.done_extracting:
