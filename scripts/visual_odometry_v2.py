@@ -1,7 +1,7 @@
 #!/usr/bin/python
 
 # Author: Ivy Aiwei Zhang
-# Last updated: 7-05-2023
+# Last updated: 7-25-2023
 # PURPOSE: attempt to fix hypothesis, using the idea to rewrite visual_odometry.py/
 # HYPOTHESIS: we can successfully find the top 10 matches between two consecutive frames;
 # however, essential matrix is still using all 500 key points to calculate the movement; we need to extract the top 10

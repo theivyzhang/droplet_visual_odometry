@@ -1,13 +1,9 @@
 #!/usr/bin/python
 
 # Author: Ivy Aiwei Zhang
-# Last updated: 7-10-2023
+# Last updated: 7-25-2023
 # Purpose: An updated version for unit testing
 # Pipeline: imports FrameExtraction to get real-time images, store as global variables and run detailed analysis
-
-# import visual odometry model --> change hypothesis to visual_odometry when finalized
-from hypothesis import VisualOdometry
-from frame_extraction import FrameExtraction
 
 # ROS node messages
 import rospy
@@ -28,7 +24,7 @@ from mpl_toolkits.mplot3d import Axes3D
 import yaml
 from yaml.loader import SafeLoader
 
-from hypothesis2 import VisualOdometry
+from visual_odometry_v2 import VisualOdometry
 
 
 class UnitTestingComparing:
