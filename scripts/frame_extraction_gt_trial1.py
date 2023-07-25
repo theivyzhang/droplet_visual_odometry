@@ -5,7 +5,7 @@
 # Purpose: correct way to extract ground truth and convert into good frames
 
 # ROS node messages
-print("hello world")
+print("extracting ground truth from two consecutive frames and giving us the marker to marker transformations")
 
 import rospy
 from sensor_msgs.msg import CompressedImage
