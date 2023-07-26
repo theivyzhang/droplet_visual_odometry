@@ -15,9 +15,10 @@ def main():
     # type is np array
     #plt.ion()
 
-    ground_truth_vector = np.array([0.00148313, -0.00242303,  0.001438444])
+    """Currently testing set 3"""
+    ground_truth_vector = np.array([-1.10238768e-03,  5.20361849e-05, -1.56140485e-04])
     print('before convert: ', ground_truth_vector)
-    visual_odometry_vector = np.array([0.45204653,  0.7760078 , -0.43984751])
+    visual_odometry_vector = np.array([-0.1580193,   0.00319077,  0.98743087])
     ground_truth_vector = calculate_unit_vector_ground_truth(ground_truth_vector)
     print('after convert', ground_truth_vector)
     print('vo vector length', np.linalg.norm(visual_odometry_vector))

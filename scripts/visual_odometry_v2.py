@@ -352,7 +352,7 @@ class VisualOdometry:
         if self.start_feature_matching:
             try:
 
-                # TODO: get thigngs
+                # TODO: get things
                 """Step 1: undistort the image"""
                 frame_dimensions = (VisualOdometry.frame_width, VisualOdometry.frame_height)
 

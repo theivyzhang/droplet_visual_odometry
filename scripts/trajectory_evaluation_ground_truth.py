@@ -29,7 +29,7 @@ DEFAULT_CAMERA_TOPIC = '/cam_0_optical_frame'
 
 
 class FrameExtraction:
-    def __init__(self, default_base_link_topic=DEFAULT_BASE_LINK_TOPIC, default_camera_topic=DEFAULT_CAMERA_TOPIC, starting_index=1):
+    def __init__(self, default_base_link_topic=DEFAULT_BASE_LINK_TOPIC, default_camera_topic=DEFAULT_CAMERA_TOPIC, starting_index=1, loop=False):
 
         """
         by initializing vo, the image subscriber in hypothesis is activated
@@ -62,10 +62,12 @@ class FrameExtraction:
         self.listener = tf.TransformListener()
         self.default_base_link_topic = default_base_link_topic
         self.default_camera_topic = default_camera_topic
+        self.starting_index = starting_index
+        self.loop = loop
+
 
         # finally, activate all the callbacks
         self.activate_callbacks()
-        self.starting_index = starting_index
 
 
     def activate_callbacks(self):
@@ -124,7 +126,7 @@ class FrameExtraction:
                     self.robot_frame_1_stamp = robot_frame.header.stamp
                     self.image_one = self.rosframe_to_current_image(frame=robot_frame,
                                                                     frame_dimensions=self.frame_dimensions)
-                    image_path = "/home/ivyz/Documents/ivy_workspace/src/vis_odom/scripts/images/unit_testing_07262023/test_set_frame1.jpg"
+                    image_path = "/home/ivyz/Documents/ivy_workspace/src/vis_odom/scripts/images/unit_testing_07262023/test_set"+str(self.starting_index)+"_frame1.jpg"
                     cv.imwrite(image_path, self.image_one)
                     print("frame one extracted")
 
@@ -134,13 +136,19 @@ class FrameExtraction:
                     self.robot_frame_2_stamp = robot_frame.header.stamp
                     self.image_two = self.rosframe_to_current_image(frame=robot_frame,
                                                                     frame_dimensions=self.frame_dimensions)
-                    image_path = "/home/ivyz/Documents/ivy_workspace/src/vis_odom/scripts/images/unit_testing_07262023/test_set_frame2.jpg"
+                    image_path = "/home/ivyz/Documents/ivy_workspace/src/vis_odom/scripts/images/unit_testing_07262023/test_set"+str(self.starting_index)+"_frame2.jpg"
 
                     cv.imwrite(image_path, self.image_two)
                     print("frame two extracted")
 
                 if self.frame_one is not None and self.frame_two is not None:
-                    self.done_extracting = True
+                    self.starting_index+=1
+                    if self.loop:
+                        self.frame_one = None
+                        self.frame_two = None
+                    else:
+                        self.done_extracting = True
+
 
 
         except CvBridgeError as e:
@@ -157,6 +165,19 @@ class FrameExtraction:
         ground_truth_point = [x, y, z]  # create an (x,y,z) point object
         self.ground_truth_full_list_in_base_link.append(
             np.array(ground_truth_point))  # add the ground truth point into the list of ground truths
+
+
+    """
+    this method returns the quaternion representation of a rotation matrix
+    """
+    def quaternion_representation(self, homogenous_matrix):
+        rotation_matrix = homogenous_matrix[:3, :3]
+        print("here is the rotation matrix: {}".format(rotation_matrix))
+        quaternion_rep = tf.quaternion_from_matrix(rotation_matrix)
+        print("here is the quaternion representation: {}".format(quaternion_rep))
+        return quaternion_rep
+
+
 
     """
     this method computes the camera to marker translation (ground truth) at a given frame
@@ -209,6 +230,12 @@ class FrameExtraction:
         print("Here is the camera to marker transformation: {}".format(cam_to_marker_transformation))
         self.ground_truth_list_cam_to_marker.append(cam_to_marker_transformation)
 
+        """""
+        Now prepare the data needed for trajectory evaluation
+        1) extract rotation from cam_to_marker translation, turn into quaternion representation with x, y, z, w
+        """
+        self.quaternion_representation(cam_to_marker_transformation)
+
         return cam_to_marker_transformation
 
     """
@@ -252,7 +279,8 @@ class FrameExtraction:
 
                         if len(self.ground_truth_list_cam_to_marker) == 2:
                             self.get_translation_between_two_frames(frame1_cam2marker, frame2_cam2marker)
-                            self.ground_truth_subscriber.unregister()
+                            if not self.loop:
+                                self.ground_truth_subscriber.unregister()
                     else:
                         print("did not find marker 0")
 
@@ -282,11 +310,17 @@ class FrameExtraction:
 
     # def getting_key_points(self):
 
+    def loop_program(self):
+        while not rospy.is_shutdown():
+            FrameExtraction()
+
 
 def main(args):
     rospy.init_node('FrameExtractionNode', anonymous=True)
-    while not rospy.is_shutdown():
-        FrameExtraction()
+    FrameExtraction(loop=True)
+
+    # while not rospy.is_shutdown():
+    #     FrameExtraction()
     print("frame extraction activated")
     rospy.sleep(1)
 
