@@ -7,23 +7,11 @@
 
 # ROS node messages
 import rospy
-from sensor_msgs.msg import CompressedImage
-from stag_ros.msg import StagMarkers
-from geometry_msgs.msg import PoseStamped
 
 # other packages
-import numpy as np
 import cv2 as cv
-import roslib
-from cv_bridge import CvBridge, CvBridgeError
+import numpy as np
 import sys
-import os as os
-import transformations as transf
-import matplotlib.pyplot as plt
-from mpl_toolkits.mplot3d import Axes3D
-import yaml
-from yaml.loader import SafeLoader
-
 from visual_odometry_v2 import VisualOdometry
 
 
@@ -33,8 +21,8 @@ class UnitTestingComparing:
         # self.parse_camera_intrinsics()
         self.matches_dictionary = []
         self.robot_position_list = []
-        self.previous_image = cv.imread("/home/ivyz/Documents/ivy_workspace/src/vis_odom/scripts/images/unit_testing_07242023/set4_ut_072423_frame1.jpg")
-        self.current_image = cv.imread("/home/ivyz/Documents/ivy_workspace/src/vis_odom/scripts/images/unit_testing_07242023/set4_ut_072423_frame2.jpg")
+        self.previous_image = cv.imread("/home/ivyz/Documents/ivy_workspace/src/vis_odom/scripts/images/unit_testing_07262023/test_set4_frame1.jpg")
+        self.current_image = cv.imread("/home/ivyz/Documents/ivy_workspace/src/vis_odom/scripts/images/unit_testing_07262023/test_set4_frame2.jpg")
         self.vo = VisualOdometry()
         self.bf = cv.BFMatcher(cv.NORM_HAMMING, crossCheck=True)
         self.orb_feature_detector = cv.ORB_create()
@@ -43,9 +31,16 @@ class UnitTestingComparing:
         # self.previous_key_points = None  # same key points of PREVIOUS frame
         # self.previous_descriptors = None
 
+        self.traj_estimates_file_path = "/home/ivyz/Documents/ivy_workspace/src/vis_odom/scripts/stamped_traj_estimates.txt"
+
+
     def get_features_transformation(self):
         self.vo.visual_odometry_calculations(self.previous_image, None)
         self.vo.visual_odometry_calculations(self.current_image, self.previous_image)
+        print("robot current position with previous AND current image: {}".format(self.vo.robot_curr_position))
+
+
+
         print("robot translated in visual odometry",self.vo.robot_current_translation)
 
 

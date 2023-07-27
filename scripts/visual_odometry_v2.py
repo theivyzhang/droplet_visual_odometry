@@ -32,6 +32,9 @@ VERBOSE = False
 
 number_of_frames = 25075
 
+DEFAULT_STARTING_ROBOT_TRANSLATION = [0, 0, 0]
+DEFAULT_STARTING_ROBOT_EULER = [0,0,0]
+
 
 ### UTILITY FUNCTION FOR TRANSFORMTION MATRIX ###
 
@@ -42,7 +45,9 @@ class VisualOdometry:
     frame_height = 1080
     frame_width = 1400
 
-    def __init__(self):
+    def __init__(self, starting_translation=DEFAULT_STARTING_ROBOT_TRANSLATION, starting_euler = DEFAULT_STARTING_ROBOT_EULER):
+        self.starting_translation = starting_translation
+        self.starting_euler = starting_euler
         self.robot_current_translation = None
         self.essential_matrix = None
         self.bridge = CvBridge()
@@ -68,9 +73,9 @@ class VisualOdometry:
         self.frame_translations = []  # maintains the translation between every consecutive frame
         self.marker_differences = []  # maintains the difference between the marker positions between every consecutive frames
 
-        self.prev_transformation_matrix = self.make_transform_mat(translation=[0, 0, 0], euler=[0, 0, 0])
+        self.prev_transformation_matrix = self.make_transform_mat(translation=self.starting_translation, euler=self.starting_euler)
         # print("Previous transform matrix at initialization: {}".format(self.prev_transformation_matrix))
-        self.robot_curr_position = self.make_transform_mat(translation=[0, 0, 0], euler=[0, 0, 0])
+        self.robot_curr_position = self.make_transform_mat(translation=self.starting_translation, euler=self.starting_euler)
         # print("robot_curr_position at initialization: {}".format(self.robot_curr_position))
 
         self.detected_marker = False
@@ -218,7 +223,7 @@ class VisualOdometry:
 
             # print("here are the top 10 previous_key_points: {}".format(top_ten_previous_key_points))
             # print("here are the top 10 current_key_points: {}".format(top_ten_current_key_points))
-            print("Dictionary of matches: {}".format(self.matches_dictionary))
+            # print("Dictionary of matches: {}".format(self.matches_dictionary))
             return matches[:10], top_ten_previous_key_points, top_ten_current_key_points
         else:
             print("No available previous image")
@@ -236,33 +241,33 @@ class VisualOdometry:
 
         # findEssentialMat expects the first two arguments to be numpy arrays
 
-        print("the essential matrix is : {}".format(self.essential_matrix))
+        # print("the essential matrix is : {}".format(self.essential_matrix))
         # compute the relative position using the essential matrix, key points  using cv.relativepose
         # TODO: return type / see what coordinate frame (Documentation)***
         # TODO: print out intermediate values
         points, relative_rotation, translation, mask = cv.recoverPose(E=self.essential_matrix,
                                                                       points1=array_current_key_points,
                                                                       points2=array_previous_key_points)
-        print("relative rotation and translation at the start: {}, {}".format(relative_rotation, translation))
+        # print("relative rotation and translation at the start: {}, {}".format(relative_rotation, translation))
         translation = translation.transpose()[0]
-        print("translation after transposing: {}".format(translation))
-        print("translation size {}".format(translation.size))
+        # print("translation after transposing: {}".format(translation))
+        # print("translation size {}".format(translation.size))
         relative_rotation = np.array(relative_rotation)
-        print("np array version of relative rotation {}".format(relative_rotation))
+        # print("np array version of relative rotation {}".format(relative_rotation))
         # decompose rotation matrix + find euler
         t = np.array([0, 0, 0])
         new_rotation_mat = np.vstack((np.hstack((relative_rotation, t[:, None])), [0, 0, 0, 1]))  # TODO: check 0, 0, 0, 1
-        print("here's the new rotation matrix: {}".format(new_rotation_mat))
+        # print("here's the new rotation matrix: {}".format(new_rotation_mat))
 
         # get euler angles
         euler = transf.euler_from_matrix(new_rotation_mat, 'rxyz')
-        print("here's the euler angles: {}".format(euler))
+        # print("here's the euler angles: {}".format(euler))
 
         # compute the current transformation matrix
         euler = np.array(euler)
 
         prev2curr_translation = self.make_transform_mat(translation=translation, euler=euler)
-        print("Here is the previous-current translation: {}".format(prev2curr_translation))
+        # print("Here is the previous-current translation: {}".format(prev2curr_translation))
         # store previous to current translation in the corresponding list
         self.frame_translations.append(prev2curr_translation)
         return prev2curr_translation
@@ -297,7 +302,7 @@ class VisualOdometry:
             # convert previous_key_points and current_key_points into floating point arrays
             # print("top 10 current key points type {} and content {}".format(type(top_10_current_key_points), top_10_current_key_points))
             array_previous_key_points = cv.KeyPoint_convert(top_10_previous_key_points)
-            print("array previous key points type {} and content {}".format(type(array_previous_key_points), array_previous_key_points))
+            # print("array previous key points type {} and content {}".format(type(array_previous_key_points), array_previous_key_points))
             # print("sizeeeeeeee",array_previous_key_points.shape)
 
             # top 10 previous key points is a list of KeyPoint objects, array_previous_key points is a numpy array
@@ -312,10 +317,11 @@ class VisualOdometry:
 
             # calculate the current position using the previous-to-current translation
             self.robot_curr_position = self.robot_curr_position.dot(prev2curr_translation)
+            print("here is the robot's current position: {}".format(self.robot_curr_position))
             _, _, _, robot_current_translation, _ = transf.decompose_matrix(self.robot_curr_position)
-            print("Here is the transformation matrix: {}".format(prev2curr_translation))
+            # print("Here is the transformation matrix: {}".format(prev2curr_translation))
             self.robot_position_list.append(robot_current_translation)  # append to the corresponding list
-            print("robot translation: {}".format(robot_current_translation))
+            # print("robot translation: {}".format(robot_current_translation))
             self.robot_current_translation = robot_current_translation
 
     def visual_odometry_calculations(self, current_image, previous_image):
