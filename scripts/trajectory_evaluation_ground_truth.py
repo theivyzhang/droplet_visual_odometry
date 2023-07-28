@@ -129,7 +129,7 @@ class FrameExtraction:
                     self.robot_frame_1_stamp = robot_frame.header.stamp
                     self.image_one = self.rosframe_to_current_image(frame=robot_frame,
                                                                     frame_dimensions=self.frame_dimensions)
-                    image_path = "/home/ivyz/Documents/ivy_workspace/src/vis_odom/scripts/images/unit_testing_07262023/test_set"+str(self.starting_index)+"_frame1.jpg"
+                    image_path = "/home/ivyz/Documents/ivy_workspace/src/vis_odom/scripts/images/unit_testing_07282023_trial2/test_set"+str(self.starting_index)+"_frame1.jpg"
                     cv.imwrite(image_path, self.image_one)
                     print("frame one extracted")
 
@@ -139,7 +139,7 @@ class FrameExtraction:
                     self.robot_frame_2_stamp = robot_frame.header.stamp
                     self.image_two = self.rosframe_to_current_image(frame=robot_frame,
                                                                     frame_dimensions=self.frame_dimensions)
-                    image_path = "/home/ivyz/Documents/ivy_workspace/src/vis_odom/scripts/images/unit_testing_07262023/test_set"+str(self.starting_index)+"_frame2.jpg"
+                    image_path = "/home/ivyz/Documents/ivy_workspace/src/vis_odom/scripts/images/unit_testing_07282023_trial2/test_set"+str(self.starting_index)+"_frame2.jpg"
 
                     cv.imwrite(image_path, self.image_two)
                     print("frame two extracted")
@@ -321,6 +321,7 @@ class FrameExtraction:
 
             if len(markers) > 0 and self.detected_marker:
                 for marker in markers:
+                    print("here is the marker ID for ", marker.header.stamp, " which is ", marker.id)
                     if marker.id == 0:
                         if marker.header.stamp == self.robot_frame_1_stamp:
                             # print("currently processing the first frame")
@@ -336,6 +337,7 @@ class FrameExtraction:
                             self.ground_truth_subscriber.unregister()
                     else:
                         print("did not find marker 0")
+                        continue
 
             else:
                 rospy.debug("No markers detected")
@@ -345,7 +347,7 @@ class FrameExtraction:
             self.detected_marker = False
             print("Could not process marker data!")
             print(e)
-            pass
+
 
     def are_they_the_same(self):  # note: only two frames to compare
         if self.done_extracting:

@@ -45,7 +45,11 @@ class VisualOdometry:
     frame_height = 1080
     frame_width = 1400
 
-    def __init__(self, starting_translation=DEFAULT_STARTING_ROBOT_TRANSLATION, starting_euler = DEFAULT_STARTING_ROBOT_EULER):
+    def __init__(self, starting_translation=None, starting_euler=None):
+        if starting_euler is None:
+            starting_euler = DEFAULT_STARTING_ROBOT_EULER
+        if starting_translation is None:
+            starting_translation = DEFAULT_STARTING_ROBOT_TRANSLATION
         self.starting_translation = starting_translation
         self.starting_euler = starting_euler
         self.robot_current_translation = None
@@ -270,6 +274,7 @@ class VisualOdometry:
         # print("Here is the previous-current translation: {}".format(prev2curr_translation))
         # store previous to current translation in the corresponding list
         self.frame_translations.append(prev2curr_translation)
+        # print("LOOOOOOKOK THE PREVIUOS CURRENT TRANSLATIon {}".format(prev2curr_translation))
         return prev2curr_translation
 
     def compute_current_image_elements(self, current_image):
@@ -317,7 +322,7 @@ class VisualOdometry:
 
             # calculate the current position using the previous-to-current translation
             self.robot_curr_position = self.robot_curr_position.dot(prev2curr_translation)
-            print("here is the robot's current position: {}".format(self.robot_curr_position))
+            # print("here is the robot's current position: {}".format(self.robot_curr_position))
             _, _, _, robot_current_translation, _ = transf.decompose_matrix(self.robot_curr_position)
             # print("Here is the transformation matrix: {}".format(prev2curr_translation))
             self.robot_position_list.append(robot_current_translation)  # append to the corresponding list
