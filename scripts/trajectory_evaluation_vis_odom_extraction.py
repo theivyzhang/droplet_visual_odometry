@@ -91,7 +91,7 @@ class TrajEstimates_VisualOdom_Evaluate_Data:
                                  starting_euler=current_starting_euler)
         self.bf = cv.BFMatcher(cv.NORM_HAMMING, crossCheck=True)
         self.orb_feature_detector = cv.ORB_create()
-        self.traj_estimates_file_path = "/home/ivyz/Documents/ivy_workspace/src/vis_odom/scripts/stamped_traj_estimates.txt"
+        self.traj_estimates_file_path = "/home/ivyz/Documents/ivy_workspace/src/vis_odom/scripts/stamped_traj_estimate.txt"
         # self.robot_curr_position = self.make_transform_mat(translation=[0, 0, 0], euler=[0, 0, 0])
 
         # self.previous_key_points = None  # same key points of PREVIOUS frame
@@ -105,26 +105,6 @@ class TrajEstimates_VisualOdom_Evaluate_Data:
         # print("robot translated in visual odometry", self.vo.robot_current_translation)
 
         self.robot_curr_pos_matrix = self.vo.robot_curr_position
-        # robot_curr_quaternion = self.quaternion_representation(self.robot_curr_pos_matrix)
-        # euler_angles = tf.euler_from_matrix(self.robot_curr_pos_matrix)
-        #
-        # print("here are the euler angles: {}".format(euler_angles))
-        # translation_vector = [self.robot_curr_pos_matrix[0, 3], self.robot_curr_pos_matrix[1, 3],
-        #                       self.robot_curr_pos_matrix[2, 3]]
-        # traj_estimate_line = str(translation_vector[0]) + " " + str(translation_vector[1]) + " " + str(
-        #     translation_vector[2]) + " " + \
-        #                      str(robot_curr_quaternion[0]) + " " + str(robot_curr_quaternion[1]) + " " + str(
-        #     robot_curr_quaternion[2]) + " " + str(robot_curr_quaternion[3])
-        #
-        # # append the line to trajectory estimates txt file
-        # print(traj_estimate_line)
-        # try:
-        #     with open(self.traj_estimates_file_path, 'a') as file:
-        #         file.write(traj_estimate_line + "\n")
-        #
-        # except:
-        #     print("cannot write in output file")
-
 
 class TrajectoryEvaluation_WriteData:
     def __init__(self, list_of_transforms, output_file_name):
@@ -201,7 +181,7 @@ def main(args):
     list_of_cam2cam_transforms = collect_evaluate_data.list_of_consecutive_cam2cam_transforms
 
     # next we can start writing data for trajectory evaluation
-    traj_estimate_file_path = "/home/ivyz/Documents/ivy_workspace/src/vis_odom/scripts/stamped_traj_estimates.txt"
+    traj_estimate_file_path = "/home/ivyz/Documents/ivy_workspace/src/vis_odom/scripts/stamped_traj_estimate.txt"
     TrajectoryEvaluation_WriteData(list_of_cam2cam_transforms, traj_estimate_file_path)
     print("trajectory estimation for visual odometry activated")
     rospy.sleep(1)

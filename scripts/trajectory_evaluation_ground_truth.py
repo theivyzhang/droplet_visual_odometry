@@ -66,7 +66,7 @@ class FrameExtraction:
 
         self.starting_index = starting_index
         self.loop = loop
-        self.file_name = "/home/ivyz/Documents/ivy_workspace/src/vis_odom/scripts/stamped_ground_truth.txt"
+        self.file_name = "/home/ivyz/Documents/ivy_workspace/src/vis_odom/scripts/stamped_ground_truth_2.txt"
 
         # finally, activate all the callbacks
         self.activate_callbacks()
@@ -282,11 +282,10 @@ class FrameExtraction:
 
         # write the information needed for the trajectory evaluation
         with open(self.file_name, 'a') as file:
-            file.write(str(time_stamp) + " " + str(cam_to_marker_translation[0]) + " " + str(
+            file.write(str(time_stamp.to_sec()) + " " + str(cam_to_marker_translation[0]) + " " + str(
                 cam_to_marker_translation[1]) + " " + str(cam_to_marker_translation[2]) + " "
                        + str(cam_to_marker_quaternion[0]) + " " + str(cam_to_marker_quaternion[1]) + " " + str(
-                cam_to_marker_quaternion[2]) + " " + str(cam_to_marker_quaternion[3]) + " " +
-                       self.image_path + "\n")
+                cam_to_marker_quaternion[2]) + " " + str(cam_to_marker_quaternion[3]) + " " + "\n")
         return cam_to_marker_transformation
 
     # def write_to_ground_truth_file(self, file_name, timestamp, translation, quaternion):
