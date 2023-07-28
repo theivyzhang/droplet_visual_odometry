@@ -30,7 +30,8 @@ DEFAULT_CAMERA_TOPIC = '/cam_0_optical_frame'
 
 
 class FrameExtraction:
-    def __init__(self, default_base_link_topic=DEFAULT_BASE_LINK_TOPIC, default_camera_topic=DEFAULT_CAMERA_TOPIC, starting_index=1, loop=False):
+    def __init__(self, default_base_link_topic=DEFAULT_BASE_LINK_TOPIC, default_camera_topic=DEFAULT_CAMERA_TOPIC,
+                 starting_index=1, loop=False):
 
         # print("quaternion matrix of homogenous transformations matrix [[1, 2, 3, 4], [5, 6, 7, 8], [9, 10, 11, 12], [0, 0,0,1]] is {}".
         #       format(self.quaternion_representation(np.array([[1, 2, 3, 4], [5, 6, 7, 8], [9, 10, 11, 12], [0, 0,0,1]]))))
@@ -38,6 +39,7 @@ class FrameExtraction:
         by initializing vo, the image subscriber in hypothesis is activated
         uncomment the draw matches section that save the matched image
         """
+        self.image_path = None
         self.frame_one = None
         self.image_one = None
         self.frame_two = None
@@ -66,12 +68,8 @@ class FrameExtraction:
         self.loop = loop
         self.file_name = "/home/ivyz/Documents/ivy_workspace/src/vis_odom/scripts/stamped_ground_truth.txt"
 
-
         # finally, activate all the callbacks
         self.activate_callbacks()
-
-
-
 
     def activate_callbacks(self):
         self.image_subscriber = rospy.Subscriber("/camera_array/cam0/image_raw/compressed", CompressedImage,
@@ -129,7 +127,9 @@ class FrameExtraction:
                     self.robot_frame_1_stamp = robot_frame.header.stamp
                     self.image_one = self.rosframe_to_current_image(frame=robot_frame,
                                                                     frame_dimensions=self.frame_dimensions)
-                    image_path = "/home/ivyz/Documents/ivy_workspace/src/vis_odom/scripts/images/unit_testing_07282023_trial2/test_set"+str(self.starting_index)+"_frame1.jpg"
+                    image_path = "/home/ivyz/Documents/ivy_workspace/src/vis_odom/scripts/images/unit_testing_07282023_trial2/test_set" + str(
+                        self.starting_index) + "_frame1.jpg"
+                    self.image_path = image_path
                     cv.imwrite(image_path, self.image_one)
                     print("frame one extracted")
 
@@ -139,13 +139,14 @@ class FrameExtraction:
                     self.robot_frame_2_stamp = robot_frame.header.stamp
                     self.image_two = self.rosframe_to_current_image(frame=robot_frame,
                                                                     frame_dimensions=self.frame_dimensions)
-                    image_path = "/home/ivyz/Documents/ivy_workspace/src/vis_odom/scripts/images/unit_testing_07282023_trial2/test_set"+str(self.starting_index)+"_frame2.jpg"
-
+                    image_path = "/home/ivyz/Documents/ivy_workspace/src/vis_odom/scripts/images/unit_testing_07282023_trial2/test_set" + str(
+                        self.starting_index) + "_frame2.jpg"
+                    self.image_path = image_path
                     cv.imwrite(image_path, self.image_two)
                     print("frame two extracted")
 
                 if self.frame_one is not None and self.frame_two is not None:
-                    self.starting_index+=1
+                    self.starting_index += 1
                     if self.loop:
                         self.frame_one = None
                         self.frame_two = None
@@ -168,7 +169,6 @@ class FrameExtraction:
         ground_truth_point = [x, y, z]  # create an (x,y,z) point object
         self.ground_truth_full_list_in_base_link.append(
             np.array(ground_truth_point))  # add the ground truth point into the list of ground truths
-
 
     """
     this method returns the quaternion representation of a rotation matrix
@@ -206,13 +206,14 @@ class FrameExtraction:
     def quaternion_representation(self, homogenous_matrix):
         rotation_matrix = homogenous_matrix[:3, :3]
         # print("here is the rotation matrix: {}".format(rotation_matrix))
-        quaternion_rep =self.rotation_matrix_to_quaternion(rotation_matrix)
+        quaternion_rep = self.rotation_matrix_to_quaternion(rotation_matrix)
         # print("here is the quaternion representation: {}".format(quaternion_rep))
         return quaternion_rep
 
     """
     these methods computes the camera to marker translation (ground truth) at a given frame
     """
+
     def get_base_to_marker_homogenous_transformation(self, markers):
         bTm_translation = markers[0].pose.pose.position
         btm_orientation = markers[0].pose.pose.orientation
@@ -245,7 +246,7 @@ class FrameExtraction:
         return cTb_homogenous_translation_mat
 
     def compute_frame_camera_to_marker(self, markers):
-        time_stamp = markers[0].header.stamp # first you get the timestamp
+        time_stamp = markers[0].header.stamp  # first you get the timestamp
 
         # TODO:
         # PART A:
@@ -275,15 +276,18 @@ class FrameExtraction:
         """
         cam_to_marker_quaternion = self.quaternion_representation(cam_to_marker_transformation)
         print("here is the camera_to_marker_quaternion: {}".format(cam_to_marker_quaternion))
-        cam_to_marker_translation = [cam_to_marker_transformation[0, 3], cam_to_marker_transformation[1, 3], cam_to_marker_transformation[2, 3]]
+        cam_to_marker_translation = [cam_to_marker_transformation[0, 3], cam_to_marker_transformation[1, 3],
+                                     cam_to_marker_transformation[2, 3]]
         print("here is the camera_to_marker_translation: {}".format(cam_to_marker_translation))
 
         # write the information needed for the trajectory evaluation
         with open(self.file_name, 'a') as file:
-            file.write(str(time_stamp)+" "+str(cam_to_marker_translation[0])+" "+str(cam_to_marker_translation[1])+" "+str(cam_to_marker_translation[2])+" "
-                           +str(cam_to_marker_quaternion[0])+" "+str(cam_to_marker_quaternion[1])+" "+str(cam_to_marker_quaternion[2])+" "+str(cam_to_marker_quaternion[3])+"\n")
+            file.write(str(time_stamp) + " " + str(cam_to_marker_translation[0]) + " " + str(
+                cam_to_marker_translation[1]) + " " + str(cam_to_marker_translation[2]) + " "
+                       + str(cam_to_marker_quaternion[0]) + " " + str(cam_to_marker_quaternion[1]) + " " + str(
+                cam_to_marker_quaternion[2]) + " " + str(cam_to_marker_quaternion[3]) + " " +
+                       self.image_path + "\n")
         return cam_to_marker_transformation
-
 
     # def write_to_ground_truth_file(self, file_name, timestamp, translation, quaternion):
     #     try:
@@ -348,7 +352,6 @@ class FrameExtraction:
             print("Could not process marker data!")
             print(e)
 
-
     def are_they_the_same(self):  # note: only two frames to compare
         if self.done_extracting:
             try:
@@ -375,7 +378,6 @@ def main(args):
     #     FrameExtraction()
     print("frame extraction activated")
     rospy.sleep(1)
-
 
 
 # create the name function
