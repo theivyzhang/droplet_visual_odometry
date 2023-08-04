@@ -31,7 +31,7 @@ class UnitTestingComparing:
         # self.previous_key_points = None  # same key points of PREVIOUS frame
         # self.previous_descriptors = None
 
-        self.traj_estimates_file_path = "/home/ivyz/Documents/ivy_workspace/src/vis_odom/scripts/stamped_traj_estimate.txt"
+        self.traj_estimates_file_path = "/src/vis_odom/scripts/stamped_traj_estimate.txt"
 
 
     def get_features_transformation(self):

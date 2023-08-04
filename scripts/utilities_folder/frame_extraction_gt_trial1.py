@@ -76,7 +76,7 @@ class FrameExtraction:
                                                         queue_size=1)  # TODO: ask sam about the StagMarker posef
 
     def parse_camera_intrinsics(self):
-        calibration_file_path = '/home/ivyz/Documents/ivy_workspace/src/vis_odom/Parameters/camera_calibration.yaml'
+        calibration_file_path = '/src/vis_odom/Parameters/camera_calibration.yaml'
         # rospy.loginfo("Parsing camera calibration from file {}".format(calibration_file_path))
         with open(calibration_file_path) as camera_calibration:
             data = yaml.load(camera_calibration, Loader=SafeLoader)
