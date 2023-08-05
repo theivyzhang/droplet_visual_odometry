@@ -1,7 +1,7 @@
 #!/usr/bin/python
 
 # Author: Ivy Aiwei Zhang
-# Last updated: 7-27-2023
+# Last updated: 08-04-2023
 # Purpose: a python program to get visual odometry estimates from
 # Pipeline: imports FrameExtraction to get real-time images, store as global variables and run detailed analysis
 

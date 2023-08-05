@@ -139,7 +139,7 @@ class FrameExtraction:
                     cv.imwrite(image_path, self.image_two)
                     print("frame two extracted")
 
-                if self.frame_one is not None and self.frame_two is not None:
+                if self.frame_one is not None and self.frame_two is not None and self.starting_index==20:
                     self.done_extracting = True
 
 

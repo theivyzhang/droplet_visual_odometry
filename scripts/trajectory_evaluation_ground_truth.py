@@ -1,7 +1,7 @@
 #!/usr/bin/python
 
 # Author: Ivy Aiwei Zhang
-# Last updated: 7-26-2023
+# Last updated: 8-04-2023
 # Purpose: this is a looped ground truth extraction where the camera to marker translation and quaternion representation of rotation is extracted,
 # then stored in a txt file in the correct format
 
@@ -29,9 +29,10 @@ DEFAULT_BASE_LINK_TOPIC = '/base_link'
 DEFAULT_CAMERA_TOPIC = '/cam_0_optical_frame'
 
 
-class FrameExtraction:
+class TrajEvalGroundTruth:
     def __init__(self, default_base_link_topic=DEFAULT_BASE_LINK_TOPIC, default_camera_topic=DEFAULT_CAMERA_TOPIC,
-                 starting_index=1, loop=False):
+                 starting_index=1, loop=False, total_number_of_frames=10, start_subscriber = False, output_file_path = None,
+                 activate_image_callback = False, activate_marker_reading = False):
 
         # print("quaternion matrix of homogenous transformations matrix [[1, 2, 3, 4], [5, 6, 7, 8], [9, 10, 11, 12], [0, 0,0,1]] is {}".
         #       format(self.quaternion_representation(np.array([[1, 2, 3, 4], [5, 6, 7, 8], [9, 10, 11, 12], [0, 0,0,1]]))))
@@ -46,6 +47,7 @@ class FrameExtraction:
         self.image_two = None
         self.robot_frame_2_stamp = None
         self.robot_frame_1_stamp = None
+        self.end_frame_number = total_number_of_frames
 
         self.bridge = CvBridge()
         self.parse_camera_intrinsics()
@@ -66,17 +68,22 @@ class FrameExtraction:
 
         self.starting_index = starting_index
         self.loop = loop
-        self.file_name = "/home/ivyz/Documents/ivy_workspace/src/vis_odom/scripts/stamped_ground_truth_2.txt"
+        self.file_name = output_file_path
+
+        # print("dork you got here")
 
         # finally, activate all the callbacks
-        self.activate_callbacks()
+        if start_subscriber:
+            self.activate_callbacks(activate_image=activate_image_callback, activate_marker_reading=activate_marker_reading)
 
-    def activate_callbacks(self):
-        self.image_subscriber = rospy.Subscriber("/camera_array/cam0/image_raw/compressed", CompressedImage,
+    def activate_callbacks(self, activate_image, activate_marker_reading):
+        if activate_image:
+            self.image_subscriber = rospy.Subscriber("/camera_array/cam0/image_raw/compressed", CompressedImage,
                                                  self.frame_extraction_callback, queue_size=1)
-        self.ground_truth_subscriber = rospy.Subscriber("/bluerov_controller/ar_tag_detector", StagMarkers,
+        if activate_marker_reading:
+            self.ground_truth_subscriber = rospy.Subscriber("/bluerov_controller/ar_tag_detector", StagMarkers,
                                                         self.marker_callback,
-                                                        queue_size=1)  # TODO: ask sam about the StagMarker posef
+                                                        queue_size=1)
 
     def parse_camera_intrinsics(self):
         calibration_file_path = '/home/ivyz/Documents/ivy_workspace/src/vis_odom/Parameters/camera_calibration.yaml'
@@ -127,7 +134,7 @@ class FrameExtraction:
                     self.robot_frame_1_stamp = robot_frame.header.stamp
                     self.image_one = self.rosframe_to_current_image(frame=robot_frame,
                                                                     frame_dimensions=self.frame_dimensions)
-                    image_path = "/home/ivyz/Documents/ivy_workspace/src/vis_odom/scripts/images/unit_testing_07282023_trial2/test_set" + str(
+                    image_path = "/home/ivyz/Documents/ivy_workspace/src/vis_odom/scripts/trajectory_evaluation/traj_eval_set1_08042023/traj_eval_set" + str(
                         self.starting_index) + "_frame1.jpg"
                     self.image_path = image_path
                     cv.imwrite(image_path, self.image_one)
@@ -139,13 +146,13 @@ class FrameExtraction:
                     self.robot_frame_2_stamp = robot_frame.header.stamp
                     self.image_two = self.rosframe_to_current_image(frame=robot_frame,
                                                                     frame_dimensions=self.frame_dimensions)
-                    image_path = "/home/ivyz/Documents/ivy_workspace/src/vis_odom/scripts/images/unit_testing_07282023_trial2/test_set" + str(
+                    image_path = "/home/ivyz/Documents/ivy_workspace/src/vis_odom/scripts/trajectory_evaluation/traj_eval_set1_08042023/traj_eval_set" + str(
                         self.starting_index) + "_frame2.jpg"
                     self.image_path = image_path
                     cv.imwrite(image_path, self.image_two)
                     print("frame two extracted")
 
-                if self.frame_one is not None and self.frame_two is not None:
+                if self.frame_one is not None and self.frame_two is not None and self.starting_index!=self.end_frame_number:
                     self.starting_index += 1
                     if self.loop:
                         self.frame_one = None
@@ -288,13 +295,6 @@ class FrameExtraction:
                 cam_to_marker_quaternion[2]) + " " + str(cam_to_marker_quaternion[3]) + " " + "\n")
         return cam_to_marker_transformation
 
-    # def write_to_ground_truth_file(self, file_name, timestamp, translation, quaternion):
-    #     try:
-    #         with open(file_name, 'a') as file
-    #
-    #     except:
-    #         print("file is not found")
-
     """
     this method gets the marker to marker translation every two consecutive frames with marker readings
     """
@@ -302,13 +302,13 @@ class FrameExtraction:
     def get_translation_between_two_frames(self, frame1_cTm, frame2_cTm):
         inverse_frame2_cTm = np.linalg.inv(frame2_cTm)
         marker_transform = np.matmul(inverse_frame2_cTm, frame1_cTm)
-        print("marker has translated {}".format(marker_transform))
+        # print("marker has translated {}".format(marker_transform))
         translation_only = np.array(
             [marker_transform.item(0, 3), marker_transform.item(1, 3), marker_transform.item(2, 3)])
-        print("here is the translation decomposed: {}".format(translation_only))
-        print("here is the lin alg norm of translation only {}".format(np.linalg.norm(translation_only)))
+        # print("here is the translation decomposed: {}".format(translation_only))
+        # print("here is the lin alg norm of translation only {}".format(np.linalg.norm(translation_only)))
         unit_translation = translation_only / np.linalg.norm(translation_only)
-        print("here is the unit vector translation {}".format(unit_translation))
+        # print("here is the unit vector translation {}".format(unit_translation))
 
         ## make translation a unit vector ***
 
@@ -364,14 +364,14 @@ class FrameExtraction:
 
     # def getting_key_points(self):
 
-    def loop_program(self):
-        while not rospy.is_shutdown():
-            FrameExtraction()
+    # def loop_program(self):
+    #     while not rospy.is_shutdown():
+    #         TrajEvalGroundTruth()
 
 
 def main(args):
     rospy.init_node('FrameExtractionNode', anonymous=True)
-    FrameExtraction(loop=True)
+    TrajEvalGroundTruth(loop=True,total_number_of_frames=25, start_subscriber=True, activate_image_callback=True, activate_marker_reading=True)
 
     # while not rospy.is_shutdown():
     #     FrameExtraction()
