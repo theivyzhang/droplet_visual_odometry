@@ -7,6 +7,7 @@ print("extracting 1) visual odometry and 2) ground truth from rosbag for traject
 
 import transformations as tf
 import numpy as np
+import tf as tf
 
 
 def translation_from_transformation_matrix(transformation_matrix):
@@ -65,3 +66,24 @@ def write_to_output_file(output_file_path, timestamp, translation, quaternion):
 def clear_txt_file_contents(file_path):
     with open(file_path, "w") as file:
         file.truncate()
+
+
+def get_gt_vo_difference(gt_file_path, vo_file_path):
+    ground_truth_data = np.genfromtxt(gt_file_path)
+    vis_odom_data = np.genfromtxt(vo_file_path)
+    for i in range(ground_truth_data.shape[0]-1):
+
+         ground_truth_quaternion = (ground_truth_data[i, 4], ground_truth_data[i, 5], ground_truth_data[i, 6], ground_truth_data[i, 7])
+         gt_row, gt_pitch, gt_yaw = tf.transformations.euler_from_quaternion(ground_truth_quaternion)
+         gt_euler = np.array([gt_row, gt_pitch, gt_yaw])
+
+         vis_odom_quaternion = (vis_odom_data[i, 4], vis_odom_data[i, 5], vis_odom_data[i, 6], vis_odom_data[i, 7])
+         vo_row, vo_pitch, vo_yaw = tf.transformations.euler_from_quaternion(vis_odom_quaternion)
+         vo_euler = np.array([vo_row, vo_pitch, vo_yaw])
+
+         gt_vo_difference =  vo_euler - gt_euler
+         print("difference between gt vo at timestamp {} is {}".format(ground_truth_data[i, 0], gt_vo_difference))
+
+
+
+
