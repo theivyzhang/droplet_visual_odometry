@@ -1,13 +1,8 @@
 #!/usr/bin/python
 
 # Author: Ivy Aiwei Zhang
-# Last updated: 08-04-2023
-# PURPOSE: attempt to fix hypothesis, using the idea to rewrite visual_odometry.py/
-# HYPOTHESIS: we can successfully find the top 10 matches between two consecutive frames;
-# however, essential matrix is still using all 500 key points to calculate the movement; we need to extract the top 10
-# using matches DMatch query/train indices and get the corresponding key points from previous and current keypoint
-# the accuracy of the matches depends on how we have sorted the full list of matches
-
+# Last updated: 08-06-2023
+# PURPOSE: A MODULE FOR VISUAL ODOMETRY POSE AND VELOCITY ESTIMATIONS FOR UNDERWATER AUTONOMOUS ROBOTS
 
 #### ROS node messages
 from geometry_msgs.msg import PoseStamped
@@ -28,7 +23,7 @@ VERBOSE = False
 number_of_frames = 25075
 
 DEFAULT_STARTING_ROBOT_TRANSLATION = [0, 0, 0]
-DEFAULT_STARTING_ROBOT_EULER = [0,0,0]
+DEFAULT_STARTING_ROBOT_EULER = [0, 0, 0]
 
 
 ### UTILITY FUNCTION FOR TRANSFORMTION MATRIX ###
@@ -56,7 +51,6 @@ class VisualOdometry:
         # do the matching here
         self.bf = cv.BFMatcher(cv.NORM_HAMMING, crossCheck=True)
 
-
         # parameters needed for evaluating the image frames
         # self.all_frames = []
         self.orb_feature_detector = cv.ORB_create()
@@ -66,7 +60,7 @@ class VisualOdometry:
         # self.current_frame = None
         # self.current_frame = None
 
-        self.matches_dictionary = [] # list of dictionaries
+        self.matches_dictionary = []  # list of dictionaries
 
         # list to store the relevant positions
         self.robot_position_list = []  # calculated robot position list from opencv
@@ -74,9 +68,11 @@ class VisualOdometry:
         self.frame_translations = []  # maintains the translation between every consecutive frame
         self.marker_differences = []  # maintains the difference between the marker positions between every consecutive frames
 
-        self.prev_transformation_matrix = self.make_transform_mat(translation=self.starting_translation, euler=self.starting_euler)
+        self.prev_transformation_matrix = self.make_transform_mat(translation=self.starting_translation,
+                                                                  euler=self.starting_euler)
         # print("Previous transform matrix at initialization: {}".format(self.prev_transformation_matrix))
-        self.robot_curr_position = self.make_transform_mat(translation=self.starting_translation, euler=self.starting_euler)
+        self.robot_curr_position = self.make_transform_mat(translation=self.starting_translation,
+                                                           euler=self.starting_euler)
         # print("robot_curr_position at initialization: {}".format(self.robot_curr_position))
 
         self.detected_marker = False
@@ -90,13 +86,14 @@ class VisualOdometry:
         return current_image
 
     def rosframe_to_current_image(self, frame):
+        # print("frame type {}".format(type(frame)))
         # compute the camera matrix
         new_camera_matrix, _ = cv.getOptimalNewCameraMatrix(
             self.int_coeff_mtx,
             self.dist_coef_arr,
-            (self.frame_widthm, self.frame_height),
+            (self.frame_width, self.frame_height),
             1,
-            (self.frame_widthm, self.frame_height)
+            (self.frame_width, self.frame_height)
         )
         # convert the frame data into a numpy array
         np_arr = np.fromstring(frame.data, np.uint8)
@@ -136,34 +133,33 @@ class VisualOdometry:
     THIS SECTION CONTAINS ALL THE FUNCTIONS NEEDED FOR THE VISUAL ODOMETRY CALLBACK
     """
 
-    def visualize_key_points_matching(self, current_descriptors, current_key_points,current_image_with_keypoints_drawn):
-        if self.previous_image is not None:
+    def visualize_key_points_matching(self, current_descriptors, current_key_points,
+                                      current_image_with_keypoints_drawn):
 
-            # Match descriptors.
-            matches = self.bf.match(self.previous_descriptors, current_descriptors)
+        # Match descriptors.
+        matches = self.bf.match(previous_descriptors, current_descriptors)
 
-            # TODO: discuss the possible ways to sort the matches
-            # one way is using the ascending order of DMatch distances
-            # the distance is apparently not the euclidean distances
-            # key points: in what unit?
-            # if keypoints are the coordinates of matches on the image, sorting by euclidean distance and/or slope between the points might be better
+        # TODO: discuss the possible ways to sort the matches
+        # one way is using the ascending order of DMatch distances
+        # the distance is apparently not the euclidean distances
+        # key points: in what unit?
+        # if keypoints are the coordinates of matches on the image, sorting by euclidean distance and/or slope between the points might be better
 
-            # matches = sorted(matches, key=lambda x: x.distance)
+        # matches = sorted(matches, key=lambda x: x.distance)
 
-            img3 = cv.drawMatches(self.previous_image, current_key_points, current_image_with_keypoints_drawn,
-                                  current_key_points, matches[:10], None,
-                                  flags=cv.DrawMatchesFlags_NOT_DRAW_SINGLE_POINTS)
-            image_path = "/home/ivyz/Documents/ivy_workspace/src/vis_odom/scripts/images/unit_testing_07242023/set5_ut_072423_matches.jpg"
-            cv.imwrite(image_path, img3)
+        img3 = cv.drawMatches(self.previous_image, current_key_points, current_image_with_keypoints_drawn,
+                              current_key_points, matches[:10], None,
+                              flags=cv.DrawMatchesFlags_NOT_DRAW_SINGLE_POINTS)
+        image_path = "/home/ivyz/Documents/ivy_workspace/src/vis_odom/scripts/images/unit_testing_07242023/set5_ut_072423_matches.jpg"
+        cv.imwrite(image_path, img3)
 
-            cv.imshow('pattern', img3), cv.waitKey(5)
+        cv.imshow('pattern', img3), cv.waitKey(5)
 
-    def get_matches_between_two_frames(self, current_key_points, current_descriptors, previous_key_points, previous_descriptors):
+    def get_matches_between_two_frames(self, current_key_points, current_descriptors, previous_key_points,
+                                       previous_descriptors):
 
         top_ten_previous_key_points = []
         top_ten_current_key_points = []
-
-
 
         matches = self.bf.match(previous_descriptors, current_descriptors)
         # print("Here are the top 10 matches: {}".format(matches[:10]))
@@ -175,21 +171,22 @@ class VisualOdometry:
             top_ten_current_key_points.append(current_key_points[query_index])
             dictionary = {}
             dictionary["{} th match distance".format(i)] = matches[i].distance
-            dictionary["{} th match previous key point ".format(i)] = (previous_key_points[train_index].pt[0],previous_key_points[train_index].pt[1])
-            dictionary["{} th match current key point ".format(i)] = (current_key_points[train_index].pt[0],current_key_points[train_index].pt[1])
-            self.matches_dictionary.append(dictionary) # TODO is it necessary?
+            dictionary["{} th match previous key point ".format(i)] = (
+            previous_key_points[train_index].pt[0], previous_key_points[train_index].pt[1])
+            dictionary["{} th match current key point ".format(i)] = (
+            current_key_points[train_index].pt[0], current_key_points[train_index].pt[1])
+            self.matches_dictionary.append(dictionary)  # TODO is it necessary?
 
         # print("here are the top 10 previous_key_points: {}".format(top_ten_previous_key_points))
         # print("here are the top 10 current_key_points: {}".format(top_ten_current_key_points))
         # print("Dictionary of matches: {}".format(self.matches_dictionary))
-        return matches[:10], top_ten_previous_key_points, top_ten_current_key_points # TODO parameter for top-k matches
+        return matches[:10], top_ten_previous_key_points, top_ten_current_key_points  # TODO parameter for top-k matches
 
-
-    def get_translation_between_two_frames(self, array_previous_key_points, array_current_key_points): # TODO check for consistency previous-current
+    # TODO: CHECKED - PREV CURR
+    def get_translation_between_two_frames(self, array_previous_key_points,
+                                           array_current_key_points):  # TODO check for consistency previous-current
 
         # get the essential matrix
-        # print(type(array_current_key_points), type(array_previous_key_points))
-        # print("camera intrinsic matrix = {}".format(self.int_coeff_mtx))
         # CHECK: camera intrinsic coefficient matrix check passed
         self.essential_matrix, mask = cv.findEssentialMat(points1=array_current_key_points,
                                                           points2=array_previous_key_points,
@@ -198,96 +195,72 @@ class VisualOdometry:
 
         # findEssentialMat expects the first two arguments to be numpy arrays
 
-        # print("the essential matrix is : {}".format(self.essential_matrix))
         # compute the relative position using the essential matrix, key points  using cv.relativepose
-        # TODO: return type / see what coordinate frame (Documentation)***
-        # TODO: print out intermediate values
         points, relative_rotation, translation, mask = cv.recoverPose(E=self.essential_matrix,
                                                                       points1=array_current_key_points,
                                                                       points2=array_previous_key_points)
-        # print("relative rotation and translation at the start: {}, {}".format(relative_rotation, translation))
         translation = translation.transpose()[0]
-        # print("translation after transposing: {}".format(translation))
-        # print("translation size {}".format(translation.size))
         relative_rotation = np.array(relative_rotation)
-        # print("np array version of relative rotation {}".format(relative_rotation))
         # decompose rotation matrix + find euler
         t = np.array([0, 0, 0])
-        new_rotation_mat = np.vstack((np.hstack((relative_rotation, t[:, None])), [0, 0, 0, 1]))  # TODO: check 0, 0, 0, 1
-        # print("here's the new rotation matrix: {}".format(new_rotation_mat))
+        new_rotation_mat = np.vstack((np.hstack((relative_rotation, t[:, None])), [0, 0, 0, 1]))
 
         # get euler angles
         euler = transf.euler_from_matrix(new_rotation_mat, 'rxyz')
-        # print("here's the euler angles: {}".format(euler))
 
         # compute the current transformation matrix
         euler = np.array(euler)
 
-        prev2curr_translation = self.make_transform_mat(translation=translation, euler=euler)
-        # print("Here is the previous-current translation: {}".format(prev2curr_translation))
+        prev_to_curr_translation = self.make_transform_mat(translation=translation, euler=euler)
+
         # store previous to current translation in the corresponding list
-        self.frame_translations.append(prev2curr_translation)
-        # print("LOOOOOOKOK THE PREVIUOS CURRENT TRANSLATIon {}".format(prev2curr_translation))
-        return prev2curr_translation
-
-    def compute_current_image_elements(self, current_image):
-
-        current_key_points = self.orb_feature_detector.detect(current_image, None)
-        # ckp = self.orb_feature_detector.detect(current_image)
-        # print("current_key_points {}".format(current_key_points))
-        # print("\n ckp {}".format(ckp))
-
-
-        # find the keypoints and descriptors with ORB
-        current_key_points, current_descriptors = self.orb_feature_detector.compute(current_image,
-                                                                                    current_key_points)
-        # current key points output a list of KeyPoint elements, current descriptors is numpy array of (500 x 32 dimensions)
-        # print("current_key_points of type {} and current descriptors of type {}".format(type(current_key_points), type(current_descriptors)))
-        current_image_with_keypoints_drawn = cv.drawKeypoints(current_image, current_key_points, None,
-                                                              color=(0, 255, 0), flags=0)
-        # current image with keypoints drawn is a numpy array
-        # print("current image with key points drawn: {}", current_image_with_keypoints_drawn)
-
-        # print("current image with key points drawn type {}".format(type(current_image_with_keypoints_drawn)))
-
-        return current_key_points, current_descriptors, current_image_with_keypoints_drawn
+        self.frame_translations.append(prev_to_curr_translation)
+        return prev_to_curr_translation
 
     # here you would want to pass in the top 10 key points
-    def previous_current_matching(self, top_10_previous_key_points, top_10_current_key_points):
+    # TODO: CHECKED - PREV CURR
+    def previous_current_matching(self, top_10_previous_key_points, top_10_current_key_points,
+                                  robot_previous_position_transformation):
 
         """"you can choose to visualize the points matched between every two frames by uncommenting this line"""""
 
         # convert previous_key_points and current_key_points into floating point arrays
-        # print("top 10 current key points type {} and content {}".format(type(top_10_current_key_points), top_10_current_key_points))
         array_previous_key_points = cv.KeyPoint_convert(top_10_previous_key_points)
-        # print("array previous key points type {} and content {}".format(type(array_previous_key_points), array_previous_key_points))
-        # print("sizeeeeeeee",array_previous_key_points.shape)
 
         # top 10 previous key points is a list of KeyPoint objects, array_previous_key points is a numpy array
-
         array_current_key_points = cv.KeyPoint_convert(top_10_current_key_points)
-        # print("here are the previous key points: {}".format(array_previous_key_points))
-        # print("the length of previous keypoints = {}, length of current = {}".format(len(self.previous_key_points), len(current_key_points)))
 
         # get the translation between previous image and the current image using the array list forms of previous and current key points
-        prev2curr_translation = self.get_translation_between_two_frames(array_previous_key_points,
-                                                                        array_current_key_points)
-        # TODO self could be revisited to actually have them as variable and be returned
+        prev_to_curr_translation = self.get_translation_between_two_frames(array_previous_key_points,
+                                                                           array_current_key_points)
 
         # calculate the current position using the previous-to-current translation
-        self.robot_curr_position = self.robot_curr_position.dot(prev2curr_translation)
-        # print("here is the robot's current position: {}".format(self.robot_curr_position))
-        _, _, _, robot_current_translation, _ = transf.decompose_matrix(self.robot_curr_position)
-        # print("Here is the transformation matrix: {}".format(prev2curr_translation))
-        self.robot_position_list.append(robot_current_translation)  # append to the corresponding list
-        print("robot translation: {}".format(robot_current_translation))
-        self.robot_current_translation = robot_current_translation
+        robot_current_position_transformation = robot_previous_position_transformation.dot(prev_to_curr_translation)
+        # _, _, _, robot_current_translation, _ = transf.decompose_matrix(robot_current_transformation)
+        # self.robot_position_list.append(robot_current_translation)  # append to the corresponding list
+        # print("robot translation: {}".format(robot_current_translation))
+        # self.robot_current_translation = robot_current_translation
+        return robot_current_position_transformation
 
-    def visual_odometry_calculations(self, current_image, previous_image):
+    def compute_current_image_elements(self, input_image):
+
+        key_points = self.orb_feature_detector.detect(input_image, None)
+
+        # find the keypoints and descriptors with ORB
+        key_points, descriptors = self.orb_feature_detector.compute(input_image, key_points)
+        # current key points output a list of KeyPoint elements, current descriptors is numpy array of (500 x 32 dimensions)
+        image_with_keypoints_drawn = cv.drawKeypoints(input_image, key_points, None,
+                                                      color=(0, 255, 0), flags=0)
+        # current image with keypoints drawn is a numpy array
+
+        return key_points, descriptors, image_with_keypoints_drawn
+
+    def visual_odometry_calculations(self, previous_image, current_image, robot_previous_position_transformation):
         # print("type of current image and previous image , {}, {}".format(type(current_image), type(previous_image)))
         # get the relevant information needed for computing the translation
         previous_key_points, previous_descriptors, previous_image_with_keypoints_drawn = self.compute_current_image_elements(
             previous_image)
+
         current_key_points, current_descriptors, current_image_with_keypoints_drawn = self.compute_current_image_elements(
             current_image)
         # print("this is the format for keypoints {} and descriptors {}".format(type(current_key_points), type(current_descriptors)))
@@ -300,18 +273,19 @@ class VisualOdometry:
         # starting from frame number two, calculate the matches:\
 
         top_ten_matches, top_10_previous_key_points, top_10_current_key_points = self.get_matches_between_two_frames(
-                current_key_points, current_descriptors, previous_key_points, previous_descriptors)
-            # print("Top ten matches type {} and itself: {}".format(type(top_ten_matches), top_ten_matches))
-            # print("Top 10 previuos key points type {} \n and itself {}".format(type(top_10_previous_key_points),top_10_previous_key_points))
-            # print("Top 10 current key points type {} \n and itself {}".format(type(top_10_current_key_points), top_10_current_key_points))
+            current_key_points, current_descriptors, previous_key_points, previous_descriptors)
+        # print("Top ten matches type {} and itself: {}".format(type(top_ten_matches), top_ten_matches))
+        # print("Top 10 previuos key points type {} \n and itself {}".format(type(top_10_previous_key_points),top_10_previous_key_points))
+        # print("Top 10 current key points type {} \n and itself {}".format(type(top_10_current_key_points), top_10_current_key_points))
 
-            # get matches should return top 10 previous key points
+        # get matches should return top 10 previous key points
 
-            # starting from frame number two, calculate translation and current position
-        self.previous_current_matching(top_10_previous_key_points, top_10_current_key_points)
+        # starting from frame number two, calculate translation and current position
+        robot_current_position_transformation = self.previous_current_matching(top_10_previous_key_points,
+                                                                               top_10_current_key_points,
+                                                                               robot_previous_position_transformation)
 
-        return self.robot_current_translation # TODO check if it is the 4x4 homogeneous matrix and rename properly to reflect that is the matrix
-
+        return robot_current_position_transformation  # TODO check if it is the 4x4 homogeneous matrix and rename properly to reflect that is the matrix
 
     def plot_graph(self, position_history, ax):
 
@@ -385,6 +359,7 @@ class VisualOdometry:
         )
         self.combined_ax.set_title("Combined")
         plt.pause(0.1)
+
 
 # create the name function
 if __name__ == '__main__':

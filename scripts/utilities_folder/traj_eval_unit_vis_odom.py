@@ -91,7 +91,7 @@ class TrajEstimates_VisualOdom_Evaluate_Data:
                                  starting_euler=current_starting_euler)
         self.bf = cv.BFMatcher(cv.NORM_HAMMING, crossCheck=True)
         self.orb_feature_detector = cv.ORB_create()
-        self.traj_estimates_file_path = "/home/ivyz/Documents/ivy_workspace/src/vis_odom/scripts/stamped_traj_estimate.txt"
+        self.traj_estimates_file_path = "/src/vis_odom/scripts/stamped_traj_estimate.txt"
         # self.robot_curr_position = self.make_transform_mat(translation=[0, 0, 0], euler=[0, 0, 0])
 
         # self.previous_key_points = None  # same key points of PREVIOUS frame
@@ -103,7 +103,6 @@ class TrajEstimates_VisualOdom_Evaluate_Data:
         self.vo.visual_odometry_calculations(self.current_image, self.previous_image)
         # print("robot current position with previous AND current image: {}".format(self.vo.robot_curr_position))
         # print("robot translated in visual odometry", self.vo.robot_current_translation)
-
         self.robot_curr_pos_matrix = self.vo.robot_curr_position
 
 class TrajectoryEvaluation_WriteData:
@@ -168,7 +167,7 @@ class TrajectoryEvaluation_WriteData:
 
 def main(args):
     # rospy.init_node('VisualOdometryNode', anonymous=True)
-    desktop_folder_path = '/home/ivyz/Documents/ivy_workspace/src/vis_odom/scripts/images/unit_testing_07282023_trial2'  # Replace with the actual folder path on your desktop\
+    desktop_folder_path = '/src/vis_odom/scripts/images/unit_testing_07282023_trial2'  # Replace with the actual folder path on your desktop\
 
     # first collect the images and extract the needed folders
     collect_images = CollectImagePaths(desktop_folder_path=desktop_folder_path)
@@ -181,7 +180,7 @@ def main(args):
     list_of_cam2cam_transforms = collect_evaluate_data.list_of_consecutive_cam2cam_transforms
 
     # next we can start writing data for trajectory evaluation
-    traj_estimate_file_path = "/home/ivyz/Documents/ivy_workspace/src/vis_odom/scripts/stamped_traj_estimate.txt"
+    traj_estimate_file_path = "/src/vis_odom/scripts/stamped_traj_estimate.txt"
     TrajectoryEvaluation_WriteData(list_of_cam2cam_transforms, traj_estimate_file_path)
     print("trajectory estimation for visual odometry activated")
     rospy.sleep(1)

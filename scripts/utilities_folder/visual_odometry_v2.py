@@ -80,7 +80,7 @@ class VisualOdometry:
         self.prev_transformation_matrix = self.make_transform_mat(translation=self.starting_translation, euler=self.starting_euler)
         # print("Previous transform matrix at initialization: {}".format(self.prev_transformation_matrix))
         self.robot_curr_position = self.make_transform_mat(translation=self.starting_translation, euler=self.starting_euler)
-        # print("robot_curr_position at initialization: {}".format(self.robot_curr_position))
+        print("robot_curr_position at initialization: {}".format(self.robot_curr_position))
 
         self.detected_marker = False
 
@@ -147,7 +147,7 @@ class VisualOdometry:
         return translation.dot(rotation)
 
     def parse_camera_intrinsics(self):
-        calibration_file_path = '/home/ivyz/Documents/ivy_workspace/src/vis_odom/Parameters/camera_calibration.yaml'
+        calibration_file_path = '/src/vis_odom/Parameters/camera_calibration.yaml'
         # rospy.loginfo("Parsing camera calibration from file {}".format(calibration_file_path))
         with open(calibration_file_path) as camera_calibration:
             data = yaml.load(camera_calibration, Loader=SafeLoader)
@@ -188,7 +188,7 @@ class VisualOdometry:
             img3 = cv.drawMatches(self.previous_image, current_key_points, current_image_with_keypoints_drawn,
                                   current_key_points, matches[:10], None,
                                   flags=cv.DrawMatchesFlags_NOT_DRAW_SINGLE_POINTS)
-            image_path = "/home/ivyz/Documents/ivy_workspace/src/vis_odom/scripts/images/unit_testing_07242023/set5_ut_072423_matches.jpg"
+            image_path = "/src/vis_odom/scripts/images/unit_testing_07242023/set5_ut_072423_matches.jpg"
             cv.imwrite(image_path, img3)
 
             cv.imshow('pattern', img3), cv.waitKey(5)

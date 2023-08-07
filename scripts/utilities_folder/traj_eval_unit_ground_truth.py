@@ -86,7 +86,7 @@ class TrajEvalGroundTruth:
                                                         queue_size=1)
 
     def parse_camera_intrinsics(self):
-        calibration_file_path = '/home/ivyz/Documents/ivy_workspace/src/vis_odom/Parameters/camera_calibration.yaml'
+        calibration_file_path = '/src/vis_odom/Parameters/camera_calibration.yaml'
         # rospy.loginfo("Parsing camera calibration from file {}".format(calibration_file_path))
         with open(calibration_file_path) as camera_calibration:
             data = yaml.load(camera_calibration, Loader=SafeLoader)
@@ -134,7 +134,7 @@ class TrajEvalGroundTruth:
                     self.robot_frame_1_stamp = robot_frame.header.stamp
                     self.image_one = self.rosframe_to_current_image(frame=robot_frame,
                                                                     frame_dimensions=self.frame_dimensions)
-                    image_path = "/home/ivyz/Documents/ivy_workspace/src/vis_odom/scripts/trajectory_evaluation/traj_eval_set1_08042023/traj_eval_set" + str(
+                    image_path = "/home/ivyz/Documents/ivy_workspace/src/vis_odom/scripts/trajectory_evaluation/traj_eval_set1_08072023/traj_eval_set" + str(
                         self.starting_index) + "_frame1.jpg"
                     self.image_path = image_path
                     cv.imwrite(image_path, self.image_one)
@@ -146,7 +146,7 @@ class TrajEvalGroundTruth:
                     self.robot_frame_2_stamp = robot_frame.header.stamp
                     self.image_two = self.rosframe_to_current_image(frame=robot_frame,
                                                                     frame_dimensions=self.frame_dimensions)
-                    image_path = "/home/ivyz/Documents/ivy_workspace/src/vis_odom/scripts/trajectory_evaluation/traj_eval_set1_08042023/traj_eval_set" + str(
+                    image_path = "/home/ivyz/Documents/ivy_workspace/src/vis_odom/scripts/trajectory_evaluation/traj_eval_set1_08072023/traj_eval_set" + str(
                         self.starting_index) + "_frame2.jpg"
                     self.image_path = image_path
                     cv.imwrite(image_path, self.image_two)
