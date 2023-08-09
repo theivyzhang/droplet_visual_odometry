@@ -102,11 +102,12 @@ class GroundTruth:
         bTm_translation_mat = tf.transformations.translation_matrix(bTm_translation_array)
         bTm_orientation_mat = tf.transformations.quaternion_matrix(bTm_rotation_array)
 
-        btm_homogenous_translation_mat = tf.transformations.concatenate_matrices(bTm_translation_mat,
-                                                                                 bTm_orientation_mat)
-        return btm_homogenous_translation_mat
+        btm_homogenous_transformation_mat = tf.transformations.concatenate_matrices(bTm_translation_mat,
+                                                                                    bTm_orientation_mat)
+        return btm_homogenous_transformation_mat
 
     def get_camera_to_base_homogenous_transformation_matrix(self, marker):
+        # TODO: check --> lookupTransform(target_frame, source_frame, timestamp); want camera to base
         cTb_translation, cTb_rotation = self.listener.lookupTransform(self.default_base_link_topic,
                                                                       self.default_camera_topic,
                                                                       marker.header.stamp)
@@ -117,30 +118,20 @@ class GroundTruth:
         # print("we have cTb translation matrix {} and orientation matrix {}".format(cTb_translation_mat,
         #                                                                            cTb_orientation_mat))
 
-        cTb_homogenous_translation_mat = tf.transformations.concatenate_matrices(cTb_translation_mat,
-                                                                                 cTb_orientation_mat)
-        return cTb_homogenous_translation_mat
+        cTb_homogenous_transformation_mat = tf.transformations.concatenate_matrices(cTb_translation_mat,
+                                                                                    cTb_orientation_mat)
+        return cTb_homogenous_transformation_mat
 
     def compute_frame_camera_to_marker(self, marker):
-        # TODO:
-        # for each frame, first get the pose translation and rotation info from base link
-        # use tf transformations to get translation and rotation matrices
-        # concatenate the two; the output is a homogenous transformation matrix 4x4, and yon now have base to marker
-        btm_homogenous_translation_mat = self.get_base_to_marker_homogenous_transformation(marker)
-        # print("we have the base to marker homogenous translation matrix {}".format(btm_homogenous_translation_mat))
 
-        # PART B:
-        # to get camera to baselink:
-        # lookUpTransform produces a cam-2-baselink translation + rotation; repeat steps 2 - 3 in part A; produces 4x4 CTB
-        # dot product: CTB dot BTM, you get CTM which is what the output of this function should be
         cTb_homogenous_translation_mat = self.get_camera_to_base_homogenous_transformation_matrix(marker)
 
-        # print("we have the camera to base homogenous translation matrix {}".format(cTb_homogenous_translation_mat))
+        bTm_homogenous_translation_mat = self.get_base_to_marker_homogenous_transformation(marker)
 
-        # now get camera to marker transformation (4x4 homogenous transformation matrix)
-        cam_to_marker_transformation = np.matmul(btm_homogenous_translation_mat, cTb_homogenous_translation_mat)
+        # TODO: check inverse, check if cTm or mTc, origin T reference frame --> ask Sam for message form
+        # TODO: check --> camera2marker = camera2base @ base2marker
+        cam_to_marker_transformation = np.matmul(cTb_homogenous_translation_mat, bTm_homogenous_translation_mat)
 
-        # print("Here is the camera to marker transformation: {}".format(cam_to_marker_transformation))
         self.ground_truth_list_cam_to_marker.append(cam_to_marker_transformation)
 
         return cam_to_marker_transformation
@@ -148,28 +139,36 @@ class GroundTruth:
     """
     this method gets the marker to marker translation every two consecutive frames with marker readings
     """
+    #
+    # def get_translation_between_two_frames(self, frame1_cTm, frame2_cTm):
+    #     inverse_frame2_cTm = np.linalg.inv(frame2_cTm)
+    #     marker_transform = np.matmul(inverse_frame2_cTm, frame1_cTm)
+    #     # print("marker has translated {}".format(marker_transform))
+    #     translation_only = np.array(
+    #         [marker_transform.item(0, 3), marker_transform.item(1, 3), marker_transform.item(2, 3)])
+    #     unit_translation = translation_only / np.linalg.norm(translation_only)
+    #
+    #     ## make translation a unit vector ***
 
-    def get_translation_between_two_frames(self, frame1_cTm, frame2_cTm):
-        inverse_frame2_cTm = np.linalg.inv(frame2_cTm)
-        marker_transform = np.matmul(inverse_frame2_cTm, frame1_cTm)
-        # print("marker has translated {}".format(marker_transform))
-        translation_only = np.array(
-            [marker_transform.item(0, 3), marker_transform.item(1, 3), marker_transform.item(2, 3)])
-        unit_translation = translation_only / np.linalg.norm(translation_only)
-
-        ## make translation a unit vector ***
-
-    def get_ground_truth_estimate(self, marker_reading):
+    def get_ground_truth_estimate(self, marker_reading, reference_id=0):
         # callback function to access the ground truth data
         markers = marker_reading.markers  # get the marker information
 
         if len(markers) > 0:
-            print("markers detected!")
-            camera_to_marker_transformation = self.compute_frame_camera_to_marker(markers[0])
-            return camera_to_marker_transformation
+            reference_id_index = -1
+            for i, m in enumerate(markers):
+                if m.id == reference_id:
+                    reference_id_index = i
+                    break
+
+            if reference_id_index == -1:
+                return None
+            else:
+                print("marker {} detected!".format(reference_id_index))
+                camera_to_marker_transformation = self.compute_frame_camera_to_marker(markers[reference_id_index])
+                return camera_to_marker_transformation
         # else:
         #     rospy.debug("No markers detected")
-
 
 
 # create the name function

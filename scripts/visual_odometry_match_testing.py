@@ -17,6 +17,7 @@ import matplotlib.pyplot as plt
 from mpl_toolkits.mplot3d import Axes3D
 import yaml
 from yaml.loader import SafeLoader
+import pyflann
 
 VERBOSE = False
 
@@ -162,6 +163,24 @@ class VisualOdometry:
 
         top_ten_previous_key_points = []
         top_ten_current_key_points = []
+
+        # initialize pyflann
+        flann = pyflann.FLANN()
+        index_params = dict(algorithm=pyflann.FLANN_INDEX_KDTREE, trees=5)  # KD-tree index
+        flann.build_index(previous_descriptors, index_params)
+
+        # use flann index to approximate nearest neighbors]
+        num_neighbors = 2  # Number of nearest neighbors to find
+        _, indices = flann.nn_index(current_descriptors, num_neighbors)
+
+        matches = []
+
+        for i, (query_index, neighbor_index) in enumerate(zip(range(len(current_descriptors)), indices)):
+            distance = current_descriptors[query_index] - previous_descriptors[neighbor_index[0]]
+            match = cv.DMatch(queryIdx=query_index, trainIdx=neighbor_index[0], distance=distance)
+            matches.append(match)
+
+
 
         matches = self.bf.match(previous_descriptors, current_descriptors)
         if to_sort:
