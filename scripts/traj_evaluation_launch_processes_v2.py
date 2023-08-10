@@ -8,31 +8,17 @@
 # ROS node messages
 print("extracting 1) visual odometry and 2) ground truth from rosbag for trajectory evaluation")
 
-import sys
-import os
-import csv
 import rosbag
 import rospy
 
-from sensor_msgs.msg import CompressedImage
-from stag_ros.msg import StagMarkers
-
 # other packages
 import numpy as np
-import cv2 as cv
-from cv_bridge import CvBridge, CvBridgeError
 import sys
-import yaml
-from yaml.loader import SafeLoader
-import transformations as tf
 
 # import from modules
 from visual_odometry_v3 import VisualOdometry  # visual odometry module
 from traj_eval_ground_truth import GroundTruth  # ground truth reading module
 import pose_estimation_module as PoseEstimationFunctions
-
-import tf as tf
-
 
 class Activate_GT_VO_Processes:
     def __init__(self, bag_file_path=None, gt_output_file_path='', vo_output_file_path=''):
@@ -57,15 +43,17 @@ class Activate_GT_VO_Processes:
         self.ground_truth = GroundTruth()
 
         # initialize lists
-        self.vo_tf_list = []  # final list containing marker to marker transforms (ground truth)
-        self.gt_tf_list = []  # final list containing marker to marker transforms (
+        self.vo_tf_list = []
+        self.gt_tf_list = []
         self.gt_camera_to_marker_list = []
         self.gt_camera_to_camera_list = []
 
+        # add starting positions
         self.robot_starting_position_transformation = np.array([[1, 0, 0, 0], [0, 1, 0, 0], [0, 0, 1, 0], [0, 0, 0, 1]])
         self.vo_tf_list.append(self.robot_starting_position_transformation)  # TODO: CHECK
         self.gt_camera_to_camera_list.append(self.robot_starting_position_transformation)
 
+        # start getting vo gt data
         self.extract_vo_gt_data()
 
     def extract_vo_gt_data(self):
@@ -88,7 +76,6 @@ class Activate_GT_VO_Processes:
                         if self.valid_count < 1:
                             self.previous_image = bag_message
                         elif self.valid_count == 1:
-                            # print("now setting current image")
                             self.current_image = bag_message
                         else:
                             self.current_image = bag_message
@@ -97,19 +84,17 @@ class Activate_GT_VO_Processes:
 
                         # TODO avoid repetition of code
                         self.marker_reading = bag_message
-                        print("trying to see and len of marker is {}".format(len(self.marker_reading.markers)))
-                        # print("marker reading message {}".format(self.marker_reading))
+                        print("len of marker is {}".format(len(self.marker_reading.markers)))
 
                         if len(self.marker_reading.markers) > 0:
                             # get the camera to marker transformation
                             gt_transformation = self.ground_truth.get_ground_truth_estimate(
                                 marker_reading=self.marker_reading)
-                            # TODO try to include all markers
+                            # TODO try to include all markers -->
 
-                            # print("here is gt transform {}".format(gt_transformation))
                             # separate the translation and the quaternion
                             if gt_transformation is not None:
-                                # TODO have the message already in the form of a transformation
+                                # TODO have the message already in the form of a transformation - CHECKED
                                 self.gt_camera_to_marker_list.append(gt_transformation)
                                 # self.valid_count += 1 # TODO is valid_count needed or just len(gt_camera_to_marker_list is enough?
 
@@ -117,10 +102,6 @@ class Activate_GT_VO_Processes:
                     # found second message after finding a first message, searching for valid pair
                     if topic != self.first_topic_found:
                         # found actual valid pair image-pose or pose-image
-
-                        # print("different topic and topic is {}".format(topic))
-                        # valid
-
                         # Saving ground truth
                         if gt_transformation is None and "ar_tag" in topic:
                             # tmp_gt_tf = bag_message
@@ -175,7 +156,6 @@ class Activate_GT_VO_Processes:
 
                             # TODO: CHECK - compute the data for ground truth; DIFFERENCE: getting camera_to_camera
                             # now get the marker_to_marker transform between previous and current
-                            gt_cTm_length = len(self.gt_camera_to_marker_list)
                             gt_cTc_length = len(self.gt_camera_to_camera_list)
 
                             # current cTc = gt_cTm[-2] dot inv(gt_cTm[-1]) dot previous cTc
@@ -187,11 +167,6 @@ class Activate_GT_VO_Processes:
                                                                                              -1]))
                                                                            )
 
-                            # print("current camera to camera transform: {}".format(current_camera_to_camera_transform))
-
-                            # gt_mTm = PoseEstimationFunctions.get_marker_to_marker_transformation(
-                            #     previous_cTm_transform=self.gt_tf_list[-1],
-                            #     current_cTm_transform=self.gt_camera_to_marker_list[-1])
 
                             self.gt_camera_to_camera_list.append(current_camera_to_camera_transform)
 
@@ -220,7 +195,7 @@ class Activate_GT_VO_Processes:
                                 self.previous_image = bag_message
                                 # print("adding initial position")
                                 # vo_tf = np.eye(4, dtype=float)  # TODO ensure consistency with the other vo_tf; CHECKED
-                                # self.vo_tf_list.append(vo_tf)
+                                # self.vo_tf_list.append(vo_tf)x
 
                         gt_transformation = None  # Reset.
                         self.first_topic_found = ""
@@ -244,8 +219,8 @@ class Activate_GT_VO_Processes:
 def main(args):
     rospy.init_node('LaunchProcessNode', anonymous=True)
     bag_file_path = '/home/ivyz/Documents/8-31-system-trials_2021-07-28-16-33-22.bag'
-    gt_output_file_path = '/src/vis_odom/scripts/trajectory_evaluation/08082023_traj_eval_set3_unsorted_sim3_2000/stamped_ground_truth.txt'
-    vo_output_file_path = '/src/vis_odom/scripts/trajectory_evaluation/08082023_traj_eval_set3_unsorted_sim3_2000/stamped_traj_estimate.txt'
+    gt_output_file_path = '/home/ivyz/Documents/ivy_workspace/src/vis_odom/scripts/trajectory_evaluation/08092023_traj_eval_test_et/stamped_ground_truth2.txt'
+    vo_output_file_path = '/home/ivyz/Documents/ivy_workspace/src/vis_odom/scripts/trajectory_evaluation/08092023_traj_eval_test_et/stamped_traj_estimate2.txt'
     Activate_GT_VO_Processes(bag_file_path=bag_file_path, gt_output_file_path=gt_output_file_path,
                              vo_output_file_path=vo_output_file_path)
 

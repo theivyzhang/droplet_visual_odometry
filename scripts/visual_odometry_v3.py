@@ -46,19 +46,11 @@ class VisualOdometry:
         self.starting_euler = starting_euler
         self.robot_current_translation = None
         self.essential_matrix = None
-        # self.bridge = CvBridge()
         self.parse_camera_intrinsics()
-        # do the matching here
         self.bf = cv.BFMatcher(cv.NORM_HAMMING, crossCheck=True)
 
         # parameters needed for evaluating the image frames
-        # self.all_frames = []
         self.orb_feature_detector = cv.ORB_create()
-        # self.previous_image = None
-        # self.previous_key_points = None
-        # self.previous_descriptors = None
-        # self.current_frame = None
-        # self.current_frame = None
 
         self.to_sort = to_sort
 
@@ -72,10 +64,8 @@ class VisualOdometry:
 
         self.prev_transformation_matrix = self.make_transform_mat(translation=self.starting_translation,
                                                                   euler=self.starting_euler)
-        # print("Previous transform matrix at initialization: {}".format(self.prev_transformation_matrix))
         self.robot_curr_position = self.make_transform_mat(translation=self.starting_translation,
                                                            euler=self.starting_euler)
-        # print("robot_curr_position at initialization: {}".format(self.robot_curr_position))
 
         self.detected_marker = False
 
@@ -88,7 +78,6 @@ class VisualOdometry:
         return current_image
 
     def rosframe_to_current_image(self, frame):
-        # print("frame type {}".format(type(frame)))
         # compute the camera matrix
         new_camera_matrix, _ = cv.getOptimalNewCameraMatrix(
             self.int_coeff_mtx,
@@ -112,7 +101,6 @@ class VisualOdometry:
 
     def parse_camera_intrinsics(self):
         calibration_file_path = '/home/ivyz/Documents/ivy_workspace/src/vis_odom/Parameters/camera_calibration.yaml'
-        # rospy.loginfo("Parsing camera calibration from file {}".format(calibration_file_path))
         with open(calibration_file_path) as camera_calibration:
             data = yaml.load(camera_calibration, Loader=SafeLoader)
 
@@ -127,9 +115,6 @@ class VisualOdometry:
 
         self.int_coeff_mtx = np.array(self.int_coef_arr)
         self.int_coeff_mtx = self.int_coeff_mtx.reshape(3, 3)
-
-        # rospy.loginfo(
-        #     "Parsed camera calibration. Distortion: {}. Intrinsics: {}".format(self.dist_coef_arr, self.int_coeff_mtx))
 
     """
     THIS SECTION CONTAINS ALL THE FUNCTIONS NEEDED FOR THE VISUAL ODOMETRY CALLBACK
@@ -166,7 +151,6 @@ class VisualOdometry:
         matches = self.bf.match(previous_descriptors, current_descriptors)
         if to_sort:
             matches = sorted(matches, key=lambda x: x.distance)
-        # print("Here are the top 10 matches: {}".format(matches[:10]))
         # matches = sorted(matches, key=lambda x: x.distance)
         for i in range(len(matches[:10])):
             train_index = matches[i].trainIdx  # index of the match in previous key points
@@ -230,10 +214,6 @@ class VisualOdometry:
 
         # calculate the current position using the previous-to-current translation
         robot_current_position_transformation = robot_previous_position_transformation.dot(prev_to_curr_translation)
-        # _, _, _, robot_current_translation, _ = transf.decompose_matrix(robot_current_transformation)
-        # self.robot_position_list.append(robot_current_translation)  # append to the corresponding list
-        # print("robot translation: {}".format(robot_current_translation))
-        # self.robot_current_translation = robot_current_translation
         return robot_current_position_transformation
 
     def compute_current_image_elements(self, input_image):
@@ -250,32 +230,18 @@ class VisualOdometry:
         return key_points, descriptors, image_with_keypoints_drawn
 
     def visual_odometry_calculations(self, previous_image, current_image, robot_previous_position_transformation):
-        # print("type of current image and previous image , {}, {}".format(type(current_image), type(previous_image)))
         # get the relevant information needed for computing the translation
         previous_key_points, previous_descriptors, previous_image_with_keypoints_drawn = self.compute_current_image_elements(
             previous_image)
 
         current_key_points, current_descriptors, current_image_with_keypoints_drawn = self.compute_current_image_elements(
             current_image)
-        # print("this is the format for keypoints {} and descriptors {}".format(type(current_key_points), type(current_descriptors)))
-        # print("shape of current descriptors: {}".format(current_descriptors.shape))
-
-        # self.visualize_key_points_matching(current_descriptors, current_key_points, current_image_with_keypoints_drawn)
 
         # from the above code we produce a length 500 current key points and a (500 height, 32 width) shaped current descriptors
-
-        # starting from frame number two, calculate the matches:\
-
-
         top_ten_matches, top_10_previous_key_points, top_10_current_key_points = self.get_matches_between_two_frames(
             current_key_points, current_descriptors, previous_key_points, previous_descriptors, to_sort=self.to_sort)
-        # print("Top ten matches type {} and itself: {}".format(type(top_ten_matches), top_ten_matches))
-        # print("Top 10 previuos key points type {} \n and itself {}".format(type(top_10_previous_key_points),top_10_previous_key_points))
-        # print("Top 10 current key points type {} \n and itself {}".format(type(top_10_current_key_points), top_10_current_key_points))
-
         # get matches should return top 10 previous key points
 
-        # starting from frame number two, calculate translation and current position
         robot_current_position_transformation = self.previous_current_matching(top_10_previous_key_points,
                                                                                top_10_current_key_points,
                                                                                robot_previous_position_transformation)

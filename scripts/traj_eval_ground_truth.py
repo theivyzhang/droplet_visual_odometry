@@ -83,9 +83,7 @@ class GroundTruth:
 
     def quaternion_representation(self, homogenous_matrix):
         rotation_matrix = homogenous_matrix[:3, :3]
-        # print("here is the rotation matrix: {}".format(rotation_matrix))
         quaternion_rep = self.rotation_matrix_to_quaternion(rotation_matrix)
-        # print("here is the quaternion representation: {}".format(quaternion_rep))
         return quaternion_rep
 
     """
@@ -136,20 +134,6 @@ class GroundTruth:
 
         return cam_to_marker_transformation
 
-    """
-    this method gets the marker to marker translation every two consecutive frames with marker readings
-    """
-    #
-    # def get_translation_between_two_frames(self, frame1_cTm, frame2_cTm):
-    #     inverse_frame2_cTm = np.linalg.inv(frame2_cTm)
-    #     marker_transform = np.matmul(inverse_frame2_cTm, frame1_cTm)
-    #     # print("marker has translated {}".format(marker_transform))
-    #     translation_only = np.array(
-    #         [marker_transform.item(0, 3), marker_transform.item(1, 3), marker_transform.item(2, 3)])
-    #     unit_translation = translation_only / np.linalg.norm(translation_only)
-    #
-    #     ## make translation a unit vector ***
-
     def get_ground_truth_estimate(self, marker_reading, reference_id=0):
         # callback function to access the ground truth data
         markers = marker_reading.markers  # get the marker information
@@ -167,8 +151,6 @@ class GroundTruth:
                 print("marker {} detected!".format(reference_id_index))
                 camera_to_marker_transformation = self.compute_frame_camera_to_marker(markers[reference_id_index])
                 return camera_to_marker_transformation
-        # else:
-        #     rospy.debug("No markers detected")
 
 
 # create the name function
