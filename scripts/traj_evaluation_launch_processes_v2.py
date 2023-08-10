@@ -150,8 +150,8 @@ class Activate_GT_VO_Processes:
                             vo_quaternion = PoseEstimationFunctions.quaternion_from_transformation_matrix(
                                 transformation_matrix=vo_transformation)
 
-                            #PoseEstimationFunctions.write_to_output_file(self.vo_output_file_path, timestamp.to_sec(),
-                                 #                                        vo_translation_unit, vo_quaternion)
+                            PoseEstimationFunctions.write_to_output_file(self.vo_output_file_path, timestamp.to_sec(),
+                                                                         vo_translation_unit, vo_quaternion)
 
 
                             # TODO: CHECK - compute the data for ground truth; DIFFERENCE: getting camera_to_camera

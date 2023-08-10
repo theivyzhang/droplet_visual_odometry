@@ -117,8 +117,7 @@ class GroundTruth:
 
         bTm_homogenous_transformation_mat = self.get_base_to_marker_homogenous_transformation(marker)
 
-        # TODO: check inverse, check if cTm or mTc, origin T reference frame --> ask Sam for message form
-        # TODO: check --> camera2marker = camera2base @ base2marker
+        # TODO: checked --> camera2marker = camera2base @ base2marker
         cam_to_marker_transformation = np.matmul(cTb_homogenous_transformation_mat, bTm_homogenous_transformation_mat)
 
         self.ground_truth_list_cam_to_marker.append(cam_to_marker_transformation)
