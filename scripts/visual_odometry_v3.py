@@ -246,7 +246,7 @@ class VisualOdometry:
                                                                                top_10_current_key_points,
                                                                                robot_previous_position_transformation)
 
-        return robot_current_position_transformation  # TODO check if it is the 4x4 homogeneous matrix and rename properly to reflect that is the matrix
+        return robot_current_position_transformation  # TODO check if it is the 4x4 homogeneous matrix and rename properly to reflect that is the matrix - CHECKED
 
     def plot_graph(self, position_history, ax):
 

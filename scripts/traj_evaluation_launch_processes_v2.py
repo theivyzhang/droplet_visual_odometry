@@ -50,7 +50,7 @@ class Activate_GT_VO_Processes:
 
         # add starting positions
         self.robot_starting_position_transformation = np.array([[1, 0, 0, 0], [0, 1, 0, 0], [0, 0, 1, 0], [0, 0, 0, 1]])
-        self.vo_tf_list.append(self.robot_starting_position_transformation)  # TODO: CHECK
+        self.vo_tf_list.append(self.robot_starting_position_transformation)
         self.gt_camera_to_camera_list.append(self.robot_starting_position_transformation)
 
         # start getting vo gt data
@@ -150,8 +150,8 @@ class Activate_GT_VO_Processes:
                             vo_quaternion = PoseEstimationFunctions.quaternion_from_transformation_matrix(
                                 transformation_matrix=vo_transformation)
 
-                            PoseEstimationFunctions.write_to_output_file(self.vo_output_file_path, timestamp.to_sec(),
-                                                                         vo_translation_unit, vo_quaternion)
+                            #PoseEstimationFunctions.write_to_output_file(self.vo_output_file_path, timestamp.to_sec(),
+                                 #                                        vo_translation_unit, vo_quaternion)
 
 
                             # TODO: CHECK - compute the data for ground truth; DIFFERENCE: getting camera_to_camera
@@ -180,7 +180,7 @@ class Activate_GT_VO_Processes:
                             # TODO: CHECK - write the data
                             PoseEstimationFunctions.write_to_output_file(self.gt_output_file_path, timestamp.to_sec(),
                                                                          #gt_translation_unit,
-                                                                         gt_translation,
+                                                                        gt_translation,
                                                                          gt_quaternion)
 
                             # TODO: another module that does the calculations to have the same global reference frame ***
@@ -193,9 +193,6 @@ class Activate_GT_VO_Processes:
                         else:
                             if "image" in topic:
                                 self.previous_image = bag_message
-                                # print("adding initial position")
-                                # vo_tf = np.eye(4, dtype=float)  # TODO ensure consistency with the other vo_tf; CHECKED
-                                # self.vo_tf_list.append(vo_tf)x
 
                         gt_transformation = None  # Reset.
                         self.first_topic_found = ""
@@ -210,8 +207,6 @@ class Activate_GT_VO_Processes:
                                 self.current_image = bag_message
                         else:
                             self.marker_reading = bag_message
-
-                # print("valid count check {}".format(self.valid_count))
 
             print("finished bag!")
 

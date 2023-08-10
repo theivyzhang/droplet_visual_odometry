@@ -1,44 +1,30 @@
 #!/usr/bin/python
 
 # Author: Ivy Aiwei Zhang
-# Last updated: 8-04-2023
-# Purpose: this is a looped ground truth extraction where the camera to marker translation and quaternion representation of rotation is extracted,
-# then stored in a txt file in the correct format
+# Last updated: 8-10-2023
+# Purpose: this file extract ground truth from a single marker reading;
+# ground truth in the form of camera_to_marker homogenous transformation matrix
 
 # ROS node messages
 print("extracting ground truth from two consecutive frames and giving us the marker to marker transformations")
 
-import rospy
-from sensor_msgs.msg import CompressedImage
-from stag_ros.msg import StagMarkers
-# from stag_ros.msg import StagMarkers
-
 # other packages
 import numpy as np
-import cv2 as cv
-from cv_bridge import CvBridge, CvBridgeError
-import sys
-import yaml
-from yaml.loader import SafeLoader
-
-# from hypothesis2 import VisualOdometry as vo
 import tf as tf
 
 # GLOBAL VARIABLES
 DEFAULT_BASE_LINK_TOPIC = '/base_link'
 DEFAULT_CAMERA_TOPIC = '/cam_0_optical_frame'
 
-
 class GroundTruth:
     def __init__(self, default_base_link_topic=DEFAULT_BASE_LINK_TOPIC, default_camera_topic=DEFAULT_CAMERA_TOPIC):
 
-        # print("quaternion matrix of homogenous transformations matrix [[1, 2, 3, 4], [5, 6, 7, 8], [9, 10, 11, 12], [0, 0,0,1]] is {}".
-        #       format(self.quaternion_representation(np.array([[1, 2, 3, 4], [5, 6, 7, 8], [9, 10, 11, 12], [0, 0,0,1]]))))
         """
         by initializing vo, the image subscriber in hypothesis is activated
         uncomment the draw matches section that save the matched image
         """
 
+        # list to store information
         self.ground_truth_full_list_in_base_link = []
         self.ground_truth_list_cam_to_marker = []
 
@@ -46,6 +32,7 @@ class GroundTruth:
         self.default_base_link_topic = default_base_link_topic
         self.default_camera_topic = default_camera_topic
 
+        # initialize transform listener
         self.listener = tf.TransformListener()
 
     """
@@ -90,54 +77,59 @@ class GroundTruth:
     these methods computes the camera to marker translation (ground truth) at a given frame
     """
 
+    # function to get the base to marker homogenous transformation matrix
     def get_base_to_marker_homogenous_transformation(self, marker):
+        # extract translation and position
         bTm_translation = marker.pose.pose.position
-        btm_orientation = marker.pose.pose.orientation
+        bTm_orientation = marker.pose.pose.orientation
 
+        # make numpy arrays
         bTm_translation_array = np.array([bTm_translation.x, bTm_translation.y, bTm_translation.z])
-        bTm_rotation_array = np.array([btm_orientation.x, btm_orientation.y, btm_orientation.z, btm_orientation.w])
+        bTm_quaternion_array = np.array([bTm_orientation.x, bTm_orientation.y, bTm_orientation.z, bTm_orientation.w])
 
+        # turn into translation and orientation matrices; dimensions = 4x4
         bTm_translation_mat = tf.transformations.translation_matrix(bTm_translation_array)
-        bTm_orientation_mat = tf.transformations.quaternion_matrix(bTm_rotation_array)
+        bTm_orientation_mat = tf.transformations.quaternion_matrix(bTm_quaternion_array)
 
         btm_homogenous_transformation_mat = tf.transformations.concatenate_matrices(bTm_translation_mat,
                                                                                     bTm_orientation_mat)
-        return btm_homogenous_transformation_mat
+        return btm_homogenous_transformation_mat # returns 4x4 homogenous transformation matrix
 
+    # function to get the camera to base homogenous transformation matrix
     def get_camera_to_base_homogenous_transformation_matrix(self, marker):
-        # TODO: check --> lookupTransform(target_frame, source_frame, timestamp); want camera to base
-        cTb_translation, cTb_rotation = self.listener.lookupTransform(self.default_base_link_topic,
-                                                                      self.default_camera_topic,
-                                                                      marker.header.stamp)
-        # print("we have cTb translation {} and orientation {}".format(cTb_translation, cTb_rotation))
+        # using lookupTransform(target, source, time) -> position, quaternion
+        cTb_translation, cTb_quaternion = self.listener.lookupTransform(target_frame=self.default_base_link_topic,
+                                                                        source_frame=self.default_camera_topic,
+                                                                        time=marker.header.stamp)
 
+        # turn into translation and orientation matrices; dimensions = 4x4
         cTb_translation_mat = tf.transformations.translation_matrix(cTb_translation)
-        cTb_orientation_mat = tf.transformations.quaternion_matrix(cTb_rotation)
-        # print("we have cTb translation matrix {} and orientation matrix {}".format(cTb_translation_mat,
-        #                                                                            cTb_orientation_mat))
+        cTb_orientation_mat = tf.transformations.quaternion_matrix(cTb_quaternion)
 
         cTb_homogenous_transformation_mat = tf.transformations.concatenate_matrices(cTb_translation_mat,
                                                                                     cTb_orientation_mat)
         return cTb_homogenous_transformation_mat
 
+    # this method computes the camera to marker homogenous transformation matrix for a frame; marker = marker.0
     def compute_frame_camera_to_marker(self, marker):
 
-        cTb_homogenous_translation_mat = self.get_camera_to_base_homogenous_transformation_matrix(marker)
+        cTb_homogenous_transformation_mat = self.get_camera_to_base_homogenous_transformation_matrix(marker)
 
-        bTm_homogenous_translation_mat = self.get_base_to_marker_homogenous_transformation(marker)
+        bTm_homogenous_transformation_mat = self.get_base_to_marker_homogenous_transformation(marker)
 
         # TODO: check inverse, check if cTm or mTc, origin T reference frame --> ask Sam for message form
         # TODO: check --> camera2marker = camera2base @ base2marker
-        cam_to_marker_transformation = np.matmul(cTb_homogenous_translation_mat, bTm_homogenous_translation_mat)
+        cam_to_marker_transformation = np.matmul(cTb_homogenous_transformation_mat, bTm_homogenous_transformation_mat)
 
         self.ground_truth_list_cam_to_marker.append(cam_to_marker_transformation)
 
-        return cam_to_marker_transformation
+        return cam_to_marker_transformation # output: 4x4 homogenous transformation matrix
 
     def get_ground_truth_estimate(self, marker_reading, reference_id=0):
         # callback function to access the ground truth data
         markers = marker_reading.markers  # get the marker information
 
+        # taking marker 0 information
         if len(markers) > 0:
             reference_id_index = -1
             for i, m in enumerate(markers):
@@ -149,6 +141,7 @@ class GroundTruth:
                 return None
             else:
                 print("marker {} detected!".format(reference_id_index))
+                # compute camera to marker transformation for current frame for marker 0
                 camera_to_marker_transformation = self.compute_frame_camera_to_marker(markers[reference_id_index])
                 return camera_to_marker_transformation
 
