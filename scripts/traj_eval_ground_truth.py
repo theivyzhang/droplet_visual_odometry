@@ -11,13 +11,20 @@ print("extracting ground truth from two consecutive frames and giving us the mar
 # other packages
 import numpy as np
 import tf as tf
+import rospy
+import pose_estimation_module as PEM
 
 # GLOBAL VARIABLES
 DEFAULT_BASE_LINK_TOPIC = '/base_link'
 DEFAULT_CAMERA_TOPIC = '/cam_0_optical_frame'
 
+DEFAULT_CTB_TRANSLATION = [-0.000, -0.000, -0.133]
+DEFAULT_CTB_QUATERNION = [0.500, -0.500, 0.500, 0.500]
+
+
 class GroundTruth:
-    def __init__(self, default_base_link_topic=DEFAULT_BASE_LINK_TOPIC, default_camera_topic=DEFAULT_CAMERA_TOPIC):
+    def __init__(self, default_base_link_topic=DEFAULT_BASE_LINK_TOPIC, default_camera_topic=DEFAULT_CAMERA_TOPIC,
+                 default_ctb_translation=DEFAULT_CTB_TRANSLATION, default_ctb_quaternion=DEFAULT_CTB_QUATERNION):
 
         """
         by initializing vo, the image subscriber in hypothesis is activated
@@ -34,6 +41,9 @@ class GroundTruth:
 
         # initialize transform listener
         self.listener = tf.TransformListener()
+        self.ctb_translation = default_ctb_translation
+        self.ctb_quaternion = default_ctb_quaternion
+        # rospy.wait_for_service('spawn')
 
     """
     this method returns the quaternion representation of a rotation matrix
@@ -93,14 +103,12 @@ class GroundTruth:
 
         btm_homogenous_transformation_mat = tf.transformations.concatenate_matrices(bTm_translation_mat,
                                                                                     bTm_orientation_mat)
-        return btm_homogenous_transformation_mat # returns 4x4 homogenous transformation matrix
+        return btm_homogenous_transformation_mat  # returns 4x4 homogenous transformation matrix
 
     # function to get the camera to base homogenous transformation matrix
-    def get_camera_to_base_homogenous_transformation_matrix(self, marker):
-        # using lookupTransform(target, source, time) -> position, quaternion
-        cTb_translation, cTb_quaternion = self.listener.lookupTransform(target_frame=self.default_base_link_topic,
-                                                                        source_frame=self.default_camera_topic,
-                                                                        time=marker.header.stamp)
+    def get_camera_to_base_homogenous_transformation_matrix(self):
+
+        cTb_translation, cTb_quaternion = self.ctb_translation, self.ctb_quaternion
 
         # turn into translation and orientation matrices; dimensions = 4x4
         cTb_translation_mat = tf.transformations.translation_matrix(cTb_translation)
@@ -113,7 +121,7 @@ class GroundTruth:
     # this method computes the camera to marker homogenous transformation matrix for a frame; marker = marker.0
     def compute_frame_camera_to_marker(self, marker):
 
-        cTb_homogenous_transformation_mat = self.get_camera_to_base_homogenous_transformation_matrix(marker)
+        cTb_homogenous_transformation_mat = self.get_camera_to_base_homogenous_transformation_matrix()
 
         bTm_homogenous_transformation_mat = self.get_base_to_marker_homogenous_transformation(marker)
 
@@ -122,7 +130,7 @@ class GroundTruth:
 
         self.ground_truth_list_cam_to_marker.append(cam_to_marker_transformation)
 
-        return cam_to_marker_transformation # output: 4x4 homogenous transformation matrix
+        return cam_to_marker_transformation  # output: 4x4 homogenous transformation matrix
 
     def get_ground_truth_estimate(self, marker_reading, reference_id=0):
         # callback function to access the ground truth data
@@ -139,7 +147,7 @@ class GroundTruth:
             if reference_id_index == -1:
                 return None
             else:
-                print("marker {} detected!".format(reference_id_index))
+                # print("marker {} detected!".format(reference_id_index))
                 # compute camera to marker transformation for current frame for marker 0
                 camera_to_marker_transformation = self.compute_frame_camera_to_marker(markers[reference_id_index])
                 return camera_to_marker_transformation

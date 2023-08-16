@@ -5,9 +5,22 @@
 # ROS node messages
 print("extracting 1) visual odometry and 2) ground truth from rosbag for trajectory evaluation")
 
-import transformations as tf
-import numpy as np
 import tf as tf
+import numpy as np
+import matplotlib.pyplot as plt
+from mpl_toolkits.mplot3d import axes3d, Axes3D
+# from numpy_quaternion import Quaternion
+
+
+def transformation_from_translation_quaternion(translation, quaternion):
+    # Convert the quaternion to a rotation matrix
+    rotation_matrix = tf.quaternion_matrix(quaternion)[:3, :3]
+
+    transformation_matrix = np.eye(4)  # Start with identity matrix
+    transformation_matrix[:3, :3] = rotation_matrix
+    transformation_matrix[:3, 3] = translation
+
+    return transformation_matrix
 
 
 def translation_from_transformation_matrix(transformation_matrix):
@@ -112,4 +125,54 @@ def write_gt_vo_difference_to_file(gt_file_path, vo_file_path, output_file_path)
             vo_euler = np.array([vo_row, vo_pitch, vo_yaw])
 
             gt_vo_difference = vo_euler - gt_euler
+            print(gt_vo_difference)
             file.write("at timestamp {} the gt vo euler angle difference is {} \n".format(timestamp, gt_vo_difference))
+
+
+def append_transformation_to_file(transformation_matrix, file_path):
+    with open(file_path, 'a') as file:
+        for row in transformation_matrix:
+            row_str = ' '.join(str(value) for value in row)
+            file.write(row_str + '\n')
+
+def compute_gt_vo_translation_difference(gt_file_path, vo_file_path):
+    ground_truth = np.genfromtxt(gt_file_path)
+    vis_odom = np.genfromtxt(vo_file_path)
+
+    ground_truth_translation = np.array([ground_truth[1], ground_truth[2], ground_truth[3]])
+    vis_odom_translation = np.array([vis_odom[1], vis_odom[2], vis_odom[3]])
+    translation_difference = vis_odom_translation - ground_truth_translation
+
+    return [translation_difference[0], translation_difference[1], translation_difference[2]]
+
+
+def compute_gt_vo_quaternion_difference(gt_file_path, vo_file_path):
+    ground_truth = np.genfromtxt(gt_file_path)
+    vis_odom = np.genfromtxt(vo_file_path)
+
+    ground_truth_quaternion = Quaternion(x=ground_truth[4], y=ground_truth[5], z=ground_truth[6], w=ground_truth[7])
+    vis_odom_quaternion = Quaternion(x=vis_odom[4], y=vis_odom[5], z=vis_odom[6], w=vis_odom[7])
+
+    interpolated_quaternion = ground_truth_quaternion * vis_odom_quaternion.conjugate()
+
+    return [interpolated_quaternion.x, interpolated_quaternion.y, interpolated_quaternion.z, interpolated_quaternion.w]
+
+
+def visualize_gt_vo_translation_difference(translation_difference, plot_output_path):
+    # Create a 3D plot
+
+    plt.ion()
+    fig = plt.figure(figsize=(5, 5))
+    ax = fig.add_subplot(111, projection='3d')
+    ax.plot([translation_difference[0], translation_difference[0]], [translation_difference[1], translation_difference[1]], [translation_difference[2], translation_difference[2]], 'bo-')
+    ax.scatter(translation_difference[0], translation_difference[1], translation_difference[2], c='r', marker='o', label='Vector 1')
+    ax.scatter(translation_difference[0], translation_difference[1], translation_difference[2], c='g', marker='o', label='Vector 2')
+    ax.plot([translation_difference[0], translation_difference[0]], [translation_difference[1], translation_difference[1]], [translation_difference[2], translation_difference[2]], 'b--')
+    ax.set_xlabel('X')
+    ax.set_ylabel('Y')
+    ax.set_zlabel('Z')
+    ax.set_title('Translation Difference Visualization')
+    ax.legend()
+    plt.savefig(plot_output_path, format='jpg', dpi=300)
+    plt.show()
+
