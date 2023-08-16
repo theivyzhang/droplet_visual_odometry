@@ -1,9 +1,8 @@
 #!/usr/bin/python
 
 # Author: Ivy Aiwei Zhang
-# Last updated: 08-08-2023
-# Purpose: a TEST python file that concurrently runs visual odometry and ground truth extraction
-# testing differences in handling matrix algebra
+# Last updated: 08-16-2023
+# Purpose: a python file that runs visual odometry and ground truth extraction on a single pair of images saved
 
 # ROS node messages
 print("extracting 1) visual odometry and 2) ground truth from rosbag for trajectory evaluation")
