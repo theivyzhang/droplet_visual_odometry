@@ -21,9 +21,8 @@ from traj_eval_ground_truth import GroundTruth  # ground truth reading module
 import pose_estimation_module as PoseEstimationFunctions
 
 
-class Activate_GT_VO_Processes:
-    def __init__(self, bag_file_path=None, gt_output_file_path='', vo_output_file_path='', previous_image_path=' ',
-                 current_image_path=' ', matching_mode='orb'):
+class UnitTestingExtractData:
+    def __init__(self, bag_file_path=None, gt_output_file_path='', vo_output_file_path='', folder_path = ' ', matching_mode='orb', starting_index = 0):
         # set up flags
         self.previous_image = None
         self.current_image = None
@@ -35,8 +34,10 @@ class Activate_GT_VO_Processes:
         self.bag_file_path = bag_file_path
         self.gt_output_file_path = gt_output_file_path
         self.vo_output_file_path = vo_output_file_path
-        self.previous_image_path = previous_image_path
-        self.current_image_path = current_image_path
+        # self.previous_image_path = previous_image_path
+        # self.current_image_path = current_image_path
+        self.folder_path = folder_path
+        self.starting_index = starting_index
 
         # clear existing data for sanity checks
         PoseEstimationFunctions.clear_txt_file_contents(self.gt_output_file_path)
@@ -90,7 +91,7 @@ class Activate_GT_VO_Processes:
 
                         # TODO avoid repetition of code
                         self.marker_reading = bag_message
-                        print("len of marker is {}".format(len(self.marker_reading.markers)))
+                        # print("len of marker is {}".format(len(self.marker_reading.markers)))
 
                         if len(self.marker_reading.markers) > 0:
                             # get the camera to marker transformation
@@ -146,9 +147,7 @@ class Activate_GT_VO_Processes:
 
                             # extract translation and quaternion separately from the vo_transformation
                             vo_translation = PoseEstimationFunctions.translation_from_transformation_matrix(
-                                transformation_matrix=vo_transformation)
-                            vo_translation_unit = vo_translation / np.linalg.norm(
-                                vo_translation)  # turn into unit vector
+                                transformation_matrix=vo_transformation) # unit vector
                             vo_quaternion = PoseEstimationFunctions.quaternion_from_transformation_matrix(
                                 transformation_matrix=vo_transformation)
 
@@ -186,7 +185,7 @@ class Activate_GT_VO_Processes:
                             self.valid_count = 1
 
                             valid_pair += 1
-                            if valid_pair > 10:
+                            if valid_pair > self.starting_index:
                                 # write ground truth data
                                 # TODO: CHECK - write the data
                                 PoseEstimationFunctions.write_to_output_file(self.gt_output_file_path, timestamp.to_sec(),
@@ -195,14 +194,19 @@ class Activate_GT_VO_Processes:
                                                                          gt_quaternion)
                                 # write visual odometry data
                                 PoseEstimationFunctions.write_to_output_file(self.vo_output_file_path, timestamp.to_sec(),
-                                                                         vo_translation_unit, vo_quaternion)
+                                                                         vo_translation, vo_quaternion)
                                 # save current and previous image
-                                cv.imwrite(self.previous_image_path, previous_image)
-                                cv.imwrite(self.current_image_path, current_image)
+                                previous_image_path = self.folder_path+"/set_"+str(valid_pair)+"_image1.jpg"
+                                current_image_path = self.folder_path+"/set_"+str(valid_pair)+"_image1.jpg"
+
+                                cv.imwrite(previous_image_path, previous_image)
+                                cv.imwrite(current_image_path, current_image)
                                 print("previous and current images saved for unit testing")
                                 # write the second line to vis_odom output for vo_transform for the PREVIOUS set
-                                PoseEstimationFunctions.append_transformation_to_file(self.vo_tf_list[-2], self.vo_output_file_path)
+                                # PoseEstimationFunctions.append_transformation_to_file(self.vo_tf_list[-2], self.vo_output_file_path)
                                 print("completed unit testing")
+                            if valid_pair > self.starting_index + 10:
+                                print("completed unit testing on {} gt vs vo outputs".format(10))
                                 break
 
                         # valid count <= 1
@@ -228,16 +232,18 @@ class Activate_GT_VO_Processes:
 
 
 def main(args):
-    rospy.init_node('LaunchProcessNode', anonymous=True)
+    rospy.init_node('UnitTestingExtractData', anonymous=True)
     bag_file_path = '/home/ivyz/Documents/8-31-system-trials_2021-07-28-16-33-22.bag'
-    gt_output_file_path = '/home/ivyz/Documents/ivy_workspace/src/vis_odom/scripts/unit_testing/ut_08162023_set1_flann/stamped_ground_truth.txt'
-    vo_output_file_path = '/home/ivyz/Documents/ivy_workspace/src/vis_odom/scripts/unit_testing/ut_08162023_set1_flann/stamped_traj_estimate.txt'
-    previous_image_path = '/home/ivyz/Documents/ivy_workspace/src/vis_odom/scripts/unit_testing/ut_08162023_set1_flann/image1.jpg'
-    current_image_path = '/home/ivyz/Documents/ivy_workspace/src/vis_odom/scripts/unit_testing/ut_08162023_set1_flann/image2.jpg'
 
-    Activate_GT_VO_Processes(bag_file_path=bag_file_path, gt_output_file_path=gt_output_file_path,
-                             vo_output_file_path=vo_output_file_path, previous_image_path=previous_image_path,
-                             current_image_path=current_image_path, matching_mode='flann')
+    # previous_image_path = '/home/ivyz/Documents/ivy_workspace/src/vis_odom/scripts/unit_testing/ut_08162023_set1_flann/image1.jpg'
+    # current_image_path = '/home/ivyz/Documents/ivy_workspace/src/vis_odom/scripts/unit_testing/ut_08162023_set1_flann/image2.jpg'
+    folder_path = '/home/ivyz/Documents/ivy_workspace/src/vis_odom/scripts/unit_testing/ut_08172023/output000-010'
+    gt_output_file_path = folder_path+"/stamped_ground_truth.txt"
+    vo_output_file_path = folder_path+"/stamped_traj_estimate.txt"
+    starting_index = 0
+
+    UnitTestingExtractData(bag_file_path=bag_file_path, gt_output_file_path=gt_output_file_path,
+                             vo_output_file_path=vo_output_file_path, folder_path = folder_path, matching_mode='flann', starting_index = starting_index)
 
     print("trajectory evaluation processes activated")
     rospy.sleep(1)

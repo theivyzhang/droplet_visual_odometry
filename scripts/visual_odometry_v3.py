@@ -76,7 +76,7 @@ class VisualOdometry:
             feature_detector = cv.ORB_create()
             norm_type = cv.NORM_HAMMING
             cross_check = True
-        elif mode.lower() == "sift" or mode.lower() == 'flann' or mode.lower()=='knn_sift':
+        elif mode.lower() == "sift" or mode.lower() == 'flann' or mode.lower() == 'knn_sift':
             feature_detector = cv.xfeatures2d.SIFT_create()
             norm_type = cv.NORM_L1
             cross_check = False
@@ -158,20 +158,20 @@ class VisualOdometry:
     def get_matches_between_two_frames(self, previous_key_points, previous_descriptors, current_key_points,
                                        current_descriptors):
 
+        match_fun = None
         if self.mode == 'sift':
-            return self.get_sift_matches(previous_key_points, previous_descriptors, current_key_points,
-                                         current_descriptors)
-        elif self.mode =='knn_sift':
-            return self.get_knn_sift_matches(previous_key_points, previous_descriptors, current_key_points,
-                                         current_descriptors)
+            match_fun = self.get_sift_matches
+        elif self.mode == 'knn_sift':
+            match_fun = self.get_knn_sift_matches
         elif self.mode == 'flann':
-            return self.get_sift_flann_matches(previous_key_points, previous_descriptors, current_key_points, current_descriptors)
+            match_fun = self.get_sift_flann_matches
         elif self.mode == 'surf':
-            return self.get_surf_matches(previous_key_points, previous_descriptors, current_key_points, current_descriptors)
+            match_fun = self.get_surf_matches
         elif self.mode == 'orb':
-            return self.get_orb_matches(previous_key_points, previous_descriptors, current_key_points,
-                                        current_descriptors)
+            match_fun = self.get_orb_matches
 
+        return match_fun(previous_key_points, previous_descriptors, current_key_points,
+                                         current_descriptors)
 
     # TODO: bf matching with orb, returning only top 100 out of 500
     def get_orb_matches(self, previous_key_points, previous_descriptors, current_key_points,
@@ -189,7 +189,7 @@ class VisualOdometry:
         for i in range(len(matches[:100])):
             train_index = matches[i].trainIdx  # index of the match in previous key points
             query_index = matches[i].queryIdx  # index of the match in current key points
-            print("train index {} and query index {} ".format(train_index, query_index))
+            # print("train index {} and query index {} ".format(train_index, query_index))
             top_ten_previous_key_points.append(previous_key_points[train_index])
             top_ten_current_key_points.append(current_key_points[query_index])
         return matches[:10], top_ten_previous_key_points, top_ten_current_key_points  # TODO parameter for top-k matches
@@ -218,9 +218,9 @@ class VisualOdometry:
         return matches[:10], top_ten_previous_key_points, top_ten_current_key_points  # TODO parameter for top-k matches
 
     # TODO: bf matching with sift descriptors and ratio test
-    # RESULTS under KNN_SIFT_08152023
+    # RESULTS under KNN_SIFT_08152023_400
     def get_knn_sift_matches(self, previous_key_points, previous_descriptors, current_key_points,
-                         current_descriptors):
+                             current_descriptors):
 
         top_ten_previous_key_points = []
         top_ten_current_key_points = []
@@ -250,17 +250,18 @@ class VisualOdometry:
 
     # TODO: check sift FLANN method
 
-    def get_sift_flann_matches(self, previous_key_points, previous_descriptors, current_key_points, current_descriptors):
+    def get_sift_flann_matches(self, previous_key_points, previous_descriptors, current_key_points,
+                               current_descriptors):
         top_ten_previous_key_points = []
         top_ten_current_key_points = []
 
         # FLANN parameters
         FLANN_INDEX_KDTREE = 1
-        index_params = dict(algorithm = FLANN_INDEX_KDTREE, trees = 5)
-        search_params = dict(checks=50) # or pass empty dictionary
+        index_params = dict(algorithm=FLANN_INDEX_KDTREE, trees=5)
+        search_params = dict(checks=50)  # or pass empty dictionary
 
-        flann = cv.FlannBasedMatcher(index_params,search_params)
-        matches = flann.knnMatch(previous_descriptors,current_descriptors,k=2)
+        flann = cv.FlannBasedMatcher(index_params, search_params)
+        matches = flann.knnMatch(previous_descriptors, current_descriptors, k=2)
 
         passed_ratio_test = []
 
@@ -284,7 +285,7 @@ class VisualOdometry:
         return matches[:10], top_ten_previous_key_points, top_ten_current_key_points  # TODO parameter for top-k matches
 
     # TODO: bf matching with sift descriptors and ratio test
-    # RESULTS under KNN_SIFT_08152023
+    # RESULTS under KNN_SIFT_08152023_400
     def get_surf_matches(self, previous_key_points, previous_descriptors, current_key_points,
                          current_descriptors):
 
@@ -314,23 +315,26 @@ class VisualOdometry:
 
         return matches[:10], top_ten_previous_key_points, top_ten_current_key_points  # TODO parameter for top-k matches
 
-
     # TODO: CHECKED - PREV CURR
     def get_transformation_between_two_frames(self, array_previous_key_points,
                                               array_current_key_points):
 
         # get the essential matrix
-        self.essential_matrix, mask = cv.findEssentialMat(points1=array_current_key_points,
-                                                          points2=array_previous_key_points,
+        self.essential_matrix, mask = cv.findEssentialMat(points1=array_previous_key_points,
+                                                          points2=array_current_key_points,
                                                           cameraMatrix=self.int_coeff_mtx,
                                                           method=cv.RANSAC, prob=0.999, threshold=1.0)
         # TODO: discuss the need for setting maxIters -> maximum number of robust method iterations
         # compute the relative position using the essential matrix, key points  using cv.relativepose
         points, relative_rotation, translation, mask = cv.recoverPose(E=self.essential_matrix,
-                                                                      points1=array_current_key_points,
-                                                                      points2=array_previous_key_points,
+                                                                      points1=array_previous_key_points,
+                                                                      points2=array_current_key_points,
                                                                       cameraMatrix=self.int_coeff_mtx)
         translation = translation.transpose()[0]
+        # make the translation unit
+        translation_unit = translation / np.linalg.norm(translation)
+        #print("unit_translation {}".format(translation_unit))
+
         relative_rotation = np.array(relative_rotation)
         # decompose rotation matrix + find euler
         t = np.array([0, 0, 0])
@@ -342,7 +346,7 @@ class VisualOdometry:
         # compute the current transformation matrix
         euler = np.array(euler)
 
-        prev_to_curr_translation = self.make_transform_mat(translation=translation, euler=euler)
+        prev_to_curr_translation = self.make_transform_mat(translation=translation_unit, euler=euler)
 
         # store previous to current translation in the corresponding list
         self.frame_translations.append(prev_to_curr_translation)
@@ -392,8 +396,8 @@ class VisualOdometry:
         current_key_points, current_descriptors, current_image_with_keypoints_drawn = self.compute_current_image_elements(
             current_image)
 
-        print("length of prev kp {} and curr kp {}".format(len(previous_key_points), len(current_key_points)))
-        print("length of prev desc {} and curr desc {}".format(len(previous_descriptors), len(current_descriptors)))
+        # print("length of prev kp {} and curr kp {}".format(len(previous_key_points), len(current_key_points)))
+        # print("length of prev desc {} and curr desc {}".format(len(previous_descriptors), len(current_descriptors)))
 
         # from the above code we produce a length 500 current key points and a (500 height, 32 width) shaped current descriptors
         # get matches should return top 10 previous key points

@@ -127,7 +127,6 @@ class GroundTruth:
 
         # TODO: checked --> camera2marker = camera2base @ base2marker
         cam_to_marker_transformation = np.matmul(cTb_homogenous_transformation_mat, bTm_homogenous_transformation_mat)
-
         self.ground_truth_list_cam_to_marker.append(cam_to_marker_transformation)
 
         return cam_to_marker_transformation  # output: 4x4 homogenous transformation matrix

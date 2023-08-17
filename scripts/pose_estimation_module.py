@@ -54,7 +54,6 @@ def rotation_matrix_to_quaternion(rotation_matrix):
         x = (rotation_matrix[0, 2] + rotation_matrix[2, 0]) / S
         y = (rotation_matrix[1, 2] + rotation_matrix[2, 1]) / S
         z = 0.25 * S
-
     return [x, y, z, w]
 
 
