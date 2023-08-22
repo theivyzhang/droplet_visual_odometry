@@ -31,6 +31,8 @@ class UnitTestingExtractData:
         self.first_topic_found = ""
         self.valid_count = 0
         self.number_of_outputs = number_of_outputs
+        self.calibration_file_path = calibration_file_path
+        self.controlled = controlled
 
         # set up file paths
         self.bag_file_path = bag_file_path
@@ -46,8 +48,6 @@ class UnitTestingExtractData:
         PoseEstimationFunctions.clear_txt_file_contents(self.vo_output_file_path)
 
         # initialize modules
-        self.calibration_file_path = calibration_file_path
-        self.controlled = controlled
         self.visual_odometry = VisualOdometry(to_sort=False, mode=matching_mode, calibration_file_path=self.calibration_file_path, controlled=self.controlled)
         print("activating mode {}".format(self.visual_odometry.mode))
         self.ground_truth = GroundTruth()
@@ -63,6 +63,9 @@ class UnitTestingExtractData:
         self.vo_tf_list.append(self.robot_starting_position_transformation)
         self.gt_camera_to_camera_list.append(self.robot_starting_position_transformation)
 
+        # determine the topics
+
+
         # start getting vo gt data
         self.extract_vo_gt_data()
 
@@ -71,8 +74,8 @@ class UnitTestingExtractData:
             gt_transformation = None
             i = 0
             valid_pair = 0
-            for topic, bag_message, timestamp in bag.read_messages(topics=['/camera_array/cam0/image_raw/compressed',
-                                                                           '/bluerov_controller/ar_tag_detector'],
+            for topic, bag_message, timestamp in bag.read_messages(topics=['/usb_cam/image_raw',
+                                                                           '/stag_markers'],
                                                                    ):
                 i += 1
                 print("{} {} {}".format(i, topic, timestamp.to_sec()))
@@ -82,7 +85,7 @@ class UnitTestingExtractData:
                 if not self.first_topic_found:
                     # finding first message for a valid pair
                     self.first_topic_found = topic
-                    if "image" in topic:
+                    if "raw" in topic:
                         # Saving image for when a valid pair is found
                         if self.valid_count < 1:
                             self.previous_image = bag_message
@@ -100,7 +103,7 @@ class UnitTestingExtractData:
                         if len(self.marker_reading.markers) > 0:
                             # get the camera to marker transformation
                             gt_transformation = self.ground_truth.get_ground_truth_estimate(
-                                marker_reading=self.marker_reading, reference_id=0)
+                                marker_reading=self.marker_reading, reference_id=11)
                             # TODO try to include all markers -->
 
                             # separate the translation and the quaternion
@@ -113,19 +116,22 @@ class UnitTestingExtractData:
                     if topic != self.first_topic_found:
                         # found actual valid pair image-pose or pose-image
                         # Saving ground truth
-                        if gt_transformation is None and "ar_tag" in topic:
+                        if gt_transformation is None and "markers" in topic:
                             # tmp_gt_tf = bag_message
                             self.marker_reading = bag_message
+                            # print("now processing marker message")
 
                             if len(self.marker_reading.markers) > 0:
+                                # print("yellow!")
                                 # get the camera to marker transformation
                                 gt_transformation = self.ground_truth.get_ground_truth_estimate(
-                                    marker_reading=self.marker_reading, reference_id=0)
+                                    marker_reading=self.marker_reading, reference_id=11)
                                 # print("here is gt transform {}".format(gt_transformation))
                                 # separate the translation and the quaternion
                                 # TODO have the message already in the form of a transformation
                                 if gt_transformation is not None:
                                     self.gt_camera_to_marker_list.append(gt_transformation)
+                                    # print("we have marker gt transformation {}".format(gt_transformation))
 
                                     self.valid_count += 1
 
@@ -139,8 +145,8 @@ class UnitTestingExtractData:
                             if self.current_image is None:  # and "image" in topic:
                                 self.current_image = bag_message
                             # TODO: CHECK - compute the data for visual odometry
-                            current_image = self.visual_odometry.ros_img_msg_to_opencv_image(image_message=self.current_image, msg_type='compressed')
-                            previous_image = self.visual_odometry.ros_img_msg_to_opencv_image(image_message=self.previous_image, msg_type='compressed')
+                            current_image = self.visual_odometry.ros_img_msg_to_opencv_image(image_message=self.current_image, msg_type='usb_raw')
+                            previous_image = self.visual_odometry.ros_img_msg_to_opencv_image(image_message=self.previous_image, msg_type='usb_raw')
 
                             # outputs transformation with respect to the current position of robot (different from default)
                             vo_transformation = self.visual_odometry.visual_odometry_calculations(previous_image,
@@ -216,17 +222,8 @@ class UnitTestingExtractData:
                                                                              gt_quaternion)
                                 # write visual odometry data
                                 PoseEstimationFunctions.write_to_output_file(self.vo_output_file_path,
-                                                                             timestamp.to_sec(),
+                                                                              timestamp.to_sec(),
                                                                              vo_translation, vo_quaternion)
-                                # save current and previous image
-                                current_image_path = self.folder_path + "/set_" + str(valid_pair) + "_image.jpg"
-
-                                # cv.imwrite(previous_image_path, previous_image)
-                                # cv.imwrite(current_image_path, current_image)
-                                # print("previous and current images saved for unit testing")
-                                # write the second line to vis_odom output for vo_transform for the PREVIOUS set
-                                # PoseEstimationFunctions.append_transformation_to_file(self.vo_tf_list[-2], self.vo_output_file_path)
-                                # print("completed unit testing")
                             if valid_pair > self.starting_index + self.number_of_outputs:
                                 # print(self.vo_tf_list[len(self.vo_tf_list) - 2 - self.number_of_outputs:])
                                 print("completed unit testing on {} gt vs vo outputs".format(self.number_of_outputs))
@@ -255,18 +252,17 @@ class UnitTestingExtractData:
 
 
 def main(args):
-    rospy.init_node('UnitTestingExtractDataIdentityMatrix', anonymous=True)
-    bag_file_path = '/home/ivyz/Documents/8-31-system-trials_2021-07-28-16-33-22.bag'
-    calibration_file_path = '/home/ivyz/Documents/ivy_workspace/src/vis_odom/Parameters/camera_calibration.yaml'
+    rospy.init_node('UnitTestingControlledExperiment', anonymous=True)
+    print("starting controlled experiments")
+    bag_file_path = '/home/ivyz/Documents/ivy_workspace/src/vis_odom/scripts/unit_testing_controlled/controlled_usb_rosbot_zoomin_move_1/controlled_usb_rosbot_zoomin_move_1.bag'
+    calibration_file_path = '/home/ivyz/Documents/ivy_workspace/src/usb_cam.yaml'
+    controlled = True
 
-    # previous_image_path = '/home/ivyz/Documents/ivy_workspace/src/vis_odom/scripts/unit_testing/ut_08162023_set1_flann/image1.jpg'
-    # current_image_path = '/home/ivyz/Documents/ivy_workspace/src/vis_odom/scripts/unit_testing/ut_08162023_set1_flann/image2.jpg'
-    folder_path = '/home/ivyz/Documents/ivy_workspace/src/vis_odom/scripts/unit_testing_controlled/testbag'
+    folder_path = '/home/ivyz/Documents/ivy_workspace/src/vis_odom/scripts/unit_testing_controlled/controlled_usb_rosbot_zoomin_move_1'
     gt_output_file_path = folder_path + "/stamped_ground_truth.txt"
     vo_output_file_path = folder_path + "/stamped_traj_estimate.txt"
     starting_index = 0
-    number_of_outputs = 400
-    controlled = False
+    number_of_outputs = 200
 
     UnitTestingExtractData(bag_file_path=bag_file_path, gt_output_file_path=gt_output_file_path,
                            vo_output_file_path=vo_output_file_path, folder_path=folder_path, matching_mode='flann',

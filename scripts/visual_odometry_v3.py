@@ -10,6 +10,8 @@ import cv2 as cv
 import transformations as transf
 import yaml
 from yaml.loader import SafeLoader
+import pose_estimation_module as PEM
+
 
 VERBOSE = False
 
@@ -22,15 +24,25 @@ DEFAULT_STARTING_ROBOT_EULER = [0, 0, 0]
 class VisualOdometry:
     # global all_frames, previous_image, previous_key_points, previous_descriptors, current_frame, robot_position_list
 
-    def __init__(self, starting_translation=None, starting_euler=None, to_sort=False, mode="ORB"):
+    def __init__(self, starting_translation=None, starting_euler=None, to_sort=False, mode="ORB",
+                 calibration_file_path="", controlled=False):
         if starting_euler is None:
             starting_euler = DEFAULT_STARTING_ROBOT_EULER
         if starting_translation is None:
             starting_translation = DEFAULT_STARTING_ROBOT_TRANSLATION
 
-        # Assumes that message is compressed, thus requiring frame width and height
-        self.frame_height = 1080
-        self.frame_width = 1400
+        # sets frame width and height according to type (controlled = usb_cam/image_raw, otherwise compressed_image)
+        self.controlled = controlled
+        print("is this a controlled experiment? {}".format(self.controlled))
+        if not controlled:
+            self.frame_height = 1080
+            self.frame_width = 1400
+        else:
+            self.frame_height = 480
+            self.frame_width = 640
+
+        print("have frame width {} and height {}".format(self.frame_width, self.frame_height))
+
         # the translation and euler at the start of the program
         self.starting_translation = starting_translation
         self.starting_euler = starting_euler
@@ -40,6 +52,10 @@ class VisualOdometry:
         self.essential_matrix = None
 
         # parse the camera intrinsics before starting anything else
+        self.calibration_file_path = calibration_file_path
+
+        self.distortion_coefficient_matrix = None
+        self.intrinsic_coefficient_matrix = None
         self.parse_camera_intrinsics()
 
         # model parameters
@@ -48,6 +64,7 @@ class VisualOdometry:
 
         # get the parameters needed under the specified mode
         self.feature_detector, self.norm_type, self.cross_check = self.return_feature_matching_parameters(mode)
+        self.calibration_file_path = calibration_file_path
 
         # parameters needed for evaluating the image frames
 
@@ -57,14 +74,12 @@ class VisualOdometry:
         self.robot_position_list = []  # calculated robot position list from opencv
         self.ground_truth_list = []  # list of ground truths from the ros node
         self.frame_translations = []  # maintains the translation between every consecutive frame
-        self.marker_differences = []  # maintains the difference between the marker positions between every consecutive frames
         self.matches_dictionary = []  # list of dictionaries
 
         # initialize current position of the robot based on the translation and euler at the start of the program
         self.robot_curr_position = self.make_transform_mat(translation=self.starting_translation,
                                                            euler=self.starting_euler)
 
-        self.detected_marker = False
 
     """
     THIS IS THE SECTION CONTAINING ALL THE UTILITY FUNCTIONS
@@ -88,24 +103,28 @@ class VisualOdometry:
 
     # method to undistort the image
     def undistort_image(self, distorted_image, new_camera_matrix):
-        current_image = cv.undistort(distorted_image, self.int_coeff_mtx, self.dist_coef_arr, None, new_camera_matrix)
+        current_image = cv.undistort(src=distorted_image, cameraMatrix=self.intrinsic_coefficient_matrix,
+                                     distCoeffs=self.distortion_coefficient_matrix, newCameraMatrix=new_camera_matrix)
         return current_image
 
-    # method to convert a ros frame to a compatible opencv image format
-    def rosframe_to_current_image(self, frame):
-        # compute the camera matrix
+    def ros_img_msg_to_opencv_image(self, image_message, msg_type):
+        image_np = None
         new_camera_matrix, _ = cv.getOptimalNewCameraMatrix(
-            self.int_coeff_mtx,
-            self.dist_coef_arr,
+            self.intrinsic_coefficient_matrix,
+            self.distortion_coefficient_matrix,
             (self.frame_width, self.frame_height),
             1,
             (self.frame_width, self.frame_height)
         )
-        # convert the frame data into a numpy array
-        np_arr = np.fromstring(frame.data, np.uint8)
-        image_np = cv.imdecode(np_arr, cv.IMREAD_COLOR)
-        grey_image = cv.cvtColor(image_np, cv.COLOR_BGR2GRAY)
+        if msg_type=='compressed':
+            np_arr = np.fromstring(image_message.data, np.uint8)
+            image_np = cv.imdecode(np_arr, cv.IMREAD_COLOR)
+        elif msg_type=='usb_raw':
+            np_arr = np.frombuffer(image_message.data, dtype=np.uint8)
+            image_np = np_arr.reshape((image_message.height, image_message.width, -1))
+        grey_image = cv.cvtColor(src=image_np, code=cv.COLOR_BGR2GRAY)
         current_image = self.undistort_image(grey_image, new_camera_matrix)
+
         return current_image
 
     # helper function to make transformation matrix
@@ -117,21 +136,21 @@ class VisualOdometry:
 
     # method that parses camera intrinsics and computes 1) distortion coefficients and 2) intrinsic coefficients
     def parse_camera_intrinsics(self):
-        calibration_file_path = '/home/ivyz/Documents/ivy_workspace/src/vis_odom/Parameters/camera_calibration.yaml'
+        calibration_file_path = self.calibration_file_path
         with open(calibration_file_path) as camera_calibration:
             data = yaml.load(camera_calibration, Loader=SafeLoader)
 
-        # input the distortion coefficients into an array
-        distortion_coefficients = data["distortion_coeffs"]
-        self.dist_coef_arr = distortion_coefficients[0]
-        self.dist_coef_arr = np.array(self.dist_coef_arr).reshape(1, 5)
+        if not self.controlled: # using the camera calibration file for the robot
 
-        # compute the 3x3 intrinsic coefficient matrix
-        intrinsic_coefficients = data["intrinsic_coeffs"]
-        self.int_coef_arr = intrinsic_coefficients[0]
+            self.distortion_coefficient_matrix = np.array(data['distortion_coeffs'][0])
+            self.intrinsic_coefficient_matrix = np.array(data['intrinsic_coeffs'][0]).reshape((3, 3))
 
-        self.int_coeff_mtx = np.array(self.int_coef_arr)
-        self.int_coeff_mtx = self.int_coeff_mtx.reshape(3, 3)
+        else: # using the camera calibration yaml for the lab iMAC
+            camera_matrix_data = data['camera_matrix']['data']
+            distortion_coeff_data = data['distortion_coefficients']['data']
+
+            self.intrinsic_coefficient_matrix = np.array(camera_matrix_data).reshape((3, 3))
+            self.distortion_coefficient_matrix = np.array(distortion_coeff_data).reshape((1, 5))
 
     """
     THIS SECTION CONTAINS ALL THE FUNCTIONS NEEDED FOR THE VISUAL ODOMETRY CALLBACK
@@ -158,162 +177,52 @@ class VisualOdometry:
     def get_matches_between_two_frames(self, previous_key_points, previous_descriptors, current_key_points,
                                        current_descriptors):
 
-        match_fun = None
-        if self.mode == 'sift':
-            match_fun = self.get_sift_matches
-        elif self.mode == 'knn_sift':
-            match_fun = self.get_knn_sift_matches
-        elif self.mode == 'flann':
-            match_fun = self.get_sift_flann_matches
-        elif self.mode == 'surf':
-            match_fun = self.get_surf_matches
-        elif self.mode == 'orb':
-            match_fun = self.get_orb_matches
+        matches = None
 
-        return match_fun(previous_key_points, previous_descriptors, current_key_points,
-                                         current_descriptors)
-
-    # TODO: bf matching with orb, returning only top 100 out of 500
-    def get_orb_matches(self, previous_key_points, previous_descriptors, current_key_points,
-                        current_descriptors):
         # initialize key points arrays
-        top_ten_previous_key_points = []
-        top_ten_current_key_points = []
+        top_previous_key_points = []
+        top_current_key_points = []
 
-        # use the brute force matcher to match features
-        matches = self.bf.match(previous_descriptors, current_descriptors)
-        # sort if needed
-        matches = sorted(matches, key=lambda x: x.distance)
+        if self.mode == 'sift':
+            matches = self.bf.match(previous_descriptors, current_descriptors)
 
-        # extract top 10 previous and current key points
-        for i in range(len(matches[:100])):
-            train_index = matches[i].trainIdx  # index of the match in previous key points
-            query_index = matches[i].queryIdx  # index of the match in current key points
-            # print("train index {} and query index {} ".format(train_index, query_index))
-            top_ten_previous_key_points.append(previous_key_points[train_index])
-            top_ten_current_key_points.append(current_key_points[query_index])
-        return matches[:10], top_ten_previous_key_points, top_ten_current_key_points  # TODO parameter for top-k matches
+        elif self.mode == 'knn_sift':
+            matches = self.bf.knnMatch(previous_descriptors, current_descriptors, k=2)
 
-    def get_sift_matches(self, previous_key_points, previous_descriptors, current_key_points,
-                         current_descriptors):
+        elif self.mode == 'flann':
+            FLANN_INDEX_KDTREE = 1
+            index_params = dict(algorithm=FLANN_INDEX_KDTREE, trees=5)
+            search_params = dict(checks=50)  # or pass empty dictionary
 
-        top_ten_previous_key_points = []
-        top_ten_current_key_points = []
+            flann = cv.FlannBasedMatcher(index_params, search_params)
+            matches = flann.knnMatch(previous_descriptors, current_descriptors, k=2)
 
-        matches = self.bf.match(previous_descriptors, current_descriptors)
+        elif self.mode == 'surf':
+            matches = self.bf.knnMatch(previous_descriptors, current_descriptors, k=2)
 
-        # print("here are the knn matches object types: {}".format(type(matches[0])))
-
-        # TODO: CHECK - for SIFT, currently using ALL good matches with no filter
-        # extract top 10 previous and current key points
-        for i in range(len(matches[:100])):
-            train_index = matches[i].trainIdx  # index of the match in previous key points
-            query_index = matches[i].queryIdx  # index of the match in current key points
-            # print("train index {} and query index {} ".format(train_index, query_index))
-            top_ten_previous_key_points.append(previous_key_points[query_index])
-            top_ten_current_key_points.append(current_key_points[train_index])
-
-        # print("the ones that passed ratio test: {}".format(passed_ratio_test))
-
-        return matches[:10], top_ten_previous_key_points, top_ten_current_key_points  # TODO parameter for top-k matches
-
-    # TODO: bf matching with sift descriptors and ratio test
-    # RESULTS under KNN_SIFT_08152023_400
-    def get_knn_sift_matches(self, previous_key_points, previous_descriptors, current_key_points,
-                             current_descriptors):
-
-        top_ten_previous_key_points = []
-        top_ten_current_key_points = []
-
-        matches = self.bf.knnMatch(previous_descriptors, current_descriptors, k=2)
-
-        # print("here are the knn matches object types: {}".format(type(matches[0])))
+        elif self.mode == 'orb':
+            # use the brute force matcher to match features
+            matches = self.bf.match(previous_descriptors, current_descriptors)
+            # sort if needed
+            matches = sorted(matches, key=lambda x: x.distance)
 
         passed_ratio_test = []
+        # if we are not in orb mode, a ratio test is needed
+        if self.mode != "orb":
+            for m, n in matches:
+                if m.distance < 0.75 * n.distance:
+                    passed_ratio_test.append([m])
+        else:
+            passed_ratio_test = matches
 
-        for m, n in matches:
-            if m.distance < 0.75 * n.distance:
-                passed_ratio_test.append([m])
-
-        # TODO: CHECK - for SIFT, currently using ALL good matches with no filter
         # extract top 10 previous and current key points
         for i in range(len(passed_ratio_test)):
             train_index = passed_ratio_test[i][0].trainIdx  # index of the match in previous key points
             query_index = passed_ratio_test[i][0].queryIdx  # index of the match in current key points
             # print("train index {} and query index {} ".format(train_index, query_index))
-            top_ten_previous_key_points.append(previous_key_points[query_index])
-            top_ten_current_key_points.append(current_key_points[train_index])
-
-        # print("the ones that passed ratio test: {}".format(passed_ratio_test))
-
-        return matches[:10], top_ten_previous_key_points, top_ten_current_key_points  # TODO parameter for top-k matches
-
-    # TODO: check sift FLANN method
-
-    def get_sift_flann_matches(self, previous_key_points, previous_descriptors, current_key_points,
-                               current_descriptors):
-        top_ten_previous_key_points = []
-        top_ten_current_key_points = []
-
-        # FLANN parameters
-        FLANN_INDEX_KDTREE = 1
-        index_params = dict(algorithm=FLANN_INDEX_KDTREE, trees=5)
-        search_params = dict(checks=50)  # or pass empty dictionary
-
-        flann = cv.FlannBasedMatcher(index_params, search_params)
-        matches = flann.knnMatch(previous_descriptors, current_descriptors, k=2)
-
-        passed_ratio_test = []
-
-        for m, n in matches:
-            # print("m {}, n {}".format(m, n))
-            if m.distance < 0.7 * n.distance:
-                passed_ratio_test.append([m])
-
-        # TODO: CHECK - for FLANN, currently using ALL good matches with no filter
-        # extract top 10 previous and current key points
-        for i in range(len(passed_ratio_test)):
-            train_index = passed_ratio_test[i][0].trainIdx  # index of the match in previous key points
-            query_index = passed_ratio_test[i][0].queryIdx  # index of the match in current key points
-            # print("train index {} and query index {} ".format(train_index, query_index))
-            # print("train {} and query {}".format(train_index, query_index))
-            top_ten_previous_key_points.append(previous_key_points[query_index])
-            top_ten_current_key_points.append(current_key_points[train_index])
-
-        # print("the ones that passed ratio test: {}".format(passed_ratio_test))
-
-        return matches[:10], top_ten_previous_key_points, top_ten_current_key_points  # TODO parameter for top-k matches
-
-    # TODO: bf matching with sift descriptors and ratio test
-    # RESULTS under KNN_SIFT_08152023_400
-    def get_surf_matches(self, previous_key_points, previous_descriptors, current_key_points,
-                         current_descriptors):
-
-        top_ten_previous_key_points = []
-        top_ten_current_key_points = []
-
-        matches = self.bf.knnMatch(previous_descriptors, current_descriptors, k=2)
-
-        # print("here are the knn matches object types: {}".format(type(matches[0])))
-
-        passed_ratio_test = []
-
-        for m, n in matches:
-            if m.distance < 0.75 * n.distance:
-                passed_ratio_test.append([m])
-
-        # TODO: CHECK - for SIFT, currently using ALL good matches with no filter
-        # extract top 10 previous and current key points
-        for i in range(len(passed_ratio_test)):
-            train_index = passed_ratio_test[i][0].trainIdx  # index of the match in previous key points
-            query_index = passed_ratio_test[i][0].queryIdx  # index of the match in current key points
-            # print("train index {} and query index {} ".format(train_index, query_index))
-            top_ten_previous_key_points.append(previous_key_points[query_index])
-            top_ten_current_key_points.append(current_key_points[train_index])
-
-        # print("the ones that passed ratio test: {}".format(passed_ratio_test))
-
-        return matches[:10], top_ten_previous_key_points, top_ten_current_key_points  # TODO parameter for top-k matches
+            top_previous_key_points.append(previous_key_points[query_index])
+            top_current_key_points.append(current_key_points[train_index])
+        return matches, top_previous_key_points, top_current_key_points
 
     # TODO: CHECKED - PREV CURR
     def get_transformation_between_two_frames(self, array_previous_key_points,
@@ -322,18 +231,18 @@ class VisualOdometry:
         # get the essential matrix
         self.essential_matrix, mask = cv.findEssentialMat(points1=array_previous_key_points,
                                                           points2=array_current_key_points,
-                                                          cameraMatrix=self.int_coeff_mtx,
+                                                          cameraMatrix=self.intrinsic_coefficient_matrix,
                                                           method=cv.RANSAC, prob=0.999, threshold=1.0)
         # TODO: discuss the need for setting maxIters -> maximum number of robust method iterations
         # compute the relative position using the essential matrix, key points  using cv.relativepose
         points, relative_rotation, translation, mask = cv.recoverPose(E=self.essential_matrix,
                                                                       points1=array_previous_key_points,
                                                                       points2=array_current_key_points,
-                                                                      cameraMatrix=self.int_coeff_mtx)
+                                                                      cameraMatrix=self.intrinsic_coefficient_matrix)
         translation = translation.transpose()[0]
         # make the translation unit
         translation_unit = translation / np.linalg.norm(translation)
-        #print("unit_translation {}".format(translation_unit))
+        # print("unit_translation {}".format(translation_unit))
 
         relative_rotation = np.array(relative_rotation)
         # decompose rotation matrix + find euler
@@ -354,16 +263,16 @@ class VisualOdometry:
 
     # here you would want to pass in the top 10 key points
     # TODO: CHECKED - PREV CURR
-    def previous_current_matching(self, top_10_previous_key_points, top_10_current_key_points,
+    def previous_current_matching(self, top_previous_key_points, top_current_key_points,
                                   robot_previous_position_transformation):
 
         """"you can choose to visualize the points matched between every two frames by uncommenting this line"""""
 
         # convert previous_key_points and current_key_points into floating point arrays
-        array_previous_key_points = cv.KeyPoint_convert(top_10_previous_key_points)
+        array_previous_key_points = cv.KeyPoint_convert(top_previous_key_points)
 
         # top 10 previous key points is a list of KeyPoint objects, array_previous_key points is a numpy array
-        array_current_key_points = cv.KeyPoint_convert(top_10_current_key_points)
+        array_current_key_points = cv.KeyPoint_convert(top_current_key_points)
 
         # get the 4x4 homogenous transformation between previous image and the current image using the array list forms of previous and current key points
         prev_to_curr_transformation = self.get_transformation_between_two_frames(array_previous_key_points,
@@ -402,12 +311,12 @@ class VisualOdometry:
         # from the above code we produce a length 500 current key points and a (500 height, 32 width) shaped current descriptors
         # get matches should return top 10 previous key points
         # TODO: check if we can determine number of matches based on distance to the marker (if distance > certain threshold, can get more)
-        top_ten_matches, top_10_previous_key_points, top_10_current_key_points = self.get_matches_between_two_frames(
+        top_ten_matches, top_previous_key_points, top_current_key_points = self.get_matches_between_two_frames(
             previous_key_points=previous_key_points, previous_descriptors=previous_descriptors,
             current_key_points=current_key_points, current_descriptors=current_descriptors)
 
-        robot_current_position_transformation = self.previous_current_matching(top_10_previous_key_points,
-                                                                               top_10_current_key_points,
+        robot_current_position_transformation = self.previous_current_matching(top_previous_key_points,
+                                                                               top_current_key_points,
                                                                                robot_previous_position_transformation)
 
         return robot_current_position_transformation

@@ -97,6 +97,11 @@ class GroundTruth:
         bTm_translation_array = np.array([bTm_translation.x, bTm_translation.y, bTm_translation.z])
         bTm_quaternion_array = np.array([bTm_orientation.x, bTm_orientation.y, bTm_orientation.z, bTm_orientation.w])
 
+        ground_truth_raw = "/home/ivyz/Documents/ivy_workspace/src/vis_odom/scripts/unit_testing_controlled/controlled_dec-trans_1/ground_truth_raw_measurement.txt"
+        PEM.clear_txt_file_contents(ground_truth_raw)
+        PEM.write_to_output_file(output_file_path=ground_truth_raw, timestamp=marker.header.stamp.to_sec(),
+                                 translation=bTm_translation_array.tolist(), quaternion=bTm_quaternion_array.tolist())
+
         # turn into translation and orientation matrices; dimensions = 4x4
         bTm_translation_mat = tf.transformations.translation_matrix(bTm_translation_array)
         bTm_orientation_mat = tf.transformations.quaternion_matrix(bTm_quaternion_array)
@@ -131,7 +136,7 @@ class GroundTruth:
 
         return cam_to_marker_transformation  # output: 4x4 homogenous transformation matrix
 
-    def get_ground_truth_estimate(self, marker_reading, reference_id=0):
+    def get_ground_truth_estimate(self, marker_reading, reference_id):
         # callback function to access the ground truth data
         markers = marker_reading.markers  # get the marker information
 
@@ -148,6 +153,7 @@ class GroundTruth:
             else:
                 # print("marker {} detected!".format(reference_id_index))
                 # compute camera to marker transformation for current frame for marker 0
+
                 camera_to_marker_transformation = self.compute_frame_camera_to_marker(markers[reference_id_index])
                 return camera_to_marker_transformation
 
