@@ -202,7 +202,7 @@ class Activate_GT_VO_Processes:
 def main(args):
     rospy.init_node('LaunchProcessNode', anonymous=True)
     bag_file_path = '/home/ivyz/Documents/8-31-system-trials_2021-07-28-16-33-22.bag'
-    gt_output_file_path = '/src/vis_odom/scripts/trajectory_evaluation/traj_eval_set2_08072023_sim3/stamped_ground_truth.txt'
+    gt_output_file_path = '/src/vis_odom/scripts/trajectory_evaluation/traj_eval_set2_08072023_sim3/stamped_ground_truth_relative.txt'
     vo_output_file_path = '/src/vis_odom/scripts/trajectory_evaluation/traj_eval_set2_08072023_sim3/stamped_traj_estimate.txt'
     Activate_GT_VO_Processes(bag_file_path=bag_file_path, gt_output_file_path=gt_output_file_path,
                              vo_output_file_path=vo_output_file_path)

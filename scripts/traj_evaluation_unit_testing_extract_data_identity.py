@@ -262,7 +262,7 @@ def main(args):
     # previous_image_path = '/home/ivyz/Documents/ivy_workspace/src/vis_odom/scripts/unit_testing/ut_08162023_set1_flann/image1.jpg'
     # current_image_path = '/home/ivyz/Documents/ivy_workspace/src/vis_odom/scripts/unit_testing/ut_08162023_set1_flann/image2.jpg'
     folder_path = '/home/ivyz/Documents/ivy_workspace/src/vis_odom/scripts/unit_testing_controlled/testbag'
-    gt_output_file_path = folder_path + "/stamped_ground_truth.txt"
+    gt_output_file_path = folder_path + "/stamped_ground_truth_relative.txt"
     vo_output_file_path = folder_path + "/stamped_traj_estimate.txt"
     starting_index = 0
     number_of_outputs = 400

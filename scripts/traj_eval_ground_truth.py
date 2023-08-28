@@ -97,10 +97,6 @@ class GroundTruth:
         bTm_translation_array = np.array([bTm_translation.x, bTm_translation.y, bTm_translation.z])
         bTm_quaternion_array = np.array([bTm_orientation.x, bTm_orientation.y, bTm_orientation.z, bTm_orientation.w])
 
-        ground_truth_raw = "/home/ivyz/Documents/ivy_workspace/src/vis_odom/scripts/unit_testing_controlled/controlled_dec-trans_1/ground_truth_raw_measurement.txt"
-        PEM.clear_txt_file_contents(ground_truth_raw)
-        PEM.write_to_output_file(output_file_path=ground_truth_raw, timestamp=marker.header.stamp.to_sec(),
-                                 translation=bTm_translation_array.tolist(), quaternion=bTm_quaternion_array.tolist())
 
         # turn into translation and orientation matrices; dimensions = 4x4
         bTm_translation_mat = tf.transformations.translation_matrix(bTm_translation_array)
@@ -109,6 +105,7 @@ class GroundTruth:
         btm_homogenous_transformation_mat = tf.transformations.concatenate_matrices(bTm_translation_mat,
                                                                                     bTm_orientation_mat)
         return btm_homogenous_transformation_mat  # returns 4x4 homogenous transformation matrix
+    # TODO: instead of concatenation, do matrix multiplication
 
     # function to get the camera to base homogenous transformation matrix
     def get_camera_to_base_homogenous_transformation_matrix(self):
@@ -124,19 +121,24 @@ class GroundTruth:
         return cTb_homogenous_transformation_mat
 
     # this method computes the camera to marker homogenous transformation matrix for a frame; marker = marker.0
-    def compute_frame_camera_to_marker(self, marker):
+    def compute_frame_camera_to_marker(self, marker, base_link_flag=True):
 
-        cTb_homogenous_transformation_mat = self.get_camera_to_base_homogenous_transformation_matrix()
+        cam_to_marker_transformation = None
+        if base_link_flag:
+            cTb_homogenous_transformation_mat = self.get_camera_to_base_homogenous_transformation_matrix()
 
-        bTm_homogenous_transformation_mat = self.get_base_to_marker_homogenous_transformation(marker)
+            bTm_homogenous_transformation_mat = self.get_base_to_marker_homogenous_transformation(marker)
 
-        # TODO: checked --> camera2marker = camera2base @ base2marker
-        cam_to_marker_transformation = np.matmul(cTb_homogenous_transformation_mat, bTm_homogenous_transformation_mat)
+            # TODO: checked --> camera2marker = camera2base @ base2marker
+            cam_to_marker_transformation = np.matmul(cTb_homogenous_transformation_mat, bTm_homogenous_transformation_mat)
+        else:
+            cam_to_marker_transformation = self.get_base_to_marker_homogenous_transformation(marker)
+
         self.ground_truth_list_cam_to_marker.append(cam_to_marker_transformation)
 
         return cam_to_marker_transformation  # output: 4x4 homogenous transformation matrix
 
-    def get_ground_truth_estimate(self, marker_reading, reference_id):
+    def get_ground_truth_estimate(self, marker_reading, reference_id, base_link_flag=True):
         # callback function to access the ground truth data
         markers = marker_reading.markers  # get the marker information
 
@@ -154,7 +156,7 @@ class GroundTruth:
                 # print("marker {} detected!".format(reference_id_index))
                 # compute camera to marker transformation for current frame for marker 0
 
-                camera_to_marker_transformation = self.compute_frame_camera_to_marker(markers[reference_id_index])
+                camera_to_marker_transformation = self.compute_frame_camera_to_marker(markers[reference_id_index], base_link_flag)
                 return camera_to_marker_transformation
 
 

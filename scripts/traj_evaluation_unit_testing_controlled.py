@@ -22,7 +22,8 @@ import pose_estimation_module as PoseEstimationFunctions
 
 
 class UnitTestingExtractData:
-    def __init__(self, bag_file_path=None, gt_output_file_path='', vo_output_file_path='', folder_path=' ',
+    def __init__(self, bag_file_path=None, gt_output_file_path='', gt_marker_positions_file_path='',
+                 vo_output_file_path='', folder_path=' ',
                  matching_mode='orb', starting_index=0, number_of_outputs=10, calibration_file_path=' ', controlled=False):
         # set up flags
         self.previous_image = None
@@ -33,19 +34,23 @@ class UnitTestingExtractData:
         self.number_of_outputs = number_of_outputs
         self.calibration_file_path = calibration_file_path
         self.controlled = controlled
+        self.marker_id_reference = 8 # TODO parameter passed
 
         # set up file paths
         self.bag_file_path = bag_file_path
         self.gt_output_file_path = gt_output_file_path
+        self.gt_marker_positions_file_path = gt_marker_positions_file_path
         self.vo_output_file_path = vo_output_file_path
         # self.previous_image_path = previous_image_path
         # self.current_image_path = current_image_path
         self.folder_path = folder_path
         self.starting_index = starting_index
+        self.base_link_flag = False # flag to indicate if there is a base_link ref frame
 
         # clear existing data for sanity checks
         PoseEstimationFunctions.clear_txt_file_contents(self.gt_output_file_path)
         PoseEstimationFunctions.clear_txt_file_contents(self.vo_output_file_path)
+        PoseEstimationFunctions.clear_txt_file_contents(self.gt_marker_positions_file_path)
 
         # initialize modules
         self.visual_odometry = VisualOdometry(to_sort=False, mode=matching_mode, calibration_file_path=self.calibration_file_path, controlled=self.controlled)
@@ -63,12 +68,26 @@ class UnitTestingExtractData:
         self.vo_tf_list.append(self.robot_starting_position_transformation)
         self.gt_camera_to_camera_list.append(self.robot_starting_position_transformation)
 
-        # determine the topics
-
-
         # start getting vo gt data
         self.extract_vo_gt_data()
 
+
+    """Helper functions"""
+    def extract_ground_truth(self):
+        # print("yellow!")
+        # get the camera to marker transformation
+        gt_transformation = self.ground_truth.get_ground_truth_estimate(
+            marker_reading=self.marker_reading, reference_id=self.marker_id_reference, base_link_flag=self.base_link_flag)
+        # print("here is gt transform {}".format(gt_transformation))
+        # separate the translation and the quaternion
+        # TODO have the message already in the form of a transformation
+        if gt_transformation is not None:
+            self.gt_camera_to_marker_list.append(gt_transformation)
+            # print("we have marker gt transformation {}".format(gt_transformation))
+            self.valid_count += 1
+
+
+    """Main function"""
     def extract_vo_gt_data(self):
         with rosbag.Bag(self.bag_file_path, "r") as bag:
             gt_transformation = None
@@ -95,56 +114,26 @@ class UnitTestingExtractData:
                             self.current_image = bag_message
                     else:
                         # otherwise saving ground truth for when a valid pair is found.
-
-                        # TODO avoid repetition of code
                         self.marker_reading = bag_message
-                        # print("len of marker is {}".format(len(self.marker_reading.markers)))
-
                         if len(self.marker_reading.markers) > 0:
-                            # get the camera to marker transformation
-                            gt_transformation = self.ground_truth.get_ground_truth_estimate(
-                                marker_reading=self.marker_reading, reference_id=11)
-                            # TODO try to include all markers -->
-
-                            # separate the translation and the quaternion
-                            if gt_transformation is not None:
-                                self.gt_camera_to_marker_list.append(gt_transformation)
-                                self.valid_count += 1 # TODO is valid_count needed or just len(gt_camera_to_marker_list is enough?
-
+                            self.extract_ground_truth()
                 else:
                     # found second message after finding a first message, searching for valid pair
                     if topic != self.first_topic_found:
                         # found actual valid pair image-pose or pose-image
                         # Saving ground truth
                         if gt_transformation is None and "markers" in topic:
-                            # tmp_gt_tf = bag_message
                             self.marker_reading = bag_message
-                            # print("now processing marker message")
-
                             if len(self.marker_reading.markers) > 0:
-                                # print("yellow!")
-                                # get the camera to marker transformation
-                                gt_transformation = self.ground_truth.get_ground_truth_estimate(
-                                    marker_reading=self.marker_reading, reference_id=11)
-                                # print("here is gt transform {}".format(gt_transformation))
-                                # separate the translation and the quaternion
-                                # TODO have the message already in the form of a transformation
-                                if gt_transformation is not None:
-                                    self.gt_camera_to_marker_list.append(gt_transformation)
-                                    # print("we have marker gt transformation {}".format(gt_transformation))
-
-                                    self.valid_count += 1
-
-                            # TODO: get mTm transform between the last two cTm transforms; open ground truth txt and append data
-
-                        # self.valid_count += 1
+                                self.extract_ground_truth()
 
                         if self.valid_count > 1 and gt_transformation is not None:
                             # Have at least 2 images with corresponding "ground truth", calculate VO
 
                             if self.current_image is None:  # and "image" in topic:
                                 self.current_image = bag_message
-                            # TODO: CHECK - compute the data for visual odometry
+
+                            # process the consecutive image frames
                             current_image = self.visual_odometry.ros_img_msg_to_opencv_image(image_message=self.current_image, msg_type='usb_raw')
                             previous_image = self.visual_odometry.ros_img_msg_to_opencv_image(image_message=self.previous_image, msg_type='usb_raw')
 
@@ -159,10 +148,10 @@ class UnitTestingExtractData:
                             vo_quaternion = PoseEstimationFunctions.quaternion_from_transformation_matrix(
                                 transformation_matrix=vo_transformation)
 
+                            # when valid gt-vo pair count gets to the starting index where we record data, the previous position has always been set as the identity matrix
                             if valid_pair <= self.starting_index:
                                 identity_matrix_position = np.eye(4)
                                 self.vo_tf_list.append(identity_matrix_position)
-                                # when valid gt-vo pair count gets to the starting index where we record data, the previous position has always been set as the identity matrix
                             else:
                                 self.vo_tf_list.append(vo_transformation)
 
@@ -174,14 +163,15 @@ class UnitTestingExtractData:
                             # cTc at time 0 is the identity matrix
                             current_camera_to_camera_transform = np.matmul(
                                 self.gt_camera_to_camera_list[gt_cTc_length - 1],
-                                np.matmul(self.gt_camera_to_marker_list[-2],
-                                          np.linalg.inv(
+                                np.matmul(np.linalg.inv(
+                                    self.gt_camera_to_marker_list[-2]),
+                                          #np.linalg.inv(
                                               self.gt_camera_to_marker_list[
-                                                  -1]))
+                                                  -1]) #)
                             )
 
                             if valid_pair <= self.starting_index:
-                                self.gt_camera_to_camera_list.append(np.eye(4))
+                                self.gt_camera_to_camera_list.append(np.eye(4)) # at time 0, beginning
                             else:
                                 self.gt_camera_to_camera_list.append(current_camera_to_camera_transform)
 
@@ -192,6 +182,14 @@ class UnitTestingExtractData:
                                 gt_translation)  # turn into unit vector
                             gt_quaternion = PoseEstimationFunctions.quaternion_from_transformation_matrix(
                                 transformation_matrix=current_camera_to_camera_transform)
+
+                            # TODO: marker poses
+                            gt_translation_absolute = PoseEstimationFunctions.translation_from_transformation_matrix(
+                                transformation_matrix=self.gt_camera_to_marker_list[-1])
+                            gt_translation_absolute_unit = gt_translation_absolute / np.linalg.norm(
+                                gt_translation_absolute)  # turn into unit vector
+                            gt_quaternion_absolute = PoseEstimationFunctions.quaternion_from_transformation_matrix(
+                                transformation_matrix=self.gt_camera_to_marker_list[-1])
 
                             # TODO: another module that does the calculations to have the same global reference frame ***
 
@@ -207,19 +205,34 @@ class UnitTestingExtractData:
                                                                              # gt_translation_unit,
                                                                              [0, 0, 0],
                                                                              [0, 0, 0, 1])
+
+                                PoseEstimationFunctions.write_to_output_file(self.gt_marker_positions_file_path,
+                                                                             timestamp.to_sec(),
+                                                                             # gt_translation_unit,
+                                                                             gt_translation_absolute,
+                                                                             gt_quaternion_absolute)
+
                                 # write visual odometry data
                                 PoseEstimationFunctions.write_to_output_file(self.vo_output_file_path,
                                                                              timestamp.to_sec(),
                                                                              [0, 0, 0],
                                                                              [0, 0, 0, 1])
                             elif valid_pair > self.starting_index:
-                                # write ground truth data
+                                # write ground truth data considering the first camera as the origin
                                 # TODO: CHECK - write the data
                                 PoseEstimationFunctions.write_to_output_file(self.gt_output_file_path,
                                                                              timestamp.to_sec(),
                                                                              # gt_translation_unit,
                                                                              gt_translation,
                                                                              gt_quaternion)
+
+                                # write ground truth data considering the marker as the origin
+                                PoseEstimationFunctions.write_to_output_file(self.gt_marker_positions_file_path,
+                                                                             timestamp.to_sec(),
+                                                                             # gt_translation_unit,
+                                                                             gt_translation_absolute,
+                                                                             gt_quaternion_absolute)
+
                                 # write visual odometry data
                                 PoseEstimationFunctions.write_to_output_file(self.vo_output_file_path,
                                                                               timestamp.to_sec(),
@@ -254,17 +267,18 @@ class UnitTestingExtractData:
 def main(args):
     rospy.init_node('UnitTestingControlledExperiment', anonymous=True)
     print("starting controlled experiments")
-    bag_file_path = '/home/ivyz/Documents/ivy_workspace/src/vis_odom/scripts/unit_testing_controlled/controlled_usb_rosbot_zoomin_move_1/controlled_usb_rosbot_zoomin_move_1.bag'
-    calibration_file_path = '/home/ivyz/Documents/ivy_workspace/src/usb_cam.yaml'
+    calibration_file_path = '/home/ivyz/Documents/ivy_workspace/src/new_usb_cam.yaml'
     controlled = True
 
-    folder_path = '/home/ivyz/Documents/ivy_workspace/src/vis_odom/scripts/unit_testing_controlled/controlled_usb_rosbot_zoomin_move_1'
-    gt_output_file_path = folder_path + "/stamped_ground_truth.txt"
+    folder_path = '/home/ivyz/Documents/ivy_workspace/src/vis_odom/scripts/unit_testing_controlled/controlled_usb_rosbot/backward-1'
+    bag_file_path = folder_path+"/backward-1.bag"
+    gt_output_file_path = folder_path + "/stamped_ground_truth_relative.txt"
+    gt_marker_positions_file_path = folder_path + "/stamped_ground_truth_absolute.txt"
     vo_output_file_path = folder_path + "/stamped_traj_estimate.txt"
     starting_index = 0
-    number_of_outputs = 200
+    number_of_outputs = 100000
 
-    UnitTestingExtractData(bag_file_path=bag_file_path, gt_output_file_path=gt_output_file_path,
+    UnitTestingExtractData(bag_file_path=bag_file_path, gt_output_file_path=gt_output_file_path, gt_marker_positions_file_path=gt_marker_positions_file_path,
                            vo_output_file_path=vo_output_file_path, folder_path=folder_path, matching_mode='flann',
                            starting_index=starting_index, number_of_outputs=number_of_outputs, calibration_file_path=calibration_file_path, controlled = controlled)
 
