@@ -224,7 +224,6 @@ class VisualOdometry:
             top_current_key_points.append(current_key_points[train_index])
         return matches, top_previous_key_points, top_current_key_points
 
-    # TODO: CHECKED - PREV CURR
     def get_transformation_between_two_frames(self, array_previous_key_points,
                                               array_current_key_points):
 
@@ -233,7 +232,6 @@ class VisualOdometry:
                                                           points2=array_current_key_points,
                                                           cameraMatrix=self.intrinsic_coefficient_matrix,
                                                           method=cv.RANSAC, prob=0.999, threshold=1.0)
-        # TODO: discuss the need for setting maxIters -> maximum number of robust method iterations
         # compute the relative position using the essential matrix, key points  using cv.relativepose
         points, relative_rotation, translation, mask = cv.recoverPose(E=self.essential_matrix,
                                                                       points1=array_previous_key_points,
@@ -241,8 +239,6 @@ class VisualOdometry:
                                                                       cameraMatrix=self.intrinsic_coefficient_matrix)
         translation = translation.transpose()[0]
         # make the translation unit
-        translation_unit = translation / np.linalg.norm(translation)
-        # print("unit_translation {}".format(translation_unit))
 
         relative_rotation = np.array(relative_rotation)
         # decompose rotation matrix + find euler
@@ -255,7 +251,7 @@ class VisualOdometry:
         # compute the current transformation matrix
         euler = np.array(euler)
 
-        prev_to_curr_translation = self.make_transform_mat(translation=translation_unit, euler=euler)
+        prev_to_curr_translation = self.make_transform_mat(translation=translation, euler=euler)
 
         # store previous to current translation in the corresponding list
         self.frame_translations.append(prev_to_curr_translation)
@@ -280,7 +276,7 @@ class VisualOdometry:
 
         # calculate the current position using the previous-to-current homogenous transformation
         robot_current_position_transformation = robot_previous_position_transformation.dot(prev_to_curr_transformation)
-        return robot_current_position_transformation
+        return robot_current_position_transformation, prev_to_curr_transformation # where is the robot now in VO frame
 
     def compute_current_image_elements(self, input_image):
 
@@ -315,11 +311,11 @@ class VisualOdometry:
             previous_key_points=previous_key_points, previous_descriptors=previous_descriptors,
             current_key_points=current_key_points, current_descriptors=current_descriptors)
 
-        robot_current_position_transformation = self.previous_current_matching(top_previous_key_points,
+        robot_current_position_transformation, prev_to_curr_transformation = self.previous_current_matching(top_previous_key_points,
                                                                                top_current_key_points,
                                                                                robot_previous_position_transformation)
 
-        return robot_current_position_transformation
+        return robot_current_position_transformation, prev_to_curr_transformation
 
 
 # create the name function

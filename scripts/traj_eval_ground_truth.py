@@ -88,8 +88,10 @@ class GroundTruth:
     """
 
     # function to get the base to marker homogenous transformation matrix
-    def get_base_to_marker_homogenous_transformation(self, marker):
-        # extract translation and position
+
+    # TODO: check if camera to marker means -  position of marker relative the camera in cmaera coord frame
+    def get_base_ref_frame_to_marker_homogenous_transformation(self, marker):
+        # extract translation and position of the marker from the camera reference frame
         bTm_translation = marker.pose.pose.position
         bTm_orientation = marker.pose.pose.orientation
 
@@ -97,14 +99,12 @@ class GroundTruth:
         bTm_translation_array = np.array([bTm_translation.x, bTm_translation.y, bTm_translation.z])
         bTm_quaternion_array = np.array([bTm_orientation.x, bTm_orientation.y, bTm_orientation.z, bTm_orientation.w])
 
-
         # turn into translation and orientation matrices; dimensions = 4x4
         bTm_translation_mat = tf.transformations.translation_matrix(bTm_translation_array)
         bTm_orientation_mat = tf.transformations.quaternion_matrix(bTm_quaternion_array)
-
-        btm_homogenous_transformation_mat = tf.transformations.concatenate_matrices(bTm_translation_mat,
+        bTm_homogenous_transformation_mat = tf.transformations.concatenate_matrices(bTm_translation_mat,
                                                                                     bTm_orientation_mat)
-        return btm_homogenous_transformation_mat  # returns 4x4 homogenous transformation matrix
+        return bTm_homogenous_transformation_mat  # returns 4x4 homogenous transformation matrix
     # TODO: instead of concatenation, do matrix multiplication
 
     # function to get the camera to base homogenous transformation matrix
@@ -123,22 +123,21 @@ class GroundTruth:
     # this method computes the camera to marker homogenous transformation matrix for a frame; marker = marker.0
     def compute_frame_camera_to_marker(self, marker, base_link_flag=True):
 
-        cam_to_marker_transformation = None
         if base_link_flag:
             cTb_homogenous_transformation_mat = self.get_camera_to_base_homogenous_transformation_matrix()
 
-            bTm_homogenous_transformation_mat = self.get_base_to_marker_homogenous_transformation(marker)
+            bTm_homogenous_transformation_mat = self.get_base_ref_frame_to_marker_homogenous_transformation(marker)
 
             # TODO: checked --> camera2marker = camera2base @ base2marker
             cam_to_marker_transformation = np.matmul(cTb_homogenous_transformation_mat, bTm_homogenous_transformation_mat)
         else:
-            cam_to_marker_transformation = self.get_base_to_marker_homogenous_transformation(marker)
+            cam_to_marker_transformation = self.get_base_ref_frame_to_marker_homogenous_transformation(marker)
 
         self.ground_truth_list_cam_to_marker.append(cam_to_marker_transformation)
 
         return cam_to_marker_transformation  # output: 4x4 homogenous transformation matrix
 
-    def get_ground_truth_estimate(self, marker_reading, reference_id, base_link_flag=True):
+    def get_marker_position(self, marker_reading, reference_id, base_link_flag=True):
         # callback function to access the ground truth data
         markers = marker_reading.markers  # get the marker information
 

@@ -24,7 +24,8 @@ import pose_estimation_module as PoseEstimationFunctions
 class UnitTestingExtractData:
     def __init__(self, bag_file_path=None, gt_output_file_path='', gt_marker_positions_file_path='',
                  vo_output_file_path='', folder_path=' ',
-                 matching_mode='orb', starting_index=0, number_of_outputs=10, calibration_file_path=' ', controlled=False):
+                 matching_mode='orb', starting_index=0, number_of_outputs=10, calibration_file_path=' ',
+                 controlled=False):
         # set up flags
         self.previous_image = None
         self.current_image = None
@@ -34,7 +35,7 @@ class UnitTestingExtractData:
         self.number_of_outputs = number_of_outputs
         self.calibration_file_path = calibration_file_path
         self.controlled = controlled
-        self.marker_id_reference = 8 # TODO parameter passed
+        self.marker_id_reference = 8  # TODO parameter passed
 
         # set up file paths
         self.bag_file_path = bag_file_path
@@ -45,7 +46,7 @@ class UnitTestingExtractData:
         # self.current_image_path = current_image_path
         self.folder_path = folder_path
         self.starting_index = starting_index
-        self.base_link_flag = False # flag to indicate if there is a base_link ref frame
+        self.base_link_flag = False  # flag to indicate if there is a base_link ref frame
 
         # clear existing data for sanity checks
         PoseEstimationFunctions.clear_txt_file_contents(self.gt_output_file_path)
@@ -53,7 +54,9 @@ class UnitTestingExtractData:
         PoseEstimationFunctions.clear_txt_file_contents(self.gt_marker_positions_file_path)
 
         # initialize modules
-        self.visual_odometry = VisualOdometry(to_sort=False, mode=matching_mode, calibration_file_path=self.calibration_file_path, controlled=self.controlled)
+        self.visual_odometry = VisualOdometry(to_sort=False, mode=matching_mode,
+                                              calibration_file_path=self.calibration_file_path,
+                                              controlled=self.controlled)
         print("activating mode {}".format(self.visual_odometry.mode))
         self.ground_truth = GroundTruth()
 
@@ -71,23 +74,23 @@ class UnitTestingExtractData:
         # start getting vo gt data
         self.extract_vo_gt_data()
 
-
     """Helper functions"""
+
     def extract_ground_truth(self):
-        # print("yellow!")
         # get the camera to marker transformation
-        gt_transformation = self.ground_truth.get_ground_truth_estimate(
-            marker_reading=self.marker_reading, reference_id=self.marker_id_reference, base_link_flag=self.base_link_flag)
-        # print("here is gt transform {}".format(gt_transformation))
+        print("type of marker reading: {}".format(type(self.marker_reading)))
+        gt_transformation = self.ground_truth.get_marker_position(
+            marker_reading=self.marker_reading, reference_id=self.marker_id_reference,
+            base_link_flag=self.base_link_flag)
         # separate the translation and the quaternion
         # TODO have the message already in the form of a transformation
         if gt_transformation is not None:
             self.gt_camera_to_marker_list.append(gt_transformation)
-            # print("we have marker gt transformation {}".format(gt_transformation))
             self.valid_count += 1
-
+            return gt_transformation
 
     """Main function"""
+
     def extract_vo_gt_data(self):
         with rosbag.Bag(self.bag_file_path, "r") as bag:
             gt_transformation = None
@@ -116,7 +119,7 @@ class UnitTestingExtractData:
                         # otherwise saving ground truth for when a valid pair is found.
                         self.marker_reading = bag_message
                         if len(self.marker_reading.markers) > 0:
-                            self.extract_ground_truth()
+                            gt_transformation = self.extract_ground_truth()
                 else:
                     # found second message after finding a first message, searching for valid pair
                     if topic != self.first_topic_found:
@@ -125,7 +128,8 @@ class UnitTestingExtractData:
                         if gt_transformation is None and "markers" in topic:
                             self.marker_reading = bag_message
                             if len(self.marker_reading.markers) > 0:
-                                self.extract_ground_truth()
+
+                                gt_transformation = self.extract_ground_truth()
 
                         if self.valid_count > 1 and gt_transformation is not None:
                             # Have at least 2 images with corresponding "ground truth", calculate VO
@@ -134,8 +138,10 @@ class UnitTestingExtractData:
                                 self.current_image = bag_message
 
                             # process the consecutive image frames
-                            current_image = self.visual_odometry.ros_img_msg_to_opencv_image(image_message=self.current_image, msg_type='usb_raw')
-                            previous_image = self.visual_odometry.ros_img_msg_to_opencv_image(image_message=self.previous_image, msg_type='usb_raw')
+                            current_image = self.visual_odometry.ros_img_msg_to_opencv_image(
+                                image_message=self.current_image, msg_type='usb_raw')
+                            previous_image = self.visual_odometry.ros_img_msg_to_opencv_image(
+                                image_message=self.previous_image, msg_type='usb_raw')
 
                             # outputs transformation with respect to the current position of robot (different from default)
                             vo_transformation = self.visual_odometry.visual_odometry_calculations(previous_image,
@@ -161,17 +167,11 @@ class UnitTestingExtractData:
 
                             # current cTc = gt_cTm[-2] dot inv(gt_cTm[-1]) dot previous cTc
                             # cTc at time 0 is the identity matrix
-                            current_camera_to_camera_transform = np.matmul(
-                                self.gt_camera_to_camera_list[gt_cTc_length - 1],
-                                np.matmul(np.linalg.inv(
-                                    self.gt_camera_to_marker_list[-2]),
-                                          #np.linalg.inv(
-                                              self.gt_camera_to_marker_list[
-                                                  -1]) #)
-                            )
+                            current_camera_to_camera_transform = np.matmul(self.gt_camera_to_marker_list[-2],np.linalg.inv(self.gt_camera_to_marker_list[-1]))
+
 
                             if valid_pair <= self.starting_index:
-                                self.gt_camera_to_camera_list.append(np.eye(4)) # at time 0, beginning
+                                self.gt_camera_to_camera_list.append(np.eye(4))  # at time 0, beginning
                             else:
                                 self.gt_camera_to_camera_list.append(current_camera_to_camera_transform)
 
@@ -235,7 +235,7 @@ class UnitTestingExtractData:
 
                                 # write visual odometry data
                                 PoseEstimationFunctions.write_to_output_file(self.vo_output_file_path,
-                                                                              timestamp.to_sec(),
+                                                                             timestamp.to_sec(),
                                                                              vo_translation, vo_quaternion)
                             if valid_pair > self.starting_index + self.number_of_outputs:
                                 # print(self.vo_tf_list[len(self.vo_tf_list) - 2 - self.number_of_outputs:])
@@ -247,6 +247,7 @@ class UnitTestingExtractData:
                             if "image" in topic:
                                 self.previous_image = bag_message
 
+                        print("found valid pair!")
                         gt_transformation = None  # Reset.
                         self.first_topic_found = ""
 
@@ -267,20 +268,22 @@ class UnitTestingExtractData:
 def main(args):
     rospy.init_node('UnitTestingControlledExperiment', anonymous=True)
     print("starting controlled experiments")
-    calibration_file_path = '/home/ivyz/Documents/ivy_workspace/src/new_usb_cam.yaml'
+    calibration_file_path = '/src/old_usb_cam_pre08292023.yaml'
     controlled = True
 
-    folder_path = '/home/ivyz/Documents/ivy_workspace/src/vis_odom/scripts/unit_testing_controlled/controlled_usb_rosbot/backward-1'
-    bag_file_path = folder_path+"/backward-1.bag"
+    folder_path = '/home/ivyz/Documents/ivy_workspace/src/vis_odom/scripts/unit_testing_controlled/controlled_usb_rosbot/forward-3'
+    bag_file_path = folder_path + "/forward-3.bag"
     gt_output_file_path = folder_path + "/stamped_ground_truth_relative.txt"
     gt_marker_positions_file_path = folder_path + "/stamped_ground_truth_absolute.txt"
     vo_output_file_path = folder_path + "/stamped_traj_estimate.txt"
     starting_index = 0
     number_of_outputs = 100000
 
-    UnitTestingExtractData(bag_file_path=bag_file_path, gt_output_file_path=gt_output_file_path, gt_marker_positions_file_path=gt_marker_positions_file_path,
+    UnitTestingExtractData(bag_file_path=bag_file_path, gt_output_file_path=gt_output_file_path,
+                           gt_marker_positions_file_path=gt_marker_positions_file_path,
                            vo_output_file_path=vo_output_file_path, folder_path=folder_path, matching_mode='flann',
-                           starting_index=starting_index, number_of_outputs=number_of_outputs, calibration_file_path=calibration_file_path, controlled = controlled)
+                           starting_index=starting_index, number_of_outputs=number_of_outputs,
+                           calibration_file_path=calibration_file_path, controlled=controlled)
 
     print("finished unit testing on {} outputs".format(number_of_outputs))
     rospy.sleep(1)

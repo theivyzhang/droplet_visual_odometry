@@ -145,17 +145,6 @@ def compute_gt_vo_translation_difference(gt_file_path, vo_file_path):
     return [translation_difference[0], translation_difference[1], translation_difference[2]]
 
 
-def compute_gt_vo_quaternion_difference(gt_file_path, vo_file_path):
-    ground_truth = np.genfromtxt(gt_file_path)
-    vis_odom = np.genfromtxt(vo_file_path)
-
-    ground_truth_quaternion = Quaternion(x=ground_truth[4], y=ground_truth[5], z=ground_truth[6], w=ground_truth[7])
-    vis_odom_quaternion = Quaternion(x=vis_odom[4], y=vis_odom[5], z=vis_odom[6], w=vis_odom[7])
-
-    interpolated_quaternion = ground_truth_quaternion * vis_odom_quaternion.conjugate()
-
-    return [interpolated_quaternion.x, interpolated_quaternion.y, interpolated_quaternion.z, interpolated_quaternion.w]
-
 
 def visualize_gt_vo_translation_difference(translation_difference, plot_output_path):
     # Create a 3D plot

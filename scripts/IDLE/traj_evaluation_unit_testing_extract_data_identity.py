@@ -257,11 +257,11 @@ class UnitTestingExtractData:
 def main(args):
     rospy.init_node('UnitTestingExtractDataIdentityMatrix', anonymous=True)
     bag_file_path = '/home/ivyz/Documents/8-31-system-trials_2021-07-28-16-33-22.bag'
-    calibration_file_path = '/home/ivyz/Documents/ivy_workspace/src/vis_odom/Parameters/camera_calibration.yaml'
+    calibration_file_path = '/src/vis_odom/Parameters/camera_calibration.yaml'
 
     # previous_image_path = '/home/ivyz/Documents/ivy_workspace/src/vis_odom/scripts/unit_testing/ut_08162023_set1_flann/image1.jpg'
     # current_image_path = '/home/ivyz/Documents/ivy_workspace/src/vis_odom/scripts/unit_testing/ut_08162023_set1_flann/image2.jpg'
-    folder_path = '/home/ivyz/Documents/ivy_workspace/src/vis_odom/scripts/unit_testing_controlled/testbag'
+    folder_path = '/src/vis_odom/scripts/unit_testing_controlled/testbag'
     gt_output_file_path = folder_path + "/stamped_ground_truth_relative.txt"
     vo_output_file_path = folder_path + "/stamped_traj_estimate.txt"
     starting_index = 0
