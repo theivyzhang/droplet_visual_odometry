@@ -25,7 +25,7 @@ class VisualOdometry:
     # global all_frames, previous_image, previous_key_points, previous_descriptors, current_frame, robot_position_list
 
     def __init__(self, starting_translation=None, starting_euler=None, to_sort=False, mode="ORB",
-                 calibration_file_path="", controlled=False):
+                 calibration_file_path="", controlled=False, real_marker_length = 0.0):
         if starting_euler is None:
             starting_euler = DEFAULT_STARTING_ROBOT_EULER
         if starting_translation is None:
@@ -61,6 +61,7 @@ class VisualOdometry:
         # model parameters
         self.to_sort = to_sort  # whether we want to sort the frames or not
         self.mode = mode
+        self.real_marker_length = real_marker_length
 
         # get the parameters needed under the specified mode
         self.feature_detector, self.norm_type, self.cross_check = self.return_feature_matching_parameters(mode)
@@ -225,20 +226,24 @@ class VisualOdometry:
         return matches, top_previous_key_points, top_current_key_points
 
     def get_transformation_between_two_frames(self, array_previous_key_points,
-                                              array_current_key_points):
+                                              array_current_key_points, marker_pixel_length):
 
         # get the essential matrix
         self.essential_matrix, mask = cv.findEssentialMat(points1=array_previous_key_points,
                                                           points2=array_current_key_points,
                                                           cameraMatrix=self.intrinsic_coefficient_matrix,
                                                           method=cv.RANSAC, prob=0.999, threshold=1.0)
-        # compute the relative position using the essential matrix, key points  using cv.relativepose
+        # compute the relative position using the essential matrix, key points  using cv.relativePose
         points, relative_rotation, translation, mask = cv.recoverPose(E=self.essential_matrix,
                                                                       points1=array_previous_key_points,
                                                                       points2=array_current_key_points,
                                                                       cameraMatrix=self.intrinsic_coefficient_matrix)
+        scaling_factor = marker_pixel_length/self.real_marker_length
         translation = translation.transpose()[0]
-        # make the translation unit
+        print("translation before scaling factor {}".format(translation))
+        print("scaling factor: {}".format(marker_pixel_length/self.real_marker_length))
+        translation = translation/scaling_factor
+        print("translation after scaling factor: {}".format(translation))
 
         relative_rotation = np.array(relative_rotation)
         # decompose rotation matrix + find euler
@@ -260,7 +265,7 @@ class VisualOdometry:
     # here you would want to pass in the top 10 key points
     # TODO: CHECKED - PREV CURR
     def previous_current_matching(self, top_previous_key_points, top_current_key_points,
-                                  robot_previous_position_transformation):
+                                  robot_previous_position_transformation, marker_pixel_length):
 
         """"you can choose to visualize the points matched between every two frames by uncommenting this line"""""
 
@@ -272,7 +277,7 @@ class VisualOdometry:
 
         # get the 4x4 homogenous transformation between previous image and the current image using the array list forms of previous and current key points
         prev_to_curr_transformation = self.get_transformation_between_two_frames(array_previous_key_points,
-                                                                                 array_current_key_points)
+                                                                                 array_current_key_points, marker_pixel_length)
 
         # calculate the current position using the previous-to-current homogenous transformation
         robot_current_position_transformation = robot_previous_position_transformation.dot(prev_to_curr_transformation)
@@ -292,7 +297,7 @@ class VisualOdometry:
     """This is the main method for visual odometry calculations; calls other helper functions to compute immediate values"""
 
     # param: previous image, current image, and the 4x4 robot previous position (homogenous transformation matrix)
-    def visual_odometry_calculations(self, previous_image, current_image, robot_previous_position_transformation):
+    def visual_odometry_calculations(self, previous_image, current_image, robot_previous_position_transformation, marker_pixel_length):
         # get key points and descriptors for previous image
         previous_key_points, previous_descriptors, previous_image_with_keypoints_drawn = self.compute_current_image_elements(
             previous_image)
@@ -313,7 +318,7 @@ class VisualOdometry:
 
         robot_current_position_transformation, prev_to_curr_transformation = self.previous_current_matching(top_previous_key_points,
                                                                                top_current_key_points,
-                                                                               robot_previous_position_transformation)
+                                                                               robot_previous_position_transformation, marker_pixel_length)
 
         return robot_current_position_transformation, prev_to_curr_transformation
 

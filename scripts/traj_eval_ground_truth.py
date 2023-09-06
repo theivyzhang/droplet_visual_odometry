@@ -102,10 +102,11 @@ class GroundTruth:
         # turn into translation and orientation matrices; dimensions = 4x4
         bTm_translation_mat = tf.transformations.translation_matrix(bTm_translation_array)
         bTm_orientation_mat = tf.transformations.quaternion_matrix(bTm_quaternion_array)
-        bTm_homogenous_transformation_mat = tf.transformations.concatenate_matrices(bTm_translation_mat,
-                                                                                    bTm_orientation_mat)
+
+        # TODO: checked with Sam - translation then rotation gives the right combination
+        bTm_homogenous_transformation_mat = tf.transformations.concatenate_matrices(bTm_translation_mat, bTm_orientation_mat)
+        # print("translation in the btm 4x4 matrix= {}".format(bTm_homogenous_transformation_mat[:3, 3]))
         return bTm_homogenous_transformation_mat  # returns 4x4 homogenous transformation matrix
-    # TODO: instead of concatenation, do matrix multiplication
 
     # function to get the camera to base homogenous transformation matrix
     def get_camera_to_base_homogenous_transformation_matrix(self):
@@ -136,6 +137,19 @@ class GroundTruth:
         self.ground_truth_list_cam_to_marker.append(cam_to_marker_transformation)
 
         return cam_to_marker_transformation  # output: 4x4 homogenous transformation matrix
+
+    # TODO: added new method to retrieve marker length in pixels; subject to finetuning*
+    # TODO: can show stag marker message in rqt_bag
+    def get_current_marker_pixel_length(self, marker_message):
+        marker_A_corners_x = [marker_message.markers[0].corners[0].x, marker_message.markers[0].corners[1].x,
+                            marker_message.markers[0].corners[2].x, marker_message.markers[0].corners[3].x]
+
+        min_X = min(marker_A_corners_x)
+        max_X = max(marker_A_corners_x)
+
+        marker_pixel_length = max_X - min_X
+        print("the marker pixel length is {}".format(marker_pixel_length))
+        return float(marker_pixel_length)
 
     def get_marker_position(self, marker_reading, reference_id, base_link_flag=True):
         # callback function to access the ground truth data

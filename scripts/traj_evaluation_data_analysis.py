@@ -100,7 +100,7 @@ def plot_and_save(list, category, plot_destination_path):
     ax1.set_ylabel('ty')
     ax1.set_zlabel('tz')
     ax1.set_title(category + " translation")
-    ax1.set_aspect('equal')
+    # ax1.set_aspect('equal')
 
     # Save the 3D dot plots as image files
     plt.savefig(plot_destination_path + plots)
@@ -108,7 +108,6 @@ def plot_and_save(list, category, plot_destination_path):
 
 
 def main(experiment_sample):
-
 
     print("starting data analysis")
 

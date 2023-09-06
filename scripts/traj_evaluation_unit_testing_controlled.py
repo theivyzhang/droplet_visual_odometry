@@ -271,7 +271,7 @@ def main(args):
     calibration_file_path = '/src/old_usb_cam_pre08292023.yaml'
     controlled = True
 
-    folder_path = '/home/ivyz/Documents/ivy_workspace/src/vis_odom/scripts/unit_testing_controlled/controlled_usb_rosbot/forward-3'
+    folder_path = '/src/vis_odom/scripts/unit_testing_controlled/controlled_usb_rosbot/before_stag_ros_update/forward-3'
     bag_file_path = folder_path + "/forward-3.bag"
     gt_output_file_path = folder_path + "/stamped_ground_truth_relative.txt"
     gt_marker_positions_file_path = folder_path + "/stamped_ground_truth_absolute.txt"
