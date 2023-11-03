@@ -13,9 +13,7 @@ import rospy
 # other packages
 import numpy as np
 import sys
-import cv2 as cv
 import tf as tf
-
 import matplotlib.pyplot as plt
 from mpl_toolkits.mplot3d import Axes3D  # Import the Axes3D module
 
@@ -96,20 +94,18 @@ class UnitTestingExtractData:
                                               mode=self.matching_mode,
                                               calibration_file_path=self.calibration_file_path,
                                               controlled=self.controlled,
-                                              real_marker_length= self.real_marker_length)
+                                              real_marker_length=self.real_marker_length)
         print("activating mode {}".format(self.visual_odometry.mode))
 
     def initialize_ground_truth_module(self):
         self.ground_truth = GroundTruth()
 
     def extract_and_compute_gt_marker_position(self, valid_set):
-        # print(valid_set.marker_msg)
-        # print("markers",valid_set.marker_msg.markers.markers)
         camera_T_marker_position = self.ground_truth.get_marker_position(
             marker_reading=valid_set.marker_msg,
             reference_id=self.marker_id_reference, base_link_flag=self.base_link_flag
         )
-        print("receiving ground truth translation {}".format(camera_T_marker_position[:3, 3]))
+        print("receiving ground truth ".format(camera_T_marker_position))
         return camera_T_marker_position
 
     def extract_and_compute_gt_transformation(self):
@@ -119,7 +115,8 @@ class UnitTestingExtractData:
 
     def get_ground_truth_marker_pixel_length(self, valid_set):
         current_marker_message = valid_set.marker_msg
-        marker_pixel_length = self.ground_truth.get_current_marker_pixel_length(marker_message = current_marker_message)
+        # print("we have current marker message: {}".format(current_marker_message))
+        marker_pixel_length = self.ground_truth.get_current_marker_pixel_length(marker_message=current_marker_message)
         return marker_pixel_length
 
     def extract_and_compute_vo_robot_current_position(self):
@@ -130,9 +127,9 @@ class UnitTestingExtractData:
         # process the consecutive image frames
 
         previous_image = self.visual_odometry.ros_img_msg_to_opencv_image(
-            image_message=previous_valid_set.img_msg, msg_type='usb_raw')
+            image_message=previous_valid_set.img_msg, msg_type='compressed')
         current_image = self.visual_odometry.ros_img_msg_to_opencv_image(
-            image_message=current_valid_set.img_msg, msg_type='usb_raw')
+            image_message=current_valid_set.img_msg, msg_type='compressed')
         robot_current_position, robot_camera_to_camera = self.visual_odometry.visual_odometry_calculations(
             previous_image=previous_image,
             current_image=current_image,
@@ -227,18 +224,17 @@ class UnitTestingExtractData:
                     quaternion[2]) + " " + str(quaternion[3]) + " " + "\n")
 
 
-def main(folder_path, matching_mode, controlled, id, real_marker_length):
+def main(experiment_sample, matching_mode, controlled, id, real_marker_length):
     rospy.init_node('UnitTestingControlledExperiment', anonymous=True)
     print("starting controlled experiments")
-    calibration_file_path = '/home/ivyz/Documents/ivy_workspace/src/new_usb_cam.yaml'
+    calibration_file_path = '/home/ivyz/Documents/ivy_workspace/src/camera_calibration/refined_hdpro_calibration.yaml'
     if controlled == 'controlled':
         is_controlled = True
     else:
         is_controlled = False
 
-
-    bag_file_path = folder_path + "/scaled_with_bundles_forward.bag"
-    print("successfully located bag {}".format(bag_file_path))
+    folder_path = '/home/ivyz/Documents/UAV_VisOdom_Data/cart_experiment/' + experiment_sample
+    bag_file_path = folder_path+"/counterclockwise_1.bag"
     gt_relative_transformations_file_path = folder_path + "/stamped_ground_truth_relative.txt"
     gt_marker_positions_file_path = folder_path + "/stamped_ground_truth_absolute.txt"
     vo_relative_transformations_file_path = folder_path + "/stamped_traj_estimate_relative.txt"
@@ -255,18 +251,18 @@ def main(folder_path, matching_mode, controlled, id, real_marker_length):
                            vo_absolute_position_file_path=vo_absolute_position_file_path,
                            folder_path=folder_path, matching_mode=matching_mode,
                            calibration_file_path=calibration_file_path, controlled=is_controlled,
-                           marker_id = marker_id, real_marker_length = real_marker_length)
+                           marker_id=marker_id, real_marker_length=real_marker_length)
     rospy.sleep(1)
 
 
 # create the name function
 if __name__ == '__main__':
     try:
-        folder_path = sys.argv[1]
+        experiment_sample = sys.argv[1]
         matching_mode = sys.argv[2]
         controlled = sys.argv[3]
         id = int(sys.argv[4])
         real_marker_length = float(sys.argv[5])
-        main(folder_path, matching_mode, controlled, id, real_marker_length)
+        main(experiment_sample, matching_mode, controlled, id, real_marker_length)
     except rospy.ROSInterruptException:
         pass

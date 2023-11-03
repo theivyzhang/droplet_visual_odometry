@@ -141,15 +141,20 @@ class GroundTruth:
     # TODO: added new method to retrieve marker length in pixels; subject to finetuning*
     # TODO: can show stag marker message in rqt_bag
     def get_current_marker_pixel_length(self, marker_message):
-        marker_A_corners_x = [marker_message.markers[0].corners[0].x, marker_message.markers[0].corners[1].x,
-                            marker_message.markers[0].corners[2].x, marker_message.markers[0].corners[3].x]
+        # print(marker_message.markers[0])
+        if len(marker_message.markers[0].corners) > 0:
+            # print(type(marker_message.markers[0].corners))
+            marker_A_corners_x = [marker_message.markers[0].corners[0].x, marker_message.markers[0].corners[1].x,
+                                marker_message.markers[0].corners[2].x, marker_message.markers[0].corners[3].x]
 
-        min_X = min(marker_A_corners_x)
-        max_X = max(marker_A_corners_x)
+            min_X = min(marker_A_corners_x)
+            max_X = max(marker_A_corners_x)
 
-        marker_pixel_length = max_X - min_X
-        print("the marker pixel length is {}".format(marker_pixel_length))
-        return float(marker_pixel_length)
+            marker_pixel_length = max_X - min_X
+            print("the marker pixel length is {}".format(marker_pixel_length))
+            return float(marker_pixel_length)
+        else:
+            return 0
 
     def get_marker_position(self, marker_reading, reference_id, base_link_flag=True):
         # callback function to access the ground truth data

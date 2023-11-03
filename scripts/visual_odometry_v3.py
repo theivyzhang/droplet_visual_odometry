@@ -12,7 +12,6 @@ import yaml
 from yaml.loader import SafeLoader
 import pose_estimation_module as PEM
 
-
 VERBOSE = False
 
 number_of_frames = 25075
@@ -25,7 +24,7 @@ class VisualOdometry:
     # global all_frames, previous_image, previous_key_points, previous_descriptors, current_frame, robot_position_list
 
     def __init__(self, starting_translation=None, starting_euler=None, to_sort=False, mode="ORB",
-                 calibration_file_path="", controlled=False, real_marker_length = 0.0):
+                 calibration_file_path="", controlled=False, real_marker_length=0.0):
         if starting_euler is None:
             starting_euler = DEFAULT_STARTING_ROBOT_EULER
         if starting_translation is None:
@@ -81,7 +80,6 @@ class VisualOdometry:
         self.robot_curr_position = self.make_transform_mat(translation=self.starting_translation,
                                                            euler=self.starting_euler)
 
-
     """
     THIS IS THE SECTION CONTAINING ALL THE UTILITY FUNCTIONS
     """
@@ -117,10 +115,12 @@ class VisualOdometry:
             1,
             (self.frame_width, self.frame_height)
         )
-        if msg_type=='compressed':
+        if msg_type == 'compressed':
+            print("image is compressed!")
             np_arr = np.fromstring(image_message.data, np.uint8)
             image_np = cv.imdecode(np_arr, cv.IMREAD_COLOR)
-        elif msg_type=='usb_raw':
+        elif msg_type == 'usb_raw':
+            print("image is usb_raw!")
             np_arr = np.frombuffer(image_message.data, dtype=np.uint8)
             image_np = np_arr.reshape((image_message.height, image_message.width, -1))
         grey_image = cv.cvtColor(src=image_np, code=cv.COLOR_BGR2GRAY)
@@ -141,12 +141,12 @@ class VisualOdometry:
         with open(calibration_file_path) as camera_calibration:
             data = yaml.load(camera_calibration, Loader=SafeLoader)
 
-        if not self.controlled: # using the camera calibration file for the robot
+        if not self.controlled:  # using the camera calibration file for the robot
 
             self.distortion_coefficient_matrix = np.array(data['distortion_coeffs'][0])
             self.intrinsic_coefficient_matrix = np.array(data['intrinsic_coeffs'][0]).reshape((3, 3))
 
-        else: # using the camera calibration yaml for the lab iMAC
+        else:  # using the camera calibration yaml for the lab iMAC
             camera_matrix_data = data['camera_matrix']['data']
             distortion_coeff_data = data['distortion_coefficients']['data']
 
@@ -233,16 +233,19 @@ class VisualOdometry:
                                                           points2=array_current_key_points,
                                                           cameraMatrix=self.intrinsic_coefficient_matrix,
                                                           method=cv.RANSAC, prob=0.999, threshold=1.0)
+
         # compute the relative position using the essential matrix, key points  using cv.relativePose
         points, relative_rotation, translation, mask = cv.recoverPose(E=self.essential_matrix,
                                                                       points1=array_previous_key_points,
                                                                       points2=array_current_key_points,
                                                                       cameraMatrix=self.intrinsic_coefficient_matrix)
-        scaling_factor = marker_pixel_length/self.real_marker_length
+
+        # TODO: UPDATE SCALING FACTOR
+        scaling_factor = marker_pixel_length / self.real_marker_length
         translation = translation.transpose()[0]
         print("translation before scaling factor {}".format(translation))
-        print("scaling factor: {}".format(marker_pixel_length/self.real_marker_length))
-        translation = translation/scaling_factor
+        print("scaling factor: {}".format(marker_pixel_length / self.real_marker_length))
+        translation = translation / scaling_factor
         print("translation after scaling factor: {}".format(translation))
 
         relative_rotation = np.array(relative_rotation)
@@ -277,11 +280,12 @@ class VisualOdometry:
 
         # get the 4x4 homogenous transformation between previous image and the current image using the array list forms of previous and current key points
         prev_to_curr_transformation = self.get_transformation_between_two_frames(array_previous_key_points,
-                                                                                 array_current_key_points, marker_pixel_length)
+                                                                                 array_current_key_points,
+                                                                                 marker_pixel_length)
 
         # calculate the current position using the previous-to-current homogenous transformation
         robot_current_position_transformation = robot_previous_position_transformation.dot(prev_to_curr_transformation)
-        return robot_current_position_transformation, prev_to_curr_transformation # where is the robot now in VO frame
+        return robot_current_position_transformation, prev_to_curr_transformation  # where is the robot now in VO frame
 
     def compute_current_image_elements(self, input_image):
 
@@ -297,7 +301,8 @@ class VisualOdometry:
     """This is the main method for visual odometry calculations; calls other helper functions to compute immediate values"""
 
     # param: previous image, current image, and the 4x4 robot previous position (homogenous transformation matrix)
-    def visual_odometry_calculations(self, previous_image, current_image, robot_previous_position_transformation, marker_pixel_length):
+    def visual_odometry_calculations(self, previous_image, current_image, robot_previous_position_transformation,
+                                     marker_pixel_length):
         # get key points and descriptors for previous image
         previous_key_points, previous_descriptors, previous_image_with_keypoints_drawn = self.compute_current_image_elements(
             previous_image)
@@ -306,19 +311,18 @@ class VisualOdometry:
         current_key_points, current_descriptors, current_image_with_keypoints_drawn = self.compute_current_image_elements(
             current_image)
 
-        # print("length of prev kp {} and curr kp {}".format(len(previous_key_points), len(current_key_points)))
-        # print("length of prev desc {} and curr desc {}".format(len(previous_descriptors), len(current_descriptors)))
-
-        # from the above code we produce a length 500 current key points and a (500 height, 32 width) shaped current descriptors
-        # get matches should return top 10 previous key points
-        # TODO: check if we can determine number of matches based on distance to the marker (if distance > certain threshold, can get more)
-        top_ten_matches, top_previous_key_points, top_current_key_points = self.get_matches_between_two_frames(
+        # get top matches
+        top_matches, top_previous_key_points, top_current_key_points = self.get_matches_between_two_frames(
             previous_key_points=previous_key_points, previous_descriptors=previous_descriptors,
             current_key_points=current_key_points, current_descriptors=current_descriptors)
 
-        robot_current_position_transformation, prev_to_curr_transformation = self.previous_current_matching(top_previous_key_points,
-                                                                               top_current_key_points,
-                                                                               robot_previous_position_transformation, marker_pixel_length)
+        robot_current_position_transformation, prev_to_curr_transformation = \
+            self.previous_current_matching(
+                top_previous_key_points,
+                top_current_key_points,
+                robot_previous_position_transformation,
+                marker_pixel_length
+            )
 
         return robot_current_position_transformation, prev_to_curr_transformation
 

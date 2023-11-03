@@ -20,6 +20,7 @@ class ExtractData:
     def output_translation_quaternion(self):
         # Read data from the text file
         with open(self.traj_txt_file_path, 'r') as file:
+            print("file opened")
             for line in file:
                 parts = line.split()
                 timestamp = float(parts[0])
@@ -29,6 +30,7 @@ class ExtractData:
                 self.translations.append(translation)
                 self.quaternions.append(quaternion)
                 self.timestamps.append(timestamp)
+            print("translations {}".format(self.translations))
 
 
 """Step 2: convert the information into 1) average 2) standard deviation separately"""
@@ -69,6 +71,7 @@ def get_averages(translations, quaternions):
 
 # Modify the Plot class to create 3D dot plots
 def plot_and_save(list, category, plot_destination_path):
+    print("plotting {}".format(category))
     plots = '/' + category + '_3d_dot_plot.jpg'
 
     fig = plt.figure(figsize=(7, 5))
@@ -115,19 +118,23 @@ def main(experiment_sample):
     SECTION FOR VARIABLE INPUT
     """
     destination_directory = '/home/ivyz/Documents/ivy_workspace/src/vis_odom/scripts/unit_testing_controlled/controlled_usb_rosbot/'+experiment_sample
+    print("destination: {}".format(destination_directory))
     ground_truth_absolute_path = destination_directory + '/stamped_ground_truth_absolute.txt'
     ground_truth_relative_path = destination_directory + '/stamped_ground_truth_relative.txt'
     vis_odom_absolute_path = destination_directory + '/stamped_traj_estimate_absolute.txt'
     vis_odom_relative_path = destination_directory + '/stamped_traj_estimate_relative.txt'
+    print(ground_truth_relative_path)
+    print("received all")
 
     # TODO:get aboslute position translation + quaternion
     """
     SECTION FOR GROUND TRUTH ABSOLUTE + RELATIVE
     """
     # get the ground truth info + plot
+    print("ground truth absolute")
     gt_position_data = ExtractData(ground_truth_absolute_path)
     gt_position_translations = gt_position_data.translations
-
+    print("ground truth relative")
     gt_relative_data = ExtractData(ground_truth_relative_path)
     gt_relative_translations = gt_relative_data.translations
 
@@ -135,9 +142,10 @@ def main(experiment_sample):
     SECTION FOR VISUAL ODOMETRY ABSOLUTE + RELATIVE
     """
     # get the vis odom info + plot
+    print("vo absolute")
     vo_data = ExtractData(vis_odom_absolute_path)
     vo_position_translations = vo_data.translations
-
+    print("VO RELATIVE")
     vo_relative_data = ExtractData(vis_odom_relative_path)
     vo_relative_translations = vo_relative_data.translations
 

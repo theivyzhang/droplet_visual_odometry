@@ -9,45 +9,36 @@ print("extracting valid pairs of image_raw and stag_marker messages from a given
 
 import rosbag
 import collections
-from decimal import Decimal
 
-
+# construct object tuples for use
 ValidPair = collections.namedtuple('ValidPair', ['img_msg', 'marker_msg'])
 TimeMessagePair = collections.namedtuple('TimeMessagePair', ['timestamp', 'message'])
 TimeImageMarker = collections.namedtuple('TimeImageMarker', ['timestamp', 'img_msg', 'marker_msg'])
 
 ids = collections.defaultdict(lambda: ValidPair(None, None))
 
-
-"""SECTION: OUTPUT A STREAM OF VALID BAG MESSAGES"""
-class BagMessage:
-    def __init__(self, i, topic, message, timestamp):
-        self.index = i
-        self.topic = topic
-        self.message = message
-        self.timestamp = timestamp
-
-
+print("extracting stream of valid messages")
 def distribute_bag_messages(bag_file_path):
-    image_raw_messages_map ={}
-    stag_marker_messages_map ={}
+    """look for valid /usb_cam/image_raw and /stag_markers messages, and append to corresponding maps under their timestamp"""
+    image_raw_messages_map = {}
+    stag_marker_messages_map = {}
     with rosbag.Bag(bag_file_path, "r") as bag:
 
         i = 0
 
-        for topic, bag_message, timestamp in bag.read_messages(topics=['/usb_cam/image_raw','/stag_markers']):
+        for topic, bag_message, timestamp in bag.read_messages(topics=['/camera_array/cam1/image_raw/compressed','/stag_markers']):
             i += 1
-
-
             if "raw" in topic:
                 image_raw_messages_map[bag_message.header.stamp.to_sec()] = bag_message
             else:
-                # do something
-                stag_marker_messages_map[bag_message.header.stamp.to_sec()] = bag_message
+                if len(bag_message.markers)>0:
+                    stag_marker_messages_map[bag_message.header.stamp.to_sec()] = bag_message
 
     return image_raw_messages_map, stag_marker_messages_map
 
 def find_matching_map_entries(image_messages_map, marker_messages_map):
+    """this method sorts both maps according to ascending key (timestamp) values; then only keep messages with the same timestamp found"""
+
     # Get the common keys between map_a and map_b
     common_keys = set(image_messages_map.keys()) & set(marker_messages_map.keys())
 
@@ -63,6 +54,7 @@ def find_matching_map_entries(image_messages_map, marker_messages_map):
 
 
 def process_stream(sorted_filtered_image_messages_map, sorted_filtered_marker_messages_map):
+    """This method groups an image message with a marker message occurring at the same timestamp, and append to output stream"""
     # create object [timestamp, image message, marker message]
     assert len(sorted_filtered_image_messages_map) == len(sorted_filtered_marker_messages_map)
 
@@ -76,8 +68,6 @@ def process_stream(sorted_filtered_image_messages_map, sorted_filtered_marker_me
     return valid_input_stream
 
 """Utility functions"""
-
-
 def print_valid_message_stream(valid_message_stream):
     i = 0
     for msg in valid_message_stream:
@@ -92,11 +82,6 @@ def get_valid_message_stream(bag_file_path):
     sorted_filtered_image_messages_map, sorted_filtered_marker_messages_map = find_matching_map_entries(image_raw_messages_map, stag_marker_messages_map)
     valid_input_stream = process_stream(sorted_filtered_image_messages_map, sorted_filtered_marker_messages_map)
     sorted_valid_input_stream = sorted(valid_input_stream, key=lambda x: x.timestamp)
-    print("valid input stream ready")
+    print("valid input stream successfully extracted")
     # print_valid_message_stream(valid_input_stream)
-    print(len(valid_input_stream))
     return sorted_valid_input_stream
-
-
-# bag_file_path = '/home/ivyz/Documents/ivy_workspace/src/vis_odom/scripts/unit_testing_controlled/controlled_usb_rosbot/forward-3/forward-3.bag'
-# get_valid_message_stream(bag_file_path)
