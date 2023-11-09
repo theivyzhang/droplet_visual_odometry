@@ -28,19 +28,30 @@ TransformationPair = collections.namedtuple('TransformationPair', ['timestamp', 
 
 
 class UnitTestingExtractData:
-    def __init__(self, bag_file_path=None, gt_marker_positions_file_path='', gt_relative_transformations_file_path='',
-                 vo_relative_transformations_file_path='', vo_absolute_position_file_path='', folder_path=' ',
-                 matching_mode='orb', calibration_file_path=' ',
-                 controlled=False, marker_id=0, real_marker_length=0.0):
+    def __init__(self, bag_file_path=None,
+                 gt_marker_positions_file_path='',
+                 gt_relative_transformations_file_path='',
+                 gt_velocity_file_path='',
+                 vo_absolute_position_file_path='',
+                 vo_relative_transformations_file_path='',
+                 vo_velocity_file_path='',
+                 folder_path=' ',
+                 matching_mode='orb',
+                 calibration_file_path=' ',
+                 controlled=False,
+                 marker_id=0,
+                 real_marker_length=0.0):
 
         # clear existing data for sanity checks
         # set up file paths and clear existing content
         self.folder_path = folder_path
         self.bag_file_path = bag_file_path
-        self.gt_relative_transformations_file_path = gt_relative_transformations_file_path
         self.gt_marker_positions_file_path = gt_marker_positions_file_path
-        self.vo_relative_transformations_file_path = vo_relative_transformations_file_path
+        self.gt_relative_transformations_file_path = gt_relative_transformations_file_path
+        self.gt_velocity_file_path = gt_velocity_file_path
         self.vo_absolute_position_file_path = vo_absolute_position_file_path
+        self.vo_relative_transformations_file_path = vo_relative_transformations_file_path
+        self.vo_velocity_file_path = vo_velocity_file_path
         self.clear_file_contents_all()
 
         # set up flags
@@ -58,10 +69,13 @@ class UnitTestingExtractData:
         self.base_link_flag = False  # flag to indicate if there is a base_link ref frame
 
         # initialize lists
-        self.vo_absolute_position_list = []
         self.gt_marker_positions = []
         self.gt_camera_to_camera_list = []
+        self.gt_velocity_list = []
+        self.vo_absolute_position_list = []
         self.vo_camera_to_camera_list = []
+        self.vo_velocity_list = []
+        self.timestamp_list = []
 
         # start getting vo gt data
         self.valid_message_stream = StreamExtract.get_valid_message_stream(self.bag_file_path)
@@ -71,14 +85,16 @@ class UnitTestingExtractData:
         self.compute_all_gt_vo_comparison_list()
         # 2) compute to output txt
         self.log_all_lists()
-        # 3) plot all the graphs
+
 
     def clear_file_contents_all(self):
         # clear existing data for sanity checks
-        PoseEstimationFunctions.clear_txt_file_contents(self.gt_relative_transformations_file_path)
         PoseEstimationFunctions.clear_txt_file_contents(self.gt_marker_positions_file_path)
+        PoseEstimationFunctions.clear_txt_file_contents(self.gt_relative_transformations_file_path)
+        PoseEstimationFunctions.clear_txt_file_contents(self.gt_velocity_file_path)
         PoseEstimationFunctions.clear_txt_file_contents(self.vo_absolute_position_file_path)
         PoseEstimationFunctions.clear_txt_file_contents(self.vo_relative_transformations_file_path)
+        PoseEstimationFunctions.clear_txt_file_contents(self.vo_velocity_file_path)
 
     def initialize_visual_odometry_module(self, robot_starting_position):  # initialize modules
         # Extract translation vector (first three elements of the last column)
@@ -116,7 +132,9 @@ class UnitTestingExtractData:
     def get_ground_truth_marker_pixel_length(self, valid_set):
         current_marker_message = valid_set.marker_msg
         # print("we have current marker message: {}".format(current_marker_message))
+        """testing and comparing the marker lengths"""
         marker_pixel_length = self.ground_truth.get_current_marker_pixel_length(marker_message=current_marker_message)
+        self.ground_truth.get_current_marker_pixel_length_2(marker_message=current_marker_message)
         return marker_pixel_length
 
     def extract_and_compute_vo_robot_current_position(self):
@@ -146,6 +164,7 @@ class UnitTestingExtractData:
             if previous_valid_set is None:
                 previous_valid_set = self.valid_message_stream[i]
                 timestamp = previous_valid_set.timestamp
+                self.timestamp_list.append(timestamp)
 
                 # initialize ground truth
                 self.initialize_ground_truth_module()
@@ -168,55 +187,79 @@ class UnitTestingExtractData:
                 print("we have pair one and pair two")
                 current_valid_set = self.valid_message_stream[i]
                 timestamp = current_valid_set.timestamp
+                self.timestamp_list.append(timestamp)
 
-                # TODO - get marker position = absolute and relative ground truth position
+                # get the absolute and relative ground truth transformations
                 gt_marker_position = self.extract_and_compute_gt_marker_position(valid_set=current_valid_set)
                 self.gt_marker_positions.append(
                     TransformationPair(timestamp=timestamp, transformation=gt_marker_position))
 
+
+                # obtain the marker's pixel length
                 marker_pixel_length = self.get_ground_truth_marker_pixel_length(valid_set=current_valid_set)
 
                 gt_relative_position_change = self.extract_and_compute_gt_transformation()
+
                 self.gt_camera_to_camera_list.append(
                     TransformationPair(timestamp=timestamp, transformation=gt_relative_position_change))
+                # get the ground truth velocity
+                gt_velocity = PoseEstimationFunctions.get_velocity_between_timestamps(
+                    relative_position_change=gt_relative_position_change, previous_timestamp=self.timestamp_list[-2],
+                    current_timestamp=self.timestamp_list[-1])
 
-                # TODO - get and compute both robot absolute postion as well as transformation between frames
+                self.gt_velocity_list.append(TransformationPair(timestamp=self.timestamp_list[-1], transformation=gt_velocity))
+
+                # get the visual odometry absolute and relative positions
                 robot_current_position, robot_camera_to_camera = self.extract_and_compute_vo_transformation(
                     previous_valid_set=previous_valid_set,
                     current_valid_set=current_valid_set,
                     marker_pixel_length=marker_pixel_length
                 )
+
+                # get the velocity for visual odometry
+                vo_velocity = PoseEstimationFunctions.get_velocity_between_timestamps(relative_position_change=robot_camera_to_camera,
+                                                                                      previous_timestamp=self.timestamp_list[-2],
+                                                                                      current_timestamp=self.timestamp_list[-1])
+
+                # add all transforms to the respective lists
                 self.vo_absolute_position_list.append(
                     TransformationPair(timestamp=timestamp, transformation=robot_current_position))
                 self.vo_camera_to_camera_list.append(
                     TransformationPair(timestamp=timestamp, transformation=robot_camera_to_camera))
+                self.vo_velocity_list.append(TransformationPair(timestamp=self.timestamp_list[-1], transformation=vo_velocity))
 
                 previous_valid_set = current_valid_set
 
     def log_all_lists(self):
         # log marker positions (absolute ground truth)
-        self.log_list_items_to_files(self.gt_marker_positions, False, self.gt_marker_positions_file_path)
-        # log robot positions for robot (absolute vis odom)
-        self.log_list_items_to_files(self.vo_absolute_position_list, True, self.vo_absolute_position_file_path)
-        # log marker camera to camera transform (relative ground truth)
-        self.log_list_items_to_files(self.gt_camera_to_camera_list, False, self.gt_relative_transformations_file_path)
-        # log robot camera to camera transform (relative vis odom)
-        self.log_list_items_to_files(self.vo_camera_to_camera_list, True, self.vo_relative_transformations_file_path)
+        self.log_list_items_to_files(self.gt_marker_positions, self.gt_marker_positions_file_path)
 
-    def extract_translation_quaternion_from_transform(self, transform, isVisOdom):
+        # log marker camera to camera transform (relative ground truth)
+        self.log_list_items_to_files(self.gt_camera_to_camera_list, self.gt_relative_transformations_file_path)
+
+        # log ground truth velocity
+        self.log_list_items_to_files(self.gt_velocity_list, self.gt_velocity_file_path)
+
+        # log vis odom positions for robot (absolute vis odom)
+        self.log_list_items_to_files(self.vo_absolute_position_list, self.vo_absolute_position_file_path)
+
+        # log vis odom camera to camera transform (relative vis odom)
+        self.log_list_items_to_files(self.vo_camera_to_camera_list, self.vo_relative_transformations_file_path)
+
+        # log vis odom velocity
+        self.log_list_items_to_files(self.vo_velocity_list, self.vo_velocity_file_path)
+
+    def extract_translation_quaternion_from_transform(self, transform):
         translation = PoseEstimationFunctions.translation_from_transformation_matrix(transform)
         quaternion = PoseEstimationFunctions.quaternion_from_transformation_matrix(transform)
         return translation, quaternion
 
-    def log_list_items_to_files(self, list_of_transforms, isVisOdom, output_file_path):
+    def log_list_items_to_files(self, list_of_transforms, output_file_path):
         for transform_pair in list_of_transforms:
             timestamp = transform_pair.timestamp
             transform = transform_pair.transformation
 
-            translation, quaternion = self.extract_translation_quaternion_from_transform(transform=transform,
-                                                                                         isVisOdom=isVisOdom)
-            print("extracting translation {}".format(translation))
-
+            translation, quaternion = self.extract_translation_quaternion_from_transform(transform=transform)
             with open(output_file_path, 'a') as file:
                 file.write(str(timestamp) + " " + str(translation[0]) + " " + str(
                     translation[1]) + " " + str(translation[2]) + " "
@@ -234,21 +277,25 @@ def main(experiment_sample, matching_mode, controlled, id, real_marker_length):
         is_controlled = False
 
     folder_path = '/home/ivyz/Documents/UAV_VisOdom_Data/cart_experiment/' + experiment_sample
-    bag_file_path = folder_path+"/counterclockwise_1.bag"
-    gt_relative_transformations_file_path = folder_path + "/stamped_ground_truth_relative.txt"
+    bag_file_path = folder_path + "/clockwise_1.bag"
     gt_marker_positions_file_path = folder_path + "/stamped_ground_truth_absolute.txt"
-    vo_relative_transformations_file_path = folder_path + "/stamped_traj_estimate_relative.txt"
+    gt_relative_transformations_file_path = folder_path + "/stamped_ground_truth_relative.txt"
+    gt_velocity_file_path = folder_path + "/stamped_ground_truth_velocity.txt"
     vo_absolute_position_file_path = folder_path + "/stamped_traj_estimate_absolute.txt"
+    vo_relative_transformations_file_path = folder_path + "/stamped_traj_estimate_relative.txt"
+    vo_velocity_file_path = folder_path + "/stamped_traj_estimate_velocity.txt"
 
     # log marker details
     marker_id = id
     real_marker_length = real_marker_length
 
     UnitTestingExtractData(bag_file_path=bag_file_path,
-                           gt_relative_transformations_file_path=gt_relative_transformations_file_path,
                            gt_marker_positions_file_path=gt_marker_positions_file_path,
-                           vo_relative_transformations_file_path=vo_relative_transformations_file_path,
+                           gt_relative_transformations_file_path=gt_relative_transformations_file_path,
+                           gt_velocity_file_path=gt_velocity_file_path,
                            vo_absolute_position_file_path=vo_absolute_position_file_path,
+                           vo_relative_transformations_file_path=vo_relative_transformations_file_path,
+                           vo_velocity_file_path=vo_velocity_file_path,
                            folder_path=folder_path, matching_mode=matching_mode,
                            calibration_file_path=calibration_file_path, controlled=is_controlled,
                            marker_id=marker_id, real_marker_length=real_marker_length)

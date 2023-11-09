@@ -242,6 +242,7 @@ class VisualOdometry:
 
         # TODO: UPDATE SCALING FACTOR
         scaling_factor = marker_pixel_length / self.real_marker_length
+        print("here's the marker pixel length {}".format(marker_pixel_length))
         translation = translation.transpose()[0]
         print("translation before scaling factor {}".format(translation))
         print("scaling factor: {}".format(marker_pixel_length / self.real_marker_length))

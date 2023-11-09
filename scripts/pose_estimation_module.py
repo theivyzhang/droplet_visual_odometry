@@ -91,6 +91,18 @@ def clear_txt_file_contents(file_path):
         file.truncate()
 
 
+def get_velocity_between_timestamps(relative_position_change, previous_timestamp, current_timestamp):
+    time_change = current_timestamp-previous_timestamp
+    translation = np.array([relative_position_change[0, 3], relative_position_change[1, 3], relative_position_change[2, 3]])
+    translation_velocity = translation/time_change
+    rotation = relative_position_change[:3, :3]
+    rotational_velocity = rotation/time_change
+    velocity_transformation = np.eye(4)
+    velocity_transformation[:3, :3] = rotational_velocity
+    velocity_transformation[:3, 3] = translation_velocity
+    print("the relative position change is {} and with time change {}, the velocity is {}".format(relative_position_change, time_change, velocity_transformation))
+    return velocity_transformation
+
 def get_gt_vo_difference(gt_file_path, vo_file_path):
     ground_truth_data = np.genfromtxt(gt_file_path)
     vis_odom_data = np.genfromtxt(vo_file_path)
