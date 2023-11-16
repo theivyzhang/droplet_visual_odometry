@@ -225,6 +225,10 @@ class VisualOdometry:
             top_current_key_points.append(current_key_points[train_index])
         return matches, top_previous_key_points, top_current_key_points
 
+
+    def return_scaling_factor(self, real_marker_length, ground_truth_key_points):
+        pass
+
     def get_transformation_between_two_frames(self, array_previous_key_points,
                                               array_current_key_points, marker_pixel_length):
 

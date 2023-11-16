@@ -298,6 +298,15 @@ class GroundTruth:
                 return camera_to_marker_transformation
 
 
+
+    # TODO: implement the function that returns the list of keypoints produced by the StagMarker Message
+    def get_stagmarker_keypoints(self):
+        # in pixel coordinates
+
+        # sort if needed; sorting mechanism to be discussed
+        pass
+
+
 # create the name function
 if __name__ == '__main__':
     pass

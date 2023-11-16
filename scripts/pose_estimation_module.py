@@ -92,11 +92,18 @@ def clear_txt_file_contents(file_path):
 
 
 def get_velocity_between_timestamps(relative_position_change, previous_timestamp, current_timestamp):
+    # get the incremental change in time
     time_change = current_timestamp-previous_timestamp
+
+    # calculate the translation velocity
     translation = np.array([relative_position_change[0, 3], relative_position_change[1, 3], relative_position_change[2, 3]])
     translation_velocity = translation/time_change
+
+    # calculate the rotational velocity
     rotation = relative_position_change[:3, :3]
     rotational_velocity = rotation/time_change
+
+    # combine into a full velocity homogenous transformation matrix
     velocity_transformation = np.eye(4)
     velocity_transformation[:3, :3] = rotational_velocity
     velocity_transformation[:3, 3] = translation_velocity

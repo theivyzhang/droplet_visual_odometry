@@ -77,6 +77,9 @@ class UnitTestingExtractData:
         self.vo_velocity_list = []
         self.timestamp_list = []
 
+        # TODO: list of lists of stag marker corners
+        self.stagmarker_corners_list = []
+
         # start getting vo gt data
         self.valid_message_stream = StreamExtract.get_valid_message_stream(self.bag_file_path)
 
@@ -121,7 +124,7 @@ class UnitTestingExtractData:
             marker_reading=valid_set.marker_msg,
             reference_id=self.marker_id_reference, base_link_flag=self.base_link_flag
         )
-        print("receiving ground truth ".format(camera_T_marker_position))
+        # print("receiving ground truth ".format(camera_T_marker_position))
         return camera_T_marker_position
 
     def extract_and_compute_gt_transformation(self):
@@ -184,7 +187,7 @@ class UnitTestingExtractData:
                 # activate visual odometry
 
             else:  # we have the first pair and need the second pair
-                print("we have pair one and pair two")
+                # print("we have pair one and pair two")
                 current_valid_set = self.valid_message_stream[i]
                 timestamp = current_valid_set.timestamp
                 self.timestamp_list.append(timestamp)
@@ -277,7 +280,7 @@ def main(experiment_sample, matching_mode, controlled, id, real_marker_length):
         is_controlled = False
 
     folder_path = '/home/ivyz/Documents/UAV_VisOdom_Data/cart_experiment/' + experiment_sample
-    bag_file_path = folder_path + "/clockwise_1.bag"
+    bag_file_path = folder_path + "/clockwise_1_surf.bag"
     gt_marker_positions_file_path = folder_path + "/stamped_ground_truth_absolute.txt"
     gt_relative_transformations_file_path = folder_path + "/stamped_ground_truth_relative.txt"
     gt_velocity_file_path = folder_path + "/stamped_ground_truth_velocity.txt"
