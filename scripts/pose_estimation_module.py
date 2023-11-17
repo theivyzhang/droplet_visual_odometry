@@ -107,7 +107,7 @@ def get_velocity_between_timestamps(relative_position_change, previous_timestamp
     velocity_transformation = np.eye(4)
     velocity_transformation[:3, :3] = rotational_velocity
     velocity_transformation[:3, 3] = translation_velocity
-    print("the relative position change is {} and with time change {}, the velocity is {}".format(relative_position_change, time_change, velocity_transformation))
+    # print("the relative position change is {} and with time change {}, the velocity is {}".format(relative_position_change, time_change, velocity_transformation))
     return velocity_transformation
 
 def get_gt_vo_difference(gt_file_path, vo_file_path):

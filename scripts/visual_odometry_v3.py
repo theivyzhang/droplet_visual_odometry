@@ -1,4 +1,5 @@
 #!/usr/bin/python
+import math
 
 # Author: Ivy Aiwei Zhang
 # Last updated: 08-10-2023
@@ -11,6 +12,8 @@ import transformations as transf
 import yaml
 from yaml.loader import SafeLoader
 import pose_estimation_module as PEM
+import matplotlib.pyplot as plt
+
 
 VERBOSE = False
 
@@ -55,6 +58,7 @@ class VisualOdometry:
 
         self.distortion_coefficient_matrix = None
         self.intrinsic_coefficient_matrix = None
+        self.previous_projection_matrix = None
         self.parse_camera_intrinsics()
 
         # model parameters
@@ -75,6 +79,8 @@ class VisualOdometry:
         self.ground_truth_list = []  # list of ground truths from the ros node
         self.frame_translations = []  # maintains the translation between every consecutive frame
         self.matches_dictionary = []  # list of dictionaries
+        self.projection_matrix_list = [] # list of projection matrices
+        self.plot_4D_counter = 1
 
         # initialize current position of the robot based on the translation and euler at the start of the program
         self.robot_curr_position = self.make_transform_mat(translation=self.starting_translation,
@@ -146,12 +152,19 @@ class VisualOdometry:
             self.distortion_coefficient_matrix = np.array(data['distortion_coeffs'][0])
             self.intrinsic_coefficient_matrix = np.array(data['intrinsic_coeffs'][0]).reshape((3, 3))
 
+
+
         else:  # using the camera calibration yaml for the lab iMAC
             camera_matrix_data = data['camera_matrix']['data']
             distortion_coeff_data = data['distortion_coefficients']['data']
 
             self.intrinsic_coefficient_matrix = np.array(camera_matrix_data).reshape((3, 3))
             self.distortion_coefficient_matrix = np.array(distortion_coeff_data).reshape((1, 5))
+
+            R = np.eye(3)
+            T = np.zeros((3, 1))
+            self.previous_projection_matrix = np.matmul(self.intrinsic_coefficient_matrix, np.hstack((R, T)))
+            print("The projection matrix is: {}".format(self.previous_projection_matrix))
 
     """
     THIS SECTION CONTAINS ALL THE FUNCTIONS NEEDED FOR THE VISUAL ODOMETRY CALLBACK
@@ -226,11 +239,59 @@ class VisualOdometry:
         return matches, top_previous_key_points, top_current_key_points
 
 
-    def return_scaling_factor(self, real_marker_length, ground_truth_key_points):
-        pass
+    def visualize_4D_marker_corners(self, marker_corners_4D):
+        marker_Xs = marker_corners_4D[0, :]
+        marker_Ys = marker_corners_4D[1, :]
+        marker_Zs = marker_corners_4D[2, :]
+
+        # creating the 3D plot
+        marker_3d_points_plot = plt.figure()
+        marker_3d_points_ax = marker_3d_points_plot.add_subplot(111, projection='3d')
+
+        marker_3d_points_ax.scatter(marker_Xs, marker_Ys, marker_Zs)
+
+        marker_3d_points_ax.set_xlabel("marker_corners_X")
+        marker_3d_points_ax.set_ylabel("marker_corners_Y")
+        marker_3d_points_ax.set_zlabel("marker_corners_Z")
+
+        marker_3d_points_plot.savefig("/home/ivyz/Documents/UAV_VisOdom_Data/cart_experiment/data_20231116/clockwise_1_flann/3d_marker_plots/plot_{}.jpg".format(self.plot_4D_counter))
+        # if self.plot_4D_counter == 15:
+        plt.show()
+        self.plot_4D_counter+=1
+
+    # TODO: implement the scaling factor function with cv2 triangulate points
+    def get_scaling_factor_from_triangulation(self, current_projection_matrix, previous_marker_corners, current_marker_corners):
+        self.projection_matrix_list.append(self.previous_projection_matrix)
+        marker_corners_4D = cv.triangulatePoints(projMatr1 = self.previous_projection_matrix, projMatr2=current_projection_matrix, projPoints1=previous_marker_corners.T, projPoints2=current_marker_corners.T)
+
+        print("marker corners 4D = {}".format(marker_corners_4D.shape))
+
+        marker_Xs = marker_corners_4D[0, :]
+        marker_Ys = marker_corners_4D[1, :]
+        marker_Zs = marker_corners_4D[2, :]
+
+        print("first point {}".format((marker_Xs[0], marker_Ys[0], marker_Zs[0])))
+        print("second point {}".format((marker_Xs[1], marker_Ys[1], marker_Zs[1])))
+
+        real_world_distance = math.sqrt((marker_Xs[0]-marker_Xs[1])**2 + (marker_Ys[0]-marker_Ys[1])**2+ (marker_Zs[0]-marker_Zs[1])**2)
+
+        print("real world marker distance: {} real marker length {} \n".format(real_world_distance, self.real_marker_length))
+        scaling_factor = self.real_marker_length / real_world_distance
+
+
+        scaled_marker_corners_4D = marker_corners_4D * scaling_factor
+        # self.visualize_4D_marker_corners(scaled_marker_corners_4D)
+        scaled_marker_Xs = scaled_marker_corners_4D[0, :]
+        scaled_marker_Ys = scaled_marker_corners_4D[1, :]
+        scaled_marker_Zs = scaled_marker_corners_4D[2, :]
+        scaled_real_world_distance = math.sqrt((scaled_marker_Xs[0]-scaled_marker_Xs[1])**2 + (scaled_marker_Ys[0]-scaled_marker_Ys[1])**2+ (scaled_marker_Zs[0]-scaled_marker_Zs[1])**2)
+        print("scaled real world marker distance: {} \n".format(scaled_real_world_distance))
+
+        print("------")
+        return real_world_distance
 
     def get_transformation_between_two_frames(self, array_previous_key_points,
-                                              array_current_key_points, marker_pixel_length):
+                                              array_current_key_points, previous_marker_corners, current_marker_corners):
 
         # get the essential matrix
         self.essential_matrix, mask = cv.findEssentialMat(points1=array_previous_key_points,
@@ -244,13 +305,24 @@ class VisualOdometry:
                                                                       points2=array_current_key_points,
                                                                       cameraMatrix=self.intrinsic_coefficient_matrix)
 
+        # TODO: projection matrix = camera matrix * [rotation | translation]
+        current_projection_matrix = self.intrinsic_coefficient_matrix.dot(np.hstack((relative_rotation, translation.reshape(-1, 1))))
+
+        # print("current projection matrix {} and shape {}".format(current_projection_matrix, current_projection_matrix.shape))
+        #
+        # print("type of array key points {}".format(type(array_previous_key_points[0])))
+        # print("type of marker corners {}".format(type(previous_marker_corners[0])))
+        #
+        # print("format of projection matrix = {}".format(current_projection_matrix))
+
         # TODO: UPDATE SCALING FACTOR
-        scaling_factor = marker_pixel_length / self.real_marker_length
-        print("here's the marker pixel length {}".format(marker_pixel_length))
+        current_real_world_distance = self.get_scaling_factor_from_triangulation(current_projection_matrix=current_projection_matrix, previous_marker_corners=previous_marker_corners, current_marker_corners=current_marker_corners)
+
+        scaling_factor = self.real_marker_length / current_real_world_distance
+        print("the scaling factor is {}".format(scaling_factor))
         translation = translation.transpose()[0]
         print("translation before scaling factor {}".format(translation))
-        print("scaling factor: {}".format(marker_pixel_length / self.real_marker_length))
-        translation = translation / scaling_factor
+        translation = translation * scaling_factor
         print("translation after scaling factor: {}".format(translation))
 
         relative_rotation = np.array(relative_rotation)
@@ -268,12 +340,14 @@ class VisualOdometry:
 
         # store previous to current translation in the corresponding list
         self.frame_translations.append(prev_to_curr_translation)
+
+        self.previous_projection_matrix = current_projection_matrix
         return prev_to_curr_translation
 
     # here you would want to pass in the top 10 key points
     # TODO: CHECKED - PREV CURR
     def previous_current_matching(self, top_previous_key_points, top_current_key_points,
-                                  robot_previous_position_transformation, marker_pixel_length):
+                                  robot_previous_position_transformation, previous_marker_corners, current_marker_corners):
 
         """"you can choose to visualize the points matched between every two frames by uncommenting this line"""""
 
@@ -286,7 +360,8 @@ class VisualOdometry:
         # get the 4x4 homogenous transformation between previous image and the current image using the array list forms of previous and current key points
         prev_to_curr_transformation = self.get_transformation_between_two_frames(array_previous_key_points,
                                                                                  array_current_key_points,
-                                                                                 marker_pixel_length)
+                                                                                 previous_marker_corners,
+                                                                                 current_marker_corners)
 
         # calculate the current position using the previous-to-current homogenous transformation
         robot_current_position_transformation = robot_previous_position_transformation.dot(prev_to_curr_transformation)
@@ -307,7 +382,7 @@ class VisualOdometry:
 
     # param: previous image, current image, and the 4x4 robot previous position (homogenous transformation matrix)
     def visual_odometry_calculations(self, previous_image, current_image, robot_previous_position_transformation,
-                                     marker_pixel_length):
+                                     previous_marker_corners, current_marker_corners):
         # get key points and descriptors for previous image
         previous_key_points, previous_descriptors, previous_image_with_keypoints_drawn = self.compute_current_image_elements(
             previous_image)
@@ -326,7 +401,8 @@ class VisualOdometry:
                 top_previous_key_points,
                 top_current_key_points,
                 robot_previous_position_transformation,
-                marker_pixel_length
+                previous_marker_corners,
+                current_marker_corners
             )
 
         return robot_current_position_transformation, prev_to_curr_transformation

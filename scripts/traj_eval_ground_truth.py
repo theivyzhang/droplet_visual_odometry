@@ -274,7 +274,7 @@ class GroundTruth:
                 self.biased_count += 1
 
         else:
-            return 0
+            return
 
     def get_marker_position(self, marker_reading, reference_id, base_link_flag=True):
         # callback function to access the ground truth data
@@ -300,11 +300,15 @@ class GroundTruth:
 
 
     # TODO: implement the function that returns the list of keypoints produced by the StagMarker Message
-    def get_stagmarker_keypoints(self):
+    def get_stagmarker_keypoints(self, marker_reading):
         # in pixel coordinates
-
+        markers = marker_reading.markers
+        corner_array = []
+        for corner in markers[0].corners:
+            corner_array.append([corner.x, corner.y])
         # sort if needed; sorting mechanism to be discussed
-        pass
+        corner_np_array = np.array(corner_array)
+        return corner_np_array
 
 
 # create the name function

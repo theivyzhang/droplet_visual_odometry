@@ -119,6 +119,10 @@ class UnitTestingExtractData:
     def initialize_ground_truth_module(self):
         self.ground_truth = GroundTruth()
 
+
+    def extract_marker_corners(self, marker_reading):
+        return self.ground_truth.get_stagmarker_keypoints(marker_reading)
+
     def extract_and_compute_gt_marker_position(self, valid_set):
         camera_T_marker_position = self.ground_truth.get_marker_position(
             marker_reading=valid_set.marker_msg,
@@ -144,7 +148,7 @@ class UnitTestingExtractData:
         robot_current_position = self.visual_odometry.robot_curr_position
         return robot_current_position
 
-    def extract_and_compute_vo_transformation(self, previous_valid_set, current_valid_set, marker_pixel_length):
+    def extract_and_compute_vo_transformation(self, previous_valid_set, current_valid_set, previous_marker_corners, current_marker_corners):
         # process the consecutive image frames
 
         previous_image = self.visual_odometry.ros_img_msg_to_opencv_image(
@@ -155,7 +159,9 @@ class UnitTestingExtractData:
             previous_image=previous_image,
             current_image=current_image,
             robot_previous_position_transformation=self.vo_absolute_position_list[-1].transformation,
-            marker_pixel_length=marker_pixel_length)
+            previous_marker_corners=previous_marker_corners,
+            current_marker_corners=current_marker_corners
+        )
 
         return robot_current_position, robot_camera_to_camera
 
@@ -171,6 +177,13 @@ class UnitTestingExtractData:
 
                 # initialize ground truth
                 self.initialize_ground_truth_module()
+
+                # obtain current marker corners as a numpy array
+                current_marker_corners = self.extract_marker_corners(marker_reading=previous_valid_set.marker_msg)
+                # print("received current marker corners {}".format(current_marker_corners))
+                # print("type of marker corner list item {}".format(type(current_marker_corners[0])))
+                self.stagmarker_corners_list.append(current_marker_corners)
+
 
                 gt_marker_position = self.extract_and_compute_gt_marker_position(valid_set=previous_valid_set)
                 self.gt_marker_positions.append(
@@ -197,9 +210,13 @@ class UnitTestingExtractData:
                 self.gt_marker_positions.append(
                     TransformationPair(timestamp=timestamp, transformation=gt_marker_position))
 
+                 # obtain current marker corners as a numpy array
+                current_marker_corners = self.extract_marker_corners(marker_reading=previous_valid_set.marker_msg)
+                # print("received current marker corners {}".format(current_marker_corners))
+                self.stagmarker_corners_list.append(current_marker_corners)
 
-                # obtain the marker's pixel length
-                marker_pixel_length = self.get_ground_truth_marker_pixel_length(valid_set=current_valid_set)
+                # # obtain the marker's pixel length
+                # marker_pixel_length = self.get_ground_truth_marker_pixel_length(valid_set=current_valid_set)
 
                 gt_relative_position_change = self.extract_and_compute_gt_transformation()
 
@@ -216,7 +233,8 @@ class UnitTestingExtractData:
                 robot_current_position, robot_camera_to_camera = self.extract_and_compute_vo_transformation(
                     previous_valid_set=previous_valid_set,
                     current_valid_set=current_valid_set,
-                    marker_pixel_length=marker_pixel_length
+                    previous_marker_corners=self.stagmarker_corners_list[-2],
+                    current_marker_corners=self.stagmarker_corners_list[-1]
                 )
 
                 # get the velocity for visual odometry
@@ -232,6 +250,8 @@ class UnitTestingExtractData:
                 self.vo_velocity_list.append(TransformationPair(timestamp=self.timestamp_list[-1], transformation=vo_velocity))
 
                 previous_valid_set = current_valid_set
+
+        # TODO: implement the part that plots the velocities/absolute trajectories with respect to time t
 
     def log_all_lists(self):
         # log marker positions (absolute ground truth)
@@ -280,7 +300,7 @@ def main(experiment_sample, matching_mode, controlled, id, real_marker_length):
         is_controlled = False
 
     folder_path = '/home/ivyz/Documents/UAV_VisOdom_Data/cart_experiment/' + experiment_sample
-    bag_file_path = folder_path + "/clockwise_1_surf.bag"
+    bag_file_path = folder_path + "/clockwise_1_knn_sift.bag"
     gt_marker_positions_file_path = folder_path + "/stamped_ground_truth_absolute.txt"
     gt_relative_transformations_file_path = folder_path + "/stamped_ground_truth_relative.txt"
     gt_velocity_file_path = folder_path + "/stamped_ground_truth_velocity.txt"
